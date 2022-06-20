@@ -1,9 +1,9 @@
+
 import logo from './logo.svg';
-import './App.css';
 import { Route } from 'react-router-dom';
-import Landing from './components/LandingPage/Landing'
+import './App.css';
+import Home from './components/Home/Home'
 import Detalle from './components/Card/Card';
-import Home from './components/Home/Home';
 
 function App() {
   return (
