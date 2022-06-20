@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+
+# Dependency directories
+node_modules/
+jspm_packages/
+package-lock.json
+
 # testing
 /coverage
 
