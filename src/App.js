@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage/Landing';
+import Home from './components/Home/Home';
 
 function App() {
   return (
