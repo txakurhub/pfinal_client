@@ -33,8 +33,7 @@ export default function Home() {
   return (
     <>
       {/* <NavBar setCurrentPage={setCurrentPage} /> */}
-      { currentProduct ? <PageHeading products={products} /> : null }
-      <FilterPrice setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />
+      { currentProduct ? <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> : null }
       {
         currentProduct ?
         <div className="mt-10 grid lg:grid-cols-2 gap-x-8 gap-y-8 items-center px-[10px]">
