@@ -47,3 +47,21 @@ export const filterByRangePrice = (priceMin, priceMax) => {
     }
   }
 }
+
+export function getCategories() {
+  return function (dispatch) {
+    axios(`${local_url}/categories`).then((json) =>
+      dispatch({
+        type: GET_CATEGORIES,
+        payload: json.data,
+      })
+    );
+  };
+}
+
+export function filterByCategory(id) {
+  return async function (dispatch) {
+    const { data } = await axios(`${local_url}/categories/${id}`);
+    console.log(data[0])
+    dispatch({ type: FILTER_CATEGORY, payload: data });
+  }}

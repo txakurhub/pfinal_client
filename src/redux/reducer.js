@@ -4,7 +4,8 @@ const initialState = {
   allProducts: [],
   allProductsCopy: [],
   product_detail: [],
-  products: []
+  products: [],
+  categories:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -59,6 +60,18 @@ function rootReducer(state = initialState, action) {
         allProducts: container.length ? container : state.allProducts
       }
     }
+    case FILTER_CATEGORY: {
+      return {
+        ...state,
+        allProducts: action.payload
+      }
+    }
+
+case GET_CATEGORIES:{
+      return {
+        ...state,
+        categories: action.payload
+      }}
     default:
       return { ...state };
   }

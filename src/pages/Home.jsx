@@ -6,6 +6,7 @@ import NavBar from '../components/Navbar'
 import Paginado from "../components/Paginado";
 import FilterPrice from '../components/FilterPrice'
 import PageHeading from "../components/PageHeading";
+import FilterCategory from "../components/FilterCategory";
 
 export default function Home() {
 
@@ -33,6 +34,7 @@ export default function Home() {
   return (
     <>
       {/* <NavBar setCurrentPage={setCurrentPage} /> */}
+      <FilterCategory/>
       { currentProduct ? <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> : null }
       {
         currentProduct ?
