@@ -1,9 +1,15 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES } from "./actions";
+import {
+  FILTER_BY_BRAND,
+  GET_PRODUCTS,
+  GET_SHOE_DETAIL,
+  SEARCH_SNEAKES,
+} from "./actions";
 
 const initialState = {
   product_detail: [],
   products: [],
   allProducts: [],
+  brands: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -22,9 +28,19 @@ function rootReducer(state = initialState, action) {
     case SEARCH_SNEAKES: {
       return {
         ...state,
-        allProducts: action.payload
-      }
+        allProducts: action.payload,
+      };
     }
+    case FILTER_BY_BRAND:
+      const brandFilter = state.allProducts.filter((p) =>
+        action.payload !== "All"
+          ? p.brand.includes(action.payload)
+          : state.allProducts
+      );
+      return {
+        ...state,
+        brands: brandFilter,
+      };
     default:
       return { ...state };
   }
