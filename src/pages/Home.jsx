@@ -18,6 +18,7 @@ export default function Home() {
           {products
             ? products.map((p) => (
                 <Card
+                  id={p.id}
                   key={p.id}
                   title={p.title}
                   image={p.image}
