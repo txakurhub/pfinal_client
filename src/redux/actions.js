@@ -5,6 +5,8 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
 export const SEARCH_SNEAKES = "SEARCH_SNEAKES";
 export const FILTER_PRICE = "FILTER_PRICE";
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 
 export function getProducts() {
   return function (dispatch) {
