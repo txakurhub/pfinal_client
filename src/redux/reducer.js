@@ -1,15 +1,9 @@
-import {
-  FILTER_BY_BRAND,
-  GET_PRODUCTS,
-  GET_SHOE_DETAIL,
-  SEARCH_SNEAKES,
-} from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE } from "./actions";
 
 const initialState = {
-  product_detail: [],
-  products: [],
   allProducts: [],
-  brands: [],
+  product_detail: [],
+  products: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -18,7 +12,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
-        allProducts: action.payload,
+        allProducts: action.payload
       };
     case GET_SHOE_DETAIL:
       return {
@@ -28,19 +22,33 @@ function rootReducer(state = initialState, action) {
     case SEARCH_SNEAKES: {
       return {
         ...state,
-        allProducts: action.payload,
-      };
+        allProducts: action.payload
+      }
     }
-    case FILTER_BY_BRAND:
-      const brandFilter = state.allProducts.filter((p) =>
-        action.payload !== "All"
-          ? p.brand.includes(action.payload)
-          : state.allProducts
-      );
+    case FILTER_PRICE: {
+      const container = action.payload === 'lowest' ? state.allProducts.sort((a, b) => {
+        if (a.price > b.price) {
+          return 1
+        }
+        if (a.price < b.price) {
+          return -1
+        }
+        return 0
+      }) : state.allProducts.sort((a, b) => {
+        if (a.price > b.price) {
+          return -1
+        }
+        if (a.price < b.price) {
+          return 1
+        }
+        return 0
+      }
+      )
       return {
         ...state,
-        brands: brandFilter,
-      };
+        allProducts: container
+      }
+    }
     default:
       return { ...state };
   }
