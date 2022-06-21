@@ -17,8 +17,8 @@ export function getProducts() {
 }
 
 export function getShoeDetail(id) {
-  return function (dispatch) {
-    const { data } = axios(`${local_url}/shoes/${id}`);
+  return async function (dispatch) {
+    const { data } =await axios(`${local_url}/shoes/${id}`);
     dispatch({ type: GET_SHOE_DETAIL, payload: data });
   };
 }

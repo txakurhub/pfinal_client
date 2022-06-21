@@ -1,8 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default function Card({title, image, brand, model, price}) {
+export default function Card({title, image, brand, model, price,id}) {
   return (
     <div>
+      <Link to={`/${id}`}>
       <div >
         <p>{title}</p>
         <img src={image} alt="" />
@@ -11,6 +13,7 @@ export default function Card({title, image, brand, model, price}) {
         <p>Price: ${price}</p>
       </div>
       <hr />
+      </Link>
     </div>
   )
 }

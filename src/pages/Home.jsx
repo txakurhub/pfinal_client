@@ -19,15 +19,16 @@ export default function Home() {
         <div>
           {products
             ? products.map((p) => (
-              <Card
-                key={p.id}
-                title={p.title}
-                image={p.image}
-                brand={p.brand}
-                model={p.model}
-                price={p.price}
-              />
-            ))
+                <Card
+                  id={p.id}
+                  key={p.id}
+                  title={p.title}
+                  image={p.image}
+                  brand={p.brand}
+                  model={p.model}
+                  price={p.price}
+                />
+              ))
             : "No hay nada"}
         </div>
       </section>
