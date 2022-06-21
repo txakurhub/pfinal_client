@@ -5,7 +5,6 @@ import { getProducts } from "../redux/actions";
 import NavBar from '../components/Navbar'
 import Paginado from "../components/Paginado";
 import {CartContext} from '../components/CartItem'
-import ShoppingCart from "./ShoppingCart";
 
 
 export default function Home() {
@@ -27,13 +26,12 @@ export default function Home() {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-  
   const {addToCart} = useContext(CartContext)
+
   return (
     <main>
       <section>
         <NavBar />
-        <ShoppingCart />
         <div>
           {currentProduct
             ? currentProduct.map((p) => (
