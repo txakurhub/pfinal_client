@@ -5,6 +5,7 @@ import { getProducts } from "../redux/actions";
 import NavBar from '../components/Navbar'
 import Paginado from "../components/Paginado";
 
+
 export default function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
