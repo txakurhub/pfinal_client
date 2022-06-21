@@ -5,7 +5,7 @@ export default function Card({title, image, brand, model, price}) {
     <div>
       <div >
         <p>{title}</p>
-        <img src={image} alt="Not found" />
+        <img src={image} alt="" />
         <p>Brand: {brand}</p>
         <p>Model: {model}</p>
         <p>Price: ${price}</p>
