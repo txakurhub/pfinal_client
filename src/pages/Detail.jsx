@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getShoeDetail } from "../redux/actions";
+import { Link } from 'react-router-dom'
 
 export default function Detail({ title, image, brand, model, price }) {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ export default function Detail({ title, image, brand, model, price }) {
   }
   return (
     <main>
+      <button><Link to={'/'}>volver</Link></button>
       <div>
         <img src={selected.image} alt={title} />
       </div>
