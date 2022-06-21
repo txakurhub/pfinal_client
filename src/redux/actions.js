@@ -5,6 +5,8 @@ export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
 export const SEARCH_SNEAKES = "SEARCH_SNEAKES";
 export const FILTER_PRICE = "FILTER_PRICE";
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 
 export function getProducts() {
   return function (dispatch) {
@@ -47,3 +49,21 @@ export const filterByRangePrice = (priceMin, priceMax) => {
     }
   }
 }
+
+export function getCategories() {
+  return function (dispatch) {
+    axios(`${local_url}/categories`).then((json) =>
+      dispatch({
+        type: GET_CATEGORIES,
+        payload: json.data,
+      })
+    );
+  };
+}
+
+export function filterByCategory(id) {
+  return async function (dispatch) {
+    const { data } = await axios(`${local_url}/categories/${id}`);
+    console.log(data[0])
+    dispatch({ type: FILTER_CATEGORY, payload: data });
+  }}

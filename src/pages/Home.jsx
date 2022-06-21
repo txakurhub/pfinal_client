@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
-import { getProducts } from "../redux/actions";
+import { getCategories, getProducts } from "../redux/actions";
 import NavBar from '../components/Navbar'
 import Paginado from "../components/Paginado";
 import FilterPrice from '../components/FilterPrice'
 import PageHeading from "../components/PageHeading";
+import FilterCategory from "../components/FilterCategory";
 
 export default function Home() {
 
@@ -28,11 +29,13 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getCategories())
   }, [dispatch]);
 
   return (
     <>
       {/* <NavBar setCurrentPage={setCurrentPage} /> */}
+      <FilterCategory/>
       { currentProduct ? <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> : null }
       {
         currentProduct ?
