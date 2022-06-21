@@ -1,7 +1,7 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL } from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES } from "./actions";
 
 const initialState = {
-  product_detail: {},
+  product_detail: [],
   products: [],
   allProducts: [],
 };
@@ -19,6 +19,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         product_detail: action.payload,
       };
+    case SEARCH_SNEAKES: {
+      return {
+        ...state,
+        allProducts: action.payload
+      }
+    }
     default:
       return { ...state };
   }
