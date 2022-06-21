@@ -37,3 +37,13 @@ export const filterByPrice = (payload) => {
     payload
   }
 }
+
+export const filterByRangePrice = (priceMin, priceMax) => {
+  return {
+    type: "FILTER_BY_RANGE_PRICE",
+    payload: {
+      priceMin,
+      priceMax
+    }
+  }
+}
