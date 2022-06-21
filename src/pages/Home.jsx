@@ -8,7 +8,6 @@ import FilterPrice from '../components/FilterPrice'
 import PageHeading from "../components/PageHeading";
 import FilterCategory from "../components/FilterCategory";
 
-
 export default function Home() {
  
   const dispatch = useDispatch();
