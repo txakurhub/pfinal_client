@@ -2,6 +2,7 @@ import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE } from "./a
 
 const initialState = {
   allProducts: [],
+  allProductsCopy: [],
   product_detail: [],
   products: []
 };
@@ -12,7 +13,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload,
-        allProducts: action.payload
+        allProducts: action.payload,
+        allProductsCopy: action.payload
       };
     case GET_SHOE_DETAIL:
       return {
@@ -28,18 +30,18 @@ function rootReducer(state = initialState, action) {
     case FILTER_PRICE: {
       const container = action.payload === 'lowest' ? state.allProducts.sort((a, b) => {
         if (a.price > b.price) {
-          return 1
+          return -1
         }
         if (a.price < b.price) {
-          return -1
+          return 1
         }
         return 0
       }) : state.allProducts.sort((a, b) => {
         if (a.price > b.price) {
-          return -1
+          return 1
         }
         if (a.price < b.price) {
-          return 1
+          return -1
         }
         return 0
       }
@@ -47,6 +49,14 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allProducts: container
+      }
+    }
+    case "FILTER_BY_RANGE_PRICE": {
+      const container = state.allProductsCopy.filter(s => s.price > action.payload.priceMin && s.price < action.payload.priceMax)
+      !container.length && alert('No hay producto con ese rango de precio') 
+      return {
+        ...state,
+        allProducts: container.length ? container : state.allProducts
       }
     }
     default:
