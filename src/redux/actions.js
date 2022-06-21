@@ -9,5 +9,6 @@ export  function getProducts(){
             type: GET_PRODUCTS,
             payload: json.data
         }))
+        .catch(err => console.log(err))
     }
 };
