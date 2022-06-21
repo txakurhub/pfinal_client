@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
 import { getProducts } from "../redux/actions";
-import NavBar from '../components/NavBar'
+import NavBar from '../components/Navbar'
 
 export default function Home() {
   const dispatch = useDispatch();
