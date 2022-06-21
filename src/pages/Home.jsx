@@ -33,7 +33,7 @@ export default function Home() {
     <main>
       <section>
         <NavBar />
-        <ShoppingCart/>
+        <ShoppingCart />
         <div>
           {currentProduct
             ? currentProduct.map((p) => (

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { searchSneakes } from '../redux/actions'
 
-const NavBar = () => {
+const NavBar = ({ setCurrentPage }) => {
 
   const [input, setInput] = useState('')
   const dispatch = useDispatch()
@@ -15,6 +15,7 @@ const NavBar = () => {
     e.preventDefault()
     dispatch(searchSneakes(input))
     setInput('')
+    setCurrentPage(1)
   }
 
   return (
