@@ -1,14 +1,14 @@
 import React from 'react'
 
-export default function Card(props) {
+export default function Card({title, image, brand, model, price}) {
   return (
     <div>
       <div >
-        <p>{props.titulo}</p>
-        <img src={props.img} alt="" />
-        <p>Brand: {props.brand}</p>
-        <p>Model: {props.model}</p>
-        <p>Price: ${props.price}</p>
+        <p>{title}</p>
+        <img src={image} alt="" />
+        <p>Brand: {brand}</p>
+        <p>Model: {model}</p>
+        <p>Price: ${price}</p>
       </div>
       <hr />
     </div>
