@@ -5,7 +5,10 @@
 /.pnp
 .pnp.js
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e5712c427e46fd9ae0ae5683afb20f58cab7421e
 jspm_packages/
 package-lock.json
 >>>>>>> e5712c427e46fd9ae0ae5683afb20f58cab7421e

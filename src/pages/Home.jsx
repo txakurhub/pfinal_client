@@ -7,7 +7,10 @@ import Paginado from "../components/Paginado";
 import FilterPrice from '../components/FilterPrice'
 import PageHeading from "../components/PageHeading";
 import FilterCategory from "../components/FilterCategory";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4871ff280ffbf885784fe11cc42c720031b8f225
 
 export default function Home() {
  
