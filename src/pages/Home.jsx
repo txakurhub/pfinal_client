@@ -4,13 +4,13 @@ import Card from "../components/Card";
 import { getProducts } from "../redux/actions";
 import NavBar from '../components/Navbar'
 import Paginado from "../components/Paginado";
-
+import PageHeading from "../components/PageHeading";
 
 export default function Home() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProducts);
   const [currentPage, setCurrentPage] = useState(1);
- const productPage = 20;
+  const productPage = 20;
 
 
  const indexOfLastProduct = currentPage * productPage 
@@ -28,31 +28,17 @@ export default function Home() {
   }, [dispatch]);
 
   return (
-    <main>
-      <section>
-        <NavBar />
-        <div>
-          {currentProduct
-            ? currentProduct.map((p) => (
-                <Card
-                  id={p.id}
-                  key={p.id}
-                  title={p.title}
-                  image={p.image}
-                  brand={p.brand}
-                  model={p.model}
-                  price={p.price}
-                />
-              ))
-            : "No hay nada"}
-            <Paginado
-                  productPorPage={productPage}
-                  product={products.length}
-                  paginado={paginate}
-                  pagina={currentPage}
-            />
-        </div>
-      </section>
-    </main>
+    <>
+      {/* <NavBar /> */}
+      { currentProduct ? <PageHeading products={products} /> : null }
+      {
+        currentProduct ?
+        <div className="mt-10 grid lg:grid-cols-2 gap-x-8 gap-y-8 items-center px-[10px]">
+          {currentProduct.map(r => <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} />)}
+        </div> :
+        "No hay nada"
+      }
+      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} />
+    </>
   );
 }
