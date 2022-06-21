@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const PageHeading = (products) => {
+  const [show, setShow] = useState(true);
+
   return (
     <div className="py-5 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container flex justify-center items-center">
       <div className="flex justify-between items-center w-full">
@@ -11,7 +13,8 @@ const PageHeading = (products) => {
             <p className="text-base leading-4 text-gray-600 mt-2">(20 products of {products.products.length})</p>
           </div>
         </div>
-        <button className="hover:text-gray-500 text-gray-600 bg-gray-100 py-3.5 px-3 rounded-sm flex flex-row justify-center items-center space-x-3">
+        <div className={`bg-red-500 rounded-full w-10 h-10 ${show ? 'opacity-0' : 'opacity-1'} ease-in-out transition duration-500`} />
+        <button onClick={() => setShow(show === false ? true : false)} className="hover:text-gray-500 text-gray-600 bg-gray-100 py-3.5 px-3 rounded-sm flex flex-row justify-center items-center space-x-3">
           <svg className="fill-stroke" width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 14.6452V9.33875" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M4 6.30645V1" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
