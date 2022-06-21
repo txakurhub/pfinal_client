@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
-  console.log(products);
+
   return (
     <main>
       <section>

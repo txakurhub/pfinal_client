@@ -5,11 +5,6 @@
 /.pnp
 .pnp.js
 
-
-# Dependency directories
-jspm_packages/
-package-lock.json
-
 # testing
 /coverage
 
