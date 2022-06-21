@@ -6,11 +6,14 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ShoppingCart from "./pages/ShoppingCart"
 import Wishlist from "./pages/Wishlist";
+import {CartProvider} from './components/CartItem'
 
 function App() {
   return (
     <div className="App">
+      <CartProvider>
       <Route exact path="/" component={Home}></Route>
+      </CartProvider>
       <Route exact path="/:id" component={Detail}></Route>
       <Route exact path="/login" component={Login}></Route>
       <Route exact path="/:user/:id" component={Dashboard}></Route>

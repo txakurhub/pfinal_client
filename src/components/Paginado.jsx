@@ -24,7 +24,6 @@ function Paginado({ productPorPage, product, paginado}) {
 
   for (let i = 1; i <= Math.ceil(product/productPorPage); i++) {
     pageNumber.push(i);
-    console.log(pageNumber, "pageNumber")
   }
   return (
     <nav className="">
