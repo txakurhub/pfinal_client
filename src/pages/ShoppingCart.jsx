@@ -14,7 +14,7 @@ function ShoppingCart() {
         );
     }, [cartItem])
     
-    const total = cartItem.reduce((previus , current)=> previus + current.amount * current.price)
+    const totall = cartItem.reduce((previus , current)=> previus + current.amount * current.price)
 
 
     return (
