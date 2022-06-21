@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
 import { getProducts } from "../redux/actions";
+import NavBar from '../components/NavBar'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <main>
       <section>
+        <NavBar />
         <div>
           {products
             ? products.map((p) => (
