@@ -12,13 +12,14 @@ import { useHistory } from "react-router-dom";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [order, setOrder] = useState("");
-  const products = useSelector((state) => state.allProducts);
   const [currentPage, setCurrentPage] = useState(1);
+  const { user, logout, loading } = useAuth();
+  const products = useSelector((state) => state.allProducts);
   const productPage = 20;
 
   const indexOfLastProduct = currentPage * productPage;
-
   const indexOfFirstProduct = indexOfLastProduct - productPage;
 
   const currentProduct = products.slice(
@@ -34,16 +35,18 @@ export default function Home() {
     dispatch(getProducts());
     dispatch(getCategories());
   }, [dispatch]);
-  const history = useHistory();
   const handleLogout = async () => {
-    await logout();
-    history.push("/");
+    try {
+      await logout();
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleLogin = () => {
     history.push("/login");
   };
-  const { user, logout, loading } = useAuth();
-  // console.log(user);
+
   return (
     <>
       {/* <NavBar setCurrentPage={setCurrentPage} /> */}
