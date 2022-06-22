@@ -67,4 +67,13 @@ export function filterByCategory(id) {
     const { data } = await axios(`${local_url}/categories/${id}`);
     console.log(data[0])
     dispatch({ type: FILTER_CATEGORY, payload: data });
-  }}
+  }
+}
+
+export const createProduct = (payload) => {
+  console.log(payload)
+  return async () => {
+    const json = await axios.post("http://localhost:3001/shoes", payload)
+    return json;
+  }
+}

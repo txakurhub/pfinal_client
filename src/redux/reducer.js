@@ -5,7 +5,7 @@ const initialState = {
   allProductsCopy: [],
   product_detail: [],
   products: [],
-  categories:[]
+  categories: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -54,7 +54,7 @@ function rootReducer(state = initialState, action) {
     }
     case "FILTER_BY_RANGE_PRICE": {
       const container = state.allProductsCopy.filter(s => s.price > action.payload.priceMin && s.price < action.payload.priceMax)
-      !container.length && alert('No hay producto con ese rango de precio') 
+      !container.length && alert('No hay producto con ese rango de precio')
       return {
         ...state,
         allProducts: container.length ? container : state.allProducts
@@ -67,11 +67,12 @@ function rootReducer(state = initialState, action) {
       }
     }
 
-case GET_CATEGORIES:{
+    case GET_CATEGORIES: {
       return {
         ...state,
         categories: action.payload
-      }}
+      }
+    }
     default:
       return { ...state };
   }

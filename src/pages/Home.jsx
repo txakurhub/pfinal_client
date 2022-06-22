@@ -12,6 +12,7 @@ import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
 import ShoppingCart from '../pages/ShoppingCart'
 import { CartContext } from "../context/CartItem";
+// import CreationForm from "../components/CreationForm"; // ACA SE CREAN LAS ZAPATILLAS
 
 export default function Home() {
 
@@ -52,6 +53,7 @@ export default function Home() {
 
   return (
     <>
+    {/* <CreationForm /> DAR DISEÑO A ESTE COMPONENTE Y UNA URL*/}
       {/* <NavBar setCurrentPage={setCurrentPage} /> */}
       {loading ? (
         <div>
