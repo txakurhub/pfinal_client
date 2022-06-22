@@ -20,7 +20,7 @@ export function getProducts() {
 }
 
 export function getShoeDetail(id) {
-  console.log(id);
+
   return async function (dispatch) {
     const { data } = await axios(`${local_url}/shoes/${id}`);
     dispatch({ type: GET_SHOE_DETAIL, payload: data });
