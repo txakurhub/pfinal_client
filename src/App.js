@@ -9,6 +9,7 @@ import Wishlist from "./pages/Wishlist";
 import { AuthProvider } from "./context/authContext";
 import {CartProvider} from './context/CartItem'
 import  {PageShopingCart}  from "./pages/PageShopingCart";
+import Register from "./pages/Register";
 
 function App() {
 return (
@@ -16,8 +17,7 @@ return (
   <CartProvider>
     <AuthProvider>
       <Route exact path="/" component={Home}></Route>
-        <Route exact path="/:id" component={Detail}></Route>
-
+        <Route exact path="/detail/:id" component={Detail}></Route>
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/register" component={Register}></Route>
         <Route exact path="/:user/:id" component={Dashboard}></Route>
