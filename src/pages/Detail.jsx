@@ -33,7 +33,7 @@ export default function Detail() {
       </div>
       <hr />
       <div>
-        <Review/>
+        <Review id={selected.id}/> 
       </div>
     </main>
   );
