@@ -20,8 +20,12 @@ function Login() {
   };
 
   const handleGoogleLogin = async () => {
-    await loginWithGoogle();
-    history.push("/");
+    try {
+      await loginWithGoogle();
+      history.push("/");
+    } catch (error) {
+      setError(error.message);
+    }
   };
   return (
     <div>
