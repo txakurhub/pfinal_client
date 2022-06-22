@@ -17,8 +17,7 @@ return (
   <CartProvider>
     <AuthProvider>
       <Route exact path="/" component={Home}></Route>
-        <Route exact path="/:id" component={Detail}></Route>
-
+        <Route exact path="/detail/:id" component={Detail}></Route>
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/register" component={Register}></Route>
         <Route exact path="/:user/:id" component={Dashboard}></Route>
