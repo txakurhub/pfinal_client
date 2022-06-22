@@ -7,20 +7,25 @@ import Login from "./pages/Login";
 import ShoppingCart from "./pages/ShoppingCart";
 import Wishlist from "./pages/Wishlist";
 import { AuthProvider } from "./context/authContext";
-import Register from "./pages/Register";
+import {CartProvider} from './context/CartItem'
+import  {PageShopingCart}  from "./pages/PageShopingCart";
 
 function App() {
-  return (
-    <div className="App">
-      <AuthProvider>
-        <Route exact path="/" component={Home}></Route>
-        <Route exact path="/detail/:id" component={Detail}></Route>
+return (
+  <div className="App">
+  <CartProvider>
+    <AuthProvider>
+      <Route exact path="/" component={Home}></Route>
+        <Route exact path="/:id" component={Detail}></Route>
+
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/register" component={Register}></Route>
         <Route exact path="/:user/:id" component={Dashboard}></Route>
         <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
         <Route exact path="/user/:id/wishlist" component={Wishlist}></Route>
+        <Route exact path='/cart' component={PageShopingCart}></Route>
       </AuthProvider>
+  </CartProvider>
     </div>
   );
 }
