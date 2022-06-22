@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
 import { getProducts } from "../redux/actions";
-import NavBar from '../components/Navbar'
+// import NavBar from '../components/NavBar'
 import Paginado from "../components/Paginado";
 import FilterPrice from '../components/FilterPrice'
 import PageHeading from "../components/PageHeading";
