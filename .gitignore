@@ -4,18 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> e5712c427e46fd9ae0ae5683afb20f58cab7421e
->>>>>>> 111e67767d255c2a42361e2e2a357ab18b86d5bc
+
 jspm_packages/
 package.json
 package-lock.json
->>>>>>> e5712c427e46fd9ae0ae5683afb20f58cab7421e
+
 
 # testing
 /coverage
