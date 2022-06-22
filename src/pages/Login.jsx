@@ -6,7 +6,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -17,6 +17,11 @@ function Login() {
     } catch (error) {
       setError(error.message);
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    await loginWithGoogle();
+    history.push("/");
   };
   return (
     <div>
@@ -39,6 +44,7 @@ function Login() {
         />
         <button onClick={handleSubmit}>Login</button>
       </form>
+      <button onClick={handleGoogleLogin}>Login with google</button>
     </div>
   );
 }
