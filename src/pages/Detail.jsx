@@ -5,7 +5,7 @@ import { getShoeDetail } from "../redux/actions";
 import { Link } from 'react-router-dom'
 import Review from "../components/Reviews"
 
-export default function Detail({ title, image, brand, model, price }) {
+export default function Detail() {
   const dispatch = useDispatch();
   const params = useParams();
   const [loader, setLoader] = useState(true);
@@ -22,7 +22,7 @@ export default function Detail({ title, image, brand, model, price }) {
     <main>
       <button><Link to={'/'}>volver</Link></button>
       <div>
-        <img src={selected.image} alt={title} />
+        <img src={selected.image} alt={selected.title} />
       </div>
       <div>
         <h2>{selected.title}</h2>
