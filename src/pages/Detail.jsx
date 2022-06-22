@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getShoeDetail } from "../redux/actions";
+import { Link } from 'react-router-dom'
+import Review from "../components/Reviews"
 
-export default function Detail({ title, image, brand, model, price }) {
+export default function Detail() {
   const dispatch = useDispatch();
   const params = useParams();
   const [loader, setLoader] = useState(true);
@@ -18,8 +20,9 @@ export default function Detail({ title, image, brand, model, price }) {
   }
   return (
     <main>
+      <button><Link to={'/'}>volver</Link></button>
       <div>
-        <img src={selected.image} alt={title} />
+        <img src={selected.image} alt={selected.title} />
       </div>
       <div>
         <h2>{selected.title}</h2>
@@ -27,6 +30,10 @@ export default function Detail({ title, image, brand, model, price }) {
         <h4>{selected.model}</h4>
         <h5>{selected.price}</h5>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, asperiores voluptatem iure veniam sint, ipsa id unde porro neque sunt placeat delectus nihil labore possimus facilis. Unde quaerat commodi fugit.</p>
+      </div>
+      <hr />
+      <div>
+        <Review id={selected.id}/>
       </div>
     </main>
   );
