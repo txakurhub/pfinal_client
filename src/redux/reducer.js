@@ -6,7 +6,7 @@ const initialState = {
   product_detail: [],
   products: [],
   categories:[],
-  reviews:[],
+  reviews:[], 
 };
 
 function rootReducer(state = initialState, action) {

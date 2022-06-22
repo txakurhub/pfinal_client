@@ -8,7 +8,7 @@ export const FILTER_PRICE = "FILTER_PRICE";
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 export const CREATE_REVIEW = 'CREATE_REVIEW';
-export const GET_REVIEWS_PRODUCT = 'GET_REVIEWS_PRODUCT';
+export const GET_REVIEWS_PRODUCT = 'GET_REVIEWS_PRODUCT'; 
 
 export function getProducts() {
   return function (dispatch) {

@@ -6,7 +6,7 @@ import { create_new_review, get_reviews } from "../redux/actions";
 function Reviews({id}) {
   console.log(id)
     const dispatch = useDispatch();
-    const [input, setInput] = useState({
+    const [input, setInput] = useState({ 
         comment: "",
         calification: "",
         userid: "1",
