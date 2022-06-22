@@ -9,6 +9,7 @@ import Wishlist from "./pages/Wishlist";
 import { AuthProvider } from "./context/authContext";
 import {CartProvider} from './context/CartItem'
 import  {PageShopingCart}  from "./pages/PageShopingCart";
+import Register from "./pages/Register";
 
 function App() {
 return (
