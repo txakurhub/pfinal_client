@@ -18,7 +18,9 @@ const FilterCategory = ({ setCurrentPage }) => {
       <select
         onChange={e => handleSelect(e)}>
         {categories.map((t) => (
-          <option value={t.id}>{t.name}</option>
+          <option 
+          key={categories.indexOf(t)}
+          value={t.id}>{t.name}</option>
         ))}
       </select>
     </div>
