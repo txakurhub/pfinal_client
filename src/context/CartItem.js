@@ -46,11 +46,11 @@ export const CartProvider = ({children}) =>{
                 cartItem.filter((productInCart)=> productInCart.id !== product.id)
             )
         }else{
-            setCartItem((productInCart) =>{
+            setCartItem(cartItem.map((productInCart) =>{
                 if(productInCart.id === product.id){
                     return {...inCart, amount: inCart.amount - 1}
                 }  else return productInCart
-            })
+            }))
         }
     }
 

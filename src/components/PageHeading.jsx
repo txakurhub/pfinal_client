@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ShoppingCart from "../pages/ShoppingCart";
 import FilterPrice from "./FilterPrice";
 
 const PageHeading = ({products, setOrder, setCurrentPage, order}) => {
