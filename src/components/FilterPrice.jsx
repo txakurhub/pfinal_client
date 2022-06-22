@@ -41,7 +41,7 @@ const FilterPrice = ({ setOrder, setCurrentPage, order }) => {
       <form onSubmit={handleSubmit}>
         <input type='number' value={priceMin} min={1} max={priceMax} placeholder='Minimal price' onChange={handlePriceMin} />
         <input type='number' value={priceMax} max={50000} min={priceMin} placeholder='Maximum price' onChange={handlePriceMax} />
-        <input type='submit' value='Search' />
+        <input type='submit' value='Aplicar filtrado' />
       </form>
     </div>
   )
