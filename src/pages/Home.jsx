@@ -10,7 +10,7 @@ import FilterCategory from "../components/FilterCategory";
 
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
-import ShoppingCart from '../pages/ShoppingCart'
+import ShoppingCart from '../components/ShoppingCart'
 // import { CartContext } from "../context/CartItem";
 
 export default function Home() {
