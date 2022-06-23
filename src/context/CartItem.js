@@ -54,8 +54,20 @@ export const CartProvider = ({children}) =>{
         }
     }
 
+    const deleteItemCantidad = (product) =>{
+        const inCart = cartItem.find(
+            (productInCart) => productInCart.id === product.id
+        );
+            
+        if(inCart.amount > 0){
+            setCartItem(
+                cartItem.filter((productInCart)=> productInCart.id !== product.id)
+            )
+        }
+    }
+
     return (
-        <CartContext.Provider value={{cartItem, addToCart, deleteItemToCart}}>
+        <CartContext.Provider value={{cartItem, addToCart, deleteItemToCart,deleteItemCantidad}}>
             {children}
         </CartContext.Provider>
     )
