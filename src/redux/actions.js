@@ -1,5 +1,5 @@
 import axios from "axios";
-const local_url = "http://localhost:3001";
+const local_url = "https://zapatillas-proyecto.herokuapp.com";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
