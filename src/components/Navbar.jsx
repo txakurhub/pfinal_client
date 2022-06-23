@@ -51,15 +51,28 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
         <div className="relative">
           {/* For md screen size */}
           <div id="md-searchbar" className={`${mdOptionsToggle ? "hidden" : "flex"} bg-white dark:bg-gray-900 lg:hidden py-5 px-6 items-center justify-between`}>
-            <div className="flex items-center space-x-3 text-gray-800 dark:text-white">
+            <form className="flex items-center space-x-3 text-gray-800 dark:text-white relative">
               <div>
                 <svg className="fill-stroke" width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M18.9984 18.9999L14.6484 14.6499" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <input type="text" placeholder="Search for products" className="text-sm leading-none dark:text-gray-300 dark:bg-gray-900 text-gray-600 focus:outline-none" />
-            </div>
+              <input value={input} onChange={handleChange} type="text" placeholder="Search for products" className="text-sm leading-none dark:text-gray-300 dark:bg-gray-900 text-gray-600 focus:outline-none" />
+              {
+                suggestionsState.mostrar && (
+                  <div className="absolute top-[37px] left-0 right-0 bg-white p-1 shadow">
+                    {
+                      suggestionsState.sugerencia.map((el, index) => (
+                        <p key={index} onClick={(e) => handleClick(e)} id={el.title} className={`hover:bg-gray-50 h-[25px] truncate cursor-pointer`}>
+                          {`${el.title}`}
+                        </p>
+                      ))
+                    }
+                  </div>
+                )
+              }
+            </form>
             <div className="space-x-6">
               <button onClick={() => To()} aria-label="view favourites" className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
                 <svg className="fill-stroke" width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -181,16 +194,29 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
           </div>
           {/* For small screen */}
           <div id="mobile-menu" className={`${showMenu ? "flex" : "hidden"} absolute dark:bg-gray-900 z-10 inset-0 md:hidden bg-white flex-col h-screen w-full`}>
-            <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 p-4">
-              <div className="flex items-center space-x-3">
+            <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 p-4 relative">
+              <form className="flex items-center space-x-3 relative">
                 <div>
                   <svg className="fill-stroke text-gray-800 dark:text-white" width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M18.9984 18.9999L14.6484 14.6499" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <input type="text" placeholder="Search for products" className="text-sm dark:bg-gray-900 text-gray-600 placeholder-gray-600 dark:placeholder-gray-300 focus:outline-none" />
-              </div>
+                <input value={input} onChange={handleChange} type="text" placeholder="Search for products" className="text-sm dark:bg-gray-900 text-gray-600 placeholder-gray-600 dark:placeholder-gray-300 focus:outline-none" />
+              </form>
+              {
+                suggestionsState.mostrar && (
+                  <div className="absolute top-[37px] left-0 right-0 bg-white p-1 shadow">
+                    {
+                      suggestionsState.sugerencia.map((el, index) => (
+                        <p key={index} onClick={(e) => handleClick(e)} id={el.title} className={`hover:bg-gray-50 h-[25px] truncate cursor-pointer`}>
+                          {`${el.title}`}
+                        </p>
+                      ))
+                    }
+                  </div>
+                )
+              }
               <button onClick={() => setShowMenu(false)} aria-label="close menu" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-600">
                 <svg className="fill-stroke text-gray-800 dark:text-white" width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 4L4 12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
