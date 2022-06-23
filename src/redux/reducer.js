@@ -2,6 +2,7 @@ import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CAT
 
 const initialState = {
   allProducts: [],
+  allProductsName:[],
   allProductsCopy: [],
   product_detail: [],
   products: [],
@@ -12,8 +13,10 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
+      const result = action.payload.map(e=> ({title:e.title,brand:e.brand}))
       return {
         ...state,
+        allProductsName:result,
         products: action.payload,
         allProducts: action.payload,
         allProductsCopy: action.payload
