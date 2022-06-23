@@ -3,6 +3,8 @@ const local_url = "http://localhost:3001";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
+export const SIGNIN = "SIGNIN";
+export const SIGNUP = "SIGNUP";
 
 export function getProducts() {
   return function (dispatch) {
@@ -20,4 +22,10 @@ export function getShoeDetail(id) {
     const { data } = axios(`${local_url}/shoes/${id}`);
     dispatch({ type: GET_SHOE_DETAIL, payload: data });
   };
+}
+
+export function signin(email,password){
+  return function (dispatch){
+    
+  }
 }
