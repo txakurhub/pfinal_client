@@ -18,6 +18,7 @@ export default function Home() {
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { user, logout, loading } = useAuth();
+  // const nombreProductos = useSelector(state=>state.allProductsName)
   const products = useSelector((state) => state.allProducts);
   const productPage = 20;
   // const {addToCart} = useContext(CartContext)
@@ -50,7 +51,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <NavBar setCurrentPage={setCurrentPage} /> */}
+      {/* <NavBar setCurrentPage={setCurrentPage} nombreProductos={nombreProductos}/> */}
       {loading ? (
         <div>
           <h4>Loading...</h4>
