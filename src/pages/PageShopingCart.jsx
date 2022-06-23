@@ -36,7 +36,7 @@ function PageShopingCart() {
                     cartItem.map(r => (
                       <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
                         <div className="w-1/4">
-                          <img src={r.image} alt className="w-full h-full object-center object-cover" />
+                          <img src={r.image} alt="Not found" className="w-full h-full object-center object-cover" />
                         </div>
                         <div className="md:pl-3 md:w-3/4">
                           <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4 opacity-0">RF293</p>
