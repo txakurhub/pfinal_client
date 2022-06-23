@@ -4,11 +4,11 @@ import Dashboard from "./pages/Dashboard";
 import Detail from "./pages/Detail";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import ShoppingCart from "./pages/ShoppingCart";
+import ShoppingCart from "./components/ShoppingCart";
 import Wishlist from "./pages/Wishlist";
 import { AuthProvider } from "./context/authContext";
 import {CartProvider} from './context/CartItem'
-import  {PageShopingCart}  from "./pages/PageShopingCart";
+import PageShopingCart from "./pages/PageShopingCart";
 import Register from "./pages/Register";
 
 function App() {

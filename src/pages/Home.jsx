@@ -10,11 +10,10 @@ import FilterCategory from "../components/FilterCategory";
 
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
-import ShoppingCart from '../pages/ShoppingCart'
+import ShoppingCart from '../components/ShoppingCart'
 import { CartContext } from "../context/CartItem";
 
 export default function Home() {
-
   const dispatch = useDispatch();
   const history = useHistory();
   const [order, setOrder] = useState("");
@@ -68,7 +67,7 @@ export default function Home() {
         </div>
       )}
       <FilterCategory />
-          <ShoppingCart/>
+      <ShoppingCart />
       {currentProduct ? (
         <PageHeading
           products={products}
@@ -88,6 +87,7 @@ export default function Home() {
               brand={r.brand}
               model={r.model}
               price={r.price}
+              product={r}
             />
           ))}
 <div>
@@ -99,7 +99,6 @@ export default function Home() {
           </div>
         </div>
       ) : (
-
         "No hay nada"
       )}
       <Paginado
@@ -111,4 +110,3 @@ export default function Home() {
     </>
   );
 }
-

@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartItem";
-import { Link } from 'react-router-dom'
-import Cart from "../components/Cart";
+import { Link } from 'react-router-dom';
 
 function ShoppingCart() {
     const [cartOpen, setCartOpen] = useState(false)
@@ -9,13 +8,9 @@ function ShoppingCart() {
 
     const {cartItem} = useContext(CartContext);
 
-    useEffect(()=>{
-        setProductsLengt(
-            cartItem.reduce((previous, current) => previous + current.amount, 0)
-        );
+    useEffect(() => {
+      setProductsLengt(cartItem.reduce((previous, current) => previous + current.amount, 0));
     }, [cartItem])
-    
-  
 
     return (
         <div>
