@@ -42,9 +42,7 @@ export const CartProvider = ({children}) =>{
         );
             
         if(inCart.amount === 1){
-            setCartItem(
-                cartItem.filter((productInCart)=> productInCart.id !== product.id)
-            )
+           return inCart;
         }else{
             setCartItem(cartItem.map((productInCart) =>{
                 if(productInCart.id === product.id){
@@ -63,6 +61,12 @@ export const CartProvider = ({children}) =>{
             setCartItem(
                 cartItem.filter((productInCart)=> productInCart.id !== product.id)
             )
+        }else{
+            setCartItem((productInCart) =>{
+                if(productInCart.id === product.id){
+                    return {...inCart, amount: inCart.amount - inCart.amount}
+                }  else return productInCart
+            })
         }
     }
 
