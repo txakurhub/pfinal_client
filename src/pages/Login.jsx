@@ -48,14 +48,14 @@ const Login = () => {
 
   return (
     <div className="h-screen bg-gradient-to-tl from-green-400 to-indigo-900 w-full flex flex-col items-center justify-center">
-      <form className="bg-white shadow rounded lg:w-1/3 relative md:w-1/2 w-full p-10 pb-5">
-        <Link className="flex items-center text-gray-500 hover:text-gray-600 cursor-pointer absolute top-3 left-1" to="/">
-          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <polyline points="15 6 9 12 15 18" />
-          </svg>
-          <p className="text-sm pl-2 leading-none">Back</p>
-        </Link>
+      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-white border-b border-transparent hover:border-white cursor-pointer absolute top-3 left-1" to="/">
+        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="white" fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <polyline points="15 6 9 12 15 18" />
+        </svg>
+        <p className="text-sm pl-2 leading-none">Back</p>
+      </Link>
+      <form className="bg-white shadow rounded lg:w-1/3 md:w-1/2 w-full p-10 pb-5">
         <p tabIndex={0} role="heading" aria-level="1" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">
           Login to your account
         </p>
