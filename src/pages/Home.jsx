@@ -1,16 +1,15 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
 import { getCategories, getProducts } from "../redux/actions";
-import NavBar from "../components/Navbar";
 import Paginado from "../components/Paginado";
-import FilterPrice from "../components/FilterPrice";
 import PageHeading from "../components/PageHeading";
 import FilterCategory from "../components/FilterCategory";
-
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
-import ShoppingCart from "../pages/ShoppingCart";
+import ShoppingCart from '../components/ShoppingCart'
+// import NavBar from "../components/Navbar";
+// import FilterPrice from "../components/FilterPrice";
 // import { CartContext } from "../context/CartItem";
 
 export default function Home() {

@@ -15,10 +15,10 @@ function Paginado({ productPorPage, product, paginado}) {
     paginado(status+1)
     setStatus(status +1)
   }
-  const handlePrevius = ()=>{
-    paginado(status-1)
-    setStatus(status-1)
-  }
+  // const handlePrevius = ()=>{
+  //   paginado(status-1)
+  //   setStatus(status-1)
+  // }
 
   const max = Math.ceil(product/productPorPage);
 

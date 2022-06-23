@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getShoeDetail } from "../redux/actions";
 import { Link } from 'react-router-dom'
 import Review from "../components/Reviews"
+import { CartContext } from "../context/CartItem";
 
 export default function Detail() {
   const dispatch = useDispatch();
   const params = useParams();
   const [loader, setLoader] = useState(true);
   let selected = useSelector((state) => state.product_detail);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
@@ -32,6 +34,9 @@ export default function Detail() {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, asperiores voluptatem iure veniam sint, ipsa id unde porro neque sunt placeat delectus nihil labore possimus facilis. Unde quaerat commodi fugit.</p>
       </div>
       <hr />
+      <div>
+        <button onClick={()=>addToCart(selected)}>Agregar al Carrito</button>
+      </div>
       <div>
         <Review id={selected.id}/> 
       </div>
