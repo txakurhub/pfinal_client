@@ -9,6 +9,8 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const CREATE_REVIEW = "CREATE_REVIEW";
 export const GET_REVIEWS_PRODUCT = "GET_REVIEWS_PRODUCT";
+export const CREATE_WISHLIST_PRODUCT = "CREATE_WISHLIST_PRODUCT";
+export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
 
 export function getProducts() {
   return function (dispatch) {
@@ -96,5 +98,20 @@ export const createProduct = (payload) => {
   return async () => {
     const json = await axios.post("http://localhost:3001/shoes", payload);
     return json;
+  };
+};
+export const get_wishlist_product = (payload) =>{
+  return (dispatch)=>{
+    axios.get(`${local_url}/wishlist/${payload}`)
+    .then((res)=> dispatch({type: GET_WISHLIST_PRODUCT, payload: res.data}),
+    (error) => alert("Error"))
+  }
+}
+export const create_new_wishlist = (payload) => {
+  return (dispatch) => {
+    axios.post(`${local_url}/wishlist`, payload).then(
+      (res) => dispatch({ type: CREATE_REVIEW, payload: res.data }),
+      (error) => alert("Wishlist not created")
+    );
   };
 };
