@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import FilterCategory from "./FilterCategory";
 import FilterPrice from "./FilterPrice";
 
 const PageHeading = ({products, setOrder, setCurrentPage, order}) => {
   const [show, setShow] = useState(true);
 
   return (
-      
     <div className="py-5 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container flex justify-center items-center">
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col justify-start items-start">
@@ -15,7 +15,10 @@ const PageHeading = ({products, setOrder, setCurrentPage, order}) => {
             <p className="text-base leading-4 text-gray-600 mt-2">(20 products of {products.length})</p>
           </div>
         </div>
-        <div className={`${show ? 'opacity-0' : 'opacity-1'} ease-in-out transition duration-500`}><FilterPrice setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /></div>
+        <div className={`${show ? 'opacity-0' : 'opacity-1'} ease-in-out transition duration-500`}>
+          <FilterPrice setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />
+          <FilterCategory />
+        </div>
         <button onClick={() => setShow(show === false ? true : false)} className="hover:text-gray-500 text-gray-600 bg-gray-100 py-3.5 px-3 rounded-sm flex flex-row justify-center items-center space-x-3">
           <svg className="fill-stroke" width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 14.6452V9.33875" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
