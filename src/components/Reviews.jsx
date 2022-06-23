@@ -15,7 +15,7 @@ function Reviews({id}) {
     const review = useSelector((state)=>state.reviews)
     useEffect(()=>{
         dispatch(get_reviews(id))
-    }, [dispatch])
+    }, [dispatch, id])
     const handlechange = (e)=>{
         e.preventDefault();
         setInput({
