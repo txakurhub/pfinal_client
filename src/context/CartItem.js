@@ -63,6 +63,12 @@ export const CartProvider = ({children}) =>{
             setCartItem(
                 cartItem.filter((productInCart)=> productInCart.id !== product.id)
             )
+        }else{
+            setCartItem((productInCart) =>{
+                if(productInCart.id === product.id){
+                    return {...inCart, amount: inCart.amount - inCart.amount}
+                }  else return productInCart
+            })
         }
     }
 
