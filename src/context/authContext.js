@@ -8,7 +8,8 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, app } from "../firebase-config";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 export const authContext = createContext();
 
@@ -21,8 +22,20 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signup = async (email, password) =>
-    await createUserWithEmailAndPassword(auth, email, password);
+  const signup = async (email, password, role = "user") => {
+    try{
+      const firestore = getFirestore(app);
+      const infoUser = await createUserWithEmailAndPassword(auth, email, password, role).then(
+      (fireUser) => {
+        return fireUser
+      });
+      console.log(infoUser.user.uid);
+      const docuRef = doc(firestore, `users/${infoUser.user.uid}`);
+      setDoc(docuRef, { email: email, role: role });
+    }catch(err){
+      console.log(err+ "  - - -  error en signup");
+    }
+  };
 
   const login = async (email, password) =>
     await signInWithEmailAndPassword(auth, email, password);
@@ -35,13 +48,12 @@ export function AuthProvider({ children }) {
   const resetPassword = (email) => {
     sendPasswordResetEmail(auth, email);
   };
-  
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-
     return () => unSubscribe;
   }, []);
 
@@ -49,7 +61,15 @@ export function AuthProvider({ children }) {
 
   return (
     <authContext.Provider
-      value={{ signup, login, user, logout, loading, loginWithGoogle, resetPassword }}
+      value={{
+        signup,
+        login,
+        user,
+        logout,
+        loading,
+        loginWithGoogle,
+        resetPassword,
+      }}
     >
       {children}
     </authContext.Provider>
