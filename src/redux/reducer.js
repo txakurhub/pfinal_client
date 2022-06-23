@@ -1,11 +1,12 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES } from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT } from "./actions";
 
 const initialState = {
   allProducts: [],
   allProductsCopy: [],
   product_detail: [],
   products: [],
-  categories:[]
+  categories:[],
+  reviews:[], 
 };
 
 function rootReducer(state = initialState, action) {
@@ -72,9 +73,21 @@ case GET_CATEGORIES:{
         ...state,
         categories: action.payload
       }}
+
+    case CREATE_REVIEW: 
+    return {
+      ...state,
+      reviews: action.payload
+    }
+    case GET_REVIEWS_PRODUCT:
+      console.log(action.payload)
+      return {
+        ...state,
+        reviews: action.payload
+      }
     default:
       return { ...state };
-  }
+  } 
 }
 
 export default rootReducer;
