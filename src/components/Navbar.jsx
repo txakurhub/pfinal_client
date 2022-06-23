@@ -1,39 +1,9 @@
-// import { useState } from 'react'
+import React, { useState } from "react";
 import { useDispatch } from 'react-redux'
 import { searchSneakes } from '../redux/actions'
-
-// const NavBar = ({ setCurrentPage }) => {
-
-//   const [input, setInput] = useState('')
-//   const dispatch = useDispatch()
-
-//   const handleChange = (e) => {
-//     setInput(e.target.value)
-//   }
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     dispatch(searchSneakes(input))
-//     setInput('')
-//     setCurrentPage(1)
-//   }
-
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <input type='search' value={input} placeholder="Search sneakes..." onChange={handleChange} />
-//         <input type='submit' />
-//       </form>
-//     </div>
-//   )
-// }
-
-// export default NavBar
-
-import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const NavBar = ({ setCurrentPage, loading, user, handleLogin, handleLogout }) => {
+const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
   const [searchInput, setSearchInput] = useState(true);
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
@@ -43,8 +13,29 @@ const NavBar = ({ setCurrentPage, loading, user, handleLogin, handleLogout }) =>
 
   const To = (props) => history.push('/' + props ? props : null);
 
-  const handleChange = (e) => {
-    setInput(e.target.value);
+  const [suggestionsState, setSuggestionsState] = useState({mostrar: false, sugerencia: []});
+
+  const suggestions = (texto) => {
+    if(nombreProductos.length) {
+      if(!texto) {
+        setSuggestionsState({sugerencia: [], mostrar: false});
+        return ;
+      };
+      if(texto) {
+        const filtrado = nombreProductos.filter(e => `${e.title} ${e.brand}`.toLowerCase().includes(texto.toLowerCase()));
+        setSuggestionsState({mostrar: true, sugerencia: filtrado.length > 5 ? [filtrado[0], filtrado[1], filtrado[2], filtrado[4], filtrado[5]] : filtrado});
+      };
+    };
+  };
+
+  const handleClick = (e) => {
+    setInput(e.target.id);
+    setSuggestionsState({sugerencia: [], mostrar: false});
+  };
+
+  const handleChange = async (e) => {
+    await setInput(e.target.value);
+    suggestions(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -123,7 +114,7 @@ const NavBar = ({ setCurrentPage, loading, user, handleLogin, handleLogout }) =>
                 </li>
               </ul>
               <div className="md:w-2/12 justify-end flex items-center space-x-4 xl:space-x-8">
-                <form onSubmit={handleSubmit} className="hidden lg:flex items-center">
+                <form onSubmit={handleSubmit} className="hidden lg:flex items-center relative">
                   <button onClick={() => setSearchInput(!searchInput)} aria-label="search items" className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
                     <svg className="fill-stroke" width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 11C5 15.4183 8.58172 19 13 19C17.4183 19 21 15.4183 21 11C21 6.58172 17.4183 3 13 3C8.58172 3 5 6.58172 5 11Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -131,6 +122,19 @@ const NavBar = ({ setCurrentPage, loading, user, handleLogin, handleLogout }) =>
                     </svg>
                   </button>
                   <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="search" className={`${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
+                  {
+                    suggestionsState.mostrar && (
+                      <div className="absolute top-[25px] left-0 right-0 bg-gray-50 p-1">
+                        {
+                          suggestionsState.sugerencia.map((el, index) => (
+                            <p key={index} onClick={(e) => handleClick(e)} id={el.title} className={`hover:bg-white h-[25px] truncate cursor-pointer ${searchInput ? "hidden" : ""}`}>
+                              {`${el.title}`}
+                            </p>
+                          ))
+                        }
+                      </div>
+                    )
+                  }
                 </form>
                 <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
                   <button onClick={() => To()} aria-label="view favourites" className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
@@ -281,6 +285,6 @@ const NavBar = ({ setCurrentPage, loading, user, handleLogin, handleLogout }) =>
       </div>
     </div>
   );
-}
+};
 
 export default NavBar;
