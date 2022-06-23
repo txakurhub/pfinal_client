@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function PageShopingCart() {
   const [show, setShow] = useState(false);
   const { cartItem } = useContext(CartContext);
-  const { deleteItemToCart, addToCart } = useContext(CartContext);
+  const { deleteItemToCart, addToCart, deleteItemCantidad } = useContext(CartContext);
   const total = cartItem.reduce((previous , current) => previous + current.amount * current.price, 0);
 
   return (
@@ -42,11 +42,12 @@ function PageShopingCart() {
                           <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4 opacity-0">RF293</p>
                           <div className="flex items-center justify-between w-full pt-1">
                             <p className="text-base font-black leading-none text-gray-800 truncate">{r.title}</p>
-                            <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
+                            {/* <select className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none">
                               <option>01</option>
                               <option>02</option>
                               <option>03</option>
-                            </select>
+                            </select> */}
+                            <button onClick={()=>deleteItemCantidad(r)}> Remove All</button>
                           </div>
                           <p className="text-xs leading-3 text-gray-600 pt-2 opacity-0">Height: 10 inches</p>
                           <p className="text-xs leading-3 text-gray-600 py-4 opacity-0">Color: Black</p>
