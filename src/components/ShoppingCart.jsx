@@ -6,7 +6,6 @@ function ShoppingCart() {
     // const [cartOpen, setCartOpen] = useState(false)
     const [productsLength, setProductsLengt] = useState(0);
     const { cartItem } = useContext(CartContext);
-    const [cartOpen, setCartOpen] = useState(false)
 
     useEffect(() => {
       setProductsLengt(cartItem.reduce((previous, current) => previous + current.amount, 11));
