@@ -1,9 +1,13 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const history = useHistory();
+  const { userData } = useAuth();
   const [cartItem, setCartItem] = useState(() => {
     try {
       const productosEnLocalStorage = localStorage.getItem("cartProducts");
@@ -15,7 +19,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("cartProducts", JSON.stringify(cartItem));
-    console.log(cartItem);
+    // console.log(cartItem);
   }, [cartItem]);
 
   const addToCart = (product) => {
@@ -71,25 +75,35 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const sendMP = () => {
-    try {
-      const items = cartItem.map((e) => {
-        return {
-          title: e.title,
-          description: `${e.title}, ${e.brand}, ${e.model}`,
-          picture_url: e.image,
-          category_id: "category234",
-          quantity: e.amount,
-          unit_price: e.price,
+  const sendMP = async () => {
+    const currentUser = await userData();
+    if (currentUser) {
+      try {
+        const items = cartItem.map((e) => {
+          return {
+            title: e.title,
+            description: `${e.title}, ${e.brand}, ${e.model}`,
+            picture_url: e.image,
+            category_id: "category234",
+            quantity: e.amount,
+            unit_price: e.price,
+          };
+        });
+        const body = {
+          items: items,
+          email: currentUser.email,
+          user_id: currentUser.uid,
         };
-      });
-      console.log(items);
 
-      const response = axios
-        .post("http://localhost:3001/payments", items)
-        .then((res) => console.log(res.data));
-    } catch (error) {
-      console.log(error);
+        const response = axios
+          .post("http://localhost:3001/payments", body)
+          .then((res) => console.log(res.data));
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      alert("Tienes que estar logeado para poder comprar");
+      history.push("/login");
     }
   };
 
