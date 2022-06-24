@@ -40,11 +40,11 @@ function Paginado({ productPorPage, product, paginado, pagina }) {
         {
           totalPagesToRender?.map((number) => (
             <>
-              <button key={number} id="pagina" className="text-base leading-none text-gray-800 border-b-2 border-transparent focus:outline-none focus:border-gray-800" onClick={() => number!==max? handleClick(number):handleClick(1)}>
-                <p>{number !== max? number : 1}</p>
+              <button key={number} id="pagina" className="text-base leading-none text-gray-800 border-b-2 border-transparent focus:outline-none focus:border-gray-800" onClick={() => number !== max ? handleClick(number) : handleClick(1)}>
+                <p>{number !== max ? number : 1}</p>
               </button>
               <p>de</p>
-              <button onClick={()=> handleClick(max)}>{max}</button>
+              <button onClick={() => handleClick(max)}>{max}</button>
             </>
 
           ))
