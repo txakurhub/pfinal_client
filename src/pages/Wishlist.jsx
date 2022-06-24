@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_wishlist_product, remove_wishlist_product } from "../redux/actions";
 
 function Wishlist() {
-
+ 
     const dispatch = useDispatch();
 
     const wishlist = useSelector((state)=> state.wishlist)
