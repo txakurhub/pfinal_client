@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import ShoppingCart from "./components/ShoppingCart";
 import Wishlist from "./pages/Wishlist";
 import { AuthProvider } from "./context/authContext";
-<<<<<<< HEAD
 import {CartProvider} from './context/CartItem'
 import PageShopingCart from "./pages/PageShopingCart";
 import Register from "./pages/Register";
@@ -19,18 +18,6 @@ return (
     <AuthProvider>
       <Route exact path="/" component={Home}></Route>
         <Route exact path="/detail/:id" component={Detail}></Route>
-=======
-import Register from "./pages/Register";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-
-function App() {
-  return (
-    <div className="App">
-      <AuthProvider>
-        <Route exact path="/" component={Home}></Route>
-        <Route exact path="/:id" component={Detail}></Route>
-        <Route exact path="/Register" component={Register}></Route>
->>>>>>> ebe2139 (aasdas)
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/register" component={Register}></Route>
         <Route exact path="/:user/:id" component={Dashboard}></Route>
