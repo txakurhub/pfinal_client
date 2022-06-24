@@ -2,18 +2,12 @@ import React, {useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
 import { getCategories, getProducts } from "../redux/actions";
-// import NavBar from "../components/Navbar";
 import Paginado from "../components/Paginado";
-// import FilterPrice from "../components/FilterPrice";
 import PageHeading from "../components/PageHeading";
 import FilterCategory from "../components/FilterCategory";
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
-// import FilterCategory from "../components/FilterCategory";
-// import ShoppingCart from '../components/ShoppingCart';
-// import FilterPrice from "../components/FilterPrice";
-// import { CartContext } from "../context/CartItem";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -49,7 +43,6 @@ export default function Home() {
     history.push("/login");
   };
   const { user, logout, loading } = useAuth();
-  // console.log(user);
   return (
     <>
       <NavBar setCurrentPage={setCurrentPage} />
