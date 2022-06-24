@@ -14,9 +14,9 @@ function PageShopingCart() {
   );
 
   const handleCheckout = (e) => {
-    e.preventDefault()
-    sendMP()
-  }
+    e.preventDefault();
+    sendMP();
+  };
   return (
     <>
       <div>
@@ -67,7 +67,10 @@ function PageShopingCart() {
                   <p className="mt-14">Tu carrito esta vacio</p>
                 ) : (
                   cartItem.map((r) => (
-                    <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
+                    <div
+                      key={cartItem.indexOf(r)}
+                      className="md:flex items-center mt-14 py-8 border-t border-gray-200"
+                    >
                       <div className="w-1/4">
                         <img
                           src={r.image}
