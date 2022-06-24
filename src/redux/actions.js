@@ -125,7 +125,7 @@ console.log(wish)
   return (dispatch)=>{
     axios.delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
     .then((res)=> dispatch({type: REMOVE_PRODUCT_WISHLIST, payload: res.data}),
-    (error) => alert(error))
+    (error) => alert(error)) 
   }
 }
 
