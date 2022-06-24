@@ -41,24 +41,9 @@ function ShoppingCart() {
                     <div>{productsLength}</div>
                     )}
             </div> */}
-
-            {/* {cartItem && cartOpen && (
-                <div>
-                    <h2>Tu carrito</h2>
-                    {cartItem.length === 0  ? <p>Tu carrito esta vacio</p> :(
-                        <div>
-                            {cartItem.map((item , i)=>(
-                                <Cart key={i} item={item}/>
-                            ))}
-                        </div>
-                    )}
-                <h2>Total: ${total}</h2>
-                </div>
-            )} */}
         </div>
     );
 };
 
 export default ShoppingCart;
 
-// onClick={()=> setCartOpen(!cartOpen)}
