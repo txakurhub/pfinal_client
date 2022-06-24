@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login, loginWithGoogle, resetPassword } = useAuth();
+  const { login, loginWithGoogle, loginWithFacebook, resetPassword } = useAuth();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -41,6 +41,14 @@ const Login = () => {
     };
   };
 
+  const handleFacebookLogin = async () => {
+    try {
+      await loginWithFacebook();
+      history.push("/");
+    } catch (error) {
+      setError(error.message);
+    };
+  };
   const viewPassword = () => {
     var x = document.getElementById("password");
     x.type === "password" ? (x.type = "text") : (x.type = "password");
@@ -66,6 +74,8 @@ const Login = () => {
             Sign up here
           </span>
         </p>
+
+        <button onClick={handleFacebookLogin}>Login with Facebook</button>
         <button onClick={handleGoogleLogin} aria-label="Continue with google" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10">
           <svg width={19} height={20} viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M18.9892 10.1871C18.9892 9.36767 18.9246 8.76973 18.7847 8.14966H9.68848V11.848H15.0277C14.9201 12.767 14.3388 14.1512 13.047 15.0812L13.0289 15.205L15.905 17.4969L16.1042 17.5173C17.9342 15.7789 18.9892 13.221 18.9892 10.1871Z" fill="#4285F4" />
@@ -81,11 +91,11 @@ const Login = () => {
           <hr className="w-full bg-gray-400  " />
         </div>
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800">Email</lable>
+          <label className="text-sm font-medium leading-none text-gray-800">Email</label>
           <input onChange={(e) => setEmail(e.target.value)} id="email" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div className="mt-6 w-full">
-          <lable className="text-sm font-medium leading-none text-gray-800">Password</lable>
+          <label className="text-sm font-medium leading-none text-gray-800">Password</label>
           <div title="See password" className="relative flex items-center justify-center">
             <input onChange={(e) => setPassword(e.target.value)} id="password" min={6} aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
             <div onClick={viewPassword} className="absolute right-0 mt-2 mr-3 cursor-pointer">
