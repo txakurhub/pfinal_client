@@ -10,6 +10,7 @@ import { AuthProvider } from "./context/authContext";
 import {CartProvider} from './context/CartItem'
 import PageShopingCart from "./pages/PageShopingCart";
 import Register from "./pages/Register";
+import CreationForm from "./components/CreationForm";
 
 function App() {
 return (
@@ -24,6 +25,7 @@ return (
         <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
         <Route exact path="/user/:id/wishlist" component={Wishlist}></Route>
         <Route exact path='/cart' component={PageShopingCart}></Route>
+        <Route exact path="/form" component={CreationForm} />
       </AuthProvider>
   </CartProvider>
     </div>
