@@ -7,27 +7,27 @@ import Login from "./pages/Login";
 import ShoppingCart from "./components/ShoppingCart";
 import Wishlist from "./pages/Wishlist";
 import { AuthProvider } from "./context/authContext";
-import {CartProvider} from './context/CartItem'
+import { CartProvider } from "./context/CartItem";
 import PageShopingCart from "./pages/PageShopingCart";
 import Register from "./pages/Register";
 import CreationForm from "./components/CreationForm";
 
 function App() {
-return (
-  <div className="App">
-  <CartProvider>
-    <AuthProvider>
-      <Route exact path="/" component={Home}></Route>
-        <Route exact path="/detail/:id" component={Detail}></Route>
-        <Route exact path="/login" component={Login}></Route>
-        <Route exact path="/register" component={Register}></Route>
-        <Route exact path="/:user/:id" component={Dashboard}></Route>
-        <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
-        <Route exact path="/user/:id/wishlist" component={Wishlist}></Route>
-        <Route exact path='/cart' component={PageShopingCart}></Route>
-        <Route exact path="/form" component={CreationForm} />
+  return (
+    <div className="App">
+      <AuthProvider>
+        <CartProvider>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/detail/:id" component={Detail}></Route>
+          <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/register" component={Register}></Route>
+          <Route exact path="/:user/:id" component={Dashboard}></Route>
+          <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
+          <Route exact path="/user/:id/wishlist" component={Wishlist}></Route>
+          <Route exact path="/cart" component={PageShopingCart}></Route>
+          <Route exact path="/form" component={CreationForm} />
+        </CartProvider>
       </AuthProvider>
-  </CartProvider>
     </div>
   );
 }

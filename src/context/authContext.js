@@ -71,6 +71,10 @@ export function AuthProvider({ children }) {
     return () => unSubscribe;
   }, []);
 
+  const userData = () => {
+    return user
+  }
+
   const logout = () => signOut(auth);
 
   return (
@@ -84,6 +88,7 @@ export function AuthProvider({ children }) {
         loginWithGoogle,
         loginWithFacebook,
         resetPassword,
+        userData
       }}
     >
       {children}
