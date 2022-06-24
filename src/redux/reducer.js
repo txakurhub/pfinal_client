@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT } from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST } from "./actions";
 
 const initialState = {
   allProducts: [],
@@ -8,6 +8,7 @@ const initialState = {
   products: [],
   categories:[],
   reviews:[], 
+  wishlist: [], 
 };
 
 function rootReducer(state = initialState, action) {
@@ -88,6 +89,21 @@ case GET_CATEGORIES:{
         ...state,
         reviews: action.payload
       }
+      case GET_WISHLIST_PRODUCT:
+        return {
+          ...state,
+          wishlist: action.payload
+        }
+      case CREATE_WISHLIST_PRODUCT:
+        return{
+          ...state,
+          wishlist: action.payload
+        }
+      case REMOVE_PRODUCT_WISHLIST:
+        return{
+          ...state,
+          wishlist: action.payload
+        }
     default:
       return { ...state };
   } 
