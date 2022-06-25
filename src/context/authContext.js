@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  FacebookAuthProvider,
 } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
@@ -23,17 +24,21 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const signup = async (email, password, role = "user") => {
-    try{
+    try {
       const firestore = getFirestore(app);
-      const infoUser = await createUserWithEmailAndPassword(auth, email, password, role).then(
-      (fireUser) => {
-        return fireUser
+      const infoUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+        role
+      ).then((fireUser) => {
+        return fireUser;
       });
       console.log(infoUser.user.uid);
       const docuRef = doc(firestore, `users/${infoUser.user.uid}`);
       setDoc(docuRef, { email: email, role: role });
-    }catch(err){
-      console.log(err+ "  - - -  error en signup");
+    } catch (err) {
+      console.log(err + "  - - -  error en signup");
     }
   };
 
@@ -42,7 +47,16 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleProvider);
+    signInWithPopup(auth, googleProvider)
+      .then((re) => console.log(re))
+      .catch((err) => console.log(err));
+  };
+
+  const loginWithFacebook = () => {
+    const facebookProvider = new FacebookAuthProvider();
+    signInWithPopup(auth, facebookProvider)
+      .then((re) => console.log(re))
+      .catch((err) => console.log(err));
   };
 
   const resetPassword = (email) => {
@@ -68,6 +82,7 @@ export function AuthProvider({ children }) {
         logout,
         loading,
         loginWithGoogle,
+        loginWithFacebook,
         resetPassword,
       }}
     >

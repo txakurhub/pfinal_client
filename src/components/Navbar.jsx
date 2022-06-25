@@ -88,13 +88,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
               </button>
               {
                 loading ?
-                <h4>Loading...</h4> : 
+                <h4 className="dark:text-white">Loading...</h4> : 
                 user ?
                 <>
-                  <h4>Welcome {user.email}</h4>
-                  <button onClick={handleLogout}>Logout</button>
+                  <h4 className="dark:text-white">Welcome {user.email}</h4>
+                  <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                 </> :
-                <button onClick={handleLogin}>Login</button>
+                <button className="dark:text-white" onClick={handleLogin}>Login</button>
               }
             </div>
           </div>
@@ -164,13 +164,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   </button>
                   {
                     loading ?
-                    <h4>Loading...</h4> : 
+                    <h4 className="dark:text-white">Loading...</h4> : 
                     user ?
                     <>
-                      <h4>Welcome {user.email}</h4>
-                      <button onClick={handleLogout}>Logout</button>
+                      <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                     </> :
-                    <button onClick={handleLogin}>Login</button>
+                    <button className="dark:text-white" onClick={handleLogin}>Login</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
@@ -295,13 +295,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <li>
                   {
                     loading ?
-                    <h4>Loading...</h4> : 
+                    <h4 className="dark:text-white">Loading...</h4> : 
                     user ?
                     <>
-                      <h4>Welcome {user.email}</h4>
-                      <button onClick={handleLogout}>Logout</button>
+                      <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                     </> :
-                    <button onClick={handleLogin}>Login</button>
+                    <button className="dark:text-white" onClick={handleLogin}>Login</button>
                   }
                 </li>
               </ul>

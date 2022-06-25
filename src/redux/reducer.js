@@ -1,22 +1,23 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT } from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, ALL_FILTERS, FILTER_CATEGORY } from "./actions";
 
 const initialState = {
   allProducts: [],
-  allProductsName:[],
+  allProductsName: [],
   allProductsCopy: [],
   product_detail: [],
   products: [],
-  categories:[],
-  reviews:[], 
+  categories: [],
+  reviews: [],
+  wishlist: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
-      const result = action.payload.map(e=> ({title:e.title,brand:e.brand}))
+      const result = action.payload.map(e => ({ title: e.title, brand: e.brand }))
       return {
         ...state,
-        allProductsName:result,
+        allProductsName: result,
         products: action.payload,
         allProducts: action.payload,
         allProductsCopy: action.payload
@@ -56,12 +57,10 @@ function rootReducer(state = initialState, action) {
         allProducts: container
       }
     }
-    case "FILTER_BY_RANGE_PRICE": {
-      const container = state.allProductsCopy.filter(s => s.price > action.payload.priceMin && s.price < action.payload.priceMax)
-      !container.length && alert('No hay producto con ese rango de precio') 
+    case GET_CATEGORIES: {
       return {
         ...state,
-        allProducts: container.length ? container : state.allProducts
+        categories: action.payload
       }
     }
     case FILTER_CATEGORY: {
@@ -70,27 +69,48 @@ function rootReducer(state = initialState, action) {
         allProducts: action.payload
       }
     }
-
-case GET_CATEGORIES:{
+    case CREATE_REVIEW:
       return {
         ...state,
-        categories: action.payload
-      }}
-
-    case CREATE_REVIEW: 
-    return {
-      ...state,
-      reviews: action.payload
-    }
+        reviews: action.payload
+      }
     case GET_REVIEWS_PRODUCT:
       console.log(action.payload)
       return {
         ...state,
         reviews: action.payload
       }
+    case GET_WISHLIST_PRODUCT:
+      return {
+        ...state,
+        wishlist: action.payload
+      }
+    case CREATE_WISHLIST_PRODUCT:
+      return {
+        ...state,
+        wishlist: action.payload
+      }
+    case REMOVE_PRODUCT_WISHLIST:
+      return {
+        ...state,
+        wishlist: action.payload
+      }
+    case ALL_FILTERS: {
+      const { brand, category, precioMin, precioMax } = action.payload
+      let container = brand && category ? state.allProductsCopy.filter(p => p.brand === brand && p.category === category) : !brand && category ? state.allProductsCopy.filter(p => p.category === category) : state.allProductsCopy.filter(p => p.brand === brand)
+      if (precioMin && precioMax) {
+        container = container.filter(p => p.price > precioMin && p.price < precioMax)
+      }
+      let searchResults = container.length ? container : alert("No search results found")
+      return {
+        ...state,
+        allProducts: searchResults.length ? searchResults : state.allProducts
+      }
+    }
     default:
       return { ...state };
-  } 
+  }
 }
 
 export default rootReducer;
+

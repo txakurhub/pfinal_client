@@ -8,7 +8,7 @@ function ShoppingCart() {
     const { cartItem } = useContext(CartContext);
 
     useEffect(() => {
-      setProductsLengt(cartItem.reduce((previous, current) => previous + current.amount, 0));
+      setProductsLengt(cartItem.reduce((previous, current) => previous + current.amount, 11));
     }, [cartItem]);
 
     return (
