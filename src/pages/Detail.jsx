@@ -19,7 +19,7 @@ export default function Detail() {
   let wishlist = useSelector((state) => state.wishlist);
   const [order, setOrder] = useState('')
   const { addToCart } = useContext(CartContext);
-  let datas = 0;
+  let datas = "";
 
   useEffect(() => {
     dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
@@ -27,7 +27,7 @@ export default function Detail() {
 
   }, [dispatch, order]);
   const a =(b)=>{
-    let idwis = 0;
+    let idwis = '';
       for (let key in b) {
         if (b.hasOwnProperty(key) && (typeof b[key] === "object")) {
           a(b[key])
@@ -44,9 +44,10 @@ export default function Detail() {
       }
       return idwis
     }
-a(wishlist)
+
 
   const handleaddwishlist = (e)=>{
+    a(wishlist)
     e.preventDefault();
     console.log(selected.id)
     console.log("agregar")
@@ -54,7 +55,7 @@ a(wishlist)
     setOrder(params.id)
   }
   const handledeltewishlist = (e)=>{
-    
+    a(wishlist)
     e.preventDefault();
     console.log("delete", )
     dispatch(remove_wishlist_product(datas, "1"))
@@ -126,7 +127,7 @@ a(wishlist)
         )}
       </div>
       <div>
-        {/* <Review id={selected.id} /> */}
+        <Review id={selected.id} />
       </div>
     </main>
   );

@@ -9,6 +9,7 @@ const initialState = {
   categories: [],
   reviews: [],
   wishlist: [],
+  counterwishlist : 0,
 };
  
 function rootReducer(state = initialState, action) {
@@ -80,24 +81,45 @@ function rootReducer(state = initialState, action) {
         reviews: action.payload
       }
     case GET_WISHLIST_PRODUCT:
+      console.log(action.payload.length)
       return {
         ...state,
-        wishlist: action.payload
+        wishlist: action.payload,
+        counterwishlist: action.payload.length,
       }
     case GET_WISHLIST_PRODUCT_ID:
+      let getwishlist = action.payload.filter((e) => e.Products && e.Products.map((p) => p.id).includes(action.producto))
+      console.log(getwishlist)
       return {
         ...state,
-        wishlist: action.payload.filter((e) => e.Products && e.Products.map((p) => p.id).includes(action.producto))
+        wishlist:getwishlist ,
+        counterwishlist: getwishlist.length
       }
     case CREATE_WISHLIST_PRODUCT:
+      console.log(action.payload)
       return {
         ...state,
-        wishlist: action.payload
+        wishlist: state.wishlist.concat(action.payload) ,
+        counterwishlist: state.counterwishlist + 1,
       }
     case REMOVE_PRODUCT_WISHLIST:
-      return {
-        ...state,
-        wishlist: action.payload
+      console.log(action.id)
+      let newWishList = state.wishlist.filter(
+        (wish) => wish.id !== action.id
+      );
+      console.log(newWishList)
+      if (state.counterwishlist >= 1) {
+        return {
+          ...state,
+          wishlist: newWishList,
+          counterwishlist: state.counterwishlist - 1,
+        };
+      } else {
+        return {
+          ...state,
+          wishlist: newWishList,
+          counterwishlist: state.counterwishlist,
+        };
       }
     case ALL_FILTERS: {
       const { brand, category, precioMin, precioMax } = action.payload

@@ -25,7 +25,7 @@ function Wishlist() {
     return (
         <div>
             <h1>Mis Favoritos {wishlist&&wishlist.length}</h1>
-            {wishlist.length? wishlist.map((w)=>(
+            {wishlist.length >0? wishlist.map((w)=>(
                 <div key={w.id}>
                 <img src={w.Products[0].image} alt="" style={{width: "400px", height: "400px"}} />
                 <p>{w.Products[0].title}</p>
