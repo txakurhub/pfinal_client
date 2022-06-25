@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import axios from "axios"
 
 export const authContext = createContext();
 
@@ -18,6 +19,12 @@ export const useAuth = () => {
   const context = useContext(authContext);
   return context;
 };
+
+const signUpDb = (user)=>{
+  axios.post("http://localhost:3001/customers",user)
+  .then(res=>console.log(res.data))
+  .catch(err=>console.log(err))
+}
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -35,6 +42,18 @@ export function AuthProvider({ children }) {
         return fireUser;
       });
       console.log(infoUser.user.uid);
+      console.log(infoUser, "Es infoUser")
+      const newUser = {
+        name: "Usuario",
+        image:"https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Clipart.png",
+        user:infoUser.user.uid,
+        password:password,
+        admin: role === "admin" ? true: false ,
+        phone:" ",
+        email:email,
+        address:" "
+      }
+      signUpDb(newUser)
       const docuRef = doc(firestore, `users/${infoUser.user.uid}`);
       setDoc(docuRef, { email: email, role: role });
     } catch (err) {
@@ -48,7 +67,20 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-      .then((re) => console.log(re))
+      .then(({user:us}) =>{
+         console.log(us)
+         const newUser = {
+          id:us.uid,
+          name: us.displayName,
+          image:us.photoURL,
+          user:us.uid,
+          password:"password google",
+          phone:us.phoneNumber?us.phoneNumber: " ",
+          email:us.email,
+          address:" "
+        }
+        signUpDb(newUser)
+        })
       .catch((err) => console.log(err));
   };
 
