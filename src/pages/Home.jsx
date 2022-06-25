@@ -7,9 +7,7 @@ import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
-// import FilterCategory from "../components/FilterCategory";
 // import ShoppingCart from '../components/ShoppingCart';
-// import FilterPrice from "../components/FilterPrice";
 // import { CartContext } from "../context/CartItem";
 
 export default function Home() {
@@ -26,9 +24,9 @@ export default function Home() {
   const indexOfFirstProduct = indexOfLastProduct - productPage;
   const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+
   const handleLogin = () => history.push("/login");
-  
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -37,30 +35,30 @@ export default function Home() {
       console.log(error);
     };
   };
-    
+
   useEffect(() => {
     dispatch(getProducts());
     dispatch(getCategories());
   }, [dispatch]);
-  
+
   return (
     <>
       <NavBar nombreProductos={nombreProductos} setCurrentPage={setCurrentPage} loading={loading} user={user} handleLogin={handleLogin} handleLogout={handleLogout} />
       {
         currentProduct ?
-        <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> : 
-        null
+          <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> :
+          null
       }
       {
         currentProduct ?
-        <div className="mt-10 grid lg:grid-cols-2 gap-x-8 gap-y-8 items-center px-[10px]">
-          {
-            currentProduct.map((r) => 
-              <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} />
-            )
-          }
-        </div> : 
-        "No hay nada"
+          <div className="mt-10 grid lg:grid-cols-4 gap-x-8 gap-y-8 items-center px-[10px]">
+            {
+              currentProduct.map((r) =>
+                <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} />
+              )
+            }
+          </div> :
+          "Nothing"
       }
       <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} />
     </>

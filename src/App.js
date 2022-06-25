@@ -11,6 +11,7 @@ import { CartProvider } from "./context/CartItem";
 import PageShopingCart from "./pages/PageShopingCart";
 import Register from "./pages/Register";
 import CreationForm from "./components/CreationForm";
+import PrivateRouteUser from "./components/PrivateRouteUser";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/:user/:id" component={Dashboard}></Route>
           <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
-          <Route exact path="/user/:id/wishlist" component={Wishlist}></Route>
+          <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
           <Route exact path="/cart" component={PageShopingCart}></Route>
           <Route exact path="/form" component={CreationForm} />
         </CartProvider>

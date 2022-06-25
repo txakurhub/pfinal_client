@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { create_new_review, get_reviews } from "../redux/actions";
 
-function Reviews({id}) {
-    console.log(id);
-    const review = useSelector((state) => state.reviews);
+function Reviews({ id }) {
+    const reviews = useSelector((state) => state.reviews);
+    console.log(reviews);
     const dispatch = useDispatch();
     const [input, setInput] = useState({ 
         comment: "",
@@ -13,8 +13,6 @@ function Reviews({id}) {
         userid: "1",
         productid: id
     });
-
-    console.log(input);
 
     useEffect(() => {
         dispatch(get_reviews(id));
@@ -75,14 +73,16 @@ function Reviews({id}) {
                     <input onChange={(e) => handlechange(e)} name="calification" type="radio" value={4} className="ml-2 h-6 w-6 opacity-0 cursor-pointer" />
                     <input onChange={(e) => handlechange(e)} name="calification" type="radio" value={5} className="ml-2 h-6 w-6 opacity-0 cursor-pointer" />
                 </div>
-                <textarea value={input.comment} className="bg-gray-100 rounded border border-transparent focus:border-gray-400 leading-normal resize w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" type="text" placeholder="Comment" name="comment" id="comentario" onChange={(e) => handlechange(e)}/>
+                <textarea value={input.comment} className="bg-gray-100 rounded border border-transparent focus:border-gray-400 leading-normal resize w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" type="text" placeholder="Add a comment" name="comment" id="comentario" onChange={(e) => handlechange(e)}/>
             </div>
-            {review && review.map((r) => (
-                <>
-                    <div>5</div>
-                    <div>Soy pendejo</div>
-                </>
-            ))}
+            {
+                reviews.map((r) => (
+                    <div className="relative w-full">
+                        <div className="bg-gray-100 rounded w-full h-20 py-2 px-3 font-medium">{r.calification}</div>
+                        <div className="flex flex-row absolute bottom-3 right-2">{r.comment}</div>
+                    </div>
+                ))
+            }
         </div>
     )
 }
