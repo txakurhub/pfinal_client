@@ -103,7 +103,7 @@ function rootReducer(state = initialState, action) {
       const { brand, category, precioMin, precioMax } = action.payload
       let container = brand && category ? state.allProductsCopy.filter(p => p.brand === brand && p.category === category) : !brand && category ? state.allProductsCopy.filter(p => p.category === category) : state.allProductsCopy.filter(p => p.brand === brand)
       if (precioMin && precioMax) {
-        container = container.filter(p => p.price > precioMin && p.price < precioMax)
+        container = container.filter(p => p.price >= precioMin && p.price <= precioMax)
       }
       let searchResults = container.length ? container : alert("No search results found")
       return {
