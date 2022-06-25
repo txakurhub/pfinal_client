@@ -104,7 +104,7 @@ function rootReducer(state = initialState, action) {
       }
     case REMOVE_PRODUCT_WISHLIST:
       console.log(action.id)
-      let newWishList = state.wishlist.filter(
+      let newWishList = action.payload.filter(
         (wish) => wish.id !== action.id
       );
       console.log(newWishList)
