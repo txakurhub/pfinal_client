@@ -16,49 +16,59 @@ export default function Detail() {
   const params = useParams();
   const [loader, setLoader] = useState(true);
   let selected = useSelector((state) => state.product_detail);
-  let wishlist = useSelector((state) => state.wishlist);
+  const wishlist = useSelector((state) => state.wishlist);
+  const counter = useSelector((state)=> state.counterwishlist);
   const [order, setOrder] = useState('')
   const { addToCart } = useContext(CartContext);
-  let datas = 0;
-
-  useEffect(() => {
-    dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
-    dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
-
-  }, [dispatch, order]);
-  const a =(b)=>{
-    let idwis = 0;
+let das = 0;
+  const getid =(b)=>{
       for (let key in b) {
         if (b.hasOwnProperty(key) && (typeof b[key] === "object")) {
-          a(b[key])
+          getid(b[key])
       } else {
           // printing the flat attributes
           // console.log(key + " -> " + b[key]);
           if(key === "wishlistId"){
-            datas=b[key]
-            console.log("id encontrado "+ b[key])
-            idwis=b[key]
+            das=b[key]
           }  
       }
-      
       }
-      return idwis
     }
-a(wishlist)
+
+  useEffect(() => {
+   
+    dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
+    dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
+  
+  }, [dispatch, counter ]);
+  
+
 
   const handleaddwishlist = (e)=>{
+   
     e.preventDefault();
-    console.log(selected.id)
     console.log("agregar")
     dispatch(create_new_wishlist({user_id: 1, product_id: params.id}))
     setOrder(params.id)
   }
   const handledeltewishlist = (e)=>{
-    
+  
     e.preventDefault();
-    console.log("delete", )
-    dispatch(remove_wishlist_product(datas, "1"))
-    setOrder(params.id)
+    
+    if(counter>0){
+      console.log(counter)
+      getid(wishlist)
+      console.log(das)
+      if(das>0){
+        console.log("todo bien")
+        dispatch(remove_wishlist_product(das, "1"))
+        setOrder(params.id)
+      }
+          
+   
+    }
+    
+
   }
   if (loader === true) {
     return <div>Acá va un loader...</div>;
@@ -86,7 +96,7 @@ a(wishlist)
       <hr />
       <div>
         <button onClick={() => addToCart(selected)}>Agregar al Carrito</button>
-        {wishlist.length > 0 ? (
+        {counter > 0 ? (
 
           <div>
             <button value={wishlist.id} name="id" onClick={e=>handledeltewishlist(e)}>
@@ -102,7 +112,7 @@ a(wishlist)
                   fill="#ff0000"
                 />
               </svg>
-              Eliminar
+          
             </button>
           </div>
         ) : (
@@ -120,13 +130,13 @@ a(wishlist)
                   fill="#1F2937"
                 />
               </svg>
-              Agregar
+              
             </button>
           </div>
         )}
       </div>
       <div>
-        {/* <Review id={selected.id} /> */}
+        <Review id={selected.id} />
       </div>
     </main>
   );

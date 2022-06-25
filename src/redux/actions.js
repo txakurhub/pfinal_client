@@ -111,17 +111,19 @@ export const filter_get_wishlist_product = (payload) =>{
   }
 }
 export const create_new_wishlist = (payload) => {
+  console.log(payload)
   return (dispatch) => {
     axios.post(`${local_url}/wishlist`, payload).then(
-      (res) => dispatch({ type: CREATE_REVIEW, payload: res.data }),
+      (res) => dispatch({ type: CREATE_WISHLIST_PRODUCT, payload: res.data, producto: payload.product_id }),
       (error) => alert("Wishlist not created")
     );
   };
 };
 export const remove_wishlist_product = (id, id_user)=>{
+  console.log(id, id_user)
   return (dispatch)=>{
     axios.delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
-      .then((res) => dispatch({ type: REMOVE_PRODUCT_WISHLIST, payload: res.data }),
+      .then((res) => dispatch({ type: REMOVE_PRODUCT_WISHLIST, payload: res.data, id: id }),
         (error) => alert(error))
   }
 }
