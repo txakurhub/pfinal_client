@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, ALL_FILTERS, FILTER_CATEGORY } from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS } from "./actions";
 
 const initialState = {
   allProducts: [],
@@ -75,7 +75,6 @@ function rootReducer(state = initialState, action) {
         reviews: action.payload
       }
     case GET_REVIEWS_PRODUCT:
-      console.log(action.payload)
       return {
         ...state,
         reviews: action.payload
@@ -84,6 +83,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         wishlist: action.payload
+      }
+    case GET_WISHLIST_PRODUCT_ID:
+      return {
+        ...state,
+        wishlist: action.payload.filter((e) => e.Products && e.Products.map((p) => p.id).includes(action.producto))
       }
     case CREATE_WISHLIST_PRODUCT:
       return {

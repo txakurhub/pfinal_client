@@ -11,6 +11,7 @@ export const GET_REVIEWS_PRODUCT = "GET_REVIEWS_PRODUCT";
 export const FILTER_CATEGORY = "FILTER_CATEGORY"
 export const CREATE_WISHLIST_PRODUCT = "CREATE_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
+export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
 export const ALL_FILTERS = "ALL_FILTERS"
 
@@ -102,7 +103,13 @@ export const get_wishlist_product = (payload) => {
         (error) => alert("Error"))
   }
 }
-
+export const filter_get_wishlist_product = (payload) =>{
+  return (dispatch)=>{
+    axios.get(`${local_url}/wishlist/${payload.id}`)
+    .then((res)=> dispatch({type: GET_WISHLIST_PRODUCT_ID, payload: res.data, producto: payload.product}),
+    (error) => alert("Error"))
+  }
+}
 export const create_new_wishlist = (payload) => {
   return (dispatch) => {
     axios.post(`${local_url}/wishlist`, payload).then(
@@ -111,14 +118,8 @@ export const create_new_wishlist = (payload) => {
     );
   };
 };
-
-export const remove_wishlist_product = (id, id_user) => {
-  const wish = {
-    id_user: id_user,
-    id: id
-  }
-  console.log(wish)
-  return (dispatch) => {
+export const remove_wishlist_product = (id, id_user)=>{
+  return (dispatch)=>{
     axios.delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
       .then((res) => dispatch({ type: REMOVE_PRODUCT_WISHLIST, payload: res.data }),
         (error) => alert(error))
@@ -131,4 +132,5 @@ export const allFilters = (payload) => {
     payload
   }
 }
+
 
