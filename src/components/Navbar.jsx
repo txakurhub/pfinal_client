@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchSneakes } from "../redux/actions";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 
 const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
@@ -14,24 +14,24 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
 
   const To = (props) => history.push('/' + props ? props : null);
 
-  const [suggestionsState, setSuggestionsState] = useState({mostrar: false, sugerencia: []});
+  const [suggestionsState, setSuggestionsState] = useState({ mostrar: false, sugerencia: [] });
 
   const suggestions = (texto) => {
-    if(nombreProductos.length) {
-      if(!texto) {
-        setSuggestionsState({sugerencia: [], mostrar: false});
-        return ;
+    if (nombreProductos.length) {
+      if (!texto) {
+        setSuggestionsState({ sugerencia: [], mostrar: false });
+        return;
       };
-      if(texto) {
+      if (texto) {
         const filtrado = nombreProductos.filter(e => `${e.title} ${e.brand}`.toLowerCase().includes(texto.toLowerCase()));
-        setSuggestionsState({mostrar: true, sugerencia: filtrado.length > 5 ? [filtrado[0], filtrado[1], filtrado[2], filtrado[4], filtrado[5]] : filtrado});
+        setSuggestionsState({ mostrar: true, sugerencia: filtrado.length > 5 ? [filtrado[0], filtrado[1], filtrado[2], filtrado[4], filtrado[5]] : filtrado });
       };
     };
   };
 
   const handleClick = (e) => {
     setInput(e.target.id);
-    setSuggestionsState({sugerencia: [], mostrar: false});
+    setSuggestionsState({ sugerencia: [], mostrar: false });
   };
 
   const handleChange = async (e) => {
@@ -89,13 +89,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
               </button>
               {
                 loading ?
-                <h4 className="dark:text-white">Loading...</h4> : 
-                user ?
-                <>
-                  <h4 className="dark:text-white">Welcome {user.email}</h4>
-                  <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                </> :
-                <button className="dark:text-white" onClick={handleLogin}>Login</button>
+                  <h4 className="dark:text-white">Loading...</h4> :
+                  user ?
+                    <>
+                      <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                    </> :
+                    <button className="dark:text-white" onClick={handleLogin}>Login</button>
               }
               {console.log(user)}
             </div>
@@ -152,21 +152,23 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   }
                 </form>
                 <div className="hidden lg:flex items-center space-x-4 xl:space-x-8">
-                  <button onClick={() => To()} aria-label="view favourites" className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
-                    <svg className="fill-stroke" width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M20.8401 4.60987C20.3294 4.09888 19.7229 3.69352 19.0555 3.41696C18.388 3.14039 17.6726 2.99805 16.9501 2.99805C16.2276 2.99805 15.5122 3.14039 14.8448 3.41696C14.1773 3.69352 13.5709 4.09888 13.0601 4.60987L12.0001 5.66987L10.9401 4.60987C9.90843 3.57818 8.50915 2.99858 7.05012 2.99858C5.59109 2.99858 4.19181 3.57818 3.16012 4.60987C2.12843 5.64156 1.54883 7.04084 1.54883 8.49987C1.54883 9.95891 2.12843 11.3582 3.16012 12.3899L4.22012 13.4499L12.0001 21.2299L19.7801 13.4499L20.8401 12.3899C21.3511 11.8791 21.7565 11.2727 22.033 10.6052C22.3096 9.93777 22.4519 9.22236 22.4519 8.49987C22.4519 7.77738 22.3096 7.06198 22.033 6.39452C21.7565 5.72706 21.3511 5.12063 20.8401 4.60987V4.60987Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
+                  <Link to='/user/1/wishlist'>
+                    <button onClick={() => To()} aria-label="view favourites" className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
+                      <svg className="fill-stroke" width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.8401 4.60987C20.3294 4.09888 19.7229 3.69352 19.0555 3.41696C18.388 3.14039 17.6726 2.99805 16.9501 2.99805C16.2276 2.99805 15.5122 3.14039 14.8448 3.41696C14.1773 3.69352 13.5709 4.09888 13.0601 4.60987L12.0001 5.66987L10.9401 4.60987C9.90843 3.57818 8.50915 2.99858 7.05012 2.99858C5.59109 2.99858 4.19181 3.57818 3.16012 4.60987C2.12843 5.64156 1.54883 7.04084 1.54883 8.49987C1.54883 9.95891 2.12843 11.3582 3.16012 12.3899L4.22012 13.4499L12.0001 21.2299L19.7801 13.4499L20.8401 12.3899C21.3511 11.8791 21.7565 11.2727 22.033 10.6052C22.3096 9.93777 22.4519 9.22236 22.4519 8.49987C22.4519 7.77738 22.3096 7.06198 22.033 6.39452C21.7565 5.72706 21.3511 5.12063 20.8401 4.60987V4.60987Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+                  </Link>
                   <ShoppingCart />
                   {
                     loading ?
-                    <h4 className="dark:text-white">Loading...</h4> : 
-                    user ?
-                    <>
-                      <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                    </> :
-                    <button className="dark:text-white" onClick={handleLogin}>Login</button>
+                      <h4 className="dark:text-white">Loading...</h4> :
+                      user ?
+                        <>
+                          <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                        </> :
+                        <button className="dark:text-white" onClick={handleLogin}>Login</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
@@ -291,13 +293,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <li>
                   {
                     loading ?
-                    <h4 className="dark:text-white">Loading...</h4> : 
-                    user ?
-                    <>
-                      <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                    </> :
-                    <button className="dark:text-white" onClick={handleLogin}>Login</button>
+                      <h4 className="dark:text-white">Loading...</h4> :
+                      user ?
+                        <>
+                          <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                        </> :
+                        <button className="dark:text-white" onClick={handleLogin}>Login</button>
                   }
                 </li>
               </ul>
@@ -305,7 +307,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
