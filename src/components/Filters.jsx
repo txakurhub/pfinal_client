@@ -41,8 +41,7 @@ const Filters = ({ setOrder, setCurrentPage, order }) => {
     e.preventDefault()
     setPriceMax(e.target.value)
   }
-
-
+  //s
   return (
     <div>
 
