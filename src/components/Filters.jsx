@@ -41,7 +41,7 @@ const Filters = ({ setOrder, setCurrentPage, order }) => {
     e.preventDefault()
     setPriceMax(e.target.value)
   }
-  //s
+  
   return (
     <div>
 
@@ -71,7 +71,7 @@ const Filters = ({ setOrder, setCurrentPage, order }) => {
       </select>
 
       <input type='number' value={priceMin} min={1} max={priceMax} placeholder='Minimal price' onChange={handlePriceMin} />
-      <input type='number' value={priceMax} max={50000} min={priceMin} placeholder='Maximum price' onChange={handlePriceMax} />
+      <input type='number' value={priceMax} max={80000} min={priceMin} placeholder='Maximum price' onChange={handlePriceMax} />
 
       <input type='submit' value='Apply filters' onClick={e => handleSubmit(e)} />
     </div>
