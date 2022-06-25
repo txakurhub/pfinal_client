@@ -97,6 +97,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 </> :
                 <button className="dark:text-white" onClick={handleLogin}>Login</button>
               }
+              {console.log(user)}
             </div>
           </div>
           {/* For large screens */}
