@@ -7,7 +7,7 @@ const Card = ({ title, image, price, id, product }) => {
 
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-[5rem] py-36 px-10 flex justify-center items-center">
-      <img src={image} alt="" className="w-[350px] h-[200px]" />
+      <img src={image} alt="" className="object-contain w-[350px] h-[200px]" />
       <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
         <div>
           <p className="group-hover:opacity-60 transition duration-500 text-xl leading-5 text-gray-600">{title}</p>
