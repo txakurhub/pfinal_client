@@ -90,7 +90,7 @@ function rootReducer(state = initialState, action) {
       }
     case GET_WISHLIST_PRODUCT_ID:
       let getwishlist = action.payload.filter((e) => e.Products && e.Products.map((p) => p.id).includes(action.producto))
-      console.log(getwishlist)
+      // console.log(getwishlist)
       return {
         ...state,
         wishlist:getwishlist ,

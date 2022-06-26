@@ -18,7 +18,7 @@ function Reviews({ id }) {
         dispatch(get_reviews(id));
     }, [dispatch, id]);
 
-    console.log(input);
+    // console.log(input);
     const handlechange = (e) => {
         e.preventDefault();
         setInput({

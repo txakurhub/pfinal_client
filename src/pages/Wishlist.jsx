@@ -122,7 +122,7 @@ const Wishlist = () => {
                     <p className="mt-6 tracking-tight text-base font-medium leading-4 text-gray-800">Size</p>
                     <p className="mt-6 tracking-tight text-base font-medium leading-4 text-gray-800">${r.Products[0].price}</p>
                     <div className="flex jusitfy-between flex-col lg:flex-row items-center mt-10 w-full  space-y-4 lg:space-y-0 lg:space-x-4 xl:space-x-8">
-                      <button onClick={() => To(`detail/${r.id}`)} className="w-full focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">More information</button>
+                      <button onClick={() => To(`/detail/${r.Products[0].id}`)} className="w-full focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">More information</button>
                       <button onClick={() => addToCart(r.Products[0])} className="w-full focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2  text-white w-full tracking-tight py-4 text-lg leading-4  hover:bg-black bg-gray-800 border border-gray-800">Add to cart</button>
                     </div>
                   </div>

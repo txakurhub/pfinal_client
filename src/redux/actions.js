@@ -54,7 +54,7 @@ export const create_new_review = (payload) => {
 };
 
 export const get_reviews = (id) => {
-  console.log(id);
+  // console.log(id);
   return (dispatch) => {
     axios(`${local_url}/reviews/${id}`).then(
       (json) => dispatch({ type: GET_REVIEWS_PRODUCT, payload: json.data }),
