@@ -96,8 +96,7 @@ export const CartProvider = ({ children }) => {
           user_id: currentUser.uid,
         };
 
-        // const response = axios
-        axios
+        const response = axios
           .post("http://localhost:3001/payments", body)
           .then((res) => res.data[0]);
         return response
