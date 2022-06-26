@@ -1,4 +1,5 @@
 import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS } from "./actions";
+import swal from 'sweetalert';
 
 const initialState = {
   allProducts: [],
@@ -127,7 +128,7 @@ function rootReducer(state = initialState, action) {
       if (precioMin && precioMax) {
         container = container.filter(p => p.price >= precioMin && p.price <= precioMax)
       }
-      let searchResults = container.length ? container : alert("No search results found")
+      let searchResults = container.length ? container : swal("No search results found")
       return {
         ...state,
         allProducts: searchResults.length ? searchResults : state.allProducts

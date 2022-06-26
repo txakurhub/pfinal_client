@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from 'sweetalert';
 const local_url = "http://localhost:3001";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -38,7 +39,7 @@ export const searchSneakes = (shoe) => {
   return (dispatch) => {
     axios.get(`${local_url}/shoes?name=${shoe}`).then(
       (res) => dispatch({ type: SEARCH_SNEAKES, payload: res.data }),
-      (error) => alert("Sneakes not found")
+      (error) => swal("Sneakes not found")
     );
   };
 };
@@ -47,7 +48,7 @@ export const create_new_review = (payload) => {
   return (dispatch) => {
     axios.post(`${local_url}/reviews`, payload).then(
       (res) => dispatch({ type: CREATE_REVIEW, payload: res.data }),
-      (error) => alert("Review not created")
+      (error) => swal("Review not created")
     );
   };
 };
@@ -57,7 +58,7 @@ export const get_reviews = (id) => {
   return (dispatch) => {
     axios(`${local_url}/reviews/${id}`).then(
       (json) => dispatch({ type: GET_REVIEWS_PRODUCT, payload: json.data }),
-      (error) => alert(error)
+      (error) => swal(error)
     );
   };
 };
@@ -100,14 +101,14 @@ export const get_wishlist_product = (payload) => {
   return (dispatch) => {
     axios.get(`${local_url}/wishlist/${payload}`)
       .then((res) => dispatch({ type: GET_WISHLIST_PRODUCT, payload: res.data }),
-        (error) => alert("Error"))
+        (error) => swal("Error"))
   }
 }
 export const filter_get_wishlist_product = (payload) =>{
   return (dispatch)=>{
     axios.get(`${local_url}/wishlist/${payload.id}`)
     .then((res)=> dispatch({type: GET_WISHLIST_PRODUCT_ID, payload: res.data, producto: payload.product}),
-    (error) => alert("Error"))
+    (error) => swal("Error"))
   }
 }
 export const create_new_wishlist = (payload) => {
@@ -115,7 +116,7 @@ export const create_new_wishlist = (payload) => {
   return (dispatch) => {
     axios.post(`${local_url}/wishlist`, payload).then(
       (res) => dispatch({ type: CREATE_WISHLIST_PRODUCT, payload: res.data, producto: payload.product_id }),
-      (error) => alert("Wishlist not created")
+      (error) => swal("Wishlist not created")
     );
   };
 };
@@ -124,7 +125,7 @@ export const remove_wishlist_product = (id, id_user)=>{
   return (dispatch)=>{
     axios.delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
       .then((res) => dispatch({ type: REMOVE_PRODUCT_WISHLIST, payload: res.data, id: id }),
-        (error) => alert(error))
+        (error) => swal(error))
   }
 }
 
