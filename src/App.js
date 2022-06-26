@@ -15,7 +15,7 @@ import PrivateRouteUser from "./components/PrivateRouteUser";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App h-full">
       <AuthProvider>
         <CartProvider>
           <Route exact path="/" component={Home}></Route>
