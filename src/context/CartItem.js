@@ -98,12 +98,13 @@ export const CartProvider = ({ children }) => {
 
         const response = axios
           .post("http://localhost:3001/payments", body)
-          .then((res) => console.log(res.data));
+          .then((res) => res.data[0]);
+        return response
       } catch (error) {
         console.log(error);
       }
     } else {
-      swal("Tienes que estar logeado para poder comprar");
+      swal("You have to be logged in to be able to buy!");
       history.push("/login");
     }
   };
