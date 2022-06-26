@@ -5,7 +5,7 @@ const PageHeading = ({ products, setOrder, setCurrentPage, order }) => {
   const [show, setShow] = useState(true);
 
   return (
-    <div className="py-5 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container flex justify-center items-center">
+    <div className="py-5 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container flex flex-col justify-center items-center ease-in-out transition duration-500">
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col justify-start items-start">
           <p className="text-sm leading-none text-gray-600">home - views</p>
@@ -13,9 +13,6 @@ const PageHeading = ({ products, setOrder, setCurrentPage, order }) => {
             <p className="text-2xl font-semibold leading-normal text-gray-800">Sneakers</p>
             <p className="text-base leading-4 text-gray-600 mt-2">(20 products of {products.length})</p>
           </div>
-        </div>
-        <div className={`${show ? 'opacity-0' : 'opacity-1'} ease-in-out transition duration-500`}>
-          <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />
         </div>
         <button onClick={() => setShow(show === false ? true : false)} className="hover:text-gray-500 text-gray-600 bg-gray-100 py-3.5 px-3 rounded-sm flex flex-row justify-center items-center space-x-3">
           <svg className="fill-stroke" width="24" height="16" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +29,7 @@ const PageHeading = ({ products, setOrder, setCurrentPage, order }) => {
           <p className="hidden md:block text-sm leading-none">Filters</p>
         </button>
       </div>
+      {show && <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />}
     </div>
   );
 };
