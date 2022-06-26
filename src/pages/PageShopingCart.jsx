@@ -4,6 +4,7 @@ import { CartContext } from "../context/CartItem";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { useHistory } from 'react-router-dom'
+import swal from 'sweetalert';
 
 function PageShopingCart() {
   // const [show, setShow] = useState(false);
@@ -21,6 +22,7 @@ function PageShopingCart() {
     e.preventDefault();
     if (user) {
       sendMP();
+      swal("Good job!", "Your purchase has been made successfully!", "success");
       history.push('/')
     } else {
       history.push('/login')
