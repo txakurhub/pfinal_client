@@ -82,7 +82,7 @@ const Wishlist = () => {
         <p className="text-sm pl-2 leading-none">Back</p>
       </Link>
       <div className="flex flex-col jusitfy-start items-start">
-          <p className="text-sm leading-4 text-gray-600">Home</p>
+          <p className="text-sm leading-4 text-gray-600">Home</p><p className="hidden">{order}</p>
           <h1 className="mt-3 text-3xl lg:text-4xl tracking-tight font-semibold leading-8 lg:leading-9 text-gray-800">Favourites</h1>
           <p className="mt-4 text-2xl tracking-tight leading-6 text-gray-600">{wishlist.length === 1 ? 0 : null}{wishlist.length} items</p>
           <div className="mt-10 lg:mt-12 grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-8">

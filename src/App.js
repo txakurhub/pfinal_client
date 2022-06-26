@@ -12,6 +12,7 @@ import PageShopingCart from "./pages/PageShopingCart";
 import Register from "./pages/Register";
 import CreationForm from "./components/CreationForm";
 import PrivateRouteUser from "./components/PrivateRouteUser";
+import Homeee from "./pages/Homeee";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
           <Route exact path="/cart" component={PageShopingCart}></Route>
           <Route exact path="/form" component={CreationForm} />
+          <Route exact path="/home2" component={Homeee} />
         </CartProvider>
       </AuthProvider>
     </div>
