@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct, getCategories } from "../redux/actions";
 import { Link } from "react-router-dom";
+import swal from 'sweetalert';
 
 const validaciones = (input) => {
   const errores = {}
@@ -84,12 +85,12 @@ const CreationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!input.title.length || !input.brand.length || !input.model.length || !input.price.length || !input.image.length || !input.category.length) {
-      alert("Faltan completar datos.");
+      swal("Faltan completar datos.");
     } else if (errores.title || errores.brand || errores.model || errores.price || errores.image) {
-      alert("Revisar bien los campos completados.");
+      swal("Revisar bien los campos completados.");
     } else {
       dispatch(createProduct(input));
-      alert("Zapatilla creada!");
+      swal("Zapatilla creada!");
       setInput({
         title: '',
         brand: '',

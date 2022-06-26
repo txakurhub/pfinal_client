@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import swal from 'sweetalert';
 
 export const CartContext = createContext();
 
@@ -102,7 +103,7 @@ export const CartProvider = ({ children }) => {
         console.log(error);
       }
     } else {
-      alert("Tienes que estar logeado para poder comprar");
+      swal("Tienes que estar logeado para poder comprar");
       history.push("/login");
     }
   };

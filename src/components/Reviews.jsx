@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { create_new_review, get_reviews } from "../redux/actions";
+import swal from 'sweetalert';
 
 function Reviews({ id }) {
     const reviews = useSelector((state) => state.reviews);
@@ -29,7 +30,7 @@ function Reviews({ id }) {
     const handlesubmit = (e) => {
         e.preventDefault();
         if(!input.comment || !input.calification){
-            alert("datos no completados");
+            swal("datos no completados");
         } else {
             dispatch(create_new_review(input));
             setInput({

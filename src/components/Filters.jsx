@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { allFilters } from "../redux/actions"
 import FilterPrice from '../components/FilterPrice'
+import swal from 'sweetalert';
 
 const Filters = ({ setOrder, setCurrentPage, order }) => {
 
@@ -19,7 +20,7 @@ const Filters = ({ setOrder, setCurrentPage, order }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!filter.brand && !filter.category) {
-      alert("Select a filter type")
+      swal("Select a filter type")
     }
     else {
       dispatch(allFilters({ ...filter, precioMin: priceMin, precioMax: priceMax }))
