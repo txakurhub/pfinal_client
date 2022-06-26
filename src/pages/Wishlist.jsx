@@ -27,6 +27,7 @@ function Wishlist() {
             <h1>Mis Favoritos {wishlist&&wishlist.length}</h1>
             {wishlist.length >0? wishlist.map((w)=>(
                 <div key={w.id}>
+                    <p>{order}</p>
                 <img src={w.Products[0].image} alt="" style={{width: "400px", height: "400px"}} />
                 <p>{w.Products[0].title}</p>
                 <button  onClick={() => handleButton(w.id)}>          <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
