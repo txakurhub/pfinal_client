@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import swal from 'sweetalert';
 
 export const CartContext = createContext();
 
@@ -95,14 +96,15 @@ export const CartProvider = ({ children }) => {
           user_id: currentUser.uid,
         };
 
-        const response = axios
+        // const response = axios
+        axios
           .post("http://localhost:3001/payments", body)
           .then((res) => console.log(res.data));
       } catch (error) {
         console.log(error);
       }
     } else {
-      alert("Tienes que estar logeado para poder comprar");
+      swal("Tienes que estar logeado para poder comprar");
       history.push("/login");
     }
   };
