@@ -17,7 +17,6 @@ const PrivateRouteUser = ({ component: Component, ...rest }) => {
 export default PrivateRouteUser
 
 
-{/* <PrivateRoute exact path='/cart' component={PageShopingCart} /> */}
 
 
 

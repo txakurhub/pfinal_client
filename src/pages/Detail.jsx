@@ -1,53 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
 import {
   create_new_wishlist,
   filter_get_wishlist_product,
   getShoeDetail,
   remove_wishlist_product,
 } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Review from "../components/Reviews";
 import { CartContext } from "../context/CartItem";
-
-// export default function Detail() {
-//   const dispatch = useDispatch();
-//   const params = useParams();
-//   const [loader, setLoader] = useState(true);
-//   let selected = useSelector((state) => state.product_detail);
-//   const { addToCart } = useContext(CartContext);
-
-//   useEffect(() => {
-//     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
-//   }, [dispatch, params.id]);
-
-//   if (loader === true) {
-//     return <div>Acá va un loader...</div>;
-//   }
-//   return (
-//     <main>
-//       <button><Link to={'/'}>volver</Link></button>
-//       <div>
-//         <img src={selected.image} alt={selected.title} />
-//       </div>
-//       <div>
-//         <h2>{selected.title}</h2>
-//         <h4>{selected.brand}</h4>
-//         <h4>{selected.model}</h4>
-//         <h5>{selected.price}</h5>
-//         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, asperiores voluptatem iure veniam sint, ipsa id unde porro neque sunt placeat delectus nihil labore possimus facilis. Unde quaerat commodi fugit.</p>
-//       </div>
-//       <hr />
-//       <div>
-//         <button onClick={()=>addToCart(selected)}>Agregar al Carrito</button>
-//       </div>
-//       <div>
-//         <Review id={selected.id}/> 
-//       </div>
-//     </main>
-//   );
-// }
 
 const Detail = () => {
 
@@ -81,7 +42,7 @@ let das = 0;
     dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
   
-  }, [dispatch, counter ]);
+  }, [dispatch, counter, params.id ]);
   
 
 
@@ -123,6 +84,7 @@ let das = 0;
           <polyline points="15 6 9 12 15 18" />
         </svg>
         <p className="text-sm pl-2 leading-none">Back</p>
+        <p className="hidden">{order}</p>
       </Link>
       <div className="xl:w-2/6 lg:w-2/5 w-80 md:block hidden relative">
         {
