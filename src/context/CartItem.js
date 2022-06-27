@@ -2,8 +2,8 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
-import swal from 'sweetalert';
-
+import swal from "sweetalert";
+const URL = "https://zapatillas-proyecto.herokuapp.com";
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -96,10 +96,8 @@ export const CartProvider = ({ children }) => {
           user_id: currentUser.uid,
         };
 
-        const response = axios
-          .post("http://localhost:3001/payments", body)
-          .then((res) => res.data[0]);
-        return response
+        const response = axios.post(URL, body).then((res) => res.data[0]);
+        return response;
       } catch (error) {
         console.log(error);
       }
