@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 function PageShopingCart() {
   // const [show, setShow] = useState(false);
   const { cartItem } = useContext(CartContext);
-  const { deleteItemToCart, addToCart, deleteItemCantidad, sendMP } =
+  const { deleteItemToCart, addToCart, deleteItemCantidad, sendMP, deleteTotal } =
     useContext(CartContext);
   const total = cartItem.reduce(
     (previous, current) => previous + current.amount * current.price,
@@ -126,6 +126,9 @@ return (
                     <p className="text-2xl leading-normal text-gray-800">Total</p>
                     <p className="text-2xl font-bold leading-normal text-right text-gray-800">${total}</p>
                   </div>
+                  <button onClick={() => deleteTotal(cartItem)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                    Vaciar Carrito
+                  </button>
                   <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                     Checkout
                   </button>

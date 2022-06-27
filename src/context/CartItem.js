@@ -76,6 +76,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const deleteTotal = (cartItem) =>{
+      localStorage.clear(cartItem)
+      window.location.reload()
+  }
+
   const sendMP = async () => {
     const currentUser = await userData();
     if (currentUser) {
@@ -117,6 +122,7 @@ export const CartProvider = ({ children }) => {
         deleteItemToCart,
         deleteItemCantidad,
         sendMP,
+        deleteTotal
       }}
     >
       {children}

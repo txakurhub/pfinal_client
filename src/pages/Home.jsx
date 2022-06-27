@@ -60,7 +60,7 @@ export default function Home() {
           </div> :
           "Nothing"
       }
-      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} />
+      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage}/>
     </>
   );
 }
