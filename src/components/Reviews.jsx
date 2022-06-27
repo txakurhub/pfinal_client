@@ -32,7 +32,6 @@ function Reviews({ id }) {
         if(!input.comment || !input.calification){
             swal("datos no completados");
         } else {
-            console.log(input)
             dispatch(create_new_review(input));
             setInput({
                 comment: "",
