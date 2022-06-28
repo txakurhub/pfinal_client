@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import FilterSort from './FilterSort';
 
 function Categories() {
   const allcategories = useSelector(state=>state.categories)
