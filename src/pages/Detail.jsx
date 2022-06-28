@@ -47,16 +47,13 @@ let das = 0;
 
 
   const handleaddwishlist = (e)=>{
-   
     e.preventDefault();
     console.log("agregar")
     dispatch(create_new_wishlist({user_id: 1, product_id: params.id}))
-    setOrder(params.id)
+    
   }
   const handledeltewishlist = (e)=>{
-  
     e.preventDefault();
-    
     if(counter>0){
       console.log(counter)
       getid(wishlist)
@@ -64,13 +61,9 @@ let das = 0;
       if(das>0){
         console.log("todo bien")
         dispatch(remove_wishlist_product(das, "1"))
-        setOrder(params.id)
+        
       }
-          
-   
     }
-    
-
   }
   if (loader === true) {
     return <div>Acá va un loader...</div>;
