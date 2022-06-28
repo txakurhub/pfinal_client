@@ -131,6 +131,7 @@ let das = 0;
         <div className="py-4 border-b border-gray-200 flex items-center justify-between">
           <p className="text-base leading-4 text-gray-800">Size</p>
           <p>Stock: {selected.stock}</p>
+          <p>Cantidad vendidas {selected.sold}</p>
           <div className="flex items-center justify-center">
             <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
             <svg className="cursor-pointer" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">

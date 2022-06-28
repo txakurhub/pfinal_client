@@ -160,7 +160,7 @@ export const CartProvider = ({ children }) => {
     if (currentUser) {
       try {
         const items = cartItem.map((e) => {
-          axios.put(`${local_url}/shoes/${e.id}`, {stock: e.amount})
+          axios.put(`${local_url}/shoes/${e.id}`, {stock: e.amount , sold: e.sold})
           return {
             title: e.title,
             description: `${e.title}, ${e.brand}, ${e.model}`,
@@ -175,8 +175,6 @@ export const CartProvider = ({ children }) => {
           email: currentUser.email,
           user_id: currentUser.uid,
         };
-
-
 
         const response = axios
           .post("http://localhost:3001/payments", body)
