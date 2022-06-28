@@ -130,7 +130,7 @@ function PageShopingCart() {
                       Checkout
                     </button>
                     <button onClick={() => deleteTotal()} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
-                      Vaciar Carrito
+                      Empty Cart
                     </button>
                   </div>
                   <div className="flex items-center justify-between pt-5 opacity-0">
