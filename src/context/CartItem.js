@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import swal from 'sweetalert';
+import {local_url} from '../redux/actions'
 
 export const CartContext = createContext();
 
@@ -30,7 +31,7 @@ export const CartProvider = ({ children }) => {
     if (inCart) {
       setCartItem(
         cartItem.map((productInCart) => {
-          if (productInCart.id === product.id) {
+          if (productInCart.id === product.id && inCart.amount < product.stock) {
             return { ...inCart, amount: inCart.amount + 1 };
           } else return productInCart;
         })
@@ -65,7 +66,7 @@ export const CartProvider = ({ children }) => {
     if (inCart) {
       setCartItem(
         cartItem.map((productInCart) => {
-          if (productInCart.id === product.id) {
+          if (productInCart.id === product.id && inCart.amount < product.stock) {
             return { ...inCart, amount: inCart.amount + 1 };
           } else return productInCart;
         })
@@ -159,6 +160,7 @@ export const CartProvider = ({ children }) => {
     if (currentUser) {
       try {
         const items = cartItem.map((e) => {
+          axios.put(`${local_url}/shoes/${e.id}`, {stock: e.amount})
           return {
             title: e.title,
             description: `${e.title}, ${e.brand}, ${e.model}`,
@@ -173,6 +175,8 @@ export const CartProvider = ({ children }) => {
           email: currentUser.email,
           user_id: currentUser.uid,
         };
+
+
 
         const response = axios
           .post("http://localhost:3001/payments", body)
