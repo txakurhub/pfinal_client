@@ -11,12 +11,12 @@ const Wishlist = () => {
   const history = useHistory();
   const wishlist = useSelector((state) => state.wishlist);
   const [order, setOrder] = useState('');
+  const [loader, setLoader] = useState(true);
   const To = (props) => history.push('/' + props ? props : null);
   const { addToCart } = useContext(CartContext);
   
   useEffect(() => {
-      // aca falta modificar el id del usuario
-      dispatch(get_wishlist_product(1));
+      dispatch(get_wishlist_product(1)).then(() => setLoader(false));
   }, [dispatch]);
 
   const handleButton = (id) => {
@@ -25,8 +25,11 @@ const Wishlist = () => {
     dispatch(remove_wishlist_product( dato, "1"));
     setOrder(dato);
   };
-
+  if (loader === true) {
+    return <div>Acá va un loader...</div>;
+  }
   return (
+
     <div className="mx-auto container px-4 md:px-6 2xl:px-0 py-12 flex justify-center items-center">
       <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/">
         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="black" fill="none" strokeLinecap="round" strokeLinejoin="round">
