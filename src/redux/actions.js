@@ -15,8 +15,11 @@ export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
 export const ALL_FILTERS = "ALL_FILTERS"
-export const GET_STOCK = 'GET_STOCK';
-export const GET_PROMOTION ='GET_PROMOTION';
+export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
+export const ALL_WISHLIST = "ALL_WISHLIST"
+export const GET_STOCK = "GET_STOCK"
+
+
 
 export function getProducts() {
   return function (dispatch) {
@@ -105,11 +108,11 @@ export const get_wishlist_product = (payload) => {
         (error) => swal("Error"))
   }
 }
-export const filter_get_wishlist_product = (payload) =>{
-  return (dispatch)=>{
+export const filter_get_wishlist_product = (payload) => {
+  return (dispatch) => {
     axios.get(`${local_url}/wishlist/${payload.id}`)
-    .then((res)=> dispatch({type: GET_WISHLIST_PRODUCT_ID, payload: res.data, producto: payload.product}),
-    (error) => swal("Error"))
+      .then((res) => dispatch({ type: GET_WISHLIST_PRODUCT_ID, payload: res.data, producto: payload.product }),
+        (error) => swal("Error"))
   }
 }
 export const create_new_wishlist = (payload) => {
@@ -121,9 +124,9 @@ export const create_new_wishlist = (payload) => {
     );
   };
 };
-export const remove_wishlist_product = (id, id_user)=>{
+export const remove_wishlist_product = (id, id_user) => {
   console.log(id, id_user)
-  return (dispatch)=>{
+  return (dispatch) => {
     axios.delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
       .then((res) => dispatch({ type: REMOVE_PRODUCT_WISHLIST, payload: res.data, id: id }),
         (error) => swal(error))
@@ -136,7 +139,19 @@ export const allFilters = (payload) => {
     payload
   }
 }
+export const getAllWishlist = (payload) => {
+  return {
+    type: ALL_WISHLIST,
+    payload
+  }
+}
 
+export const modifyProduct = ({ id, input }) => {
+  return (dispatch) => {
+    axios.put(`${local_url}/shoes/${id}`, input)
+      .then(res => dispatch({ type: MODIFY_PRODUCT }))
+  }
+}
 
 
 

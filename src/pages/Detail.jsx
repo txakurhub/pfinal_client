@@ -4,7 +4,7 @@ import {
   create_new_wishlist,
   filter_get_wishlist_product,
   getShoeDetail,
-  getStock,
+  // getStock,
   remove_wishlist_product,
 } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
@@ -24,25 +24,12 @@ const Detail = () => {
   const [order, setOrder] = useState('')
   let stock = useSelector((state)=> state.stockShoes)
   const { addToCart } = useContext(CartContext);
-let das = 0;
-  const getid =(b)=>{
-      for (let key in b) {
-        if (b.hasOwnProperty(key) && (typeof b[key] === "object")) {
-          getid(b[key])
-      } else {
-          // printing the flat attributes
-          // console.log(key + " -> " + b[key]);
-          if(key === "wishlistId"){
-            das=b[key]
-          }  
-      }
-      }
-    }
+
 
   useEffect(() => {
     dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
-    dispatch(getStock(params.id))
+    // dispatch(getStock(params.id))
   
   }, [dispatch, counter, params.id ]);
   
@@ -52,20 +39,17 @@ let das = 0;
     e.preventDefault();
     console.log("agregar")
     dispatch(create_new_wishlist({user_id: 1, product_id: params.id}))
-    
+      
   }
   const handledeltewishlist = (e)=>{
     e.preventDefault();
-    if(counter>0){
-      console.log(counter)
-      getid(wishlist)
-      console.log(das)
-      if(das>0){
-        console.log("todo bien")
-        dispatch(remove_wishlist_product(das, "1"))
+    const fil = selected.wishlists.filter(f=>f.userId==="1")
+    console.log(fil[0].id)
+    console.log(selected.wishlists)
+  
+    dispatch(remove_wishlist_product(fil[0].id, "1"))
         
-      }
-    }
+
   }
   if (loader === true) {
     return <div>Acá va un loader...</div>;
@@ -98,7 +82,9 @@ let das = 0;
         <img className="w-full mt-[100px]" alt="Not found" src={selected.image} />
       </div>
       <div className="md:hidden relative">
+        {console.log(counter)}
         {
+          
           counter > 0 ?
           <button title="Add toWwishlist" className="absolute top-4 left-4" value={wishlist.id} name="id" onClick={(e) => handledeltewishlist(e)}>
             <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +117,6 @@ let das = 0;
         <div className="py-4 border-b border-gray-200 flex items-center justify-between">
           <p className="text-base leading-4 text-gray-800">Size</p>
           <p>Stock: {selected.stock}</p>
-          <p>Cantidad vendidas {selected.sold}</p>
           <div className="flex items-center justify-center">
             <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
             <svg className="cursor-pointer" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +169,7 @@ let das = 0;
               <Review id={selected.id}/>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );
