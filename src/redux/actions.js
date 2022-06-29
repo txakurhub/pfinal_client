@@ -18,6 +18,7 @@ export const ALL_FILTERS = "ALL_FILTERS"
 export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
 export const ALL_WISHLIST = "ALL_WISHLIST"
 export const GET_STOCK = "GET_STOCK"
+export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
 
 
 
@@ -155,6 +156,13 @@ export const modifyProduct = ({ id, input }) => {
   }
 }
 
+
+export const getProductosDestacados = (payload) =>{
+  return {
+    type: GET_PRODUCTOS_DESTACADOS,
+    payload
+  }
+}
 
 
 

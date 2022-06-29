@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
-import { getCategories, getProducts } from "../redux/actions";
+import { getCategories, getProductosDestacados, getProducts } from "../redux/actions";
 import Paginado from "../components/Paginado";
 import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
+import { ProductosDestacados } from "../components/ProductosDestacados";
 // import ShoppingCart from '../components/ShoppingCart';
 // import { CartContext } from "../context/CartItem";
 
@@ -18,8 +19,8 @@ export default function Home() {
   const { user, logout, loading } = useAuth();
   const nombreProductos = useSelector(state => state.allProductsName);
   const products = useSelector((state) => state.allProducts);
+  const productDestacados = useSelector((state)=> state.productosDestacados)
   const productPage = 20;
-  // const {addToCart} = useContext(CartContext)
   const indexOfLastProduct = currentPage * productPage;
   const indexOfFirstProduct = indexOfLastProduct - productPage;
   const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -30,6 +31,8 @@ export default function Home() {
   const handleLogout = async () => {
     try {
       await logout();
+      localStorage.clear()
+      window.location.reload()
       history.push("/");
     } catch (error) {
       console.log(error);
@@ -41,9 +44,15 @@ export default function Home() {
     dispatch(getCategories());
   }, [dispatch]);
 
+  useEffect(() =>{
+    if(!productDestacados.length){
+      dispatch(getProductosDestacados())
+    }
+  },[dispatch, productDestacados])
   return (
     <>
       <NavBar nombreProductos={nombreProductos} setCurrentPage={setCurrentPage} loading={loading} user={user} handleLogin={handleLogin} handleLogout={handleLogout} />
+      
       {
         currentProduct ?
           <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> :
@@ -61,6 +70,12 @@ export default function Home() {
             }
           </div> :
           "Nothing"
+      }
+     <h2>Productos Destacados</h2>
+      {
+        productDestacados?.map((r)=>(
+          r.stock !== 0 &&<ProductosDestacados title={r.title} image={r.image} brand={r.brand} model={r.model} />
+        ))
       }
       <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} />
     </>
