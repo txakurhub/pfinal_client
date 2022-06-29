@@ -136,12 +136,12 @@ function rootReducer(state = initialState, action) {
         allProducts: searchResults.length ? searchResults : state.allProducts
       }
     }
-    case GET_STOCK:{
-      return{
-        ...state,
-        stockShoes: action.payload
-      }
-    }
+    // case GET_STOCK:{
+    //   return{
+    //     ...state,
+    //     stockShoes: action.payload
+    //   }
+    // }
     default:
       return { ...state };
   }
