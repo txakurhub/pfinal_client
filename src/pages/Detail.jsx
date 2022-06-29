@@ -4,6 +4,7 @@ import {
   create_new_wishlist,
   filter_get_wishlist_product,
   getShoeDetail,
+  getStock,
   remove_wishlist_product,
 } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
@@ -21,13 +22,14 @@ const Detail = () => {
   const wishlist = useSelector((state) => state.wishlist);
   const counter = useSelector((state)=> state.counterwishlist);
   const [order, setOrder] = useState('')
+  let stock = useSelector((state)=> state.stockShoes)
   const { addToCart } = useContext(CartContext);
 
 
   useEffect(() => {
-   
     dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
+    dispatch(getStock(params.id))
   
   }, [dispatch, counter, params.id ]);
   
@@ -37,7 +39,7 @@ const Detail = () => {
     e.preventDefault();
     console.log("agregar")
     dispatch(create_new_wishlist({user_id: 1, product_id: params.id}))
-    
+      
   }
   const handledeltewishlist = (e)=>{
     e.preventDefault();
@@ -114,6 +116,7 @@ const Detail = () => {
         </div>
         <div className="py-4 border-b border-gray-200 flex items-center justify-between">
           <p className="text-base leading-4 text-gray-800">Size</p>
+          <p>Stock: {selected.stock}</p>
           <div className="flex items-center justify-center">
             <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
             <svg className="cursor-pointer" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +169,7 @@ const Detail = () => {
               <Review id={selected.id}/>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );

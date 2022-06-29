@@ -1,6 +1,6 @@
 import axios from "axios";
 import swal from 'sweetalert';
-const local_url = "http://localhost:3001";
+export const local_url = "http://localhost:3001";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
@@ -16,6 +16,9 @@ export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
 export const ALL_FILTERS = "ALL_FILTERS"
 export const ALL_WISHLIST = "ALL_WISHLIST";
+
+export const GET_STOCK = 'GET_STOCK';
+export const GET_PROMOTION ='GET_PROMOTION';
 
 
 export function getProducts() {
@@ -142,5 +145,14 @@ export const getAllWishlist = (payload)=>{
     payload
   }
 }
+
+export const getStock = (id) =>{
+  return async function (dispatch) {
+    const { data } = await axios(`https://api.mercadolibre.com/items/${id}`);
+    console.log(data[0]);
+    dispatch({ type: GET_STOCK, payload: data });
+  };
+}
+
 
 
