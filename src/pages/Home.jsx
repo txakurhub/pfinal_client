@@ -5,7 +5,7 @@ import { getCategories, getProducts, getStock } from "../redux/actions";
 import Paginado from "../components/Paginado";
 import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
 // import ShoppingCart from '../components/ShoppingCart';
 // import { CartContext } from "../context/CartItem";
@@ -43,9 +43,6 @@ export default function Home() {
 
   return (
     <>
-    <Link to='/prueba'>
-      <button>asd</button>
-    </Link>
       <NavBar nombreProductos={nombreProductos} setCurrentPage={setCurrentPage} loading={loading} user={user} handleLogin={handleLogin} handleLogout={handleLogout} />
       {
         currentProduct ?
@@ -58,14 +55,14 @@ export default function Home() {
             {
               currentProduct.map((r) =>
 
-                r.stock !== 0  && <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} wishlist={r.wishlist}  />
+                r.stock !== 0 && <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} wishlist={r.wishlist} />
 
               )
             }
           </div> :
           "Nothing"
       }
-      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage}/>
+      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} />
     </>
   );
 }
