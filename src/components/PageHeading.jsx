@@ -29,7 +29,7 @@ const PageHeading = ({ products, setOrder, setCurrentPage, order }) => {
           <p className="hidden md:block text-sm leading-none">Filters</p>
         </button>
       </div>
-      {show && <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />}
+      {show ? null : <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />}
     </div>
   );
 };
