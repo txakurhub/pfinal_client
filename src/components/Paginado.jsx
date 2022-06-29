@@ -1,31 +1,46 @@
 import React, { useState } from "react";
 
 
-function Paginado({ productPorPage, product, paginado, pagina}) {
+function Paginado({ productPorPage, product, paginado, pagina, setPagina}) {
 
   const [status, setStatus] = useState(1);
 
   const pageNumber = [];
-  const handleClick = (number) => {
-    setStatus(number);
-    paginado(number);
-  };
+  // const handleClick = (number) => {
+  //   setStatus(number);
+  //   paginado(number);
+  // };
 
   const handleNext = ()=>{
-    paginado(status+1)
-    setStatus(status +1)
+    setStatus(parseInt(status)+1)
+    setPagina(pagina+1)
   }
   const handlePrevius = ()=>{
-    paginado(status-1)
     setStatus(status-1)
+    setPagina(pagina-1)
   }
 
   const max = Math.ceil(product/productPorPage);
 
+  function handleChangeInput(e){
+    setStatus(e.target.value)
+}
+
+const  onKeyDown = e =>{
+    if(e.keyCode === 13){
+      paginado(parseInt(e.target.value))
+    if(parseInt(e.target.value < 1) || parseInt(e.target.value) > max || isNaN(parseInt(e.target.value))){
+      paginado(1)
+      setStatus(1)
+    }else {
+      paginado(parseInt(e.target.value))
+    }
+  } 
+}
   for (let i = 1; i <= Math.ceil(product/productPorPage); i++) {
     pageNumber.push(i);
   }
-  const totalPagesToRender = pageNumber.slice(pagina - 1, pagina);
+  // const totalPagesToRender = pageNumber.slice(pagina - 1, pagina);
    return (
     <div className="flex justify-center items-end mt-4">
 
@@ -35,18 +50,11 @@ function Paginado({ productPorPage, product, paginado, pagina}) {
             <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
         </button>)}
-        {
-          totalPagesToRender?.map((number) => (
-            <>
-              <button key={pagina} id="pagina" className="text-base leading-none text-gray-800 border-b-2 border-transparent focus:outline-none focus:border-gray-800" onClick={() => number!==max? handleClick(number):handleClick(1)}>
-                <p>{pagina !== max? pagina : 1}</p>
-              </button>
-              <p>de</p>
-              <button onClick={()=> handleClick(max)}>{max}</button>
-            </>
-
-          ))
-        }
+        <input
+        onKeyDown={e => onKeyDown(e)}
+        onChange={(e)=> handleChangeInput(e)}
+        type="text" value={status} name='page' autoComplete='off'/>
+        <p>de {max}</p>
         {pagina !== max && (<button className="flex justify-center items-center" disabled={status === max} onClick={handleNext}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
