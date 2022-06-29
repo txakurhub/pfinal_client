@@ -16,6 +16,9 @@ export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
 export const ALL_FILTERS = "ALL_FILTERS"
 export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
+export const ALL_WISHLIST = "ALL_WISHLIST"
+export const GET_STOCK = "GET_STOCK"
+
 
 
 export function getProducts() {
@@ -136,14 +139,27 @@ export const allFilters = (payload) => {
     payload
   }
 }
+export const getAllWishlist = (payload) => {
+  return {
+    type: ALL_WISHLIST,
+    payload
+  }
+}
 
 export const modifyProduct = ({ id, input }) => {
   return (dispatch) => {
     axios.put(`${local_url}/shoes/${id}`, input)
-    .then(res => dispatch({type: MODIFY_PRODUCT}))
+      .then(res => dispatch({ type: MODIFY_PRODUCT }))
   }
 }
 
+export const getStock = (id) => {
+  return async function (dispatch) {
+    const { data } = await axios(`https://api.mercadolibre.com/items/${id}`);
+    console.log(data[0]);
+    dispatch({ type: GET_STOCK, payload: data });
+  };
+} // Esta acción no se cargó, copié y pegué
 
 
 

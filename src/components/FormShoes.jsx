@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import style from './FormShoes.module.css'
 
 const FormShoes = () => {
-
+ 
   const { id } = useParams()
   const dispatch = useDispatch();
   const detail = useSelector(state => state.product_detail)
