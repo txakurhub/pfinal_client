@@ -12,7 +12,7 @@ const initialState = {
   wishlist: [],
   counterwishlist : 0,
 };
- 
+
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
@@ -93,14 +93,14 @@ function rootReducer(state = initialState, action) {
       // console.log(getwishlist)
       return {
         ...state,
-        wishlist:getwishlist ,
+        wishlist: getwishlist,
         counterwishlist: getwishlist.length
       }
     case CREATE_WISHLIST_PRODUCT:
       console.log(action.payload)
       return {
         ...state,
-        wishlist: state.wishlist.concat(action.payload) ,
+        wishlist: state.wishlist.concat(action.payload),
         counterwishlist: state.counterwishlist + 1,
       }
     case REMOVE_PRODUCT_WISHLIST:

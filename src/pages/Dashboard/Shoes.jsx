@@ -45,8 +45,9 @@ function Shoes() {
   const editShoes = ({id,name})=>{
     console.log(history)
     alert(`EDITAR => ID: ${id} NAME: ${name}`)
-    const win = window.open("/edit/shoes/"+id, "_blank")
-    win.focus()
+    history.push("/dashboard/admin/edit/"+id)
+    // const win = window.open("/dashboard/admin/edit/"+id, "_blank")
+    // win.focus()
     // esta funcion va a despachar una accion que elimina el producto
   }
 
@@ -66,6 +67,9 @@ function Shoes() {
         <button onClick={handleSubmit}>Buscar</button>
         {"   "}
         <button onClick={allShoes}>All shoes</button>
+        <button onClick={()=>{
+         history.push("/form")
+        }}>Anda crear una zapa gil</button>
       </div>
       <table className='table-fixed'>
         <thead>
@@ -83,7 +87,7 @@ function Shoes() {
           {shoes &&shoes.map((shoes) => {
             return (
               <tr key={shoes.id}>
-                <th ></th>
+                <th > <img src={shoes.image} draggable="false" width="50" height="50" alt="das" /> </th>
                 <th >{shoes.id}</th>
                 <td className="text-dark"> {shoes.title}</td>
                 <td className="text-dark"> {shoes.brand}</td>

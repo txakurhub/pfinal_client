@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import CreationForm from "./components/CreationForm";
 import PrivateRouteUser from "./components/PrivateRouteUser";
 import Homeee from "./pages/Homeee";
+import FormShoes from "./components/FormShoes";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/cart" component={PageShopingCart}></Route>
           <Route exact path="/form" component={CreationForm} />
           <Route exact path="/home2" component={Homeee} />
+          <Route exact path='/dashboard/admin/edit/:id' component={FormShoes} />
         </CartProvider>
       </AuthProvider>
     </div>

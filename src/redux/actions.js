@@ -17,6 +17,8 @@ export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
 export const ALL_FILTERS = "ALL_FILTERS";
 export const GET_STOCK = "GET_STOCK";
 export const GET_PROMOTION = "GET_PROMOTION";
+export const MODIFY_PRODUCT = "GET_PROMOTION";
+
 
 export function getProducts() {
   return function (dispatch) {
@@ -98,6 +100,9 @@ export const createProduct = (payload) => {
   };
 };
 
+//   const { data } = await axios(`${local_url}/shoes/${id}`);
+//   dispatch({ type: GET_SHOE_DETAIL, payload: data });
+// ;
 export const get_wishlist_product = (payload) => {
   return (dispatch) => {
     axios.get(`${local_url}/wishlist/${payload}`).then(
@@ -174,3 +179,9 @@ export const adminDeleteShoes = (id) => {
     }
   };
 };
+export const modifyProduct = ({ id, input }) => {
+  return (dispatch) => {
+    axios.put(`${local_url}/shoes/${id}`, input)
+      .then(res => dispatch({ type: MODIFY_PRODUCT }))
+  }
+}

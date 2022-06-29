@@ -1,0 +1,11 @@
+.contenedor {
+    display: flexbox;
+    flex-direction: column;
+    background-color: aqua;
+}
+
+.contenedor label {
+    display: flex;
+    flex-direction: column;
+}
+
