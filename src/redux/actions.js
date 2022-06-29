@@ -101,9 +101,6 @@ export const createProduct = (payload) => {
   };
 };
 
-//   const { data } = await axios(`${local_url}/shoes/${id}`);
-//   dispatch({ type: GET_SHOE_DETAIL, payload: data });
-// ;
 export const get_wishlist_product = (payload) => {
   return async (dispatch) => {
     const json = await axios(`${local_url}/wishlist/${payload}`)

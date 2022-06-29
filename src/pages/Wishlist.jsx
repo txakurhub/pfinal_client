@@ -16,7 +16,7 @@ const Wishlist = () => {
   const { addToCart } = useContext(CartContext);
   
   useEffect(() => {
-      dispatch(get_wishlist_product(1)).then(() => setLoader(false));
+      dispatch(get_wishlist_product(1)).then(() => setLoader(false)); 
   }, [dispatch]);
 
   const handleButton = (id) => {
