@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import swal from 'sweetalert'
+import { adminDeleteShoes, getProducts } from '../../redux/actions'
 
 function Shoes() {
   const allProduts = useSelector(state=>state.allProductsCopy)
   const [shoes,setShoes] = useState(allProduts)
   const [buscar,setBuscar] = useState("")
+  const [actualizar,setActualizar]=useState(true)
+  const dispatch = useDispatch()
+  const history = useHistory()
   
   const handleChange = (e)=>{
     setBuscar(e.target.value)
@@ -22,14 +28,37 @@ function Shoes() {
     setShoes(allProduts)
   }
 
-  const deleteShoes = ({id,name})=>{
-    alert(`ELIMINAR => ID: ${id} NAME: ${name}`)
-    // esta funcion va a despachar una accion que elimina el producto
+  const deleteShoes = async({id,name})=>{
+    await dispatch(adminDeleteShoes(id));
+    swal({
+      title: `ID ${id} SE A ELIMINADO CORRECTAMENTE`,
+      type: "success",
+      icon: "success",
+      buttons: false,
+      timer: 2000,
+    }).then(
+      async() => {
+        await dispatch(getProducts());
+      }
+    );
   }
   const editShoes = ({id,name})=>{
+    console.log(history)
     alert(`EDITAR => ID: ${id} NAME: ${name}`)
+    const win = window.open("/edit/shoes/"+id, "_blank")
+    win.focus()
     // esta funcion va a despachar una accion que elimina el producto
   }
+
+  useEffect(() => {
+    if(actualizar){
+      dispatch(getProducts())
+      console.log("entro aca")
+    }
+    setShoes(allProduts)
+    setActualizar(false)
+  }, [allProduts]);
+
   return (
     <div>
       <div >
@@ -58,7 +87,7 @@ function Shoes() {
                 <th >{shoes.id}</th>
                 <td className="text-dark"> {shoes.title}</td>
                 <td className="text-dark"> {shoes.brand}</td>
-                <td className="text-dark">{true?5:"SIN STOCK"}</td>
+                <td className="text-dark">{shoes.stock ? shoes.stock:"Sin stock"}</td>
                 <td className="text-dark"> ${shoes.price}</td>
                 <td className="text-dark">
                   <div>
