@@ -5,7 +5,7 @@ import { getCategories, getProducts } from "../redux/actions";
 import Paginado from "../components/Paginado";
 import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
 // import ShoppingCart from '../components/ShoppingCart';
 // import { CartContext } from "../context/CartItem";
@@ -43,6 +43,9 @@ export default function Home() {
 
   return (
     <>
+    <Link to='/prueba'>
+      <button>asd</button>
+    </Link>
       <NavBar nombreProductos={nombreProductos} setCurrentPage={setCurrentPage} loading={loading} user={user} handleLogin={handleLogin} handleLogout={handleLogout} />
       {
         currentProduct ?
