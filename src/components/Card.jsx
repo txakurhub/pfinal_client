@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
-import { create_new_wishlist, remove_wishlist_product } from "../redux/actions";
+// import { create_new_wishlist, remove_wishlist_product } from "../redux/actions";
+//lo comente porque tira warning que no se usa
+import { create_new_wishlist} from "../redux/actions";
 
 const Card = ({ title, image, price, id, product }) => {
   const { addToCart } = useContext(CartContext)
   const result = product.wishlists.filter( d => d.userId === '1')
  console.log(result?.length || 0)
-  const [resultado, setResultado] = useState(result)
+  //Lo comente porque tiraba warning que no se usaba
+  //const [resultado, setResultado] = useState(result)
   
   const [count, setCount] = useState(result?.length || 0)
 
@@ -28,12 +31,13 @@ const Card = ({ title, image, price, id, product }) => {
 
   // },[result])
   console.log(product.wishlists.filter(e=>e.userId === "1" || e.wishlist_product.filter(f=>f.ProductId === id)))
-  const handledeltewishlist = (e)=>{
-    e.preventDefault();
-      console.log(id)
-        dispatch(remove_wishlist_product(id, "1"))
-        setCount(0)
-  }
+  //Lo comente porque tiraba warning que no se usaba
+  // const handledeltewishlist = (e)=>{
+  //   e.preventDefault();
+  //     console.log(id)
+  //       dispatch(remove_wishlist_product(id, "1"))
+  //       setCount(0)
+  // }
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-[5rem] py-36 px-10 flex justify-center items-center">
       <img src={image} alt="" className="object-contain w-[350px] h-[200px]" />

@@ -21,7 +21,8 @@ const FormShoes = () => {
 
   useEffect(() => {
     dispatch(getShoeDetail(id))
-  }, [dispatch])
+  }, [dispatch,id])
+  //agregue el id al arreglo para que no llore el navegador
 
   useEffect(() => {
     if (detail) {
@@ -56,7 +57,7 @@ const FormShoes = () => {
       stock: '',
       image: ''
     });
-    history.push("/dashboard/admin/:id")
+    window.history.back()  
   };
 
   return (
