@@ -14,6 +14,7 @@ function Register() {
     e.preventDefault();
     try {
       await signup(email, password);
+      
       setError("");
       history.push("/");
     } catch (error) {
