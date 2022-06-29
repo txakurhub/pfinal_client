@@ -152,13 +152,6 @@ export const modifyProduct = ({ id, input }) => {
   }
 }
 
-export const getStock = (id) => {
-  return async function (dispatch) {
-    const { data } = await axios(`https://api.mercadolibre.com/items/${id}`);
-    console.log(data[0]);
-    dispatch({ type: GET_STOCK, payload: data });
-  };
-} // Esta acción no se cargó, copié y pegué
 
 
 

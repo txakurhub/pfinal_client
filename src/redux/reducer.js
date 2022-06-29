@@ -136,6 +136,7 @@ function rootReducer(state = initialState, action) {
         allProducts: searchResults.length ? searchResults : state.allProducts
       }
     }
+
     case ALL_WISHLIST: {
       return {
         ...state,
@@ -148,6 +149,7 @@ function rootReducer(state = initialState, action) {
         stockShoes: action.payload
       }
     }
+
     default:
       return { ...state };
   }
