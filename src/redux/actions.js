@@ -15,6 +15,7 @@ export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
 export const ALL_FILTERS = "ALL_FILTERS"
+export const ALL_WISHLIST = "ALL_WISHLIST";
 
 
 export function getProducts() {
@@ -132,6 +133,12 @@ export const remove_wishlist_product = (id, id_user)=>{
 export const allFilters = (payload) => {
   return {
     type: ALL_FILTERS,
+    payload
+  }
+}
+export const getAllWishlist = (payload)=>{
+  return {
+    type: ALL_WISHLIST,
     payload
   }
 }
