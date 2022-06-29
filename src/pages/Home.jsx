@@ -54,7 +54,9 @@ export default function Home() {
           <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3  gap-x-8 gap-y-8 items-center px-[10px]">
             {
               currentProduct.map((r) =>
-                r.stock !== 0  && <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} />
+
+                r.stock !== 0  && <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} wishlist={r.wishlist}  />
+
               )
             }
           </div> :
