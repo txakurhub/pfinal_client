@@ -4,7 +4,7 @@ import {
   create_new_wishlist,
   filter_get_wishlist_product,
   getShoeDetail,
-  getStock,
+  // getStock,
   remove_wishlist_product,
 } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
@@ -29,7 +29,7 @@ const Detail = () => {
   useEffect(() => {
     dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
-    dispatch(getStock(params.id))
+    // dispatch(getStock(params.id))
   
   }, [dispatch, counter, params.id ]);
   

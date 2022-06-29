@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST , GET_STOCK} from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -10,11 +10,11 @@ const initialState = {
   categories: [],
   reviews: [],
   wishlist: [],
-  counterwishlist : 0,
+  counterwishlist: 0,
   stockShoes: [],
-  
+
 };
- 
+
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
@@ -95,14 +95,14 @@ function rootReducer(state = initialState, action) {
       // console.log(getwishlist)
       return {
         ...state,
-        wishlist:getwishlist ,
+        wishlist: getwishlist,
         counterwishlist: getwishlist.length
       }
     case CREATE_WISHLIST_PRODUCT:
       console.log(action.payload)
       return {
         ...state,
-        wishlist: state.wishlist.concat(action.payload) ,
+        wishlist: state.wishlist.concat(action.payload),
         counterwishlist: state.counterwishlist + 1,
       }
     case REMOVE_PRODUCT_WISHLIST:
@@ -136,18 +136,16 @@ function rootReducer(state = initialState, action) {
         allProducts: searchResults.length ? searchResults : state.allProducts
       }
     }
-
     case ALL_WISHLIST: {
-      return{
+      return {
         ...state,
         wishlist: state.wishlist
       }
     }
     case GET_STOCK: {
-      return{
+      return {
         ...state,
         stockShoes: action.payload
-
       }
     }
     default:
