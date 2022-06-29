@@ -59,7 +59,7 @@ function PageShopingCart() {
                 <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
                 {
                   cartItem.length === 0 ?
-                    <p className="mt-14">Tu carrito esta vacio</p> :
+                    <p className="mt-14">Your cart is empty</p> :
                     cartItem.map((r) => (
                       <div key={cartItem.indexOf(r)} className="md:flex items-center mt-14 py-8 border-t border-gray-200">
                         <div className="w-1/4">
@@ -129,9 +129,14 @@ function PageShopingCart() {
                     <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                       Checkout
                     </button>
-                    <button onClick={() => deleteTotal()} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
-                      Empty Cart
-                    </button>
+                    {
+                      cartItem.length !== 0 && 
+                      (
+                        <button onClick={() => deleteTotal()} className="absolute top-2.5 right-2.5 text-base leading-none w-[150px] py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                          Empty Cart
+                        </button>
+                      )
+                    }
                   </div>
                   <div className="flex items-center justify-between pt-5 opacity-0">
                     <p className="text-base leading-none text-gray-800">Tax</p>

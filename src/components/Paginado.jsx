@@ -43,23 +43,29 @@ const  onKeyDown = e =>{
   // const totalPagesToRender = pageNumber.slice(pagina - 1, pagina);
    return (
     <div className="flex justify-center items-end mt-4">
-
-      <div className="flex flex-row items-center justify-center space-x-8 mb-4">
-        {pagina > 1 && (<button disabled={status === 1} className="" onClick={handlePrevius}>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-          </svg>
-        </button>)}
-        <input
-        onKeyDown={e => onKeyDown(e)}
-        onChange={(e)=> handleChangeInput(e)}
-        type="text" value={status} name='page' autoComplete='off'/>
-        <p>de {max}</p>
-        {pagina !== max && (<button className="flex justify-center items-center" disabled={status === max} onClick={handleNext}>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-          </svg>
-        </button>)}
+      <div className="flex flex-row items-center justify-center space-x-8 mb-8">
+        {
+          pagina > 1 && 
+          (
+            <button title="Prev page" disabled={status === 1} className="" onClick={handlePrevius}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </button>
+          )
+        }
+        <input onKeyDown={e => onKeyDown(e)} onChange={(e)=> handleChangeInput(e)} type="text" value={status} name='page' autoComplete='off' className="w-[50px] border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        <p className="ml-[15px]">of {max}</p>
+        {
+          pagina !== max && 
+          (
+            <button title="Next page" className="flex justify-center items-center" disabled={status === max} onClick={handleNext}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+              </svg>
+            </button>
+          )
+        }
       </div>
     </div>
   );
