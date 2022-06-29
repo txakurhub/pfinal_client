@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
-import { getCategories, getProducts } from "../redux/actions";
+import { getCategories, getProducts, getStock } from "../redux/actions";
 import Paginado from "../components/Paginado";
 import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
@@ -54,13 +54,13 @@ export default function Home() {
           <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3  gap-x-8 gap-y-8 items-center px-[10px]">
             {
               currentProduct.map((r) =>
-                <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} />
+                r.stock !== 0  && <Card id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} />
               )
             }
           </div> :
           "Nothing"
       }
-      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} />
+      <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage}/>
     </>
   );
 }

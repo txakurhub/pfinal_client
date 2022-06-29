@@ -9,7 +9,7 @@ import swal from 'sweetalert';
 function PageShopingCart() {
   // const [show, setShow] = useState(false);
   const { cartItem } = useContext(CartContext);
-  const { deleteItemToCart, addToCart, deleteItemCantidad, sendMP } =
+  const { deleteItemToCart, deleteItemCantidad, sendMP, deleteTotal , addToCart2 } =
     useContext(CartContext);
   const total = cartItem.reduce(
     (previous, current) => previous + current.amount * current.price,
@@ -91,7 +91,7 @@ function PageShopingCart() {
                                 </svg>
                               </button>
                               <p className="pl-4 font-semibold">{(r.amount * r.price) / r.price}</p>
-                              <button title="Add one item more" onClick={() => addToCart(r)} className="pl-4 pr-6">
+                              <button title="Add one item more" onClick={() => addToCart2(r)} className="pl-4 pr-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
@@ -129,6 +129,13 @@ function PageShopingCart() {
                     <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                       Checkout
                     </button>
+                    <button onClick={() => deleteTotal()} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                      Empty Cart
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between pt-5 opacity-0">
+                    <p className="text-base leading-none text-gray-800">Tax</p>
+                    <p className="text-base leading-none text-gray-800">$35</p>
                   </div>
                 </div>
               </div>
