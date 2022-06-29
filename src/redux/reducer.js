@@ -142,12 +142,6 @@ function rootReducer(state = initialState, action) {
         wishlist: state.wishlist
       }
     }
-    case GET_STOCK: {
-      return {
-        ...state,
-        stockShoes: action.payload
-      }
-    }
     default:
       return { ...state };
   }
