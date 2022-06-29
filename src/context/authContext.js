@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import axios from "axios";
 import { local_url } from "../redux/actions";
 export const authContext = createContext();
 
