@@ -22,7 +22,6 @@ const Detail = () => {
   const wishlist = useSelector((state) => state.wishlist);
   const counter = useSelector((state)=> state.counterwishlist);
   const [order, setOrder] = useState('')
-  let stock = useSelector((state)=> state.stockShoes)
   const { addToCart } = useContext(CartContext);
 let das = 0;
   const getid =(b)=>{

@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/detail/:id" component={Detail}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
-          <Route exact path="/:user/:id" component={Dashboard}></Route>
+          <Route exact path="/dashboard/:user/:id" component={Dashboard}></Route>
           <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
           <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
           <Route exact path="/cart" component={PageShopingCart}></Route>

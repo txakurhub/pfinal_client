@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/Card";
-import { getCategories, getProducts, getStock } from "../redux/actions";
+import { getCategories, getProducts } from "../redux/actions";
 import Paginado from "../components/Paginado";
 import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
