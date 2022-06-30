@@ -213,7 +213,7 @@ export const modifyCategory = ({ id, input }) => {
 export const getUsers = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get('http://localhost:3001/customers');
+      var json = await axios.get(`${local_url}/customers`);
       return dispatch({
         type: GET_USERS,
         payload: json.data
@@ -227,7 +227,7 @@ export const getUsers = (id) => {
 export const getUser = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get('http://localhost:3001/customers/' + id);
+      var json = await axios.get(`${local_url}/customers/` + id);
       return dispatch({
         type: GET_USER,
         payload: json.data
@@ -256,14 +256,14 @@ export const getOrderProducts = (payload) =>{
 
 export const updateUser = (payload) => {
   return async function (dispatch) {
-    var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
+    var response = await axios.post(`${local_url}/customers/update/`+ payload.id, payload.submission)
     return response;
   };
 };
 
 export const orderStatus = () => {
   return (dispatch) => {
-    axios.get('http://localhost:3001/order')
+    axios.get(`${local_url}/order`)
       .then(res => dispatch({ type: ORDER_STATUS, payload: res.data }))
       .catch(err => console.log(err))
   }
