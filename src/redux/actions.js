@@ -25,6 +25,7 @@ export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
 export const ORDER_STATUS = "ORDER_STATUS"
+export const GET_ORDER = "GET_ORDER"
 
 export function getProducts() {
   return function (dispatch) {
