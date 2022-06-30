@@ -56,7 +56,7 @@ function PageShopingCart() {
                   </svg>
                   <p className="text-sm pl-2 leading-none">Volver</p>
                 </Link>
-                <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bolsa</p>
+                <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Carrito</p>
                 {
                   cartItem.length === 0 ?
                     <p className="mt-14">Tu carrito está vacío</p> :

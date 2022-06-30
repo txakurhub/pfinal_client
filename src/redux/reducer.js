@@ -19,6 +19,7 @@ import {
   GET_STOCK,
   ALL_CATEGORY_ADMIN,
   MODIFY_CATEGORY,
+  ORDER_STATUS,
   GET_ORDER,
 } from "./actions";
 import swal from "sweetalert";
@@ -41,6 +42,7 @@ const initialState = {
   users: [],
   user: [],
   productosDestacados: [],
+  orderstatus: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -224,6 +226,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      };
+    }
+
+    case ORDER_STATUS: {
+      return {
+        ...state,
+        orderstatus: action.payload,
       };
     }
 
