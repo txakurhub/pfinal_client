@@ -1,5 +1,24 @@
-import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK } from "./actions";
-import swal from 'sweetalert';
+import {
+  GET_USER,
+  GET_USERS,
+  GET_PRODUCTS,
+  GET_SHOE_DETAIL,
+  SEARCH_SNEAKES,
+  FILTER_PRICE,
+  FILTER_CATEGORY,
+  GET_PRODUCTOS_DESTACADOS,
+  GET_CATEGORIES,
+  CREATE_REVIEW,
+  GET_REVIEWS_PRODUCT,
+  GET_WISHLIST_PRODUCT,
+  CREATE_WISHLIST_PRODUCT,
+  REMOVE_PRODUCT_WISHLIST,
+  GET_WISHLIST_PRODUCT_ID,
+  ALL_FILTERS,
+  ALL_WISHLIST,
+  GET_STOCK,
+} from "./actions";
+import swal from "sweetalert";
 
 const initialState = {
   allProducts: [],
@@ -14,19 +33,22 @@ const initialState = {
   stockShoes: [],
   users: [],
   user: [],
-  productosDestacados: []
+  productosDestacados: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
-      const result = action.payload.map(e => ({ title: e.title, brand: e.brand }))
+      const result = action.payload.map((e) => ({
+        title: e.title,
+        brand: e.brand,
+      }));
       return {
         ...state,
         allProductsName: result,
         products: action.payload,
         allProducts: action.payload,
-        allProductsCopy: action.payload
+        allProductsCopy: action.payload,
       };
     case GET_SHOE_DETAIL:
       return {
@@ -36,83 +58,86 @@ function rootReducer(state = initialState, action) {
     case SEARCH_SNEAKES: {
       return {
         ...state,
-        allProducts: action.payload
-      }
+        allProducts: action.payload,
+      };
     }
     case FILTER_PRICE: {
-      const container = action.payload === 'lowest' ? state.allProducts.sort((a, b) => {
-        if (a.price > b.price) {
-          return -1
-        }
-        if (a.price < b.price) {
-          return 1
-        }
-        return 0
-      }) : state.allProducts.sort((a, b) => {
-        if (a.price > b.price) {
-          return 1
-        }
-        if (a.price < b.price) {
-          return -1
-        }
-        return 0
-      }
-      )
+      const container =
+        action.payload === "lowest"
+          ? state.allProducts.sort((a, b) => {
+              if (a.price > b.price) {
+                return -1;
+              }
+              if (a.price < b.price) {
+                return 1;
+              }
+              return 0;
+            })
+          : state.allProducts.sort((a, b) => {
+              if (a.price > b.price) {
+                return 1;
+              }
+              if (a.price < b.price) {
+                return -1;
+              }
+              return 0;
+            });
       return {
         ...state,
-        allProducts: container
-      }
+        allProducts: container,
+      };
     }
     case GET_CATEGORIES: {
       return {
         ...state,
-        categories: action.payload
-      }
+        categories: action.payload,
+      };
     }
     case FILTER_CATEGORY: {
       return {
         ...state,
-        allProducts: action.payload
-      }
+        allProducts: action.payload,
+      };
     }
     case CREATE_REVIEW:
       return {
         ...state,
-        reviews: action.payload
-      }
+        reviews: action.payload,
+      };
     case GET_REVIEWS_PRODUCT:
       return {
         ...state,
-        reviews: action.payload
-      }
+        reviews: action.payload,
+      };
     case GET_WISHLIST_PRODUCT:
-      console.log(action.payload.length)
+      console.log(action.payload.length);
       return {
         ...state,
         wishlist: action.payload,
         counterwishlist: action.payload.length,
-      }
+      };
     case GET_WISHLIST_PRODUCT_ID:
-      let getwishlist = action.payload.filter((e) => e.Products && e.Products.map((p) => p.id).includes(action.producto))
+      let getwishlist = action.payload.filter(
+        (e) =>
+          e.Products && e.Products.map((p) => p.id).includes(action.producto)
+      );
       // console.log(getwishlist)
       return {
         ...state,
         wishlist: getwishlist,
-        counterwishlist: getwishlist.length
-      }
+        counterwishlist: getwishlist.length,
+      };
     case CREATE_WISHLIST_PRODUCT:
-      console.log(action.payload)
+      console.log(action.payload);
       return {
         ...state,
         wishlist: state.wishlist.concat(action.payload),
         counterwishlist: state.counterwishlist + 1,
-      }
+      };
     case REMOVE_PRODUCT_WISHLIST:
-      console.log(action.id)
-      let newWishList = action.payload.filter(
-        (wish) => wish.id !== action.id
-      );
-      console.log(newWishList)
+      console.log(action.id);
+      let newWishList = action.payload.filter((wish) => wish.id !== action.id);
+      console.log(newWishList);
       if (state.counterwishlist >= 1) {
         return {
           ...state,
@@ -127,44 +152,58 @@ function rootReducer(state = initialState, action) {
         };
       }
     case ALL_FILTERS: {
-      const { brand, category, precioMin, precioMax } = action.payload
-      let container = brand && category ? state.allProductsCopy.filter(p => p.brand === brand && p.category === category) : !brand && category ? state.allProductsCopy.filter(p => p.category === category) : state.allProductsCopy.filter(p => p.brand === brand)
+      const { brand, category, precioMin, precioMax } = action.payload;
+      let container =
+        brand && category
+          ? state.allProductsCopy.filter(
+              (p) => p.brand === brand && p.category === category
+            )
+          : !brand && category
+          ? state.allProductsCopy.filter((p) => p.category === category)
+          : state.allProductsCopy.filter((p) => p.brand === brand);
       if (precioMin && precioMax) {
-        container = container.filter(p => p.price >= precioMin && p.price <= precioMax)
+        container = container.filter(
+          (p) => p.price >= precioMin && p.price <= precioMax
+        );
       }
-      let searchResults = container.length ? container : swal("No search results found")
+      let searchResults = container.length
+        ? container
+        : swal("No search results found");
       return {
         ...state,
-        allProducts: searchResults.length ? searchResults : state.allProducts
-      }
+        allProducts: searchResults.length ? searchResults : state.allProducts,
+      };
     }
     case ALL_WISHLIST: {
       return {
         ...state,
-        wishlist: state.wishlist
-      }
+        wishlist: state.wishlist,
+      };
     }
-    case GET_PRODUCTOS_DESTACADOS:{
-      const destacados = state.allProductsCopy.filter(z => z.sold >= 500).sort((a ,b)=>b.sold - a.sold).slice(0,10)
+    case GET_PRODUCTOS_DESTACADOS: {
+      const destacados = state.allProductsCopy
+        .filter((z) => z.sold >= 500)
+        .sort((a, b) => b.sold - a.sold)
+        .slice(0, 10);
       return {
         ...state,
-        productosDestacados:destacados
-      }
+        productosDestacados: destacados,
+      };
     }
 
     case GET_USERS: {
       return {
         ...state,
-        users: action.payload
-      }
+        users: action.payload,
+      };
     }
 
     case GET_USER: {
       return {
         ...state,
-        user: action.payload
+        user: action.payload,
       };
-    };
+    }
 
     default:
       return { ...state };
@@ -172,4 +211,3 @@ function rootReducer(state = initialState, action) {
 }
 
 export default rootReducer;
-
