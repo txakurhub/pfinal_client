@@ -29,47 +29,54 @@ function Shoes() {
   }
 
   const deleteShoes = async({id,name})=>{
-    await dispatch(adminDeleteShoes(id));
-    swal({
-      title: `ID ${id} SE A ELIMINADO CORRECTAMENTE`,
-      type: "success",
-      icon: "success",
-      buttons: false,
-      timer: 2000,
-    }).then(
-      async() => {
-        await dispatch(getProducts());
+    // esta funcion va a despachar una accion que elimina el producto
+    await swal({
+      title: "¿Estás seguro de realizar esta acción?",
+      text: "¡Una vez eliminado, no podrá recuperar este producto!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then(async (willDelete) => {
+      if (willDelete) {
+        swal(`¡El producto ${name}, ha sido eliminado correctamente!`, {
+          icon: "success",
+        });
+        await dispatch(adminDeleteShoes(id));
+       setTimeout(() => {
+        window.location.reload()
+       }, 2000);
+      } else {
+        swal("¡La acción ha sido cancelada con éxito!");
       }
-    );
+    })
   }
   const editShoes = ({id,name})=>{
-    console.log(history)
-    alert(`EDITAR => ID: ${id} NAME: ${name}`)
+    // console.log(history)
     history.push("/dashboard/admin/edit/"+id)
     // const win = window.open("/dashboard/admin/edit/"+id, "_blank")
     // win.focus()
-    // esta funcion va a despachar una accion que elimina el producto
   }
 
   useEffect(() => {
     if(actualizar){
       dispatch(getProducts())
-      console.log("entro aca")
     }
     setShoes(allProduts)
     setActualizar(false)
-  }, [allProduts]);
+  }, [allProduts]); // no tocar porfa xd
 
   return (
     <div>
       <div >
         <input type="text" placeholder='ID del producto' value={buscar} onChange={handleChange} />
         <button onClick={handleSubmit}>Buscar</button>
-        {"   "}
+        {"         "}
         <button onClick={allShoes}>All shoes</button>
+        {"         "}
         <button onClick={()=>{
          history.push("/form")
-        }}>Anda crear una zapa gil</button>
+        }}>Crear producto</button>
       </div>
       <table className='table-fixed'>
         <thead>
