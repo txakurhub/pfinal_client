@@ -146,7 +146,6 @@ function rootReducer(state = initialState, action) {
     }
     case GET_PRODUCTOS_DESTACADOS:{
       const destacados = state.allProductsCopy.filter(z => z.sold >= 500).sort((a ,b)=>b.sold - a.sold).slice(0,10)
-      console.log(destacados)
       return {
         ...state,
         productosDestacados:destacados
