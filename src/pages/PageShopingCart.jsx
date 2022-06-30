@@ -17,27 +17,35 @@ function PageShopingCart() {
   );
   const { user } = useAuth();
   const history = useHistory()
-
+console.log("usuario verificado: "+user.emailVerified);
   const handleCheckout = async (e) => {
     e.preventDefault();
-    const linkMP = await sendMP()
+    // const linkMP = await sendMP()
     if (user) {
-      swal({
-        text: "Will be redirected to the payment method, thank you for the purchase!",
-        icon: "success",
-        buttons: true,
-        dangerMode: true,
-      })
-        .then((willDelete) => {
-          if (willDelete) {
-            window.open(linkMP, '_blank');
-            history.push('/')
-            localStorage.clear()
-            window.location.reload()
-          } else {
-            swal("Your payment was not completed");
-          }
-        });
+      if(user.emailVerified){
+          swal({
+          text: "Will be redirected to the payment method, thank you for the purchase!",
+          icon: "success",
+          buttons: true,
+          dangerMode: true,
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              window.open(sendMP(), '_blank');
+              history.push('/')
+              localStorage.clear()
+              window.location.reload()
+            } else {
+              swal("Your payment was not completed");
+            }
+          });
+      }else{
+        swal({
+            text: " I'm sorry, your email address is not verified. check your message or spam box",
+            icon: "warning",
+            dangerMode: true,
+          }).then(x=>{history.push('/')}) 
+      }
     } else {
       history.push('/login')
     }
