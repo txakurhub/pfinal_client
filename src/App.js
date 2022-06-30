@@ -14,8 +14,10 @@ import CreationForm from "./components/CreationForm";
 import PrivateRouteUser from "./components/PrivateRouteUser";
 import Homeee from "./pages/Homeee";
 import FormShoes from "./components/FormShoes";
+import Shopping from "./pages/Shopping";
 import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
+
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/update/:id" component={UpdateUser} />
+          <Route exa path='/shopping/' component={Shopping} />
+        
         </CartProvider>
       </AuthProvider>
     </div>

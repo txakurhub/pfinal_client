@@ -1,4 +1,4 @@
-import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY } from "./actions";
+import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, GET_ORDER } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -13,9 +13,13 @@ const initialState = {
   counterwishlist : 0,
   allcategoriesAdmin:[],
   stockShoes: [],
+
+  productosDestacados:[],
+  orderProduct: [],
   users: [],
   user: [],
   productosDestacados: []
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -162,6 +166,13 @@ function rootReducer(state = initialState, action) {
       }
     }
 
+    case GET_ORDER:{
+      return {
+        orderProduct: action.payload[0].Products,
+      }
+    }
+
+
     case GET_USERS: {
       return {
         ...state,
@@ -175,6 +186,7 @@ function rootReducer(state = initialState, action) {
         user: action.payload
       };
     };
+
 
     default:
       return { ...state };
