@@ -9,7 +9,7 @@ function Register() {
     phone:'',email:'',password:'',image:'',firstname:'',lastname:'',admin:false,banned:false
   })
   const [error, setError] = useState("");
-  const { signup } = useAuth();
+  const { signup, signup2 } = useAuth();
   const history = useHistory();
 
   const handleChange = async(e)=>{
@@ -23,9 +23,10 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(user);
-      setError("");
-      history.push("/");
+      signup2()
+      // await signup(user);
+      // setError("");
+      // history.push("/");
     } catch (error) {
       setError(error.message);
     };

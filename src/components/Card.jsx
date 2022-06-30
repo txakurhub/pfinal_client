@@ -27,7 +27,7 @@ const Card = ({ title, image, price, id, product }) => {
   
 
   // },[result])
-  console.log(product.wishlists.filter(e=>e.userId === "1" || e.wishlist_product.filter(f=>f.ProductId === id)))
+  // console.log(product.wishlists.filter(e=>e.userId === "1" || e.wishlist_product.filter(f=>f.ProductId === id)))
   const handledeltewishlist = (e)=>{
     e.preventDefault();
       console.log(id)

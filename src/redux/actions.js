@@ -14,10 +14,12 @@ export const CREATE_WISHLIST_PRODUCT = "CREATE_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
-export const ALL_FILTERS = "ALL_FILTERS"
-export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
-export const ALL_WISHLIST = "ALL_WISHLIST"
-export const GET_STOCK = "GET_STOCK"
+export const ALL_FILTERS = "ALL_FILTERS";
+export const MODIFY_PRODUCT = "MODIFY_PRODUCT";
+export const ALL_WISHLIST = "ALL_WISHLIST";
+export const GET_STOCK = "GET_STOCK";
+export const ADD_CATEGORY = "ADD_CATEGORY";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
 
 
 
@@ -155,6 +157,16 @@ export const modifyProduct = ({ id, input }) => {
   }
 }
 
+export const addCategory = (payload)=>{
+  return(dispatch) => {
+    axios.post(`${local_url}/categories`, payload)
+      .then(res => dispatch({ type: ADD_CATEGORY, payload: res.data }))
+  }
+}
 
-
-
+export const editCategory = ({ id, name })=>{
+  return (dispatch) => {
+    axios.put(`${local_url}/categories/${id}`, name )
+      .then(res => dispatch({ type: EDIT_CATEGORY, payload: res.data }))
+  }
+}
