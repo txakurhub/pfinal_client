@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, GET_ORDER } from "./actions";
-=======
-import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY } from "./actions";
->>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
+import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, GET_ORDER } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -17,14 +13,13 @@ const initialState = {
   counterwishlist : 0,
   allcategoriesAdmin:[],
   stockShoes: [],
-<<<<<<< HEAD
+
   productosDestacados:[],
-  orderProduct: []
-=======
+  orderProduct: [],
   users: [],
   user: [],
   productosDestacados: []
->>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -170,14 +165,13 @@ function rootReducer(state = initialState, action) {
         productosDestacados:destacados
       }
     }
-<<<<<<< HEAD
-    case GET_ORDER:{
 
+    case GET_ORDER:{
       return {
         orderProduct: action.payload[0].Products,
       }
     }
-=======
+
 
     case GET_USERS: {
       return {
@@ -193,7 +187,7 @@ function rootReducer(state = initialState, action) {
       };
     };
 
->>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
+
     default:
       return { ...state };
   }

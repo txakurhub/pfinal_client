@@ -28,8 +28,15 @@ const Shopping = () => {
               />
             </div>
             <div className="xl:w-2/5 md:w-1/4 lg:ml-8 md:mt-0 mt-6"></div>
+            <div>
             {product.id}
+            </div>
+            <div>
             {product.title}
+            </div>
+            <div>
+              {product.price}
+            </div>
           </div>
         ))
       ) : (
