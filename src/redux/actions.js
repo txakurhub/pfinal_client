@@ -19,6 +19,7 @@ export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
 export const ALL_WISHLIST = "ALL_WISHLIST"
 export const GET_STOCK = "GET_STOCK"
 export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
+export const GET_ORDER = "GET_ORDER"
 
 
 
@@ -161,5 +162,13 @@ export const getProductosDestacados = (payload) =>{
   }
 }
 
+export const getOrderProducts = (payload) =>{
+  return async(dispatch) =>{
+    const json = await axios.get(`${local_url}/order/`, payload)
+    dispatch({type: GET_ORDER, payload: json.data})
+ 
+
+  }
+}
 
 
