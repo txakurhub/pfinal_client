@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { getOrderProducts } from "../redux/actions";
+
 
 const Shopping = () => {
   const dispatch = useDispatch();
   const [loader, setLoader] = useState(true);
   const ProductOrder = useSelector((state) => state.orderProduct);
   console.log(ProductOrder);
+
+
+  const numberFormat = (value) => new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    currencyDisplay: 'symbol'
+  }).format(value);
+
+
 
   useEffect(() => {
     if (!ProductOrder.length) {
@@ -16,29 +27,49 @@ const Shopping = () => {
   return (
     <div >
       <h1>Shopping</h1>
- 
+      <hr />
       {ProductOrder ? (
-        ProductOrder.map((product) => (
-          <div className="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
-            <div >
-              <img
-                src={product.image}
-                alt={product.title}
-                className="w-full mt-[100px]"
-              />
-            </div>
-            <div className="xl:w-2/5 md:w-1/4 lg:ml-8 md:mt-0 mt-6"></div>
+        ProductOrder.map((e) => {  
+          const hora = e.order_date.split('-').join('/').slice(0, 10)
+          const horaFinal = hora + '-' + e.order_date.slice(11, 19)
+          return (
+           
+          <div key={e.id}>
+<div>
+  {horaFinal} 
+</div>
+            {e.Products && e.Products.map((product) =>(
+              <div key={product.id}>
+               <div >
+                <img
+                 src={product.image}
+                 alt="Not found Image "
+               />
+              </div>
+            
             <div>
             {product.id}
             </div>
+            <br />
             <div>
-            {product.title}
+            Titulo: {product.title}
             </div>
+            <br />
             <div>
-              {product.price}
+            Categoria: {product.category}
             </div>
+            <br />
+            <div>
+              {numberFormat(product.price) }
+            </div>
+            <hr />
           </div>
-        ))
+    
+         ))}
+  
+          </div>
+       
+        )})
       ) : (
         <div> Not found</div>
       )}
