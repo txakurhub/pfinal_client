@@ -20,8 +20,10 @@ export const GET_PROMOTION = "GET_PROMOTION";
 export const MODIFY_PRODUCT = "GET_PROMOTION";
 export const ALL_CATEGORY_ADMIN = "ALL_CATEGORY_ADMIN";
 export const MODIFY_CATEGORY = "MODIFY_CATEGORY";
-
-
+export const ALL_WISHLIST = "ALL_WISHLIST";
+export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
+export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
 
 export function getProducts() {
   return function (dispatch) {
@@ -216,3 +218,46 @@ export const modifyCategory = ({ id, input }) => {
 //     }
 //   };
 // };
+export const getUsers = (id) => {
+  return async function(dispatch) {
+    try {
+      var json = await axios.get('http://localhost:3001/customers');
+      return dispatch({
+          type: GET_USERS,
+          payload: json.data
+      });    
+    } catch (error) {
+      console.log(error);
+    };
+  };
+};
+
+export const getUser = (id) => {
+  return async function(dispatch) {
+    try {
+      var json = await axios.get('http://localhost:3001/customers/' + id);
+      return dispatch({
+          type: GET_USER,
+          payload: json.data
+      });    
+    } catch (error) {
+      console.log(error);
+    };
+  };
+};
+
+export const getProductosDestacados = (payload) =>{
+  return {
+    type: GET_PRODUCTOS_DESTACADOS,
+    payload
+  }
+}
+
+
+export const updateUser = (payload) => {
+  //console.log(payload);
+  return async function(dispatch) {
+    var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
+    return response;
+  };
+};
