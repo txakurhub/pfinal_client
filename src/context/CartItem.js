@@ -159,6 +159,7 @@ export const CartProvider = ({ children }) => {
     const currentUser = await userData();
     if (currentUser) {
       try {
+        console.log(cartItem)
         const items = cartItem.map((e) => {
           axios.put(`${local_url}/shoes/${e.id}`, { stock: e.amount, sold: e.sold })
           return {
@@ -181,6 +182,7 @@ export const CartProvider = ({ children }) => {
           .post("http://localhost:3001/payments", body)
           .then((res) => res.data[0]);
           await cartItem.map(async e=>{
+            console.log(e.id, "id sss")
             return await axios.put(`${local_url}/shoes/shoppingcart/${e.id}`, {stock: e.amount , sold: e.amount})
           })
         return response
