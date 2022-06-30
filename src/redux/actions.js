@@ -47,7 +47,7 @@ export const searchSneakes = (shoe) => {
   return (dispatch) => {
     axios.get(`${local_url}/shoes?name=${shoe}`).then(
       (res) => dispatch({ type: SEARCH_SNEAKES, payload: res.data }),
-      (error) => swal("Sneakes not found")
+      (error) => swal("Zapatillas no encontradas")
     );
   };
 };
@@ -56,7 +56,7 @@ export const create_new_review = (payload) => {
   return (dispatch) => {
     axios.post(`${local_url}/reviews`, payload).then(
       (res) => dispatch({ type: CREATE_REVIEW, payload: res.data }),
-      (error) => swal("Review not created")
+      (error) => swal("Reseña no creada")
     );
   };
 };
@@ -109,13 +109,11 @@ export const createProduct = (payload) => {
 //   dispatch({ type: GET_SHOE_DETAIL, payload: data });
 // ;
 export const get_wishlist_product = (payload) => {
-  return (dispatch) => {
-    axios.get(`${local_url}/wishlist/${payload}`).then(
-      (res) => dispatch({ type: GET_WISHLIST_PRODUCT, payload: res.data }),
-      (error) => swal("Error")
-    );
-  };
-};
+  return async (dispatch) => {
+    const json = await axios(`${local_url}/wishlist/${payload}`)
+    dispatch({ type: GET_WISHLIST_PRODUCT, payload: json.data })
+  }
+}
 export const filter_get_wishlist_product = (payload) => {
   return (dispatch) => {
     axios.get(`${local_url}/wishlist/${payload.id}`).then(
@@ -133,13 +131,8 @@ export const create_new_wishlist = (payload) => {
   //console.log(payload);
   return (dispatch) => {
     axios.post(`${local_url}/wishlist`, payload).then(
-      (res) =>
-        dispatch({
-          type: CREATE_WISHLIST_PRODUCT,
-          payload: res.data,
-          producto: payload.product_id
-        }),
-      (error) => swal("Wishlist not created")
+      (res) => dispatch({ type: CREATE_WISHLIST_PRODUCT, payload: res.data, producto: payload.product_id }),
+      (error) => swal("Favoritos no creada")
     );
   };
 };
@@ -219,13 +212,13 @@ export const modifyCategory = ({ id, input }) => {
 //   };
 // };
 export const getUsers = (id) => {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       var json = await axios.get('http://localhost:3001/customers');
       return dispatch({
-          type: GET_USERS,
-          payload: json.data
-      });    
+        type: GET_USERS,
+        payload: json.data
+      });
     } catch (error) {
       console.log(error);
     };
@@ -233,20 +226,20 @@ export const getUsers = (id) => {
 };
 
 export const getUser = (id) => {
-  return async function(dispatch) {
+  return async function (dispatch) {
     try {
       var json = await axios.get('http://localhost:3001/customers/' + id);
       return dispatch({
-          type: GET_USER,
-          payload: json.data
-      });    
+        type: GET_USER,
+        payload: json.data
+      });
     } catch (error) {
       console.log(error);
     };
   };
 };
 
-export const getProductosDestacados = (payload) =>{
+export const getProductosDestacados = (payload) => {
   return {
     type: GET_PRODUCTOS_DESTACADOS,
     payload
@@ -255,8 +248,7 @@ export const getProductosDestacados = (payload) =>{
 
 
 export const updateUser = (payload) => {
-  //console.log(payload);
-  return async function(dispatch) {
+  return async function (dispatch) {
     var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
     return response;
   };
