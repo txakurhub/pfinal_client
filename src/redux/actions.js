@@ -18,6 +18,9 @@ export const ALL_FILTERS = "ALL_FILTERS";
 export const GET_STOCK = "GET_STOCK";
 export const GET_PROMOTION = "GET_PROMOTION";
 export const MODIFY_PRODUCT = "GET_PROMOTION";
+export const ALL_CATEGORY_ADMIN = "ALL_CATEGORY_ADMIN";
+export const MODIFY_CATEGORY = "MODIFY_CATEGORY";
+
 
 
 export function getProducts() {
@@ -87,13 +90,13 @@ export function getCategories() {
 export function filterByCategory(id) {
   return async function (dispatch) {
     const { data } = await axios(`${local_url}/categories/${id}`);
-    console.log(data[0]);
+    //console.log(data[0]);
     dispatch({ type: FILTER_CATEGORY, payload: data });
   };
 }
 
 export const createProduct = (payload) => {
-  console.log(payload);
+  //console.log(payload);
   return async () => {
     const json = await axios.post("http://localhost:3001/shoes", payload);
     return json;
@@ -125,7 +128,7 @@ export const filter_get_wishlist_product = (payload) => {
   };
 };
 export const create_new_wishlist = (payload) => {
-  console.log(payload);
+  //console.log(payload);
   return (dispatch) => {
     axios.post(`${local_url}/wishlist`, payload).then(
       (res) =>
@@ -139,7 +142,7 @@ export const create_new_wishlist = (payload) => {
   };
 };
 export const remove_wishlist_product = (id, id_user) => {
-  console.log(id, id_user);
+  //console.log(id, id_user);
   return (dispatch) => {
     axios
       .delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
@@ -165,7 +168,7 @@ export const allFilters = (payload) => {
 export const getStock = (id) => {
   return async function (dispatch) {
     const { data } = await axios(`https://api.mercadolibre.com/items/${id}`);
-    console.log(data[0]);
+    //console.log(data[0]);
     dispatch({ type: GET_STOCK, payload: data });
   };
 };
@@ -180,8 +183,36 @@ export const adminDeleteShoes = (id) => {
   };
 };
 export const modifyProduct = ({ id, input }) => {
-  return (dispatch) => {
-    axios.put(`${local_url}/shoes/${id}`, input)
+  return async(dispatch) => {
+    await axios.put(`${local_url}/shoes/${id}`, input)
       .then(res => dispatch({ type: MODIFY_PRODUCT }))
   }
 }
+
+export const getAllCategoryAdmin = ()=>{
+  return async (dispatch) =>{
+    try {
+      const result = await axios(`${local_url}/categories/admin`)
+      //console.log(result)
+    return dispatch({type:ALL_CATEGORY_ADMIN,payload:result.data})
+    } catch (error) {
+      swal("ERROR!", `${error.message}`, "danger");
+    }
+  }
+}
+export const modifyCategory = ({ id, input }) => {
+  return async(dispatch) => {
+    await axios.put(`${local_url}/shoes/${id}`, input)
+      .then(res => dispatch({ type: MODIFY_CATEGORY }))
+  }
+}
+//me falta crear ruta delete para descomentar esto!
+// export const adminDeleteCategories = (id) => {
+//   return async function (dispatch) {
+//     try {
+//       await axios.delete(`${local_url}/shoes/${id}`);
+//     } catch (error) {
+//       swal(`ERROR: ${error}`);
+//     }
+//   };
+// };
