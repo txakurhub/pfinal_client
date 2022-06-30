@@ -248,7 +248,6 @@ export const getProductosDestacados = (payload) => {
 
 
 export const updateUser = (payload) => {
-  console.log(payload);
   return async function (dispatch) {
     var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
     return response;
