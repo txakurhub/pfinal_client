@@ -8,6 +8,7 @@ import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
 import { ProductosDestacados } from "../components/ProductosDestacados";
+import { Carrousel } from "../components/Carrousel";
 // import ShoppingCart from '../components/ShoppingCart';
 // import { CartContext } from "../context/CartItem";
 
@@ -52,7 +53,7 @@ export default function Home() {
   return (
     <>
       <NavBar nombreProductos={nombreProductos} setCurrentPage={setCurrentPage} loading={loading} user={user} handleLogin={handleLogin} handleLogout={handleLogout} />
-      
+      <Carrousel />
       {
         currentProduct ?
           <PageHeading products={products} setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} /> :
