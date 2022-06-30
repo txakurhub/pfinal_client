@@ -55,25 +55,25 @@ function Register() {
           <hr className="w-full bg-gray-400  " />
         </div>
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800">Email</lable>
+          <label className="text-sm font-medium leading-none text-gray-800">Email</label>
           <input onChange={handleChange} id="email" name="email" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         {/* mi cagada */}
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800">Phone</lable>
+          <label className="text-sm font-medium leading-none text-gray-800">Phone</label>
           <input onChange={handleChange} id="phone" name="phone" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800" >First name</lable>
+          <label className="text-sm font-medium leading-none text-gray-800" >First name</label>
           <input onChange={handleChange} id="firstname" name="firstname" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800">Last name</lable>
+          <label className="text-sm font-medium leading-none text-gray-800">Last name</label>
           <input onChange={handleChange} id="lastname" name="lastname" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         {/* final de la cagada */}
         <div className="mt-6 w-full">
-          <lable className="text-sm font-medium leading-none text-gray-800">Password</lable>
+          <label className="text-sm font-medium leading-none text-gray-800">Password</label>
           <div title="See password" className="relative flex items-center justify-center">
             <input onChange={handleChange} id="password" name="password" min={6} aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
             <div onClick={viewPassword} className="absolute right-0 mt-2 mr-3 cursor-pointer">
