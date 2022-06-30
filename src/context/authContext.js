@@ -7,9 +7,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+<<<<<<< HEAD
   FacebookAuthProvider,
   sendSignInLinkToEmail 
+=======
+  FacebookAuthProvider
+>>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
 } from "firebase/auth";
+import {  sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
@@ -49,7 +54,9 @@ export function AuthProvider({ children }) {
       ).then((fireUser) => {
         console.log(fireUser);
         return fireUser;
-      });
+      }).then(res=>{
+        verify()
+      })
       const docuRef = doc(firestore, `user/${infoUser.user.uid}`);
       console.log(docuRef);
       setDoc(docuRef, {  email:email,
@@ -59,11 +66,19 @@ export function AuthProvider({ children }) {
         lastname:lastname,
         phone:phone,
         admin:admin,
-        banned:banned});
+        banned:banned})
     } catch (err) {
       console.log(err + "  - - -  error en signup");
     }
   };
+  console.log(auth.currentUser)
+  const verify =async ()=>{
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        // Email verification sent!
+        // ...
+      });
+  }
 
   const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
@@ -132,6 +147,9 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => signOut(auth);
+
+
+
 
   return (
     <authContext.Provider

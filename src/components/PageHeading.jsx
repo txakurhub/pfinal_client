@@ -8,10 +8,10 @@ const PageHeading = ({ products, setOrder, setCurrentPage, order }) => {
     <div className="py-5 px-4 md:px-6 2xl:px-0 2xl:mx-auto 2xl:container flex flex-col justify-center items-center ease-in-out transition duration-500">
       <div className="flex justify-between items-center w-full">
         <div className="flex flex-col justify-start items-start">
-          <p className="text-sm leading-none text-gray-600">home - views</p>
+          <p className="text-sm leading-none text-gray-600">inicio - vista</p>
           <div className="mt-2 flex flex-row justify-end items-center space-x-3">
-            <p className="text-2xl font-semibold leading-normal text-gray-800">Sneakers</p>
-            <p className="text-base leading-4 text-gray-600 mt-2">(20 products of {products.length})</p>
+            <p className="text-2xl font-semibold leading-normal text-gray-800">Zapatillas</p>
+            <p className="text-base leading-4 text-gray-600 mt-2">(20 productos de {products.length})</p>
           </div>
         </div>
         <button onClick={() => setShow(show === false ? true : false)} className="hover:text-gray-500 text-gray-600 bg-gray-100 py-3.5 px-3 rounded-sm flex flex-row justify-center items-center space-x-3">
@@ -26,10 +26,10 @@ const PageHeading = ({ products, setOrder, setCurrentPage, order }) => {
             <path d="M9 4.79028H15" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M17 10.8549H23" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <p className="hidden md:block text-sm leading-none">Filters</p>
+          <p className="hidden md:block text-sm leading-none">Filtros</p>
         </button>
       </div>
-      {show && <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />}
+      {show ? null : <Filters setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />}
     </div>
   );
 };

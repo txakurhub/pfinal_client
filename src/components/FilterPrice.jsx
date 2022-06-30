@@ -15,9 +15,9 @@ const FilterPrice = ({ setOrder, setCurrentPage, order }) => {
   return (
     <>
       <select onChange={e => handlePrice(e)} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400">
-        <option hidden>Filter by price</option>
-        <option value='lowest'>Lowest price</option>
-        <option value='higher'>Higher price</option>
+        <option hidden>Precio</option>
+        <option value='lowest'>Más bajo</option>
+        <option value='higher'>Más alto</option>
       </select>
       {/* <button onClick={e => handlePrice(e)} value="higher">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
