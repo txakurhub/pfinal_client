@@ -29,10 +29,14 @@ const Shopping = () => {
       <h1>Shopping</h1>
       <hr />
       {ProductOrder ? (
-        ProductOrder.map((e) => (
+        ProductOrder.map((e) => {  
+          const hora = e.order_date.split('-').join('/').slice(0, 10)
+          const horaFinal = hora + '-' + e.order_date.slice(11, 19)
+          return (
+          
           <div key={e.id}>
 <div>
-  {e.order_date}
+  {horaFinal} 
 </div>
             {e.Products && e.Products.map((product) =>(
               <div key={product.id}>
@@ -65,7 +69,7 @@ const Shopping = () => {
   
           </div>
        
-        ))
+        )})
       ) : (
         <div> Not found</div>
       )}
