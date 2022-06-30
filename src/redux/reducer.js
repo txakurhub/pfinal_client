@@ -1,4 +1,4 @@
-import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY } from "./actions";
+import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_PRODUCTOS_DESTACADOS, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, ORDER_STATUS } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -10,12 +10,13 @@ const initialState = {
   categories: [],
   reviews: [],
   wishlist: [],
-  counterwishlist : 0,
-  allcategoriesAdmin:[],
+  counterwishlist: 0,
+  allcategoriesAdmin: [],
   stockShoes: [],
   users: [],
   user: [],
-  productosDestacados: []
+  productosDestacados: [],
+  orderstatus: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -145,20 +146,20 @@ function rootReducer(state = initialState, action) {
         wishlist: state.wishlist
       }
     }
-    case ALL_CATEGORY_ADMIN:{
-      return{
-        ...state,
-        allcategoriesAdmin:action.payload
-      }
-    }
-    case MODIFY_CATEGORY:{
-      return state
-    }
-    case GET_PRODUCTOS_DESTACADOS:{
-      const destacados = state.allProductsCopy.filter(z => z.sold >= 500).sort((a ,b)=>b.sold - a.sold).slice(0,10)
+    case ALL_CATEGORY_ADMIN: {
       return {
         ...state,
-        productosDestacados:destacados
+        allcategoriesAdmin: action.payload
+      }
+    }
+    case MODIFY_CATEGORY: {
+      return state
+    }
+    case GET_PRODUCTOS_DESTACADOS: {
+      const destacados = state.allProductsCopy.filter(z => z.sold >= 500).sort((a, b) => b.sold - a.sold).slice(0, 10)
+      return {
+        ...state,
+        productosDestacados: destacados
       }
     }
 
@@ -175,6 +176,13 @@ function rootReducer(state = initialState, action) {
         user: action.payload
       };
     };
+
+    case ORDER_STATUS: {
+      return {
+        ...state,
+        orderstatus: action.payload
+      }
+    }
 
     default:
       return { ...state };

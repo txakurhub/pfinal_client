@@ -24,6 +24,7 @@ export const ALL_WISHLIST = "ALL_WISHLIST";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
+export const ORDER_STATUS = "ORDER_STATUS"
 
 export function getProducts() {
   return function (dispatch) {
@@ -178,25 +179,25 @@ export const adminDeleteShoes = (id) => {
   };
 };
 export const modifyProduct = ({ id, input }) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     await axios.put(`${local_url}/shoes/${id}`, input)
       .then(res => dispatch({ type: MODIFY_PRODUCT }))
   }
 }
 
-export const getAllCategoryAdmin = ()=>{
-  return async (dispatch) =>{
+export const getAllCategoryAdmin = () => {
+  return async (dispatch) => {
     try {
       const result = await axios(`${local_url}/categories/admin`)
       //console.log(result)
-    return dispatch({type:ALL_CATEGORY_ADMIN,payload:result.data})
+      return dispatch({ type: ALL_CATEGORY_ADMIN, payload: result.data })
     } catch (error) {
       swal("ERROR!", `${error.message}`, "danger");
     }
   }
 }
 export const modifyCategory = ({ id, input }) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     await axios.put(`${local_url}/shoes/${id}`, input)
       .then(res => dispatch({ type: MODIFY_CATEGORY }))
   }
@@ -253,3 +254,11 @@ export const updateUser = (payload) => {
     return response;
   };
 };
+
+export const orderStatus = () => {
+  return (dispatch) => {
+    axios.get('http://localhost:3001/order')
+      .then(res => dispatch({ type: ORDER_STATUS, payload: res.data }))
+      .catch(err => console.log(err))
+  }
+}
