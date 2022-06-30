@@ -126,7 +126,7 @@ function PageShopingCart() {
                       <p className="text-2xl leading-normal text-gray-800">Total</p>
                       <p className="text-2xl font-bold leading-normal text-right text-gray-800">${total}</p>
                     </div>
-                    <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
+                    <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                       Comprar
                     </button>
                     <button onClick={() => deleteTotal()} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
