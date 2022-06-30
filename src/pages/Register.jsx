@@ -64,11 +64,11 @@ function Register() {
           <input onChange={handleChange} id="phone" name="phone" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800" >first name</lable>
+          <lable className="text-sm font-medium leading-none text-gray-800" >First name</lable>
           <input onChange={handleChange} id="firstname" name="firstname" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div>
-          <lable className="text-sm font-medium leading-none text-gray-800">last name</lable>
+          <lable className="text-sm font-medium leading-none text-gray-800">Last name</lable>
           <input onChange={handleChange} id="lastname" name="lastname" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         {/* final de la cagada */}
