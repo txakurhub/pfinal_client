@@ -160,12 +160,11 @@ export const CartProvider = ({ children }) => {
     if (currentUser) {
       try {
         const items = cartItem.map((e) => {
-          axios.put(`${local_url}/shoes/${e.id}`, {stock: e.amount , sold: e.sold})
           return {
             title: e.title,
             description: `${e.title}, ${e.brand}, ${e.model}`,
             picture_url: e.image,
-            category_id: "category234",
+            category_id: e.Categories[0].id,
             quantity: e.amount,
             unit_price: e.price,
           };
@@ -176,9 +175,12 @@ export const CartProvider = ({ children }) => {
           user_id: currentUser.uid,
         };
 
-        const response = axios
+        const response = await axios
           .post("http://localhost:3001/payments", body)
           .then((res) => res.data[0]);
+          await cartItem.map(async e=>{
+            return await axios.put(`${local_url}/shoes/shoppingcart/${e.id}`, {stock: e.amount , sold: e.amount})
+          })
         return response
       } catch (error) {
         console.log(error);
