@@ -1,19 +1,30 @@
+<<<<<<< HEAD
 import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, GET_ORDER } from "./actions";
+=======
+import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY,GET_PRODUCTOS_DESTACADOS,GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY } from "./actions";
+>>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
 import swal from 'sweetalert';
 
 const initialState = {
   allProducts: [],
   allProductsName: [],
   allProductsCopy: [],
-  product_detail: [],
+  product_detail: {},
   products: [],
   categories: [],
   reviews: [],
   wishlist: [],
-  counterwishlist: 0,
+  counterwishlist : 0,
+  allcategoriesAdmin:[],
   stockShoes: [],
+<<<<<<< HEAD
   productosDestacados:[],
   orderProduct: []
+=======
+  users: [],
+  user: [],
+  productosDestacados: []
+>>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
 };
 
 function rootReducer(state = initialState, action) {
@@ -85,7 +96,7 @@ function rootReducer(state = initialState, action) {
         reviews: action.payload
       }
     case GET_WISHLIST_PRODUCT:
-      console.log(action.payload.length)
+      //console.log(action.payload.length)
       return {
         ...state,
         wishlist: action.payload,
@@ -100,18 +111,18 @@ function rootReducer(state = initialState, action) {
         counterwishlist: getwishlist.length
       }
     case CREATE_WISHLIST_PRODUCT:
-      console.log(action.payload)
+      //console.log(action.payload)
       return {
         ...state,
         wishlist: state.wishlist.concat(action.payload),
         counterwishlist: state.counterwishlist + 1,
       }
     case REMOVE_PRODUCT_WISHLIST:
-      console.log(action.id)
+      //console.log(action.id)
       let newWishList = action.payload.filter(
         (wish) => wish.id !== action.id
       );
-      console.log(newWishList)
+      //console.log(newWishList)
       if (state.counterwishlist >= 1) {
         return {
           ...state,
@@ -143,20 +154,46 @@ function rootReducer(state = initialState, action) {
         wishlist: state.wishlist
       }
     }
+    case ALL_CATEGORY_ADMIN:{
+      return{
+        ...state,
+        allcategoriesAdmin:action.payload
+      }
+    }
+    case MODIFY_CATEGORY:{
+      return state
+    }
     case GET_PRODUCTOS_DESTACADOS:{
       const destacados = state.allProductsCopy.filter(z => z.sold >= 500).sort((a ,b)=>b.sold - a.sold).slice(0,10)
-      console.log(destacados)
       return {
         ...state,
         productosDestacados:destacados
       }
     }
+<<<<<<< HEAD
     case GET_ORDER:{
 
       return {
         orderProduct: action.payload[0].Products,
       }
     }
+=======
+
+    case GET_USERS: {
+      return {
+        ...state,
+        users: action.payload
+      }
+    }
+
+    case GET_USER: {
+      return {
+        ...state,
+        user: action.payload
+      };
+    };
+
+>>>>>>> 8c0b75575b54587267975d2f9aaff4ac98e2c26e
     default:
       return { ...state };
   }

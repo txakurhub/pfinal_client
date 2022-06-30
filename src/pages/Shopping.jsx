@@ -16,7 +16,7 @@ const Shopping = () => {
   return (
     <div >
       <h1>Shopping</h1>
-
+ 
       {ProductOrder ? (
         ProductOrder.map((product) => (
           <div className="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
