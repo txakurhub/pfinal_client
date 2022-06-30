@@ -14,6 +14,10 @@ import CreationForm from "./components/CreationForm";
 import PrivateRouteUser from "./components/PrivateRouteUser";
 import Homeee from "./pages/Homeee";
 import FormShoes from "./components/FormShoes";
+import Shopping from "./pages/Shopping";
+import UpdateUser from "./components/UpdateUser";
+import Users from "./components/Users";
+
 
 function App() {
   return (
@@ -24,17 +28,21 @@ function App() {
           <Route exact path="/detail/:id" component={Detail}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
-          <Route exact path="/:user/:id" component={Dashboard}></Route>
+          <Route exact path="/dashboard/:user/:id" component={Dashboard}></Route>
           <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
           <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
           <Route exact path="/cart" component={PageShopingCart}></Route>
           <Route exact path="/form" component={CreationForm} />
           <Route exact path="/home2" component={Homeee} />
-          <Route exact path='/prueba' component={FormShoes} />
+          <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
+          <Route exact path="/users" component={Users} />
+          <Route exact path="/users/update/:id" component={UpdateUser} />
+          <Route exa path='/shopping/' component={Shopping} />
+        
         </CartProvider>
       </AuthProvider>
     </div>
   );
-}
+};
 
 export default App;
