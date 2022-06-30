@@ -97,7 +97,7 @@ export function filterByCategory(id) {
 export const createProduct = (payload) => {
   console.log(payload);
   return async () => {
-    const json = await axios.post("http://localhost:3001/shoes", payload);
+    const json = await axios.post(`${local_url}/shoes`, payload);
     return json;
   };
 };
@@ -159,7 +159,7 @@ export const modifyProduct = ({ id, input }) => {
 export const getUsers = (id) => {
   return async function(dispatch) {
     try {
-      var json = await axios.get('http://localhost:3001/customers');
+      var json = await axios.get(`${local_url}/customers/`);
       return dispatch({
           type: GET_USERS,
           payload: json.data
@@ -173,7 +173,7 @@ export const getUsers = (id) => {
 export const getUser = (id) => {
   return async function(dispatch) {
     try {
-      var json = await axios.get('http://localhost:3001/customers/' + id);
+      var json = await axios.get(`${local_url}/customers/`+ id);
       return dispatch({
           type: GET_USER,
           payload: json.data
@@ -195,7 +195,7 @@ export const getProductosDestacados = (payload) =>{
 export const updateUser = (payload) => {
   console.log(payload);
   return async function(dispatch) {
-    var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
+    var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
     return response;
   };
 };
