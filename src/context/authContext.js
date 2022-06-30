@@ -7,8 +7,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
-  FacebookAuthProvider,
+  FacebookAuthProvider
 } from "firebase/auth";
+import {  sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
@@ -47,7 +48,9 @@ export function AuthProvider({ children }) {
       ).then((fireUser) => {
         console.log(fireUser);
         return fireUser;
-      });
+      }).then(res=>{
+        verify()
+      })
       const docuRef = doc(firestore, `user/${infoUser.user.uid}`);
       console.log(docuRef);
       setDoc(docuRef, {  email:email,
@@ -57,11 +60,19 @@ export function AuthProvider({ children }) {
         lastname:lastname,
         phone:phone,
         admin:admin,
-        banned:banned});
+        banned:banned})
     } catch (err) {
       console.log(err + "  - - -  error en signup");
     }
   };
+  console.log(auth.currentUser)
+  const verify =async ()=>{
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        // Email verification sent!
+        // ...
+      });
+  }
 
   const login = async (email, password) =>
     await signInWithEmailAndPassword(auth, email, password);
@@ -95,6 +106,9 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => signOut(auth);
+
+
+
 
   return (
     <authContext.Provider
