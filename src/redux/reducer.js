@@ -151,12 +151,14 @@ function rootReducer(state = initialState, action) {
     }
     case ADD_CATEGORY: {
       return{
-
+        ...state,
+        categories: action.payload
       }
     }
     case EDIT_CATEGORY: {
+      const data = state.categories.find(e=>e.name===action.payload)
       return{
-
+        ...state
       }
     }
 
