@@ -9,18 +9,18 @@ export const FILTER_PRICE = "FILTER_PRICE";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const CREATE_REVIEW = "CREATE_REVIEW";
 export const GET_REVIEWS_PRODUCT = "GET_REVIEWS_PRODUCT";
-export const FILTER_CATEGORY = "FILTER_CATEGORY"
+export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const CREATE_WISHLIST_PRODUCT = "CREATE_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
-export const ALL_FILTERS = "ALL_FILTERS"
-export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
-export const ALL_WISHLIST = "ALL_WISHLIST"
-export const GET_STOCK = "GET_STOCK"
+export const ALL_FILTERS = "ALL_FILTERS";
+export const MODIFY_PRODUCT = "MODIFY_PRODUCT";
+export const ALL_WISHLIST = "ALL_WISHLIST";
+export const GET_STOCK = "GET_STOCK";
+export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
 export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
-
-
 
 export function getProducts() {
   return function (dispatch) {
@@ -156,6 +156,33 @@ export const modifyProduct = ({ id, input }) => {
   }
 }
 
+export const getUsers = (id) => {
+  return async function(dispatch) {
+    try {
+      var json = await axios.get('http://localhost:3001/customers');
+      return dispatch({
+          type: GET_USERS,
+          payload: json.data
+      });    
+    } catch (error) {
+      console.log(error);
+    };
+  };
+};
+
+export const getUser = (id) => {
+  return async function(dispatch) {
+    try {
+      var json = await axios.get('http://localhost:3001/customers/' + id);
+      return dispatch({
+          type: GET_USER,
+          payload: json.data
+      });    
+    } catch (error) {
+      console.log(error);
+    };
+  };
+};
 
 export const getProductosDestacados = (payload) =>{
   return {
@@ -165,4 +192,10 @@ export const getProductosDestacados = (payload) =>{
 }
 
 
-
+export const updateUser = (payload) => {
+  console.log(payload);
+  return async function(dispatch) {
+    var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
+    return response;
+  };
+};
