@@ -14,12 +14,22 @@ export const CREATE_WISHLIST_PRODUCT = "CREATE_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT = "GET_WISHLIST_PRODUCT";
 export const GET_WISHLIST_PRODUCT_ID = "GET_WISHLIST_PRODUCT_ID";
 export const REMOVE_PRODUCT_WISHLIST = "REMOVE_PRODUCT_WISHLIST";
+<<<<<<< HEAD
 export const ALL_FILTERS = "ALL_FILTERS";
 export const MODIFY_PRODUCT = "MODIFY_PRODUCT";
 export const ALL_WISHLIST = "ALL_WISHLIST";
 export const GET_STOCK = "GET_STOCK";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
+=======
+export const ALL_FILTERS = "ALL_FILTERS"
+export const MODIFY_PRODUCT = "MODIFY_PRODUCT"
+export const ALL_WISHLIST = "ALL_WISHLIST"
+export const GET_STOCK = "GET_STOCK"
+export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
+
+
+>>>>>>> d5345539546fc41bd713d9fd005bcae9d92bad9e
 
 export function getProducts() {
   return function (dispatch) {
@@ -182,6 +192,14 @@ export const getUser = (id) => {
     };
   };
 };
+
+export const getProductosDestacados = (payload) =>{
+  return {
+    type: GET_PRODUCTOS_DESTACADOS,
+    payload
+  }
+}
+
 
 export const updateUser = (payload) => {
   console.log(payload);

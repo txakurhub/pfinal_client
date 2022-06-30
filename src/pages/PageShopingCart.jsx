@@ -126,17 +126,12 @@ function PageShopingCart() {
                       <p className="text-2xl leading-normal text-gray-800">Total</p>
                       <p className="text-2xl font-bold leading-normal text-right text-gray-800">${total}</p>
                     </div>
-                    <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
-                      Checkout
+                    <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
+                      Comprar
                     </button>
-                    {
-                      cartItem.length !== 0 && 
-                      (
-                        <button onClick={() => deleteTotal()} className="absolute top-2.5 right-2.5 text-base leading-none w-[150px] py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
-                          Empty Cart
-                        </button>
-                      )
-                    }
+                    <button onClick={() => deleteTotal()} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
+                      Vaciar Carrito
+                    </button>
                   </div>
                   <div className="flex items-center justify-between pt-5 opacity-0">
                     <p className="text-base leading-none text-gray-800">Tax</p>
