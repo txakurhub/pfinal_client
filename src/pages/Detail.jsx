@@ -19,6 +19,7 @@ const Detail = () => {
   const params = useParams();
   const [loader, setLoader] = useState(true);
   let selected = useSelector((state) => state.product_detail);
+  console.log(selected);
   const wishlist = useSelector((state) => state.wishlist);
   const counter = useSelector((state) => state.counterwishlist);
   const [order, setOrder] = useState("");

@@ -59,7 +59,7 @@ function PageShopingCart() {
                 <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
                 {
                   cartItem.length === 0 ?
-                    <p className="mt-14">Tu carrito esta vacio</p> :
+                    <p className="mt-14">Your cart is empty</p> :
                     cartItem.map((r) => (
                       <div key={cartItem.indexOf(r)} className="md:flex items-center mt-14 py-8 border-t border-gray-200">
                         <div className="w-1/4">
