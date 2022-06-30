@@ -32,7 +32,7 @@ function App() {
           <Route exact path="/cart" component={PageShopingCart}></Route>
           <Route exact path="/form" component={CreationForm} />
           <Route exact path="/home2" component={Homeee} />
-          <Route exact path='/prueba' component={FormShoes} />
+          <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/update/:id" component={UpdateUser} />
         </CartProvider>
