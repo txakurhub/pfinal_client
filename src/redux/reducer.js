@@ -17,6 +17,9 @@ import {
   ALL_FILTERS,
   ALL_WISHLIST,
   GET_STOCK,
+  ALL_CATEGORY_ADMIN,
+  MODIFY_CATEGORY,
+  GET_ORDER,
 } from "./actions";
 import swal from "sweetalert";
 
@@ -24,13 +27,17 @@ const initialState = {
   allProducts: [],
   allProductsName: [],
   allProductsCopy: [],
-  product_detail: [],
+  product_detail: {},
   products: [],
   categories: [],
   reviews: [],
   wishlist: [],
   counterwishlist: 0,
+  allcategoriesAdmin: [],
   stockShoes: [],
+
+  productosDestacados: [],
+  orderProduct: [],
   users: [],
   user: [],
   productosDestacados: [],
@@ -135,9 +142,9 @@ function rootReducer(state = initialState, action) {
         counterwishlist: state.counterwishlist + 1,
       };
     case REMOVE_PRODUCT_WISHLIST:
-      console.log(action.id);
+      //console.log(action.id)
       let newWishList = action.payload.filter((wish) => wish.id !== action.id);
-      console.log(newWishList);
+      //console.log(newWishList)
       if (state.counterwishlist >= 1) {
         return {
           ...state,
@@ -180,6 +187,15 @@ function rootReducer(state = initialState, action) {
         wishlist: state.wishlist,
       };
     }
+    case ALL_CATEGORY_ADMIN: {
+      return {
+        ...state,
+        allcategoriesAdmin: action.payload,
+      };
+    }
+    case MODIFY_CATEGORY: {
+      return state;
+    }
     case GET_PRODUCTOS_DESTACADOS: {
       const destacados = state.allProductsCopy
         .filter((z) => z.sold >= 500)
@@ -188,6 +204,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         productosDestacados: destacados,
+      };
+    }
+
+    case GET_ORDER: {
+      return {
+        orderProduct: action.payload[0].Products,
       };
     }
 
