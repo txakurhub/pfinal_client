@@ -37,7 +37,7 @@ function PageShopingCart() {
       })
         .then((willDelete) => {
           if (willDelete) {
-            window.open(linkMP, '_blank');
+            window.open( linkMP, '_blank');
             history.push('/')
             localStorage.clear()
             window.location.reload()
