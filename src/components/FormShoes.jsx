@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getShoeDetail, modifyProduct } from "../redux/actions";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import style from './FormShoes.module.css'
 
 const FormShoes = () => {
- 
+  const history = useHistory()
   const { id } = useParams()
   const dispatch = useDispatch();
   const detail = useSelector(state => state.product_detail)
@@ -21,7 +21,8 @@ const FormShoes = () => {
 
   useEffect(() => {
     dispatch(getShoeDetail(id))
-  }, [dispatch])
+  }, [dispatch,id])
+  //agregue el id al arreglo para que no llore el navegador
 
   useEffect(() => {
     if (detail) {
@@ -44,10 +45,10 @@ const FormShoes = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(modifyProduct({ id: id, input }));
-    swal("Zapatilla modificada");
+    await swal("Zapatilla modificada");
     setInput({
       title: '',
       brand: '',
@@ -56,6 +57,7 @@ const FormShoes = () => {
       stock: '',
       image: ''
     });
+    history.goBack()
   };
 
   return (
