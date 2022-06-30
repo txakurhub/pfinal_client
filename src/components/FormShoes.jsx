@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import style from './FormShoes.module.css'
 
 const FormShoes = () => {
- const history = useHistory()
+  const history = useHistory()
   const { id } = useParams()
   const dispatch = useDispatch();
   const detail = useSelector(state => state.product_detail)
@@ -45,10 +45,10 @@ const FormShoes = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(modifyProduct({ id: id, input }));
-    swal("Zapatilla modificada");
+    await swal("Zapatilla modificada");
     setInput({
       title: '',
       brand: '',
@@ -57,7 +57,7 @@ const FormShoes = () => {
       stock: '',
       image: ''
     });
-    window.history.back()  
+    history.goBack()
   };
 
   return (
