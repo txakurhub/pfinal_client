@@ -1,4 +1,4 @@
-import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS } from "./actions";
+import { GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -11,6 +11,7 @@ const initialState = {
   reviews: [],
   wishlist: [],
   counterwishlist : 0,
+  allcategoriesAdmin:[]
 };
 
 function rootReducer(state = initialState, action) {
@@ -82,7 +83,7 @@ function rootReducer(state = initialState, action) {
         reviews: action.payload
       }
     case GET_WISHLIST_PRODUCT:
-      console.log(action.payload.length)
+      //console.log(action.payload.length)
       return {
         ...state,
         wishlist: action.payload,
@@ -97,18 +98,18 @@ function rootReducer(state = initialState, action) {
         counterwishlist: getwishlist.length
       }
     case CREATE_WISHLIST_PRODUCT:
-      console.log(action.payload)
+      //console.log(action.payload)
       return {
         ...state,
         wishlist: state.wishlist.concat(action.payload),
         counterwishlist: state.counterwishlist + 1,
       }
     case REMOVE_PRODUCT_WISHLIST:
-      console.log(action.id)
+      //console.log(action.id)
       let newWishList = action.payload.filter(
         (wish) => wish.id !== action.id
       );
-      console.log(newWishList)
+      //console.log(newWishList)
       if (state.counterwishlist >= 1) {
         return {
           ...state,
@@ -133,6 +134,15 @@ function rootReducer(state = initialState, action) {
         ...state,
         allProducts: searchResults.length ? searchResults : state.allProducts
       }
+    }
+    case ALL_CATEGORY_ADMIN:{
+      return{
+        ...state,
+        allcategoriesAdmin:action.payload
+      }
+    }
+    case MODIFY_CATEGORY:{
+      return state
     }
     default:
       return { ...state };
