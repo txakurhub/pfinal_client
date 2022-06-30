@@ -13,6 +13,9 @@ const initialState = {
   counterwishlist: 0,
   allcategoriesAdmin: [],
   stockShoes: [],
+
+  productosDestacados:[],
+  orderProduct: [],
   users: [],
   user: [],
   productosDestacados: [],
@@ -162,6 +165,13 @@ function rootReducer(state = initialState, action) {
         productosDestacados: destacados
       }
     }
+
+    case GET_ORDER:{
+      return {
+        orderProduct: action.payload[0].Products,
+      }
+    }
+
 
     case GET_USERS: {
       return {

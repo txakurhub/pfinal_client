@@ -106,9 +106,6 @@ export const createProduct = (payload) => {
   };
 };
 
-//   const { data } = await axios(`${local_url}/shoes/${id}`);
-//   dispatch({ type: GET_SHOE_DETAIL, payload: data });
-// ;
 export const get_wishlist_product = (payload) => {
   return async (dispatch) => {
     const json = await axios(`${local_url}/wishlist/${payload}`)
@@ -247,6 +244,14 @@ export const getProductosDestacados = (payload) => {
   }
 }
 
+export const getOrderProducts = (payload) =>{
+  return async(dispatch) =>{
+    const json = await axios.get(`${local_url}/order/`, payload)
+    dispatch({type: GET_ORDER, payload: json.data})
+ 
+
+  }
+}
 
 export const updateUser = (payload) => {
   return async function (dispatch) {
