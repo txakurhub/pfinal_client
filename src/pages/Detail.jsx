@@ -72,7 +72,7 @@ const Detail = () => {
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <polyline points="15 6 9 12 15 18" />
           </svg>
-          <p className="text-sm pl-2 leading-none">Back</p>
+          <p className="text-sm pl-2 leading-none">Volver</p>
           <p className="hidden">{order}</p>
         </Link>
         <div className="xl:w-2/6 lg:w-2/5 w-80 md:block hidden relative">
@@ -182,7 +182,7 @@ const Detail = () => {
             </h1>
           </div>
           <div className="py-4 border-b border-gray-200 flex items-center justify-between">
-            <p className="text-base leading-4 text-gray-800">Colours</p>
+            <p className="text-base leading-4 text-gray-800">Colores</p>
             <div className="flex items-center justify-center">
               <p className="text-sm leading-none text-gray-600">
                 Smoke Blue with red accents
@@ -207,9 +207,9 @@ const Detail = () => {
             </div>
           </div>
           <div className="py-4 border-b border-gray-200 flex items-center justify-between">
-            <p className="text-base leading-4 text-gray-800">Size</p>
+            <p className="text-base leading-4 text-gray-800">Tamaño</p>
             <p>Stock: {selected.stock}</p>
-            <p>{selected.sold}</p>
+            <p>Vendidas: {selected.sold}</p>
             <div className="flex items-center justify-center">
               <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
               <svg
@@ -268,7 +268,7 @@ const Detail = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            Check availability in store
+            Consultar disponibilidad en tienda
           </button>
           <button
             onClick={() => addToCart(selected)}
@@ -288,10 +288,10 @@ const Detail = () => {
                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"
               />
             </svg>
-            Add to shopping cart
+            Añadir al carrito de compras
           </button>
           <p className="text-base leading-4 mt-7 text-gray-600">
-            Product Model: {selected.model}
+            Modelo del producto: {selected.model}
           </p>
           <div>
             <div className="border-t border-b py-4 mt-7 border-gray-200">
@@ -300,7 +300,7 @@ const Detail = () => {
                 className="flex justify-between items-center cursor-pointer"
               >
                 <p className="text-base leading-4 text-gray-800">
-                  Shipping and returns
+                  Envíos y devoluciones
                 </p>
                 <button
                   className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded"
@@ -333,8 +333,7 @@ const Detail = () => {
                 }
                 id="sect"
               >
-                You will be responsible for paying for your own shipping costs
-                for returning your item. Shipping costs are nonrefundable
+                Usted será responsable de pagar sus propios costos de envío para devolver su artículo. Los gastos de envío no son reembolsables.
               </div>
             </div>
           </div>
@@ -344,7 +343,7 @@ const Detail = () => {
                 onClick={() => setShow2(!show2)}
                 className="flex justify-between items-center cursor-pointer"
               >
-                <p className="text-base leading-4 text-gray-800">Reviews</p>
+                <p className="text-base leading-4 text-gray-800">Reseñas</p>
                 <button
                   className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 rounded"
                   aria-label="show or hide"
@@ -381,9 +380,9 @@ const Detail = () => {
             </div>
           </div>
         </div>
-      </section>      
-        <SlideDetail />
-      
+      </section>
+      <SlideDetail />
+
     </div>
   );
 };
