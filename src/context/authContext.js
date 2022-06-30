@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-import axios from "axios";
 import { local_url } from "../redux/actions";
 export const authContext = createContext();
 
@@ -19,44 +18,46 @@ export const useAuth = () => {
   const context = useContext(authContext);
   return context;
 };
-
-const signUpDb = (user) => {
-  axios
-    .post(`${local_url}/customers`, user)
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log(err));
-};
-
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signup = async (email, password, role = "user") => {
+  const signup = async (
+   { email,
+    password,
+    image,
+    firstname,
+    lastname,
+    phone,
+    admin,
+    banned
+   }) => {
     try {
       const firestore = getFirestore(app);
       const infoUser = await createUserWithEmailAndPassword(
         auth,
         email,
         password,
-        role
+        image,
+        firstname,
+        lastname,
+        phone,
+        admin,
+        banned
       ).then((fireUser) => {
+        console.log(fireUser);
         return fireUser;
       });
-
-      const newUser = {
-        name: "Usuario",
-        image:
-          "https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Clipart.png",
-        user: infoUser.user.uid,
-        password: password,
-        admin: role === "admin" ? true : false,
-        phone: " ",
-        email: email,
-        address: " ",
-      };
-      signUpDb(newUser);
-      const docuRef = doc(firestore, `users/${infoUser.user.uid}`);
-      setDoc(docuRef, { email: email, role: role });
+      const docuRef = doc(firestore, `user/${infoUser.user.uid}`);
+      console.log(docuRef);
+      setDoc(docuRef, {  email:email,
+        password:password,
+        image:image,
+        firstname:firstname,
+        lastname:lastname,
+        phone:phone,
+        admin:admin,
+        banned:banned});
     } catch (err) {
       console.log(err + "  - - -  error en signup");
     }
@@ -68,21 +69,6 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = () => {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-      .then(({ user: us }) => {
-        console.log(us);
-        const newUser = {
-          id: us.uid,
-          name: us.displayName,
-          image: us.photoURL,
-          user: us.uid,
-          password: "password google",
-          phone: us.phoneNumber ? us.phoneNumber : " ",
-          email: us.email,
-          address: " ",
-        };
-        signUpDb(newUser);
-      })
-      .catch((err) => console.log(err));
   };
 
   const loginWithFacebook = () => {
