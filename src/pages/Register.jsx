@@ -61,7 +61,6 @@ function Register() {
         {/* mi cagada */}
         <div>
           <label className="text-sm font-medium leading-none text-gray-800">Phone</label>
-<<<<<<< HEAD
           <input onChange={handleChange} id="phone" name="phone" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div>
@@ -70,16 +69,6 @@ function Register() {
         </div>
         <div>
           <label className="text-sm font-medium leading-none text-gray-800">Last name</label>
-=======
-          <input onChange={handleChange} id="phone" name="phone" aria-label="enter email adress" type="text" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
-        </div>
-        <div>
-          <label className="text-sm font-medium leading-none text-gray-800" >first name</label>
-          <input onChange={handleChange} id="firstname" name="firstname" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
-        </div>
-        <div>
-          <label className="text-sm font-medium leading-none text-gray-800">last name</label>
->>>>>>> 507b209 (cambiecitos y perfil)
           <input onChange={handleChange} id="lastname" name="lastname" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         {/* final de la cagada */}

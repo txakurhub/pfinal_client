@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import 'firebase/storage'
 
 //-------------zapas
 const firebaseConfig = {
@@ -20,7 +21,6 @@ const firebaseConfig = {
 //   appId: "1:502350204377:web:5a448f49e111cf51da9dc8",
 //   measurementId: "G-62NF4KXSGW",
 // };
-
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app) 
 
