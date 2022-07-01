@@ -283,8 +283,7 @@ export const orderStatus = () => {
 }
 
 export const filterByOrder = (payload) => {
-  // console.log(payload)
-  return {
+    return {
     type: FILTER_ORDER,
     payload
   }
