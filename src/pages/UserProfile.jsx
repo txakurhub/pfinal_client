@@ -23,7 +23,6 @@ export default function UserProfile() {
     const toggle = () => setActive(!active);
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user);
-    console.log(currentUser)
     useEffect(() => {
         dispatch(getUser(user.uid))
     }, [dispatch, user.id]);
