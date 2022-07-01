@@ -50,6 +50,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    
     case GET_PRODUCTS:
       const result = action.payload.map((e) => ({
         title: e.title,
