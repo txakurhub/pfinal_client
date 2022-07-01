@@ -28,6 +28,8 @@ export const GET_PICTURES = "GET_PICTURES";
 export const ORDER_STATUS = "ORDER_STATUS"
 export const GET_ORDER = "GET_ORDER"
 export const FILTER_ORDER = "FILTER_ORDER"
+export const ADD_CATEGORY = "ADD_CATEGORY"
+export const EDIT_CATEGORY = "EDIT_CATEGORY"
 
 export function getProducts() {
   return function (dispatch) {
@@ -288,3 +290,26 @@ export const filterByOrder = (payload) => {
     payload
   }
 } 
+
+export const addCategory = (payload) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`${local_url}/categories`, {nameC : payload})
+      .then(res => dispatch({ type: ADD_CATEGORY, payload: res.data}))
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+}
+
+export const editCategory = ({ id, name }) => {
+  return async (dispatch)=>{
+    try {
+      await axios.put(`${local_url}/categories/${id}`, { nameCategory: name })
+      .then(res => dispatch({ type: EDIT_CATEGORY, payload: res.data}))
+    } catch (error) {
+      console.log(error)
+    }
+    
+}}
