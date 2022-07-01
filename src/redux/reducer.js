@@ -17,9 +17,11 @@ const initialState = {
   orderProduct: [],
   users: [],
   user: [],
+
   productosDestacados: [],
   pictures: [],
   orderstatus: []
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -168,7 +170,7 @@ function rootReducer(state = initialState, action) {
 
     case GET_ORDER:{
       return {
-        orderProduct: action.payload[0].Products,
+        orderProduct: action.payload,
       }
     }
 
@@ -184,8 +186,8 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload
-      };
-    };
+      }
+    }
 
     case GET_PICTURES: {
       return {
