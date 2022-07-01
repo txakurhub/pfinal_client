@@ -24,6 +24,8 @@ export const ALL_WISHLIST = "ALL_WISHLIST";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
+export const ADD_CATEGORY = "ADD_CATEGORY";
+export const EDIT_CATEGORY = "EDIT_CATEGORY";
 
 export function getProducts() {
   return function (dispatch) {
@@ -253,3 +255,26 @@ export const updateUser = (payload) => {
     return response;
   };
 };
+
+export const addCategory = (payload) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`${local_url}/categories`, {nameC : payload})
+      .then(res => dispatch({ type: ADD_CATEGORY, payload: res.data}))
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
+}
+
+export const editCategory = ({ id, name }) => {
+  return async (dispatch)=>{
+    try {
+      await axios.put(`${local_url}/categories/${id}`, { nameCategory: name })
+      .then(res => dispatch({ type: EDIT_CATEGORY, payload: res.data}))
+    } catch (error) {
+      console.log(error)
+    }
+    
+}}

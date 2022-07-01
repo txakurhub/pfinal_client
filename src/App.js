@@ -16,6 +16,8 @@ import Homeee from "./pages/Homeee";
 import FormShoes from "./components/FormShoes";
 import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
+import CategoryAdd from "./components/CategoryAdd";
+import CategoryEdit from "./components/CategoryEdit";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
           <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/update/:id" component={UpdateUser} />
+          <Route exact path="/prueba" component={CategoryEdit}/>
         </CartProvider>
       </AuthProvider>
     </div>
