@@ -17,6 +17,7 @@ import FormShoes from "./components/FormShoes";
 import Shopping from "./pages/Shopping";
 import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
+import Reviews from "./components/Reviews";
 
 
 function App() {
@@ -37,8 +38,7 @@ function App() {
           <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/update/:id" component={UpdateUser} />
-          <Route exa path='/shopping/' component={Shopping} />
-        
+          <Route exact path='/shopping/' component={Shopping} />
         </CartProvider>
       </AuthProvider>
     </div>

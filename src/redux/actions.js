@@ -23,7 +23,8 @@ export const MODIFY_CATEGORY = "MODIFY_CATEGORY";
 export const ALL_WISHLIST = "ALL_WISHLIST";
 export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
-export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS'
+export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS';
+export const GET_PICTURES = "GET_PICTURES";
 export const ORDER_STATUS = "ORDER_STATUS"
 export const GET_ORDER = "GET_ORDER"
 
@@ -258,6 +259,16 @@ export const updateUser = (payload) => {
   return async function (dispatch) {
     var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
     return response;
+  };
+};
+
+export const getPictures = (id) => {
+  return async function(dispatch) {
+    let json = await axios.get(`${local_url}/shoes/pictures/${id}`);
+    return dispatch({
+      type: 'GET_PICTURES',
+      payload: json.data
+    });
   };
 };
 

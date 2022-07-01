@@ -1,4 +1,4 @@
-import { GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_PRODUCTOS_DESTACADOS, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, ORDER_STATUS, GET_ORDER } from "./actions";
+import { GET_PICTURES, GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_PRODUCTOS_DESTACADOS, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, ORDER_STATUS, GET_ORDER } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -17,6 +17,9 @@ const initialState = {
   orderProduct: [],
   users: [],
   user: [],
+
+  productosDestacados: [],
+  pictures: [],
   orderstatus: []
 
 };
@@ -186,6 +189,13 @@ function rootReducer(state = initialState, action) {
       }
     }
 
+    case GET_PICTURES: {
+      return {
+        ...state,
+        pictures: action.payload
+      }
+    }
+    
     case ORDER_STATUS: {
       return {
         ...state,
