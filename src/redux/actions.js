@@ -27,6 +27,7 @@ export const GET_PRODUCTOS_DESTACADOS = 'GET_PRODUCTOS_DESTACADOS';
 export const GET_PICTURES = "GET_PICTURES";
 export const ORDER_STATUS = "ORDER_STATUS"
 export const GET_ORDER = "GET_ORDER"
+export const FILTER_ORDER = "FILTER_ORDER"
 
 export function getProducts() {
   return function (dispatch) {
@@ -228,7 +229,7 @@ export const getUsers = (id) => {
 export const getUser = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`${local_url}/customers/`+ id);
+      var json = await axios.get(`${local_url}/customers/` + id);
       return dispatch({
         type: GET_USER,
         payload: json.data
@@ -246,25 +247,25 @@ export const getProductosDestacados = (payload) => {
   }
 }
 
-export const getOrderProducts = (payload) =>{
-  return async(dispatch) =>{
+export const getOrderProducts = (payload) => {
+  return async (dispatch) => {
     const json = await axios.get(`${local_url}/order/`, payload)
-    dispatch({type: GET_ORDER, payload: json.data})
- 
+    dispatch({ type: GET_ORDER, payload: json.data })
+
 
   }
 }
 
 export const updateUser = (payload) => {
   console.log(payload);
-  return async function(dispatch) {
+  return async function (dispatch) {
     var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
     return response;
   };
 };
 
 export const getPictures = (id) => {
-  return async function(dispatch) {
+  return async function (dispatch) {
     let json = await axios.get(`${local_url}/shoes/pictures/${id}`);
     return dispatch({
       type: 'GET_PICTURES',
@@ -278,5 +279,12 @@ export const orderStatus = () => {
     axios.get('http://localhost:3001/order')
       .then(res => dispatch({ type: ORDER_STATUS, payload: res.data }))
       .catch(err => console.log(err))
+  }
+}
+
+export const filterByOrder = (payload) => {
+  return {
+    type: FILTER_ORDER,
+    payload
   }
 }

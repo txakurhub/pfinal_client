@@ -1,4 +1,4 @@
-import { GET_PICTURES, GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_PRODUCTOS_DESTACADOS, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, ORDER_STATUS, GET_ORDER } from "./actions";
+import { GET_PICTURES, GET_USER, GET_USERS, GET_PRODUCTS, GET_SHOE_DETAIL, SEARCH_SNEAKES, FILTER_PRICE, FILTER_CATEGORY, GET_PRODUCTOS_DESTACADOS, GET_CATEGORIES, CREATE_REVIEW, GET_REVIEWS_PRODUCT, GET_WISHLIST_PRODUCT, CREATE_WISHLIST_PRODUCT, REMOVE_PRODUCT_WISHLIST, GET_WISHLIST_PRODUCT_ID, ALL_FILTERS, ALL_WISHLIST, GET_STOCK, ALL_CATEGORY_ADMIN, MODIFY_CATEGORY, ORDER_STATUS, GET_ORDER, FILTER_ORDER } from "./actions";
 import swal from 'sweetalert';
 
 const initialState = {
@@ -13,19 +13,19 @@ const initialState = {
   counterwishlist: 0,
   allcategoriesAdmin: [],
   stockShoes: [],
-  productosDestacados:[],
+  productosDestacados: [],
   orderProduct: [],
   users: [],
   user: [],
-
   productosDestacados: [],
   pictures: [],
-  orderstatus: []
-
+  orderstatus: [],
+  orderstatusCopy: []
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    
     case GET_PRODUCTS:
       const result = action.payload.map(e => ({ title: e.title, brand: e.brand }))
       return {
@@ -35,17 +35,20 @@ function rootReducer(state = initialState, action) {
         allProducts: action.payload,
         allProductsCopy: action.payload
       };
+
     case GET_SHOE_DETAIL:
       return {
         ...state,
         product_detail: action.payload,
       };
+
     case SEARCH_SNEAKES: {
       return {
         ...state,
         allProducts: action.payload
       }
     }
+
     case FILTER_PRICE: {
       const container = action.payload === 'lowest' ? state.allProducts.sort((a, b) => {
         if (a.price > b.price) {
@@ -70,28 +73,33 @@ function rootReducer(state = initialState, action) {
         allProducts: container
       }
     }
+
     case GET_CATEGORIES: {
       return {
         ...state,
         categories: action.payload
       }
     }
+
     case FILTER_CATEGORY: {
       return {
         ...state,
         allProducts: action.payload
       }
     }
+
     case CREATE_REVIEW:
       return {
         ...state,
         reviews: action.payload
       }
+
     case GET_REVIEWS_PRODUCT:
       return {
         ...state,
         reviews: action.payload
       }
+
     case GET_WISHLIST_PRODUCT:
       //console.log(action.payload.length)
       return {
@@ -99,6 +107,7 @@ function rootReducer(state = initialState, action) {
         wishlist: action.payload,
         counterwishlist: action.payload.length,
       }
+
     case GET_WISHLIST_PRODUCT_ID:
       let getwishlist = action.payload.filter((e) => e.Products && e.Products.map((p) => p.id).includes(action.producto))
       // console.log(getwishlist)
@@ -107,6 +116,7 @@ function rootReducer(state = initialState, action) {
         wishlist: getwishlist,
         counterwishlist: getwishlist.length
       }
+
     case CREATE_WISHLIST_PRODUCT:
       //console.log(action.payload)
       return {
@@ -114,6 +124,7 @@ function rootReducer(state = initialState, action) {
         wishlist: state.wishlist.concat(action.payload),
         counterwishlist: state.counterwishlist + 1,
       }
+
     case REMOVE_PRODUCT_WISHLIST:
       //console.log(action.id)
       let newWishList = action.payload.filter(
@@ -133,6 +144,7 @@ function rootReducer(state = initialState, action) {
           counterwishlist: state.counterwishlist,
         };
       }
+
     case ALL_FILTERS: {
       const { brand, category, precioMin, precioMax } = action.payload
       let container = brand && category ? state.allProductsCopy.filter(p => p.brand === brand && p.category === category) : !brand && category ? state.allProductsCopy.filter(p => p.category === category) : state.allProductsCopy.filter(p => p.brand === brand)
@@ -145,21 +157,25 @@ function rootReducer(state = initialState, action) {
         allProducts: searchResults.length ? searchResults : state.allProducts
       }
     }
+
     case ALL_WISHLIST: {
       return {
         ...state,
         wishlist: state.wishlist
       }
     }
+
     case ALL_CATEGORY_ADMIN: {
       return {
         ...state,
         allcategoriesAdmin: action.payload
       }
     }
+
     case MODIFY_CATEGORY: {
       return state
     }
+
     case GET_PRODUCTOS_DESTACADOS: {
       const destacados = state.allProductsCopy.filter(z => z.sold >= 500).sort((a, b) => b.sold - a.sold).slice(0, 10)
       return {
@@ -168,12 +184,11 @@ function rootReducer(state = initialState, action) {
       }
     }
 
-    case GET_ORDER:{
+    case GET_ORDER: {
       return {
         orderProduct: action.payload,
       }
     }
-
 
     case GET_USERS: {
       return {
@@ -195,11 +210,20 @@ function rootReducer(state = initialState, action) {
         pictures: action.payload
       }
     }
-    
+
     case ORDER_STATUS: {
       return {
         ...state,
-        orderstatus: action.payload
+        orderstatus: action.payload,
+        orderstatusCopy: action.payload
+      }
+    }
+
+    case FILTER_ORDER: {
+      let resultado = state.orderstatusCopy.filter(e => e.order_status === action.payload)
+      return {
+        ...state,
+        orderstatus: resultado
       }
     }
 

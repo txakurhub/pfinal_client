@@ -1,11 +1,16 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { orderStatus } from '../redux/actions'
+import { filterByOrder, orderStatus } from '../redux/actions'
 
 function OrderStatus() {
 
   const dispatch = useDispatch()
   const orderstatus = useSelector(state => state.orderstatus)
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    dispatch(filterByOrder(e.target.value))
+  }
 
   useEffect(() => {
     dispatch(orderStatus())
@@ -13,6 +18,12 @@ function OrderStatus() {
 
   return (
     <div>
+      <select onChange={handleChange}>
+        <option hidden>Órdenes</option>
+        <option value='success'>Realizadas con éxito</option>
+        <option value='pendiente'>En proceso</option>
+        <option value='failure'>Fallidas</option>
+      </select>
       {
         orderstatus ? orderstatus.sort((a, b) => a.id - b.id).map(e => {
 
