@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function Register() {
   const [user,setUser] = useState({
-    phone:'',email:'',password:'',image:'',firstname:'',lastname:'',admin:false,banned:false
+    phone:'',email:'',password:'',image:null,firstname:'',lastname:'',admin:false,banned:false
   })
   const [error, setError] = useState("");
   const { signup } = useAuth();
