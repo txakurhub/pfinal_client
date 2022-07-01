@@ -19,6 +19,7 @@ import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
 import Reviews from "./components/Reviews";
 
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/home2" component={Homeee} />
           <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
           <Route exact path="/users" component={Users} />
+          <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/users/update/:id" component={UpdateUser} />
           <Route exact path='/shopping/' component={Shopping} />
         </CartProvider>
