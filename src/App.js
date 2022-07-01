@@ -20,7 +20,6 @@ import Users from "./components/Users";
 import Reviews from "./components/Reviews";
 import PayPal from "./components/PayPal";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
-
 import UserProfile from "./pages/UserProfile";
 
 function App() {
@@ -42,6 +41,7 @@ function App() {
             <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
+            <Route exact path='/profile/' component={UserProfile} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>
