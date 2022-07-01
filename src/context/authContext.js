@@ -65,6 +65,7 @@ export function AuthProvider({ children }) {
       console.log(err + "  - - -  error en signup");
     }
   };
+<<<<<<< HEAD
 
   const verify = async () => {
     sendEmailVerification(auth.currentUser).then(() => {
@@ -72,6 +73,16 @@ export function AuthProvider({ children }) {
       // ...
     });
   };
+=======
+  // console.log(auth.currentUser)
+  const verify =async ()=>{
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        // Email verification sent!
+        // ...
+      });
+  }
+>>>>>>> fea532c (Método paypal ready)
 
   const login = async (email, password) =>
     await signInWithEmailAndPassword(auth, email, password);
