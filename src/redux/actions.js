@@ -25,17 +25,11 @@ export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const GET_PRODUCTOS_DESTACADOS = "GET_PRODUCTOS_DESTACADOS";
 export const GET_PICTURES = "GET_PICTURES";
-<<<<<<< HEAD
-export const ORDER_STATUS = "ORDER_STATUS";
-export const GET_ORDER = "GET_ORDER";
-export const FILTER_ORDER = "FILTER_ORDER";
-=======
 export const ORDER_STATUS = "ORDER_STATUS"
 export const GET_ORDER = "GET_ORDER"
 export const FILTER_ORDER = "FILTER_ORDER"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const EDIT_CATEGORY = "EDIT_CATEGORY"
->>>>>>> 10b62fe (componentes para modificar/crear categorias)
 
 export function getProducts() {
   return function (dispatch) {
