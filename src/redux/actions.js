@@ -276,7 +276,7 @@ export const getPictures = (id) => {
 
 export const orderStatus = () => {
   return (dispatch) => {
-    axios.get('http://localhost:3001/order')
+    axios.get(`${local_url}/order`)
       .then(res => dispatch({ type: ORDER_STATUS, payload: res.data }))
       .catch(err => console.log(err))
   }
