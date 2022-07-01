@@ -17,27 +17,34 @@ function PageShopingCart() {
   );
   const { user } = useAuth();
   const history = useHistory()
-
   const handleCheckout = async (e) => {
     e.preventDefault();
     const linkMP = await sendMP()
     if (user) {
-      swal({
-        text: "Serás redirigido/a al método de pago, ¡gracias por la compra!",
-        icon: "success",
-        buttons: true,
-        dangerMode: true,
-      })
-        .then((willDelete) => {
-          if (willDelete) {
-            window.open(linkMP, '_blank');
-            history.push('/')
-            localStorage.clear()
-            window.location.reload()
-          } else {
-            swal("Su pago no fue completado");
-          }
-        });
+      if(user.emailVerified){
+        swal({
+          text: "Serás redirigido/a al método de pago, ¡gracias por la compra!",
+          icon: "success",
+          buttons: true,
+          dangerMode: true,
+        })
+          .then((willDelete) => {
+            if (willDelete) {
+              window.open(linkMP, '_blank');
+              history.push('/')
+              localStorage.clear()
+              window.location.reload()
+            } else {
+              swal("Su pago no fue completado");
+            }
+          });
+      }else{
+        swal({
+          text: "Lo siento!, necesitas verificar tu email para contiuar",
+          icon: "warning",
+          dangerMode: true,
+        })
+      }
     } else {
       history.push('/login')
     }

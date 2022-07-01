@@ -54,10 +54,16 @@ export default function UserProfile() {
             <ul>
             <h6 className="font-bold mb-4">Configuracion</h6>
             <li className='flex mb-8' onClick={() => { toggle() }}>
-            <div className="bg-white shadow-sm mr-4"><img src={edit} width={25} height={25}/></div><button className="self-center">Editar perfil</button>
-                <Modal active={active} toggle={toggle} children={<EditUser id={user.uid} />} /></li>
+            <div className="bg-white shadow-sm mr-4"><img src={edit} width={25} height={25}/></div><button className="self-center">Editar perfil</button></li>
             </ul>
             </div>
+                <div className="p-6">
+                <div className="gird grid-cols-">
+                    <div className="bg-gray-100 p-6">
+                    <EditUser  id={user.uid}/>
+                    </div>
+                </div>
+                    </div>
             </div>
         </div>
 
