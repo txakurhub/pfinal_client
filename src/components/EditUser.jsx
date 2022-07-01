@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { app} from "../firebase-config";
+import { app } from "../firebase-config";
 import { getUser, updateUser } from "../redux/actions";
 
 export const EditUser = ({ id }) => {
@@ -14,7 +14,7 @@ export const EditUser = ({ id }) => {
     password: user.password,
   };
   const [submission, setSubmission] = useState({ ...initialState });
-
+  const [url, setUrl] = useState("")
 
   const handleSubmissionChange = (r) => {
     setSubmission({ ...submission, [r.target.name]: r.target.value });
@@ -23,12 +23,22 @@ export const EditUser = ({ id }) => {
   const handleSubmit = (r) => {
     r.preventDefault();
     dispatch(updateUser({ id, submission }));
-    setSubmission({ ...initialState });
+    url !== "" ? setSubmission({...initialState, image: url}) : setSubmission({ ...initialState })
   };
 
   useEffect(() => {
     dispatch(getUser(id));
   }, [dispatch]);
+
+  const handleUpload = async (e) => {
+    const archivo = e.target.files[0]
+    const storageRef = app.storage().ref();
+    const path = storageRef.child(archivo.name)
+    await path.put(archivo)
+    const link = await path.getDownloadURL()
+    console.log(link);
+    setUrl(link)
+  }
 //---------------------------------------------------------
 //ONCHANGEFILE EN PROCESO NECESITA GUARDAR LA IMG DE USER EN EL STORAGE PERO NO FUNCA
 //----------------------------------------------------------------
@@ -72,10 +82,12 @@ export const EditUser = ({ id }) => {
         />
         
         <label className="font-semibold">Contraseña:</label>
-        <input className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300" value={submission.password} type="password" placeholder="****" minLength={6} onChange={e=>{handleSubmissionChange(e)}}/>
+        <input 
+        className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300" 
+        value={submission.password} type="password" placeholder="****" minLength={6} onChange={e=>{handleSubmissionChange(e)}}/>
         
         <label className="font-semibold">Foto de perfil:</label>
-        <input className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300" type="file" name="image" id="my_file" value={submission.image}/>
+        <input type="file" name="image" id="my_file" onChange={handleUpload} value={submission.image} className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"/>
         
         <label className="font-semibold">Teléfono:</label>
         <input className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300" type="tel" name="phone" placeholder={user.phone} onChange={e=>{handleSubmissionChange(e)}} value={submission.phone}/>
