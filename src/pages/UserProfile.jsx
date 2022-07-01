@@ -5,6 +5,7 @@ import { getUser } from "../redux/actions";
 import React, { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import UpdateUser from "../components/UpdateUser";
+import { EditUser } from "../components/EditUser";
 const imgDefault='https://w7.pngwing.com/pngs/867/694/png-transparent-user-profile-default-computer-icons-network-video-recorder-avatar-cartoon-maker-blue-text-logo.png'
 
 export default function UserProfile() {
@@ -26,7 +27,7 @@ export default function UserProfile() {
             <h1>{currentUser.firstname}</h1>
             <h1>{currentUser.lastname}</h1>
             <button onClick={()=>{toggle()}}>{user.uid?user.uid:currentUser.id}</button>
-            <Modal active={active} toggle={toggle} children={<UpdateUser id={user.uid} />}/>
+            <Modal active={active} toggle={toggle} children={<EditUser id={user.uid} />}/>
         </div>
     )
 }
