@@ -21,7 +21,6 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("cartProducts", JSON.stringify(cartItem));
-    // console.log(cartItem);
   }, [cartItem]);
 
   const addToCart = (product) => {

@@ -2,12 +2,20 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
+import { registerUser } from "../redux/actions";
 
 
 function Register() {
   const [user,setUser] = useState({
-    phone:'',email:'',password:'',image:'',firstname:'',lastname:'',admin:false,banned:false
+    phone:'',
+    email:'',
+    password:'',
+    firstname:'',
+    lastname:'',
+    admin:false,
+    banned:false
   })
+  // lastname, firstname, admin, banned, phone, email 
   const [error, setError] = useState("");
   const { signup } = useAuth();
   const history = useHistory();
@@ -23,7 +31,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(user);
+      registerUser(user)
+      signup(user)
       setError("");
       history.push("/");
     } catch (error) {

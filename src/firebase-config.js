@@ -1,15 +1,29 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/storage";
+import "firebase/compat/firestore";
+import { getDatabase } from "firebase/database";
 
-//-------------zapas
-const firebaseConfig = {
+export const app = firebase.initializeApp({
+  projectId: "zapas-56035",
+  appId: "1:305266544328:web:a09d4d75e1bf19919c9ffd",
+  storageBucket: "zapas-56035.appspot.com",
+  locationId: "southamerica-east1",
   apiKey: "AIzaSyBhNLEEhfneLhbVZojVZnPXdSwzBMS0CBc",
   authDomain: "zapas-56035.firebaseapp.com",
-  projectId: "zapas-56035",
-  storageBucket: "zapas-56035.appspot.com",
   messagingSenderId: "305266544328",
-  appId: "1:305266544328:web:76c9f917d9405b449c9ffd"
-};
+  databaseURL: "https://DATABASE_NAME.firebaseio.com",
+});
+//-------------zapas
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBhNLEEhfneLhbVZojVZnPXdSwzBMS0CBc",
+//   authDomain: "zapas-56035.firebaseapp.com",
+//   projectId: "zapas-56035",
+//   storageBucket: "zapas-56035.appspot.com",
+//   messagingSenderId: "305266544328",
+//   appId: "1:305266544328:web:76c9f917d9405b449c9ffd"
+// };
 //---------------zapatillas-proyecto
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAauuDZYUBgVdRjJYAQeKo47RzgmMe38M0",
@@ -21,7 +35,7 @@ const firebaseConfig = {
 //   measurementId: "G-62NF4KXSGW",
 // };
 
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app) 
 
-
+// export const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+export const auth = getAuth(app);

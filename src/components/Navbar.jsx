@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchSneakes } from "../redux/actions";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 
 const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
@@ -93,7 +93,9 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   <h4 className="dark:text-white">Cargando...</h4> :
                   user ?
                     <>
-                      <h4 className="dark:text-white">Bienvenido {user.email}</h4>
+                      <Link to={'/profile'}>
+                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      </Link>
                       <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                     </> :
                     <button className="dark:text-white" onClick={handleLogin}>Login</button>
@@ -158,10 +160,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     </svg>
                     {
                       wishlist.length !== 0 ?
-                      <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
-                        {wishlist.length}
-                      </p> :
-                      null
+                        <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
+                          {wishlist.length}
+                        </p> :
+                        null
                     }
                   </button>
                   <ShoppingCart />
@@ -170,8 +172,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <h4 className="dark:text-white">Bienvenido {user.email}</h4>
-                          <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button>
+                          <Link to={'/profile'}>
+                            <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          </Link>
+                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
                         <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
                   }
@@ -301,7 +305,9 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <h4 className="dark:text-white">Bienvenido {user.email}</h4>
+                          <Link to={'/profile'}>
+                            <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          </Link>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
                         <button className="dark:text-white" onClick={handleLogin}>Login</button>
