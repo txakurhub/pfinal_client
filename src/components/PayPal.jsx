@@ -6,7 +6,6 @@ import { useAuth } from "../context/authContext";
 const PayPal = (props) => {
   const history = useHistory();
   const { user } = useAuth();
-  console.log(user)
   const { product } = props;
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
