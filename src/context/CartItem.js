@@ -176,7 +176,7 @@ export const CartProvider = ({ children }) => {
         };
 
         const response = await axios
-          .post("http://localhost:3001/payments", body)
+          .post(`${local_url}/payments`, body)
           .then((res) => res.data[0]);
           await cartItem.map(async e=>{
             return await axios.put(`${local_url}/shoes/shoppingcart/${e.id}`, {stock: e.amount , sold: e.amount})
