@@ -6,7 +6,7 @@ import { adminDeleteShoes, getProducts } from "../../redux/actions";
 
 function Shoes() {
   const allProduts = useSelector((state) => state.allProductsCopy);
-  const [shoes, setShoes] = useState(allProduts.slice(200));
+  const [shoes, setShoes] = useState(allProduts.slice(0,201));
   const [buscar, setBuscar] = useState("");
   const [actualizar, setActualizar] = useState(true);
   const [filtro, setFiltro] = useState("");
@@ -15,7 +15,18 @@ function Shoes() {
 
   const handleChange = (e) => {
     if(e.target.id === "filtro"){
-      setFiltro(e.target.value)
+      if(e.target.value === "sinstock"){
+        const filtrado = allProduts.filter((z) => z.stock === 0).slice(0,201)
+        return setShoes(filtrado)
+      }
+      if(e.target.value === "mas"){
+        const ordenar = allProduts.sort((a, b) => b.sold - a.sold).slice(0,201)
+        return setShoes(ordenar)
+      }
+      if(e.target.value === "menos"){
+        const ordenar = allProduts.sort((a, b) => a.sold - b.sold).slice(0,201)
+        return setShoes(ordenar)
+      }
     }else{
       setBuscar(e.target.value);
     }
@@ -59,9 +70,9 @@ function Shoes() {
   };
   const editShoes = ({ id, name }) => {
     // console.log(history)
-    history.push("/dashboard/admin/edit/" + id);
-    // const win = window.open("/dashboard/admin/edit/"+id, "_blank")
-    // win.focus()
+    // history.push("/dashboard/admin/edit/" + id);
+    const win = window.open("/dashboard/admin/edit/"+id)
+    win.focus()
   };
 
   useEffect(() => {
@@ -78,6 +89,7 @@ function Shoes() {
         <div className="bg-grey col-12 mt-2 align-middle justify-end flex " >
         <div className="relative inline-block w-40 p-2 text-gray-700">
           <select id="filtro" value={filtro} onChange={handleChange} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-md appearance-none focus:shadow-outline" placeholder="Regular input">
+            <option hidden >filtrar - ordenar</option>
             <option value="sinstock">Sin Stock</option>
             <option value="mas">+ Ventas</option>
             <option value="menos">- Ventas</option>
@@ -105,7 +117,7 @@ function Shoes() {
             <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
               ID
             </th>
-            <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
+            <th className="border border-gray-300 p-2 text-sm font-semibold tracking-wide text-center">
               NOMBRE
             </th>
             <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
@@ -114,7 +126,7 @@ function Shoes() {
             <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
               STOCK
             </th>
-            <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
+            <th className="border border-gray-300 p-2 text-sm font-semibold tracking-wide text-center">
               VENDIDAS
             </th>
             <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
