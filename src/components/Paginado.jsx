@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function Paginado({ productPorPage, product, paginado, pagina, setPagina}) {
+function Paginado({ productPorPage, product, paginado, pagina, setPagina }) {
 
   const [status, setStatus] = useState(1);
 
@@ -11,41 +11,41 @@ function Paginado({ productPorPage, product, paginado, pagina, setPagina}) {
   //   paginado(number);
   // };
 
-  const handleNext = ()=>{
-    setStatus(parseInt(status)+1)
-    setPagina(pagina+1)
+  const handleNext = () => {
+    setStatus(parseInt(status) + 1)
+    setPagina(pagina + 1)
   }
-  const handlePrevius = ()=>{
-    setStatus(status-1)
-    setPagina(pagina-1)
+  const handlePrevius = () => {
+    setStatus(status - 1)
+    setPagina(pagina - 1)
   }
 
-  const max = Math.ceil(product/productPorPage);
+  const max = Math.ceil(product / productPorPage);
 
-  function handleChangeInput(e){
+  function handleChangeInput(e) {
     setStatus(e.target.value)
-}
+  }
 
-const  onKeyDown = e =>{
-    if(e.keyCode === 13){
+  const onKeyDown = e => {
+    if (e.keyCode === 13) {
       paginado(parseInt(e.target.value))
-    if(parseInt(e.target.value < 1) || parseInt(e.target.value) > max || isNaN(parseInt(e.target.value))){
-      paginado(1)
-      setStatus(1)
-    }else {
-      paginado(parseInt(e.target.value))
+      if (parseInt(e.target.value < 1) || parseInt(e.target.value) > max || isNaN(parseInt(e.target.value))) {
+        paginado(1)
+        setStatus(1)
+      } else {
+        paginado(parseInt(e.target.value))
+      }
     }
-  } 
-}
-  for (let i = 1; i <= Math.ceil(product/productPorPage); i++) {
+  }
+  for (let i = 1; i <= Math.ceil(product / productPorPage); i++) {
     pageNumber.push(i);
   }
   // const totalPagesToRender = pageNumber.slice(pagina - 1, pagina);
-   return (
+  return (
     <div className="flex justify-center items-end mt-4">
       <div className="flex flex-row items-center justify-center space-x-8 mb-8">
         {
-          pagina > 1 && 
+          pagina > 1 &&
           (
             <button title="Prev page" disabled={status === 1} className="" onClick={handlePrevius}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -54,10 +54,10 @@ const  onKeyDown = e =>{
             </button>
           )
         }
-        <input onKeyDown={e => onKeyDown(e)} onChange={(e)=> handleChangeInput(e)} type="text" value={status} name='page' autoComplete='off' className="w-[50px] border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
-        <p className="ml-[15px]">of {max}</p>
+        <input onKeyDown={e => onKeyDown(e)} onChange={(e) => handleChangeInput(e)} type="text" value={status} name='page' autoComplete='off' className="w-[50px] border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        <p className="ml-[15px]">de {max}</p>
         {
-          pagina !== max && 
+          pagina !== max &&
           (
             <button title="Next page" className="flex justify-center items-center" disabled={status === max} onClick={handleNext}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

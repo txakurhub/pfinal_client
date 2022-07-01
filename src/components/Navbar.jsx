@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchSneakes } from "../redux/actions";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
 
 const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
@@ -90,10 +90,12 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
               </button>
               {
                 loading ?
-                  <h4 className="dark:text-white">Loading...</h4> :
+                  <h4 className="dark:text-white">Cargando...</h4> :
                   user ?
                     <>
-                      <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      <Link to={'/profile'}>
+                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      </Link>
                       <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                     </> :
                     <button className="dark:text-white" onClick={handleLogin}>Login</button>
@@ -109,7 +111,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
               <ul className={`hidden w-8/12 md:flex items-center justify-center space-x-8 ${searchInput ? "" : "translate-x-[-100px] ease-in-out transition duration-50"}`}>
                 <li>
                   <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    Home
+                    Inicio
                   </a>
                 </li>
                 <li className="hidden">
@@ -136,7 +138,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <path d="M2.99961 20.9999L7.34961 16.6499" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
-                  <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="search" className={`${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
+                  <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="buscar" className={`${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
                   {
                     suggestionsState.mostrar && (
                       <div className="absolute top-[25px] left-0 right-0 bg-gray-50 p-1">
@@ -158,22 +160,24 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     </svg>
                     {
                       wishlist.length !== 0 ?
-                      <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
-                        {wishlist.length}
-                      </p> :
-                      null
+                        <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
+                          {wishlist.length}
+                        </p> :
+                        null
                     }
                   </button>
                   <ShoppingCart />
                   {
                     loading ?
-                      <h4 className="dark:text-white">Loading...</h4> :
+                      <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          <Link to={'/profile'}>
+                            <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          </Link>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
-                        <button className="dark:text-white" onClick={handleLogin}>Login</button>
+                        <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
@@ -231,7 +235,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
               <ul className="flex flex-col space-y-6">
                 <li>
                   <a href="/" className="dark:text-white flex items-center justify-between hover:underline text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">
-                    Home
+                    Inicio
                     <div>
                       <svg className="fill-stroke text-black dark:text-white" width={12} height={12} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -298,10 +302,12 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <li>
                   {
                     loading ?
-                      <h4 className="dark:text-white">Loading...</h4> :
+                      <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          <Link to={'/profile'}>
+                            <h4 className="dark:text-white">Welcome {user.email}</h4>
+                          </Link>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
                         <button className="dark:text-white" onClick={handleLogin}>Login</button>
