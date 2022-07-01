@@ -14,10 +14,12 @@ function Dashboard() {
   }, [dispatch])
   
   return(
-    <div>
+    <div className="w-full">
       <Nav/> {/* va ir arriba */}
-      <Sidebar setView={setView}/> {/* barra lateral */}
+      <div className="flex h-screen">
+      <Sidebar setView={setView} view={view}/> {/* barra lateral */}
       <Container active={view}/> {/* ocupa el resto de la pantalla */}
+      </div>
     </div>
   )
 }
