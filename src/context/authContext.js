@@ -65,7 +65,7 @@ export function AuthProvider({ children }) {
       console.log(err + "  - - -  error en signup");
     }
   };
-  console.log(auth.currentUser)
+  // console.log(auth.currentUser)
   const verify =async ()=>{
     sendEmailVerification(auth.currentUser)
       .then(() => {

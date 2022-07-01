@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
+import PayPal from "../components/PayPal";
+import mercadopago from "../assets/mercadopago.png"
 
 function PageShopingCart() {
+  const { user } = useAuth();
+  const history = useHistory()
   // const [show, setShow] = useState(false);
   const { cartItem } = useContext(CartContext);
   const { deleteItemToCart, deleteItemCantidad, sendMP, deleteTotal, addToCart2 } =
@@ -15,9 +19,12 @@ function PageShopingCart() {
     (previous, current) => previous + current.amount * current.price,
     0
   );
-  const { user } = useAuth();
-  const history = useHistory()
-
+  
+  const product = {
+    description: "Acá van los detalles de los products, échenme una mano ahí pijos",
+    price: total
+  }
+    
   const handleCheckout = async (e) => {
     e.preventDefault();
     const linkMP = await sendMP()
@@ -42,6 +49,7 @@ function PageShopingCart() {
       history.push('/login')
     }
   };
+
   return (
     <>
       <div>
@@ -108,34 +116,26 @@ function PageShopingCart() {
                 <div className="flex flex-col md:h-screen px-14 py-20 justify-between overflow-y-auto">
                   <div>
                     <p className="text-4xl font-black leading-9 text-gray-800">Resumen</p>
-                    <div className="flex items-center justify-between pt-16 opacity-0">
-                      <p className="text-base leading-none text-gray-800">Subtotal</p>
-                      <p className="text-base leading-none text-gray-800">$9,000</p>
-                    </div>
-                    <div className="flex items-center justify-between pt-5 opacity-0">
-                      <p className="text-base leading-none text-gray-800">Shipping</p>
-                      <p className="text-base leading-none text-gray-800">$30</p>
-                    </div>
-                    <div className="flex items-center justify-between pt-5 opacity-0">
-                      <p className="text-base leading-none text-gray-800">Tax</p>
-                      <p className="text-base leading-none text-gray-800">$35</p>
-                    </div>
                   </div>
                   <div>
                     <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
                       <p className="text-2xl leading-normal text-gray-800">Total</p>
                       <p className="text-2xl font-bold leading-normal text-right text-gray-800">${total}</p>
                     </div>
-                    <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
-                      Comprar
+                    <p className="w-full flex justify-start mb-2 text-xl leading-normal text-gray-800">Pagar con</p>
+                    <button onClick={(e) => handleCheckout(e)} className="flex flex-row items-center justify-center text-base leading-none w-full py-2 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
+                      <img src={mercadopago} alt="Mercado Pago" className="h-[30px]" />
+                      <p className="font-bold ml-2">mercado pago</p>
                     </button>
-                    <button onClick={() => deleteTotal()} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
+                    <div className="w-full flex items-center justify-between py-5">
+                      <hr className="w-full bg-gray-400" />
+                      <p className="text-base font-medium leading-4 px-2.5 text-gray-400">Ó</p>
+                      <hr className="w-full bg-gray-400  " />
+                    </div>
+                    {/* <button onClick={() => deleteTotal()} className="absolute top-2.5 right-5 w-[200px] text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white" disabled={cartItem.length < 1 ? true : false}>
                       Vaciar Carrito
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-between pt-5 opacity-0">
-                    <p className="text-base leading-none text-gray-800">Tax</p>
-                    <p className="text-base leading-none text-gray-800">$35</p>
+                    </button> */}
+                    <PayPal product={product} />
                   </div>
                 </div>
               </div>
