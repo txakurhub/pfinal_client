@@ -21,7 +21,6 @@ const Wishlist = () => {
 
   const handleButton = (id) => {
     const dato = id;
-    console.log(dato);
     dispatch(remove_wishlist_product(dato, "1"));
     setOrder(dato);
   };

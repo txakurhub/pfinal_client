@@ -41,19 +41,13 @@ const Detail = () => {
 
   const handleaddwishlist = (e)=>{
     e.preventDefault();
-    console.log("agregar")
     dispatch(create_new_wishlist({user_id: 1, product_id: params.id}))
       
   }
   const handledeltewishlist = (e)=>{
     e.preventDefault();
-    const fil = selected.wishlists.filter(f=>f.userId==="1")
-    console.log(fil[0].id)
-    console.log(selected.wishlists)
-  
+    const fil = selected.wishlists.filter(f=>f.userId==="1")  
     dispatch(remove_wishlist_product(fil[0].id, "1"))
-        
-
   }
   if (loader === true) {
     return <div>Acá va un loader...</div>;
