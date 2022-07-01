@@ -19,17 +19,12 @@ function PageShopingCart() {
     (previous, current) => previous + current.amount * current.price,
     0
   );
-<<<<<<< HEAD
   
   const product = {
     description: "Acá van los detalles de los products, échenme una mano ahí pijos",
     price: total
   }
     
-=======
-  const { user } = useAuth();
-  const history = useHistory()
->>>>>>> 330578a (cambio de img de zapas en el carrusel)
   const handleCheckout = async (e) => {
     e.preventDefault();
     const linkMP = await sendMP()
