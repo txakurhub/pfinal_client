@@ -14,6 +14,7 @@ import CreationForm from "./components/CreationForm";
 import PrivateRouteUser from "./components/PrivateRouteUser";
 import Homeee from "./pages/Homeee";
 import FormShoes from "./components/FormShoes";
+import Shopping from "./pages/Shopping";
 import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
 import CategoryAdd from "./components/CategoryAdd";
@@ -36,8 +37,8 @@ function App() {
           <Route exact path="/home2" component={Homeee} />
           <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
           <Route exact path="/users" component={Users} />
+          <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/users/update/:id" component={UpdateUser} />
-          <Route exact path="/prueba" component={CategoryEdit}/>
         </CartProvider>
       </AuthProvider>
     </div>

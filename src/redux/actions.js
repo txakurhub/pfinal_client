@@ -102,14 +102,11 @@ export function filterByCategory(id) {
 export const createProduct = (payload) => {
   //console.log(payload);
   return async () => {
-    const json = await axios.post("http://localhost:3001/shoes", payload);
+    const json = await axios.post(`${local_url}/shoes`, payload);
     return json;
   };
 };
 
-//   const { data } = await axios(`${local_url}/shoes/${id}`);
-//   dispatch({ type: GET_SHOE_DETAIL, payload: data });
-// ;
 export const get_wishlist_product = (payload) => {
   return async (dispatch) => {
     const json = await axios(`${local_url}/wishlist/${payload}`)
@@ -180,25 +177,25 @@ export const adminDeleteShoes = (id) => {
   };
 };
 export const modifyProduct = ({ id, input }) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     await axios.put(`${local_url}/shoes/${id}`, input)
       .then(res => dispatch({ type: MODIFY_PRODUCT }))
   }
 }
 
-export const getAllCategoryAdmin = ()=>{
-  return async (dispatch) =>{
+export const getAllCategoryAdmin = () => {
+  return async (dispatch) => {
     try {
       const result = await axios(`${local_url}/categories/admin`)
       //console.log(result)
-    return dispatch({type:ALL_CATEGORY_ADMIN,payload:result.data})
+      return dispatch({ type: ALL_CATEGORY_ADMIN, payload: result.data })
     } catch (error) {
       swal("ERROR!", `${error.message}`, "danger");
     }
   }
 }
 export const modifyCategory = ({ id, input }) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     await axios.put(`${local_url}/shoes/${id}`, input)
       .then(res => dispatch({ type: MODIFY_CATEGORY }))
   }
@@ -216,7 +213,7 @@ export const modifyCategory = ({ id, input }) => {
 export const getUsers = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get('http://localhost:3001/customers');
+      var json = await axios.get(`${local_url}/customers/`);
       return dispatch({
         type: GET_USERS,
         payload: json.data
@@ -230,7 +227,7 @@ export const getUsers = (id) => {
 export const getUser = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get('http://localhost:3001/customers/' + id);
+      var json = await axios.get(`${local_url}/customers/` + id);
       return dispatch({
         type: GET_USER,
         payload: json.data
@@ -248,10 +245,19 @@ export const getProductosDestacados = (payload) => {
   }
 }
 
+export const getOrderProducts = (payload) => {
+  return async (dispatch) => {
+    const json = await axios.get(`${local_url}/order/`, payload)
+    dispatch({ type: GET_ORDER, payload: json.data })
+
+
+  }
+}
 
 export const updateUser = (payload) => {
+  console.log(payload);
   return async function (dispatch) {
-    var response = await axios.post("http://localhost:3001/customers/update/" + payload.id, payload.submission)
+    var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
     return response;
   };
 };

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { editCategory } from '../redux/actions';
 
 export default function CategoryEdit() {
@@ -25,6 +25,9 @@ export default function CategoryEdit() {
 
   return (
     <div>
+        <Link to="/">
+            <button>Volver</button>
+        </Link>
         <form onSubmit={(e)=>handleSubmit(e)}>
             <input type="text" id='id' value={info.id} placeholder='id' onChange={(e)=>handleChange(e)}/>
             <input type="text" id='name' value={info.name} placeholder='Nombre' onChange={(e)=>handleChange(e)}/>
