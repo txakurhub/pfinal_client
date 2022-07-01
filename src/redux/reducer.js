@@ -25,7 +25,7 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    
+
     case GET_PRODUCTS:
       const result = action.payload.map((e) => ({
         title: e.title,
@@ -56,23 +56,23 @@ function rootReducer(state = initialState, action) {
       const container =
         action.payload === "lowest"
           ? state.allProducts.sort((a, b) => {
-              if (a.price > b.price) {
-                return -1;
-              }
-              if (a.price < b.price) {
-                return 1;
-              }
-              return 0;
-            })
+            if (a.price > b.price) {
+              return -1;
+            }
+            if (a.price < b.price) {
+              return 1;
+            }
+            return 0;
+          })
           : state.allProducts.sort((a, b) => {
-              if (a.price > b.price) {
-                return 1;
-              }
-              if (a.price < b.price) {
-                return -1;
-              }
-              return 0;
-            });
+            if (a.price > b.price) {
+              return 1;
+            }
+            if (a.price < b.price) {
+              return -1;
+            }
+            return 0;
+          });
       return {
         ...state,
         allProducts: container,
@@ -151,11 +151,11 @@ function rootReducer(state = initialState, action) {
       let container =
         brand && category
           ? state.allProductsCopy.filter(
-              (p) => p.brand === brand && p.category === category
-            )
+            (p) => p.brand === brand && p.category === category
+          )
           : !brand && category
-          ? state.allProductsCopy.filter((p) => p.category === category)
-          : state.allProductsCopy.filter((p) => p.brand === brand);
+            ? state.allProductsCopy.filter((p) => p.category === category)
+            : state.allProductsCopy.filter((p) => p.brand === brand);
       if (precioMin && precioMax) {
         container = container.filter(
           (p) => p.price >= precioMin && p.price <= precioMax

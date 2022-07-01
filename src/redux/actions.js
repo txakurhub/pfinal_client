@@ -31,7 +31,6 @@ export const ORDER_STATUS = "ORDER_STATUS"
 export const GET_ORDER = "GET_ORDER"
 export const FILTER_ORDER = "FILTER_ORDER"
 
-
 export function getProducts() {
   return function (dispatch) {
     axios(`${local_url}/shoes`).then((json) =>
