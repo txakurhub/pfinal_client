@@ -109,11 +109,6 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
               </h1>
               <ul className={`hidden w-8/12 md:flex items-center justify-center space-x-8 ${searchInput ? "" : "translate-x-[-100px] ease-in-out transition duration-50"}`}>
-                <li>
-                  <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    Inicio
-                  </a>
-                </li>
                 <li className="hidden">
                   <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                     Furniture
