@@ -160,7 +160,6 @@ export const CartProvider = ({ children }) => {
     if (currentUser) {
       try {
         const items = cartItem.map((e) => {
-          axios.put(`${local_url}/shoes/${e.id}`, { stock: e.amount, sold: e.sold })
           return {
             id: e.id,
             title: e.title,
