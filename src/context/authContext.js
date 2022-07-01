@@ -46,13 +46,11 @@ export function AuthProvider({ children }) {
         admin,
         banned
       ).then((fireUser) => {
-        console.log(fireUser);
         return fireUser;
       }).then(res=>{
         verify()
       })
       const docuRef = doc(firestore, `user/${infoUser.user.uid}`);
-      console.log(docuRef);
       setDoc(docuRef, {  email:email,
         password:password,
         image:image,
