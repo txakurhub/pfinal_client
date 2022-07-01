@@ -66,7 +66,6 @@ export const create_new_review = (payload) => {
 };
 
 export const get_reviews = (id) => {
-  // console.log(id);
   return (dispatch) => {
     axios(`${local_url}/reviews/${id}`).then(
       (json) => dispatch({ type: GET_REVIEWS_PRODUCT, payload: json.data }),
@@ -96,13 +95,11 @@ export function getCategories() {
 export function filterByCategory(id) {
   return async function (dispatch) {
     const { data } = await axios(`${local_url}/categories/${id}`);
-    //console.log(data[0]);
     dispatch({ type: FILTER_CATEGORY, payload: data });
   };
 }
 
 export const createProduct = (payload) => {
-  //console.log(payload);
   return async () => {
     const json = await axios.post(`${local_url}/shoes`, payload);
     return json;
@@ -129,7 +126,6 @@ export const filter_get_wishlist_product = (payload) => {
   };
 };
 export const create_new_wishlist = (payload) => {
-  //console.log(payload);
   return (dispatch) => {
     axios.post(`${local_url}/wishlist`, payload).then(
       (res) => dispatch({ type: CREATE_WISHLIST_PRODUCT, payload: res.data, producto: payload.product_id }),
@@ -138,7 +134,6 @@ export const create_new_wishlist = (payload) => {
   };
 };
 export const remove_wishlist_product = (id, id_user) => {
-  //console.log(id, id_user);
   return (dispatch) => {
     axios
       .delete(`${local_url}/wishlist`, { data: { id: id, id_user: id_user } })
@@ -164,7 +159,6 @@ export const allFilters = (payload) => {
 export const getStock = (id) => {
   return async function (dispatch) {
     const { data } = await axios(`https://api.mercadolibre.com/items/${id}`);
-    //console.log(data[0]);
     dispatch({ type: GET_STOCK, payload: data });
   };
 };
@@ -189,7 +183,6 @@ export const getAllCategoryAdmin = () => {
   return async (dispatch) => {
     try {
       const result = await axios(`${local_url}/categories/admin`)
-      //console.log(result)
       return dispatch({ type: ALL_CATEGORY_ADMIN, payload: result.data })
     } catch (error) {
       swal("ERROR!", `${error.message}`, "danger");
@@ -257,7 +250,6 @@ export const getOrderProducts = (payload) => {
 }
 
 export const updateUser = (payload) => {
-  console.log(payload);
   return async function (dispatch) {
     var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
     return response;
@@ -283,7 +275,6 @@ export const orderStatus = () => {
 }
 
 export const filterByOrder = (payload) => {
-  // console.log(payload)
   return {
     type: FILTER_ORDER,
     payload

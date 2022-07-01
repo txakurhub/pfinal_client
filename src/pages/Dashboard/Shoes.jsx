@@ -52,7 +52,6 @@ function Shoes() {
     })
   }
   const editShoes = ({id,name})=>{
-    // console.log(history)
     history.push("/dashboard/admin/edit/"+id)
     // const win = window.open("/dashboard/admin/edit/"+id, "_blank")
     // win.focus()
