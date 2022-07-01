@@ -36,23 +36,9 @@ export const EditUser = ({ id }) => {
     const path = storageRef.child(archivo.name)
     await path.put(archivo)
     const link = await path.getDownloadURL()
-    console.log(link);
     setUrl(link)
   }
-//---------------------------------------------------------
-//ONCHANGEFILE EN PROCESO NECESITA GUARDAR LA IMG DE USER EN EL STORAGE PERO NO FUNCA
-//----------------------------------------------------------------
-  // const onChangeFile=(e)=>{
-  //   e.preventDefault(e)
-  //   const file = e.target.files[0];
-  //   console.log(file);
-  //   const storageRef = app.storage().ref();
-  //   const fileRef = storageRef.child(file.name);
-  //   fileRef.put(file).then(()=>{
-  //     console.log('uploaded file',file.name);
-  //   }) 
-  // }
-  //--------------------------------------------------------------------
+  
   return (
   
       <form className="mx-auto space-y-4"

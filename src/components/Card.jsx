@@ -9,7 +9,6 @@ import { create_new_wishlist } from "../redux/actions";
 const Card = ({ title, image, price, id, product }) => {
   const { addToCart } = useContext(CartContext)
   const result = product.wishlists.filter( d => d.userId === '1')
- console.log(result?.length || 0)
   //Lo comente porque tiraba warning que no se usaba
   //const [resultado, setResultado] = useState(result)
   
@@ -18,25 +17,11 @@ const Card = ({ title, image, price, id, product }) => {
   const dispatch = useDispatch();
   const handleaddwishlist = (e)=>{
     e.preventDefault();
-    console.log("agregar", id)
     dispatch(create_new_wishlist({user_id: 1, product_id: id}))
     setCount(1)
     
   }
-  // useEffect(()=>{
-  //   console.log("renderizo")
-  //   setCount(result?.length || 0);
-  //   console.log(count)
-  
 
-  // },[result])
-
-  // const handledeltewishlist = (e) =>{
-  //   e.preventDefault();
-  //     //console.log(id)
-  //       dispatch(remove_wishlist_product(id, "1"))
-  //       setCount(0)
-  // }
   return (
     <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-[5rem] py-36 px-10 flex justify-center items-center">
       <img src={image} alt="" className="object-contain w-[350px] h-[200px]" />
