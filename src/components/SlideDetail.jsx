@@ -22,14 +22,7 @@ export const SlideDetail = () => {
     slideRef.current.addEventListener("animationend", removeAnimation);
     //   startSlider();
   }, []);
-console.log(productDestacados);
   const imagesArr = productDestacados?.map((s) => s.image);
-console.log(imagesArr);
-  //   const startSlider = () => {
-  //     setInterval(() => {
-  //       handleNext();
-  //     }, 5000);
-  //   };
 
   const handleNext = () => {
     if (final >= imagesArr.length - 1) {

@@ -66,33 +66,55 @@ function Categories() {
   
 
   return (
-    <div>
-        <div >
-        <input type="text" placeholder='ID de la categoria' value={buscar} onChange={handleChange} />
-        <button onClick={handleSubmit}>Buscar</button>
-        {"   "}
-        <button onClick={allCategories}>All shoes</button>
+    <div className="w-full">
+    <div className=" px-4 py-3 space-y-2">
+        <div className="bg-grey col-12 mt-2 align-middle justify-end flex " >
+        
+				<input onChange={handleChange} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar categoria..." id="search-filter"/>
+        <button onClick={handleSubmit} className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Buscar</button>
+        <button onClick={allCategories} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
+        <button
+       className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-600 rounded-lg focus:shadow-outline hover:bg-green-700"
+          onClick={() => {
+            history.push("/form");
+          }}
+        >
+          Crear categoria
+        </button>
+			</div>
       </div>
-        <table className="table table-dark table-striped text-center">
-        <thead>
+      <table className="table w-full">
+      <thead className="bg-gray-100 border-b-2 border-gray-200">
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">CATEGORIA</th>
-            <th scope="col">CANTIDAD PRODUCTOS</th>
-            <th scope="col">ACTION</th>
+          <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
+            ID</th>
+            <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
+            
+            CATEGORIA</th>
+            <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
+
+            CANTIDAD PRODUCTOS</th>
+            <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">
+
+            ACTION</th>
           </tr>
         </thead>
         <tbody>
           {categories&&categories.map((category, index) => {
             return (
-              <tr key={category.id}>
-                <th scope="row">{category.id}</th>
-                <td className="text-dark"> {category.name}</td>
-                <td className="text-dark"> {category.cantidad}</td>
-                <td className="text-dark">
+              <tr className="odd:bg-white even:bg-slate-50" key={category.id}>
+                <th className="border border-gray-200 p-3 text-sm text-gray-700">{category.id}</th>
+                <td className="border border-gray-200 p-3 text-sm text-gray-700"> {category.name}</td>
+                <td className="border border-gray-200 p-3 text-sm text-gray-700"> {category.cantidad}</td>
+                <td className="border border-gray-200 p-3 text-sm text-gray-700">
                   <div>
-                    <button id={category.id} onClick={()=>editCategories({id:category.id,name:category.name})}>Editar</button>
-                    <button id={category.id} onClick={()=>deleteCategories({id:category.id,name:category.name})}>Eliminar</button>
+                    <button
+                        className="px-2 bg-lime-500 py-2 rounded-md text-white font-semibold hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:bg-lime-300 "
+                     id={category.id} onClick={()=>editCategories({id:category.id,name:category.name})}>Editar</button>
+                    <button
+                        className="px-2 bg-red-500 py-2 rounded-md text-white font-semibold hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:bg-red-300 "
+
+                     id={category.id} onClick={()=>deleteCategories({id:category.id,name:category.name})}>Eliminar</button>
                   </div>
                 </td>
               </tr>
