@@ -25,7 +25,6 @@ const UpdateUser = ({ id }) => {
   useEffect(() => {
     dispatch(getUser(id));
   }, [dispatch]);
- if(user) {console.log(user,"esto es user")}
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex gap-3 lg:ml-3 w-full justify-around">
