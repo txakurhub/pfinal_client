@@ -12,7 +12,6 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
   const dispatch = useDispatch();
   const history = useHistory();
   const [input, setInput] = useState('');
-console.log(user);
 
 
   const To = (props) => history.push('/' + props ? props : null);
