@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import { adminDeleteShoes, getProducts } from "../../redux/actions";
+import FormShoes from "../../components/FormShoes";
+import Modal from "../../components/Modal";
 
 function Shoes() {
   const allProduts = useSelector((state) => state.allProductsCopy);
@@ -12,6 +14,10 @@ function Shoes() {
   const [filtro, setFiltro] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
+  const [id, setId] = useState('');
+  const [active, setActive] = useState(false);
+  const toggle = () => setActive(!active);
+  const onClick = (r) => setId(r);
 
   const handleChange = (e) => {
     if(e.target.id === "filtro"){
@@ -71,6 +77,7 @@ function Shoes() {
       }
     });
   };
+
   const editShoes = ({ id, name }) => {
     // console.log(history)
     history.push("/admin/edit/"+id);
@@ -85,7 +92,7 @@ function Shoes() {
   }, [allProduts]); // no tocar porfa xd
 
   return (
-    <div className="w-full">
+    <div className="w-[95%] m-auto">
       <div className=" px-4 py-3 space-y-2">
         <div className="bg-grey col-12 mt-2 align-middle justify-end flex " >
         <div className="relative inline-block w-40 p-2 text-gray-700">
@@ -184,9 +191,7 @@ function Shoes() {
                       <button
                         className="px-2 bg-lime-500 py-2 rounded-md text-white font-semibold hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:bg-lime-300 "
                         id={shoes.id}
-                        onClick={() =>
-                          editShoes({ id: shoes.id, name: shoes.title })
-                        }
+                        onClick={() => { toggle(); onClick(shoes.id); }}
                       >
                         Editar
                       </button>
@@ -206,6 +211,7 @@ function Shoes() {
             })}
         </tbody>
       </table>
+      <Modal active={active} toggle={toggle} children={<FormShoes id={id} />} />
     </div>
   );
 }

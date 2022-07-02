@@ -17,7 +17,7 @@ function OrderStatus() {
   }, [dispatch])
 
   return (
-    <div className="w-full">
+    <div className="w-[95%] m-auto">
     <div className=" px-4 py-3 space-y-2">
         <div className="bg-grey col-12 mt-2 align-middle justify-content flex " >
         <div className="relative inline-block w-40 p-2 text-gray-700">
