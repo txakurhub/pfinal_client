@@ -43,6 +43,7 @@ const initialState = {
   orderProduct: [],
   users: [],
   user: [],
+  productosDestacados: [],
   pictures: [],
   orderstatus: [],
   orderstatusCopy: [],
