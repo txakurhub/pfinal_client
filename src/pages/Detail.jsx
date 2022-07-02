@@ -297,7 +297,7 @@ const Detail = () => {
       </div>
     </section>
     <SlideDetail />
-    <Reviews />
+    <Reviews user={user} id={selected.id}/>
   </div>
   );
 };
