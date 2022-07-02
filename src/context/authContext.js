@@ -13,6 +13,7 @@ import { sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
+import { async } from "@firebase/util";
 export const authContext = createContext();
 
 export const useAuth = () => {
@@ -42,29 +43,30 @@ export function AuthProvider({ children }) {
         lastname,
         phone,
         admin,
-        banned
+        banned,
       )
         .then((fireUser) => {
-          console.log(fireUser);
-          return fireUser;
+          const docuRef = doc(firestore,`user/${fireUser.user.uid}`);
+          setDoc(docuRef,{
+            email: email,
+            password: password,
+            firstname: firstname,
+            lastname: lastname,
+            phone: phone,
+            admin: admin,
+            banned: banned,
+          })
         })
         .then((res) => {
           verify();
-        });
-      const docuRef = doc(firestore, `user/${infoUser.user.uid}`);
-      setDoc(docuRef, {
-        email: email,
-        password: password,
-        firstname: firstname,
-        lastname: lastname,
-        phone: phone,
-        admin: admin,
-        banned: banned,
-      });
+        })
+
     } catch (err) {
       console.log(err + "  - - -  error en signup");
     }
   };
+
+
 
   const verify = async () => {
     sendEmailVerification(auth.currentUser).then(() => {
