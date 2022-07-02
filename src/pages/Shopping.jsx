@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 import { getOrderProducts } from "../redux/actions";
 
 const Shopping = () => {
@@ -10,7 +11,8 @@ const Shopping = () => {
   const ProductOrder = useSelector((state) => state.orderProduct);
   const To = (props) => history.push('/' + props ? props : null);
 
-
+  const { user } = useAuth()
+ const email = user?.reloadUserInfo.email
   const numberFormat = (value) =>
     new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -20,15 +22,15 @@ const Shopping = () => {
 
   useEffect(() => {
     if (!ProductOrder.length) {
-      dispatch(getOrderProducts());
+      dispatch(getOrderProducts(email));
     }
-  }, [dispatch]);
+  }, [dispatch, email]);
   return (
     <div>
       <h1 >Compras</h1>
       <br />
       <hr />
-      {ProductOrder.length > 0 ? (
+      {ProductOrder?.length > 0 ? (
         ProductOrder.map((e) => {
           const hora = e.order_date.split("-").join("/").slice(0, 10);
           const horaFinal = hora 
