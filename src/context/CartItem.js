@@ -10,7 +10,6 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const history = useHistory();
   const { userData } = useAuth();
-  console.log(userData);
   const [cartItem, setCartItem] = useState(() => {
     try {
       const productosEnLocalStorage = localStorage.getItem("cartProducts");
