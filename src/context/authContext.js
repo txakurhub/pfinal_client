@@ -79,9 +79,20 @@ export function AuthProvider({ children }) {
     await signInWithEmailAndPassword(auth, email, password);
 
   const loginWithGoogle = () => {
+    const firestore = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
-    signInWithPopup(auth, googleProvider);
-  };
+    signInWithPopup(auth, googleProvider)
+    .then(cred=>{
+      const docuRef = doc(firestore,`user/${cred.user.uid}`);
+      console.log(firestore);
+      setDoc(docuRef,{
+        email: cred.user.email,
+        displayName: cred.user.displayName,
+        photoURL:cred.user.photoURL,
+      })
+    })
+    }
+  
 
   const loginWithFacebook = () => {
     const facebookProvider = new FacebookAuthProvider();
