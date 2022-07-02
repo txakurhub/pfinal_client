@@ -258,10 +258,17 @@ export const getOrderProducts = (payload) => {
 
 export const updateUser = (payload) => {
   return async function (dispatch) {
-    var response = await axios.post(
-      `${local_url}/customers/update/` + payload.id,
-      payload.submission
-    );
+    var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
+    console.log(response,"esto es response")
+    return response;
+  };
+};
+
+export const updateUserAdmin = (payload) => {
+  const {admin,banned} = payload
+  return async function (dispatch) {
+    var response = await axios.post(`${local_url}/customers/admin/update/` + payload.id, {admin,banned})
+    console.log(response,"esto es response")
     return response;
   };
 };
