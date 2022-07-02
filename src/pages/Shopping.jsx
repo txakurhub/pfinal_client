@@ -25,15 +25,18 @@ const Shopping = () => {
   }, [dispatch]);
   return (
     <div>
-      <h1>Shopping</h1>
+      <h1 >Compras</h1>
+      <br />
       <hr />
       {ProductOrder.length > 0 ? (
         ProductOrder.map((e) => {
           const hora = e.order_date.split("-").join("/").slice(0, 10);
-          const horaFinal = hora + "-" + e.order_date.slice(11, 19);
+          const horaFinal = hora 
+
           return (
             <div key={e.id}>
               <div>{horaFinal}</div>
+              <div>{e.Products? e.Products.length: 0} Compras</div>
               {e.Products &&
                 e.Products.map((product) => (
                   <div key={product.id}>
