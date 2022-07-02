@@ -133,10 +133,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <path d="M2.99961 20.9999L7.34961 16.6499" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
-                  <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="buscar" className={`${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
+                  <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="buscar" className={`w-[250px] ${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
                   {
                     suggestionsState.mostrar && (
-                      <div className="absolute top-[25px] left-0 right-0 bg-gray-50 p-1">
+                      <div className="absolute top-[25px] left-0 right-0 bg-gray-50 p-1 z-10 rounded-b">
                         {
                           suggestionsState.sugerencia.map((el, index) => (
                             <p key={index} onClick={(e) => handleClick(e)} id={el.title} className={`hover:bg-white h-[25px] truncate cursor-pointer ${searchInput ? "hidden" : ""}`}>
@@ -155,24 +155,24 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     </svg>
                     {
                       wishlist.length !== 0 ?
-                        <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
-                          {wishlist.length}
-                        </p> :
-                        null
+                      <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
+                        {wishlist.length}
+                      </p> :
+                      null
                     }
                   </button>
                   <ShoppingCart />
                   {
                     loading ?
-                      <h4 className="dark:text-white">Cargando...</h4> :
-                      user ?
-                        <>
-                          <Link to={'/profile'}>
-                            <h4 className="dark:text-white">Welcome {user.email}</h4>
-                          </Link>
-                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                        </> :
-                        <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
+                    <h4 className="dark:text-white">Cargando...</h4> :
+                    user ?
+                    <>
+                      <Link to={'/profile'}>
+                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      </Link>
+                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                    </> :
+                    <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
