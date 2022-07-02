@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   create_new_wishlist,
   filter_get_wishlist_product,
-  getPictures,
+  getPictures, 
   getShoeDetail,
   // getStock,
   remove_wishlist_product,
@@ -12,9 +12,10 @@ import { Link, useParams } from "react-router-dom";
 import Reviews from "../components/Reviews";
 import { CartContext } from "../context/CartItem";
 import { SlideDetail } from "../components/SlideDetail";
+import { useAuth } from "../context/authContext";
 
 const Detail = () => {
-
+  const { user } = useAuth()
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
   const dispatch = useDispatch();
@@ -28,9 +29,11 @@ const Detail = () => {
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
 
-
   useEffect(() => {
-    dispatch(filter_get_wishlist_product({ id: "1", product: params.id }));
+    if(user){
+      dispatch(filter_get_wishlist_product({ id: user.uid, product: params.id }));
+    }
+    
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
     dispatch(getPictures(params.id))
     // dispatch(getStock(params.id))
@@ -41,13 +44,21 @@ const Detail = () => {
 
   const handleaddwishlist = (e)=>{
     e.preventDefault();
-    dispatch(create_new_wishlist({user_id: 1, product_id: params.id}))
-      
+    if(!user){
+      alert("error")
+    }else{
+      dispatch(create_new_wishlist({user_id: user.uid, product_id: params.id}))
+    }
   }
   const handledeltewishlist = (e)=>{
     e.preventDefault();
-    const fil = selected.wishlists.filter(f=>f.userId==="1")  
-    dispatch(remove_wishlist_product(fil[0].id, "1"))
+    if(!user){
+      alert("error")
+    }else{
+      const fil = selected.wishlists.filter(f=>f.userId===user.uid)  
+      dispatch(remove_wishlist_product(fil[0].id, user.uid))
+    }
+
   }
   if (loader === true) {
     return <div>Acá va un loader...</div>;
