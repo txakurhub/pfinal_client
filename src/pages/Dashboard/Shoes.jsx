@@ -16,15 +16,17 @@ function Shoes() {
   const handleChange = (e) => {
     if(e.target.id === "filtro"){
       if(e.target.value === "sinstock"){
-        const filtrado = allProduts.filter((z) => z.stock === 0).slice(0,201)
+        let filtrado = [...allProduts] // lo hago de esta manera porque el sort modifica el array original
+         filtrado = filtrado.filter((z) => z.stock === 0).slice(0,201)
         return setShoes(filtrado)
       }
+      let ordenar = [...allProduts] // lo hago de esta manera porque el sort modifica el array original
       if(e.target.value === "mas"){
-        const ordenar = allProduts.sort((a, b) => b.sold - a.sold).slice(0,201)
+        ordenar = ordenar.sort((a, b) => b.sold - a.sold).slice(0,201)
         return setShoes(ordenar)
       }
       if(e.target.value === "menos"){
-        const ordenar = allProduts.sort((a, b) => a.sold - b.sold).slice(0,201)
+        ordenar = ordenar.sort((a, b) => a.sold - b.sold).slice(0,201)
         return setShoes(ordenar)
       }
     }else{
@@ -43,7 +45,8 @@ function Shoes() {
   };
 
   const allShoes = () => {
-    setShoes(allProduts.slice(200));
+    let reload = allProduts
+    setShoes(reload.slice(0,201));
   };
 
   const deleteShoes = async ({ id, name }) => {
@@ -70,16 +73,14 @@ function Shoes() {
   };
   const editShoes = ({ id, name }) => {
     // console.log(history)
-    // history.push("/dashboard/admin/edit/" + id);
-    const win = window.open("/dashboard/admin/edit/"+id)
-    win.focus()
+    history.push("/admin/edit/"+id);
   };
 
   useEffect(() => {
     if (actualizar) {
       dispatch(getProducts());
     }
-    setShoes(allProduts.slice(200));
+    setShoes(allProduts.slice(0,201));
     setActualizar(false);
   }, [allProduts]); // no tocar porfa xd
 
@@ -95,7 +96,7 @@ function Shoes() {
             <option value="menos">- Ventas</option>
           </select>
         </div>
-				<input onChange={handleChange} type="text" class="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar producto..." id="search-filter"/>
+				<input onChange={handleChange} value={buscar} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar producto..." id="buscar"/>
         <button onClick={handleSubmit} className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Buscar</button>
         <button onClick={allShoes} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
         <button
