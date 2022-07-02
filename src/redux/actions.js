@@ -309,7 +309,6 @@ export const addCategory = (payload) => {
     } catch (error) {
       console.log(error)
     }
-    
   }
 }
 
@@ -321,5 +320,4 @@ export const editCategory = ({ id, name }) => {
     } catch (error) {
       console.log(error)
     }
-    
 }}

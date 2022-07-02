@@ -42,6 +42,7 @@ function App() {
             <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
+            <Route exact path='/profile/' component={UserProfile} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>
