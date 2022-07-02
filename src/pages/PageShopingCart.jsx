@@ -48,7 +48,7 @@ function PageShopingCart() {
           });
       }else{
         swal({
-          text: "Lo siento!, necesitas verificar tu email para continuar",
+          text: "Lo siento! Necesitas verificar tu email para continuar.",
           icon: "warning",
           dangerMode: true,
         })
