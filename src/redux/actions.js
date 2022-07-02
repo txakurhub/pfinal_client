@@ -252,7 +252,7 @@ export const getProductosDestacados = (payload) => {
 export const getOrderProducts = (payload) => {
   return async (dispatch) => {
     const json = await axios.get(`${local_url}/order/`, payload);
-    dispatch({ type: GET_ORDER, payload: json.data });
+    dispatch({ type: GET_ORDER, payload: json.data, correo: payload });
   };
 };
 
