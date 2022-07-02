@@ -43,7 +43,7 @@ const QuickView = ({ id, product }) => {
                                 {
                                     pictures.map((r, index) => 
                                         <Slide>
-                                            <img key={index++} src={r} alt="Not found" className="h-[150px] w-[350px] mt-[130px]" />
+                                            <img key={index++} src={r} alt="Not found" className=" object-contain h-[150px] w-[350px] mt-[130px]" />
                                         </Slide>
                                     )
                                 }
@@ -63,16 +63,13 @@ const QuickView = ({ id, product }) => {
                     <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">${selected.price}</p>
                     <div className="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8 mt-8 md:mt-16">
                         <button onClick={() => addToCart(product)} className="w-full md:w-3/5 border border-gray-800 text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800 text-white">
-                            Add to Cart
+                            Agregar al carrito
                         </button>
                         <Link to={`/detail/${id}`} className="w-full md:w-2/5">
                             <button className="w-full border border-gray-800 text-base font-medium leading-none text-gray-800 uppercase py-6 bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-800 hover:text-white">
-                                View Details
+                                Ver detalles
                             </button>
                         </Link>
-                    </div>
-                    <div className="mt-6">
-                        <button onClick={() => handleaddwishlist()} className="text-xl underline text-gray-800 capitalize hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800">add to wishlist</button>
                     </div>
                 </div>
                 <style>{`
