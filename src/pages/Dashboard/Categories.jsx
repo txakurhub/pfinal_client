@@ -70,7 +70,7 @@ function Categories() {
     <div className=" px-4 py-3 space-y-2">
         <div className="bg-grey col-12 mt-2 align-middle justify-end flex " >
         
-				<input onChange={handleChange} type="text" class="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar categoria..." id="search-filter"/>
+				<input onChange={handleChange} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar categoria..." id="search-filter"/>
         <button onClick={handleSubmit} className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Buscar</button>
         <button onClick={allCategories} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
         <button
