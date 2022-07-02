@@ -20,7 +20,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBhNLEEhfneLhbVZojVZnPXdSwzBMS0CBc",
   authDomain: "zapas-56035.firebaseapp.com",
   projectId: "zapas-56035",
-  storageBucket: "zapas-56035.appspot.com",
+  storageBucket: "gs://zapas-56035.appspot.com",
   messagingSenderId: "305266544328",
   appId: "1:305266544328:web:a09d4d75e1bf19919c9ffd"
   // appId: "1:305266544328:web:76c9f917d9405b449c9ffd"
@@ -37,7 +37,6 @@ const firebaseConfig = {
 // };
 
 export const app = initializeApp(firebaseConfig);
-// const database = getDatabase(app);
 export const auth = getAuth(app);
-
+// export const storage = firebase.storage()
 

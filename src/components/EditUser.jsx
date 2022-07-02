@@ -11,16 +11,16 @@ export const EditUser = ({ id }) => {
   const initialState = {
     lastname: user.lastname,
     firstname: user.firstname,
-    image: user.image,
+    image: user.photoURL?user.photoURL:user.image,
     phone: user.phone,
     password: user.password,
   };
   const [submission, setSubmission] = useState({ ...initialState });
   const [url, setUrl] = useState("")
-  const [active,setActive] =useState(true)
+  const [active,setActive] =useState()
 
   const toggle =(e)=>{
-    e.target.disabled(setActive(!active)) 
+    setActive(!active) 
   } 
 
   const handleSubmissionChange = (r) => {
@@ -29,16 +29,8 @@ export const EditUser = ({ id }) => {
 
   const handleSubmit = (r) => {
     r.preventDefault();
-    swal({
-      text: "Estas seguro que quieres guardar los cambios?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(res=>{
-
       dispatch(updateUser({ id, submission })).then()
       url !== "" ? setSubmission({...initialState, image: url}) : setSubmission({ ...initialState })
-    })
   };
 
   useEffect(() => {
@@ -66,6 +58,7 @@ export const EditUser = ({ id }) => {
 
         <label className="font-semibold">Nombre:</label>
         <input className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+          
           type="text"
           name="firstname"
           autoComplete="off"
@@ -80,11 +73,11 @@ export const EditUser = ({ id }) => {
         <div className="bg-gray-100 p-2">
         <label className="font-semibold">Apellido:</label>
         <input className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+          autoComplete="off"
           type="text"
           name="lastname"
           value={submission.lastname}
           onChange={e=>{handleSubmissionChange(e)}}
-          autoComplete="off"
           minLength={3}
           placeholder={user.lastname}
           disabled={active}
@@ -99,10 +92,10 @@ export const EditUser = ({ id }) => {
         value={submission.password} type="password" placeholder="****" minLength={6} onChange={e=>{handleSubmissionChange(e)}}/>
         </div>
         
-        <div className="bg-gray-100 p-2">
+        {/* <div className="bg-gray-100 p-2">
         <label className="font-semibold">Foto de perfil:</label>
         <input disabled={active} type="file" name="image" id="my_file" onChange={handleUpload} value={submission.image} className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"/>
-        </div>
+        </div> */}
         
         <div className="bg-gray-100 p-2">
 

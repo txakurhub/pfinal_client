@@ -53,7 +53,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
       <div>
         <div className="relative">
           {/* For md screen size */}
-          <div id="md-searchbar" className={`${mdOptionsToggle ? "hidden" : "flex"} bg-white dark:bg-gray-900 lg:hidden py-5 px-6 items-center justify-between`}>
+          <div id="md-searchbar" className={`${mdOptionsToggle ? "hidden" : "flex"} bg-white dark:bg-gray-900 lg:hidden  p-6 items-center justify-between`}>
             <form className="flex items-center space-x-3 text-gray-800 dark:text-white relative">
               <div>
                 <svg className="fill-stroke" width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
