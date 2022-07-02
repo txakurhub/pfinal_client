@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchSneakes } from "../redux/actions";
-import { Link, useHistory } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
-
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
   const wishlist = useSelector((state) => state.wishlist);
   const [searchInput, setSearchInput] = useState(true);
@@ -12,6 +12,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
   const dispatch = useDispatch();
   const history = useHistory();
   const [input, setInput] = useState('');
+
 
   const To = (props) => history.push('/' + props ? props : null);
 
@@ -93,9 +94,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   <h4 className="dark:text-white">Cargando...</h4> :
                   user ?
                     <>
-                      <Link to={'/profile'}>
+                      <button onClick={() => To(`/user/${user.uid}/profile`)}>
                         <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      </Link>
+                      </button>
+                      
                       <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                     </> :
                     <button className="dark:text-white" onClick={handleLogin}>Login</button>
@@ -109,11 +111,6 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
               </h1>
               <ul className={`hidden w-8/12 md:flex items-center justify-center space-x-8 ${searchInput ? "" : "translate-x-[-100px] ease-in-out transition duration-50"}`}>
-                <li>
-                  <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    Inicio
-                  </a>
-                </li>
                 <li className="hidden">
                   <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                     Furniture
@@ -138,10 +135,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <path d="M2.99961 20.9999L7.34961 16.6499" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </button>
-                  <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="buscar" className={`${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
+                  <input value={input} onChange={handleChange} id="searchInput" type="text" placeholder="buscar" className={`w-[250px] ${searchInput ? "hidden" : ""} text-sm dark:bg-gray-900 dark:placeholder-gray-300 text-gray-600 rounded ml-1 border border-transparent focus:outline-none focus:border-gray-400 px-1`} />
                   {
                     suggestionsState.mostrar && (
-                      <div className="absolute top-[25px] left-0 right-0 bg-gray-50 p-1">
+                      <div className="absolute top-[25px] left-0 right-0 bg-gray-50 p-1 z-10 rounded-b">
                         {
                           suggestionsState.sugerencia.map((el, index) => (
                             <p key={index} onClick={(e) => handleClick(e)} id={el.title} className={`hover:bg-white h-[25px] truncate cursor-pointer ${searchInput ? "hidden" : ""}`}>
@@ -160,10 +157,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     </svg>
                     {
                       wishlist.length !== 0 ?
-                        <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
-                          {wishlist.length}
-                        </p> :
-                        null
+                      <p className={`flex items-center justify-center font-bold text-[10px] w-4 h-4 bg-red-500 rounded-full absolute top-[-5px] right-[-5px] text-white`}>
+                        {wishlist.length}
+                      </p> :
+                      null
                     }
                   </button>
                   <ShoppingCart />
@@ -172,9 +169,9 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <Link to={'/profile'}>
-                            <h4 className="dark:text-white">Welcome {user.email}</h4>
-                          </Link>
+                        <button onClick={() => To(`/user/${user.uid}/profile`)}>
+                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      </button>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
                         <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
@@ -305,9 +302,9 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <Link to={'/profile'}>
-                            <h4 className="dark:text-white">Welcome {user.email}</h4>
-                          </Link>
+                        <button onClick={() => To(`/user/${user.uid}/profile`)}>
+                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      </button>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
                         <button className="dark:text-white" onClick={handleLogin}>Login</button>

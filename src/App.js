@@ -18,6 +18,8 @@ import Shopping from "./pages/Shopping";
 import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
 import Reviews from "./components/Reviews";
+import PayPal from "./components/PayPal";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 import UserProfile from "./pages/UserProfile";
 
@@ -25,23 +27,24 @@ function App() {
   return (
     <div className="App h-full">
       <AuthProvider>
-        <CartProvider>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/detail/:id" component={Detail}></Route>
-          <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/register" component={Register}></Route>
-          <Route exact path="/dashboard/:user/:id" component={Dashboard}></Route>
-          <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
-          <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
-          <Route exact path="/cart" component={PageShopingCart}></Route>
-          <Route exact path="/form" component={CreationForm} />
-          <Route exact path="/home2" component={Homeee} />
-          <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
-          <Route exact path="/users" component={Users} />
-          <Route exact path="/profile" component={UserProfile} />
-          <Route exact path="/users/update/:id" component={UpdateUser} />
-          <Route exact path='/shopping/' component={Shopping} />
-        </CartProvider>
+        <PayPalScriptProvider options={{"client-id": "AXAlXaLLWCzJX-5bYV9Aipb0kLvhidtU9uYyZIEwMtDKYOdle8MJttBT7CS2XIGRV_w84KE75YD2_eG3"}}>
+          <CartProvider>
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/detail/:id" component={Detail}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/register" component={Register}></Route>
+            <Route exact path="/admin/:id" component={Dashboard}></Route>
+            <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
+            <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
+            <Route exact path="/cart" component={PageShopingCart}></Route>
+            <Route exact path="/form" component={CreationForm} />
+            <Route exact path="/home2" component={Homeee} />
+            <Route exact path="/admin/edit/:id" component={FormShoes} />
+            <Route exact path="/users" component={Users} />
+            <Route exact path='/shopping/' component={Shopping} />
+            <PrivateRouteUser exact path="/user/:id/profile" component={UserProfile} />
+          </CartProvider>
+        </PayPalScriptProvider>
       </AuthProvider>
     </div>
   );
