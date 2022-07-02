@@ -33,7 +33,7 @@ export default function Home() {
   const indexOfFirstProduct = indexOfLastProduct - productPage;
   const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+console.log(user);
   const handleLogin = () => history.push("/login");
 
   const handleLogout = async () => {

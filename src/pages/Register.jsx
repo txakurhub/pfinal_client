@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { Link } from "react-router-dom";
-import { registerUser } from "../redux/actions";
+// import { registerUser } from "../redux/actions";
 
 
 function Register() {
@@ -31,7 +31,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      registerUser(user)
+      // registerUser(user)
       signup(user)
       setError("");
       history.push("/");
