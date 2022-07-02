@@ -33,16 +33,16 @@ function App() {
             <Route exact path="/detail/:id" component={Detail}></Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/dashboard/:user/:id" component={Dashboard}></Route>
+            <Route exact path="/admin/:id" component={Dashboard}></Route>
             <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
             <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
             <Route exact path="/cart" component={PageShopingCart}></Route>
             <Route exact path="/form" component={CreationForm} />
             <Route exact path="/home2" component={Homeee} />
-            <Route exact path="/dashboard/admin/edit/:id" component={FormShoes} />
+            <Route exact path="/admin/edit/:id" component={FormShoes} />
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
-            <Route exact path='/profile/' component={UserProfile} />
+            <PrivateRouteUser exact path="/user/:id/profile" component={UserProfile} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>

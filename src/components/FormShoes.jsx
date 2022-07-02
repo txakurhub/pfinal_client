@@ -5,9 +5,8 @@ import { useHistory, useParams } from "react-router-dom";
 import swal from 'sweetalert';
 import style from './FormShoes.module.css'
 
-const FormShoes = () => {
+const FormShoes = ({ id }) => {
   const history = useHistory()
-  const { id } = useParams()
   const dispatch = useDispatch();
   const detail = useSelector(state => state.product_detail)
   const [input, setInput] = useState({
@@ -61,39 +60,43 @@ const FormShoes = () => {
   };
 
   return (
-
-    <div className={style.contenedor}>
-
-      <form className={style.form} onSubmit={handleSubmit}>
-
-        <label>Title </label>
-        <input type="text" name="title" value={input.title} maxLength={150} onChange={handleChange} placeholder="Title..." />
-
-        <label>Brand</label>
-        <input type="text" value={input.brand} maxLength={12} onChange={handleChange} name="brand" placeholder="Brand..." />
-
-        <label>Model</label>
-        <input type="text" value={input.model} maxLength={20} onChange={handleChange} name="model" placeholder="Sports" />
-
-        <label>Price</label>
-        <input type="number" value={input.price} onChange={handleChange} name="price" placeholder="00000" />
-
-        <label>Stock</label>
-        <input type="number" value={input.stock} onChange={handleChange} name="stock" placeholder="00000" />
-
-        {/*Image type text, type file tira error y se rompe el componente*/}
-        <label>Image</label>
-        <input type="text" value={input.image} onChange={handleChange} name="image" />
-        <img src={input.image} alt='Not found' />
-
-        <input type="submit" value='Send' />
-
-      </form >
-
-    </div>
-
-  )
-
+    <form className="h-full w-full" onSubmit={handleSubmit}>
+      <div className="flex flex-row w-full justify-evenly">
+        <div className="flex flex-col w-[48%]">
+          <label className="text-start">Title </label>
+          <input type="text" name="title" value={input.title} maxLength={150} onChange={handleChange} placeholder="Title..." className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+        <div className="flex flex-col w-[48%]">
+          <label className="text-start">Brand</label>
+          <input type="text" value={input.brand} maxLength={12} onChange={handleChange} name="brand" placeholder="Brand..." className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+      </div>
+      <div className="flex flex-row w-full justify-evenly">
+        <div className="flex flex-col w-[48%]">
+          <label className="text-start">Model</label>
+          <input type="text" value={input.model} maxLength={20} onChange={handleChange} name="model" placeholder="Sports" className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+        <div className="flex flex-col w-[48%]">
+          <label className="text-start">Price</label>
+          <input type="number" value={input.price} onChange={handleChange} name="price" placeholder="00000" className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+      </div>
+      <div className="flex flex-row w-full justify-evenly">
+        <div className="flex flex-col w-[48%]">
+          <label className="text-start">Stock</label>
+          <input type="number" value={input.stock} onChange={handleChange} name="stock" placeholder="00000" className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+        <div className="flex flex-col w-[48%]">
+          <label className="text-start">Image</label>
+          <input type="text" value={input.image} onChange={handleChange} name="image" className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+      </div>
+      <div className="flex flex-row w-full items-center justify-evenly">
+        <img src={input.image} alt='Not found' className="h-[250px]" />
+        <input type="submit" value='Send' className="h-[45px] hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800" />
+      </div>
+    </form >
+  );
 };
 
 export default FormShoes;

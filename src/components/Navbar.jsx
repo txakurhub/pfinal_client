@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchSneakes } from "../redux/actions";
-import { Link, useHistory } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart";
-
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../context/authContext";
 const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
   const wishlist = useSelector((state) => state.wishlist);
   const [searchInput, setSearchInput] = useState(true);
@@ -12,6 +12,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
   const dispatch = useDispatch();
   const history = useHistory();
   const [input, setInput] = useState('');
+
 
   const To = (props) => history.push('/' + props ? props : null);
 
@@ -93,9 +94,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   <h4 className="dark:text-white">Cargando...</h4> :
                   user ?
                     <>
-                      <Link to={'/profile'}>
+                      <button onClick={() => To(`/user/${user.uid}/profile`)}>
                         <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      </Link>
+                      </button>
+                      
                       <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                     </> :
                     <button className="dark:text-white" onClick={handleLogin}>Login</button>
@@ -164,15 +166,15 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   <ShoppingCart />
                   {
                     loading ?
-                    <h4 className="dark:text-white">Cargando...</h4> :
-                    user ?
-                    <>
-                      <Link to={'/profile'}>
+                      <h4 className="dark:text-white">Cargando...</h4> :
+                      user ?
+                        <>
+                        <button onClick={() => To(`/user/${user.uid}/profile`)}>
                         <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      </Link>
-                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                    </> :
-                    <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
+                      </button>
+                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                        </> :
+                        <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
@@ -300,9 +302,9 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                          <Link to={'/profile'}>
-                            <h4 className="dark:text-white">Welcome {user.email}</h4>
-                          </Link>
+                        <button onClick={() => To(`/user/${user.uid}/profile`)}>
+                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                      </button>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
                         </> :
                         <button className="dark:text-white" onClick={handleLogin}>Login</button>

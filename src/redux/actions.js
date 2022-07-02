@@ -231,7 +231,7 @@ export const getUsers = (id) => {
 export const getUser = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios.get(`${local_url}/customers/` + id);
+      const json = await axios.get(`${local_url}/customers/` + id);
       return dispatch({
         type: GET_USER,
         payload: json.data,
@@ -252,16 +252,23 @@ export const getProductosDestacados = (payload) => {
 export const getOrderProducts = (payload) => {
   return async (dispatch) => {
     const json = await axios.get(`${local_url}/order/`, payload);
-    dispatch({ type: GET_ORDER, payload: json.data });
+    dispatch({ type: GET_ORDER, payload: json.data, correo: payload });
   };
 };
 
 export const updateUser = (payload) => {
   return async function (dispatch) {
-    var response = await axios.post(
-      `${local_url}/customers/update/` + payload.id,
-      payload.submission
-    );
+    var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
+    console.log(response,"esto es response")
+    return response;
+  };
+};
+
+export const updateUserAdmin = (payload) => {
+  const {admin,banned} = payload
+  return async function (dispatch) {
+    var response = await axios.post(`${local_url}/customers/admin/update/` + payload.id, {admin,banned})
+    console.log(response,"esto es response")
     return response;
   };
 };
