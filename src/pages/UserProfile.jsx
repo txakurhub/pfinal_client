@@ -8,6 +8,7 @@ import UpdateUser from "../components/UpdateUser";
 import { EditUser } from "../components/EditUser";
 import { useHistory } from "react-router-dom";
 import { MyShopping } from "../components/MyShopping";
+import Shopping from "./Shopping";
 
 import user from '../assets/user.png'
 import home from '../assets/home.png'
@@ -74,7 +75,7 @@ export default function UserProfile() {
                     
                     <div className="gird grid-cols ">
                         <div>{activeShopp?
-                    <MyShopping />:<EditUser id={user.uid} />    
+                    <Shopping />:<EditUser id={user.uid} />    
                     }
                         </div>
                     </div>
