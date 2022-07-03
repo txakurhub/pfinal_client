@@ -9,7 +9,7 @@ const Shopping = () => {
   const history = useHistory();
   const [loader, setLoader] = useState(true);
   const ProductOrder = useSelector((state) => state.orderProduct);
-  const To = (props) => history.push('/' + props ? props : null);
+
 
   const { user } = useAuth()
  const email = user?.reloadUserInfo.email
@@ -25,6 +25,12 @@ const Shopping = () => {
       dispatch(getOrderProducts(email));
     }
   }, [dispatch, email]); 
+
+  const handledetail = (e)=>{
+   e.preventDefault();
+    history.push(`/detail/${e.target.value}`)
+    window.location.reload();
+  }
   return (
     <div>
       <h1 >Compras</h1>
@@ -56,7 +62,9 @@ const Shopping = () => {
                 </p>
                 <p className="text-base text-gray-400 mt-2">
                   
-                <button onClick={() => To(`/detail/${product.id}`)} className="w-full focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">Más información</button>
+                  <button onClick={(e)=>handledetail(e)} value={product.id} className="focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800  bg-white border border-gray-800">Más información</button>
+        
+                
                 </p>
             </div>
         </article>
