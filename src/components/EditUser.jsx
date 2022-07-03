@@ -66,7 +66,7 @@ export const EditUser = ({ id }) => {
 
   return (
     <form
-      className="flex flex-col justify-center"
+      className="grid grid-flow-row-dense grid-cols-3 grid-rows-3  gap-4"
       onSubmit={handleSubmit}
     >
       <div className="col-span-3 text-gray-600">
@@ -78,7 +78,6 @@ export const EditUser = ({ id }) => {
 
       <div className="bg-gray-100 p-2">
         <label className="font-semibold">Foto de perfil:</label>
-        <img src={user.image? user.image : defaultImage} alt="" />
         <input
           type="file"
           name="image"
