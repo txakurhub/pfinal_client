@@ -20,10 +20,17 @@ function PageShopingCart() {
     0
   );
   
-  const product = {
-    description: "Acá van los detalles de los products, échenme una mano ahí pijos",
-    price: total
-  }
+  const product = cartItem.map((e) => {
+    return {
+      id: e.id,
+      title: e.title,
+      description: `${e.title}, ${e.brand}, ${e.model}`,
+      picture_url: e.image,
+      category_id: e.category,
+      quantity: e.amount,
+      unit_price: e.price,
+    };
+  });
     
   const handleCheckout = async (e) => {
     e.preventDefault();
