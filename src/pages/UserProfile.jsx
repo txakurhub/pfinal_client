@@ -72,7 +72,7 @@ export default function UserProfile() {
                 </div>
                 <div className="p-6">
                     
-                    <div className="gird grid-cols ">
+                    <div className="flex flex-col items-center justify-center ">
                         <div>{activeShopp?
                     <MyShopping />:<EditUser id={user.uid} />    
                     }
