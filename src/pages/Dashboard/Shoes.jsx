@@ -5,9 +5,11 @@ import swal from "sweetalert";
 import { adminDeleteShoes, getProducts } from "../../redux/actions";
 import FormShoes from "../../components/FormShoes";
 import Modal from "../../components/Modal";
+import { set } from "firebase/database";
 
 function Shoes() {
   const allProduts = useSelector((state) => state.allProductsCopy);
+  // const allBrand = useSelector((state)=> state.)
   const [shoes, setShoes] = useState(allProduts.slice(0,201));
   const [buscar, setBuscar] = useState("");
   const [actualizar, setActualizar] = useState(true);
@@ -18,6 +20,9 @@ function Shoes() {
   const [active, setActive] = useState(false);
   const toggle = () => setActive(!active);
   const onClick = (r) => setId(r);
+  const marcas = allProduts.map((e)=> e.brand)
+  const marcasSinRepetido = [...new Set(marcas)];
+
 
   const handleChange = (e) => {
     if(e.target.id === "filtro"){
@@ -37,24 +42,49 @@ function Shoes() {
       }
       let ordenar2 = [...allProduts]
       if(e.target.value === 'marca'){
-        ordenar2 = ordenar2.sort(function (a, b) {
-          if(a.brand && b.brand){
-            if(a.brand.toLowerCase() > b.brand.toLowerCase()) {
-              return 1;
-            } else if(a.brand.toLowerCase() < b.brand.toLowerCase()) {
-              return -1;
-            } else {
-              return 0;
+        ordenar2 = ordenar2.sort((a, b) =>{
+            if(a.brand && b.brand){
+              if(a.brand.toLowerCase() > b.brand.toLowerCase()) {
+                return 1;
+              } else if(a.brand.toLowerCase() < b.brand.toLowerCase()) {
+                return -1;
+              } else {
+                return 0;
+              }
             }
-          }
         }).slice(0,201);
         return setShoes(ordenar2)
       }
+      let ordenar3 = [...allProduts]
+      if(e.target.value === 'marca2'){
+        ordenar3 = ordenar3.sort((a, b) =>{
+            if(a.brand && b.brand){
+              if(b.brand.toLowerCase() > a.brand.toLowerCase()) {
+                return 1;
+              } else if(b.brand.toLowerCase() < a.brand.toLowerCase()) {
+                return -1;
+              } else {
+                return 0;
+              }
+            }
+        }).slice(0,201);
+        return setShoes(ordenar3)
+      }
+    
     }else{
       setBuscar(e.target.value);
     }
   };
-
+  const handleCategory = (e) =>{
+    let filtrados = [...allProduts]
+    if(e.target.id === 'categoria'){
+      console.log(filtrados)
+      if(e.target.value){
+        filtrados = filtrados.filter(f => f.brand === e.target.value)
+        return setShoes(filtrados)
+      }
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     const resultado = allProduts.filter((el) =>
@@ -116,9 +146,20 @@ function Shoes() {
             <option value="sinstock">Sin Stock</option>
             <option value="mas">+ Ventas</option>
             <option value="menos">- Ventas</option>
-            <option value="marca"> Marca</option>
+            <option value="marca">Marca A - Z</option>
+            <option value="marca2">Marca Z - A</option>
           </select>
         </div>
+        <div className="relative inline-block w-40 p-2 text-gray-700">
+          <select id="categoria" value={filtro} onChange={handleCategory} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-md appearance-none focus:shadow-outline" placeholder="Regular input">
+              <option hidden >Marca</option>
+              {
+                marcasSinRepetido.map((e)=>(
+                  e !==null ? <option value={e}>{e}</option> : null
+                ))
+              }
+          </select>
+          </div>
 				<input onChange={handleChange} value={buscar} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar producto..." id="buscar"/>
         <button onClick={handleSubmit} className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Buscar</button>
         <button onClick={allShoes} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
