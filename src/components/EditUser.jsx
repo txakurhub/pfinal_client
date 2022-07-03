@@ -13,10 +13,10 @@ export const EditUser = ({ id }) => {
   const initialState = {
     lastname: user.lastname,
     firstname: user.firstname,
-    image: user.photoURL?user.photoURL:user.image,
     phone: user.phone,
     password: user.password,
   };
+  const [image,setImage] = useState(user.image?user.image:"nada")
   const [submission, setSubmission] = useState({ ...initialState });
   const [Url, setUrl] = useState("")
   const [active,setActive] =useState()
