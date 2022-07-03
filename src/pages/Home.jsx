@@ -78,6 +78,7 @@ export default function Home() {
           </div> :
           "Nothing"
       }
+      {currentProduct ? <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} /> : null}
       <h2 className="mt-10 ml-5 text-2xl font-semibold leading-normal text-gray-800 flex justify-start">Productos Destacados</h2>
       <div className="mt-3 grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3  gap-x-8 gap-y-8 items-center px-[10px]">
         {
@@ -86,7 +87,6 @@ export default function Home() {
           ))
         }
       </div>
-      {currentProduct ? <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} /> : null}
       <Modal active={active} toggle={toggle} children={<QuickView id={id} product={product} />} />
     </>
   );

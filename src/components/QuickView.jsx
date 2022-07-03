@@ -43,7 +43,7 @@ const QuickView = ({ id, product }) => {
                                 {
                                     pictures.map((r, index) => 
                                         <Slide>
-                                            <img key={index++} src={r} alt="Not found" className=" object-contain h-[150px] w-[350px] mt-[130px]" />
+                                            <img key={index++} src={r} alt="Not found" className="h-[150px] w-[350px] mt-[130px]" />
                                         </Slide>
                                     )
                                 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+import swal from "sweetalert";
 
 const PayPal = (props) => {
   const history = useHistory();
@@ -12,18 +13,21 @@ const PayPal = (props) => {
 
   const handleAprrove = (orderID) => {
     //Llamada de una función del backend para completar la órden de compra
-
+    
     //Si la respuesta es exitosa
     setPaidFor(true);
     //Refresar el carrito
-
+    localStorage.clear()
+    window.location.reload()
     //Si la respuesta es error
     //setError("El pago fue exitoso pero no pudimos pero lastimosamente no está disponible porcesar sus requerimientos, algo así")
   };
 
   if(paidFor) {
     //Desplegar algún modal, swal o redirección al usuario
-    alert("Gracias por la compra, por el momento es alert esta vaina")
+    swal('Compra exitosa')
+    history.push('/')
+    // alert("Gracias por la compra, por el momento es alert esta vaina")
   };
 
   if(error) {
