@@ -35,6 +35,21 @@ function Shoes() {
         ordenar = ordenar.sort((a, b) => a.sold - b.sold).slice(0,201)
         return setShoes(ordenar)
       }
+      let ordenar2 = [...allProduts]
+      if(e.target.value === 'marca'){
+        ordenar2 = ordenar2.sort(function (a, b) {
+          if(a.brand && b.brand){
+            if(a.brand.toLowerCase() > b.brand.toLowerCase()) {
+              return 1;
+            } else if(a.brand.toLowerCase() < b.brand.toLowerCase()) {
+              return -1;
+            } else {
+              return 0;
+            }
+          }
+        }).slice(0,201);
+        return setShoes(ordenar2)
+      }
     }else{
       setBuscar(e.target.value);
     }
@@ -45,7 +60,7 @@ function Shoes() {
     const resultado = allProduts.filter((el) =>
       el.id.toLowerCase().includes(buscar.toLowerCase())
     );
-    if (!resultado.length) return alert("No hay resultados"); // cambiar alerta por swal
+    if (!resultado.length) return swal("No hay resultados"); // cambiar alerta por swal
     setBuscar("");
     setShoes(resultado);
   };
@@ -101,6 +116,7 @@ function Shoes() {
             <option value="sinstock">Sin Stock</option>
             <option value="mas">+ Ventas</option>
             <option value="menos">- Ventas</option>
+            <option value="marca"> Marca</option>
           </select>
         </div>
 				<input onChange={handleChange} value={buscar} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar producto..." id="buscar"/>
