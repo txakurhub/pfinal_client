@@ -218,7 +218,7 @@ function rootReducer(state = initialState, action) {
       const destacados = state.allProductsCopy
         .filter((z) => z.sold >= 500)
         .sort((a, b) => b.sold - a.sold)
-        .slice(0, 10);
+        .slice(0, 8);
       return {
         ...state,
         productosDestacados: destacados,
