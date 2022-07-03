@@ -4,8 +4,9 @@ import { app } from "../firebase-config";
 import { getUser, updateUser } from "../redux/actions";
 import edit from "../assets/edit.png";
 import swal from "sweetalert";
-import { getStorage, ref, uploadBytes ,getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { set } from "firebase/database";
+import defaultImage from "../assets/user.png"
 
 export const EditUser = ({ id }) => {
   const user = useSelector((state) => state.user);
