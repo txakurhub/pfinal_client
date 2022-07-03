@@ -259,16 +259,16 @@ export const getOrderProducts = (payload) => {
 export const updateUser = (payload) => {
   return async function (dispatch) {
     var response = await axios.post(`${local_url}/customers/update/` + payload.id, payload.submission)
-    console.log(response,"esto es response")
+    console.log(response, "esto es response")
     return response;
   };
 };
 
 export const updateUserAdmin = (payload) => {
-  const {admin,banned} = payload
+  const { admin, banned } = payload
   return async function (dispatch) {
-    var response = await axios.post(`${local_url}/customers/admin/update/` + payload.id, {admin,banned})
-    console.log(response,"esto es response")
+    var response = await axios.post(`${local_url}/customers/admin/update/` + payload.id, { admin, banned })
+    console.log(response, "esto es response")
     return response;
   };
 };
@@ -293,7 +293,7 @@ export const orderStatus = () => {
 };
 
 export const filterByOrder = (payload) => {
-    return {
+  return {
     type: FILTER_ORDER,
     payload,
   };
@@ -306,13 +306,13 @@ export const registerUser = async (payload) => {
   } catch (err) {
     console.log(err);
   }
-} 
+}
 
 export const addCategory = (payload) => {
   return async (dispatch) => {
     try {
-      await axios.post(`${local_url}/categories`, {nameC : payload})
-      .then(res => dispatch({ type: ADD_CATEGORY, payload: res.data}))
+      await axios.post(`${local_url}/categories`, { nameC: payload })
+        .then(res => dispatch({ type: ADD_CATEGORY, payload: res.data }))
     } catch (error) {
       console.log(error)
     }
@@ -320,11 +320,22 @@ export const addCategory = (payload) => {
 }
 
 export const editCategory = ({ id, name }) => {
-  return async (dispatch)=>{
+  return async (dispatch) => {
     try {
       await axios.put(`${local_url}/categories/${id}`, { nameCategory: name })
-      .then(res => dispatch({ type: EDIT_CATEGORY, payload: res.data}))
+        .then(res => dispatch({ type: EDIT_CATEGORY, payload: res.data }))
     } catch (error) {
       console.log(error)
     }
-}}
+  }
+}
+
+export const deleteOrder = ({ id }) => {
+  return async () => {
+    try {
+      await axios.delete(`${local_url}/order/${id}`);
+    } catch (error) {
+      swal(`ERROR: ${error}`);
+    }
+  };
+}
