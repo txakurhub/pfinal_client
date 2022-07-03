@@ -39,7 +39,7 @@ export default function UserProfile() {
         <div >
             <div className="flex dark:bg-gray-900 shadow-sm p-6">
                 <div className="flex text-2xl font-semibold">
-                    <img className="ml-14 mr-14 rounded-full dark:text-white" src={user.photoURL ? user.photoURL : currentUser.image ? currentUser.image : imgDefault} width={50} height={35} />
+                    <img className="ml-14 mr-14 rounded-full dark:text-white" src={currentUser.image ? currentUser.image : user.photoURL ? user.photoURL : imgDefault} width={50} height={35} />
                     </div>
                     {user.displayName?
                     <div className="dark:text-white self-center">

@@ -45,12 +45,11 @@ export const EditUser = ({ id }) => {
       uploadBytes(storageRef, archivo)
         .then((snapshot) => {
           console.log("Uploaded a blob or file!");
-          console.log(snapshot);
         })
         .then((x) => {
           getDownloadURL(ref(storage, archivo.name)).then((url) => {
             console.log(url);
-            setSubmission({ ...submission, image: url});
+            setSubmission({ ...submission, image: url });
           });
         })
         .catch((error) => {
@@ -61,7 +60,8 @@ export const EditUser = ({ id }) => {
   const handleSubmit = (r) => {
     r.preventDefault();
     console.log(submission);
-    dispatch(updateUser({ id, submission }));
+    dispatch(updateUser({ id, submission }))
+    .then(window.location.reload(true))
   };
 
   return (
@@ -124,6 +124,7 @@ export const EditUser = ({ id }) => {
       <div className="bg-gray-100 p-2">
         <label className="font-semibold">Contraseña:</label>
         <input
+          name="password"
           disabled={active}
           className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
           value={submission.password}
