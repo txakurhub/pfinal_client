@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   FacebookAuthProvider,
+  getAuth,
 } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";
@@ -94,6 +95,9 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      console.log(user)
       setUser(currentUser);
       setLoading(false);
     });

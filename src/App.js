@@ -22,6 +22,7 @@ import PayPal from "./components/PayPal";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 import UserProfile from "./pages/UserProfile";
+import CategoryEdit from "./components/CategoryEdit";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
             <Route exact path='/profile/' component={UserProfile} />
+            <Route exact path='/edit/category/:id' component={CategoryEdit} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>
