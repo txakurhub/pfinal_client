@@ -139,31 +139,6 @@ const Detail = () => {
           </h1>
         </div>
         <div className="py-4 border-b border-gray-200 flex items-center justify-between">
-          <p className="text-base leading-4 text-gray-800">Colores</p>
-          <div className="flex items-center justify-center">
-            <p className="text-sm leading-none text-gray-600">
-              Smoke Blue with red accents
-            </p>
-            <div className="w-6 h-6 bg-gradient-to-b from-gray-900 to-indigo-500 ml-3 mr-4 cursor-pointer" />
-            <svg
-              className="cursor-pointer"
-              width="6"
-              height="10"
-              viewBox="0 0 6 10"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1 1L5 5L1 9"
-                stroke="#4B5563"
-                strokeWidth="1.25"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
-        <div className="py-4 border-b border-gray-200 flex items-center justify-between">
           <p className="text-base leading-4 text-gray-800">Tamaño</p>
           <p>Stock: {selected.stock}</p>
           <p>Vendidas: {selected.sold}</p>
