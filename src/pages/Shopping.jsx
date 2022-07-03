@@ -24,7 +24,7 @@ const Shopping = () => {
     if (!ProductOrder.length) {
       dispatch(getOrderProducts(email));
     }
-  }, [dispatch, email]);
+  }, [dispatch, email]); 
   return (
     <div>
       <h1 >Compras</h1>

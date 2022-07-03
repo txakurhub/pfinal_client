@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_wishlist_product, remove_wishlist_product } from "../redux/actions";
 import { useHistory, Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
-
+import { useAuth } from "../context/authContext";
 const Wishlist = () => {
+  const { user } = useAuth() 
   const [id, setId] = useState('')
   const dispatch = useDispatch();
   const history = useHistory();
@@ -14,14 +15,13 @@ const Wishlist = () => {
   const [loader, setLoader] = useState(true);
   const To = (props) => history.push('/' + props ? props : null);
   const { addToCart } = useContext(CartContext);
-
   useEffect(() => {
-    dispatch(get_wishlist_product(1)).then(() => setLoader(false));
+    dispatch(get_wishlist_product(user.uid)).then(() => setLoader(false));
   }, [dispatch]);
 
   const handleButton = (id) => {
     const dato = id;
-    dispatch(remove_wishlist_product(dato, "1"));
+    dispatch(remove_wishlist_product(dato, user.uid));
     setOrder(dato);
   };
   if (loader === true) {
