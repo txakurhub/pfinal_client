@@ -4,6 +4,8 @@ import { app } from "../firebase-config";
 import { getUser, updateUser } from "../redux/actions";
 import edit from '../assets/edit.png'
 import swal from "sweetalert";
+import { getStorage, ref, uploadBytes ,getDownloadURL } from "firebase/storage";
+import { set } from "firebase/database";
 
 export const EditUser = ({ id }) => {
   const user = useSelector((state) => state.user);
@@ -16,7 +18,7 @@ export const EditUser = ({ id }) => {
     password: user.password,
   };
   const [submission, setSubmission] = useState({ ...initialState });
-  const [url, setUrl] = useState("")
+  const [Url, setUrl] = useState("")
   const [active,setActive] =useState()
 
   const toggle =(e)=>{
@@ -27,11 +29,6 @@ export const EditUser = ({ id }) => {
     setSubmission({ ...submission, [r.target.name]: r.target.value });
   };
 
-  const handleSubmit = (r) => {
-    r.preventDefault();
-      dispatch(updateUser({ id, submission })).then()
-      url !== "" ? setSubmission({...initialState, image: url}) : setSubmission({ ...initialState })
-  };
 
   useEffect(() => {
     dispatch(getUser(id));
@@ -39,13 +36,33 @@ export const EditUser = ({ id }) => {
 
   const handleUpload = async (e) => {
     const archivo = e.target.files[0]
-    const storageRef = app.storage().ref();
-    const path = storageRef.child(archivo.name)
-    await path.put(archivo)
-    const link = await path.getDownloadURL()
-    setUrl(link)
+    if(!archivo){
+      console.log("no hay archivos");
+    }
+    else{
+      const storage = getStorage();
+      const storageRef = ref(storage, archivo.name);
+      uploadBytes(storageRef, archivo).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+        console.log(snapshot);
+      }).then(x=>{
+        getDownloadURL(ref(storage,archivo.name))
+        .then((url)=>{
+         setSubmission({...submission,image:url})
+        })
+      })
+     .catch((error)=>{
+          console.log(error);
+      })
+    }
   }
-  
+
+  const handleSubmit = (r) => {
+    r.preventDefault();
+      dispatch(updateUser({ id, submission })).then()
+      Url !== "" ? setSubmission({...initialState, image: Url}) : setSubmission({ ...initialState })
+  };
+
   return (
   
       <form className="grid grid-flow-row-dense grid-cols-3 grid-rows-3  gap-4"
@@ -92,10 +109,10 @@ export const EditUser = ({ id }) => {
         value={submission.password} type="password" placeholder="****" minLength={6} onChange={e=>{handleSubmissionChange(e)}}/>
         </div>
         
-        {/* <div className="bg-gray-100 p-2">
+        <div className="bg-gray-100 p-2">
         <label className="font-semibold">Foto de perfil:</label>
-        <input disabled={active} type="file" name="image" id="my_file" onChange={handleUpload} value={submission.image} className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"/>
-        </div> */}
+        <input  type="file" name="image" id="my_file" onChange={handleUpload}  className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"/>
+        </div>
         
         <div className="bg-gray-100 p-2">
 

@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
+import "firebase/storage";
 import "firebase/compat/firestore";
 import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 // export const app = firebase.initializeApp({
 //   projectId: "zapas-56035",
@@ -38,5 +39,5 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-// export const storage = firebase.storage()
+// export const storage = getStorage(firebaseApp);
 

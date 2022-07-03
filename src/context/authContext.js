@@ -84,7 +84,6 @@ export function AuthProvider({ children }) {
     signInWithPopup(auth, googleProvider)
     .then(cred=>{
       const docuRef = doc(firestore,`user/${cred.user.uid}`);
-      console.log(firestore);
       setDoc(docuRef,{
         email: cred.user.email,
         displayName: cred.user.displayName,
