@@ -332,7 +332,7 @@ export const editCategory = ({ id, name }) => {
 
 export const deleteOrder = ({ id }) => {
   return async () => {
-    try {
+    try { 
       await axios.delete(`${local_url}/order/${id}`);
     } catch (error) {
       swal(`ERROR: ${error}`);
