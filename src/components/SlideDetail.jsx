@@ -47,10 +47,14 @@ export const SlideDetail = () => {
   };
 
   return (
+    <section className="py-12 px-4 md:px-6 2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center">
+      <div className="flex flex-col justify-start items-start w-full space-y-8">
+
+    <h3 className="flex justify-start text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Más vendidos:</h3>
     <div
       ref={slideRef}
       className="w-full  select-none relative flex flex-row justify-center"
-    >
+      >
         <button onClick={handlePrev}>
           <h2>{"<"}</h2>
         </button>
@@ -63,7 +67,9 @@ export const SlideDetail = () => {
         <button onClick={handleNext}>
           <h2>{">"}</h2>
         </button>
+      </div>
       
     </div>
+    </section>
   );
 };
