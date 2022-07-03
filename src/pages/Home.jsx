@@ -7,7 +7,7 @@ import PageHeading from "../components/PageHeading";
 import { useAuth } from "../context/authContext";
 import { useHistory } from "react-router-dom";
 import NavBar from "../components/Navbar";
-import { ProductosDestacados } from "../components/ProductosDestacados";
+import ProductosDestacados  from "../components/ProductosDestacados";
 import { Carrousel } from "../components/Carrousel";
 // import ShoppingCart from '../components/ShoppingCart';
 // import { CartContext } from "../context/CartItem";
@@ -80,13 +80,8 @@ export default function Home() {
       }
       {currentProduct ? <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} /> : null}
       <h2 className="mt-10 ml-5 text-2xl font-semibold leading-normal text-gray-800 flex justify-start">Productos Destacados</h2>
-      <div className="mt-3 grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3  gap-x-8 gap-y-8 items-center px-[10px]">
-        {
-          productDestacados?.map((r)=>(
-            r.stock !== 0 && <Card setProduct={setProduct} toggle={toggle} onClick={onClick} id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} wishlist={r.wishlist} />
-          ))
-        }
-      </div>
+      
+      <ProductosDestacados/>
       <Modal active={active} toggle={toggle} children={<QuickView id={id} product={product} />} />
     </>
   );
