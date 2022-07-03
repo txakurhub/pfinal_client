@@ -1,5 +1,4 @@
 import React from "react";
-
 const Modal = ({ active, toggle, children}) => {
   return (
     <>
@@ -21,5 +20,4 @@ const Modal = ({ active, toggle, children}) => {
     </>
   );
 };
-
 export default Modal;
