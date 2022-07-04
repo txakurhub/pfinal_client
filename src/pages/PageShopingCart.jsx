@@ -35,11 +35,12 @@ function PageShopingCart() {
       unit_price: e.price,
     };
   });
+   */
   const handleBack = (e) => {
     e.preventDefault()
     history.push("/")
     window.location.reload()
-  }    */
+  }   
   
   const handleCheckout = async (e) => {
     e.preventDefault();
