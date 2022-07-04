@@ -28,7 +28,8 @@ import {
   DELETE_CATEGORY,
   DELETE_ORDER,
   UPDATE_ORDER,
-  RELOAD_USER
+  RELOAD_USER,
+  CLEAR_STATE
 } from "./actions";
 import swal from "sweetalert";
 
@@ -49,7 +50,6 @@ const initialState = {
   users: [],
   usersCopy: [],
   user: [],
-  productosDestacados: [],
   pictures: [],
   orderstatus: [],
   orderstatusCopy: [],
@@ -57,6 +57,14 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case CLEAR_STATE: {
+      return {
+        ...state,
+        pictures: [],
+        product_detail: {},
+      }
+    }
 
     case GET_PRODUCTS:
       const result = action.payload.map((e) => ({

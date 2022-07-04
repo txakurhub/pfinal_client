@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createProduct, getCategories } from "../redux/actions";
 import { Link, useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const validaciones = (input) => {
   const errores = {}
@@ -69,6 +70,30 @@ const CreationForm = () => {
   const [errores, setErrores] = useState([]);
   const categories = useSelector(state => state.categories);
   const dispatch = useDispatch();
+
+  const handleUpload = async (e) => {
+    const archivo = e.target.files[0];
+    if (!archivo) {
+      console.log("no hay archivos");
+    } else {
+      const storage = getStorage();
+      const storageRef = ref(storage, archivo.name);
+      uploadBytes(storageRef, archivo)
+        .then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+        })
+        .then((x) => {
+          getDownloadURL(ref(storage, archivo.name)).then((url) => {
+            console.log(url);
+            setInput({ ...input, image: url });
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -235,7 +260,7 @@ const CreationForm = () => {
                     </svg>
                   </div>
                 </div>
-                <input type="file" name="image" value={input.image} accept="image/*" onChange={handleChange} required id="image" className="cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
+                <input type="file" name="image"  accept="image/*" onChange={handleUpload} required id="image" className="cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
                 <div className={`flex justify-between items-center pt-1 ${errores.image ? 'text-red-400' : 'text-green-400'}`}>
                   <p className="text-xs">{errores.price ? errores.image : input.image === '' ? '' : 'Image submission succes!'}</p>
                   {
@@ -260,7 +285,7 @@ const CreationForm = () => {
                     <option hidden>Select category</option>
                     {
                       categories && categories.map(c => (
-                        <option value={c.name}>{c.name}</option>
+                        <option key={categories.indexOf(c)} value={c.name}>{c.name}</option>
                       ))
                     }
                   </select>
