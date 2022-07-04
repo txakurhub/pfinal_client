@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearStateDetail,
   create_new_wishlist,
   filter_get_wishlist_product,
   getPictures, 
@@ -37,6 +38,9 @@ const Detail = () => {
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
     dispatch(getPictures(params.id))
     // dispatch(getStock(params.id))
+    return () => {
+      dispatch(clearStateDetail())
+  }
   
   }, [dispatch, counter, params.id ]);
   

@@ -1,7 +1,7 @@
 import axios from "axios";
 import swal from "sweetalert";
 export const local_url = "https://zapatillas-proyecto.herokuapp.com" 
-export const localhost = "http://localhost:3001";
+// export const local_url = "http://localhost:3001";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
@@ -36,6 +36,7 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY"
 export const DELETE_ORDER = "DELETE_ORDER"
 export const UPDATE_ORDER = "UPDATE_ORDER"
 export const RELOAD_USER = "RELOAD_USER"
+export const CLEAR_STATE = "CLEAR_STATE"
 
 
 export function getProducts() {
@@ -382,3 +383,8 @@ export const reloadUser = () => {
   }
 }
 
+export const clearStateDetail = () => {
+  return {
+    type: CLEAR_STATE
+  }
+}

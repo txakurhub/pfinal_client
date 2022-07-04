@@ -148,9 +148,9 @@ function OrderStatus() {
               className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-md appearance-none focus:shadow-outline"
             >
               <option hidden>Órdenes</option>
-              <option value="success">Completadas</option>
-              <option value="pendiente">En proceso</option>
-              <option value="failure">Canceladas</option>
+              <option value="realizada">Realizadas</option>
+              <option value="pendiente">Pendientes</option>
+              <option value="cancelada">Canceladas</option>
             </select>
           </div>
         </div>
