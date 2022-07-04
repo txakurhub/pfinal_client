@@ -11,7 +11,6 @@ import defaultImage from "../assets/user.png"
 export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
   
   // const user = useSelector((state) => state.user);
-  console.log(id);
   const dispatch = useDispatch();
   const initialState = {
     lastname: lastname,
@@ -20,9 +19,8 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
     password: password,
     image: image
   };
-  // const [imageUrl, setImageUrl] = useState(user.image ? user.image : "");
-  const [submission, setSubmission] = useState({ ...initialState });
   
+  const [submission, setSubmission] = useState({ ...initialState });
   const [active, setActive] = useState();
   
   const toggle = (e) => {
@@ -67,31 +65,31 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
 
   return (
     <form
-      className="grid grid-flow-row-dense grid-cols-3 grid-rows-3  gap-4"
+      className="flex flex-col items-center"
       onSubmit={handleSubmit}
     >
-      <div className="col-span-3 text-gray-600">
+      <div className="text-gray-600">
         <button onClick={toggle}>
           <img src={edit} alt="" width={25} height={25} />
         </button>
         <p>Los cambios que hagas seran visibles para otros usuarios</p>
       </div>
 
-      <div className="bg-gray-100 p-2">
+      <div className="bg-white-100 p-2">
         <label className="font-semibold">Foto de perfil:</label>
         <input
           type="file"
           name="image"
           id="my_file"
           onChange={handleUpload}
-          className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
         />
       </div>
 
-      <div className="bg-gray-100 p-2">
+      <div className="bg-white-100 p-2">
         <label className="font-semibold">Nombre:</label>
         <input
-          className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
           type="text"
           name="firstname"
           placeholder={submission.firstname}
@@ -105,10 +103,10 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
         ></input>
       </div>
 
-      <div className="bg-gray-100 p-2">
+      <div className="bg-white-100 p-2">
         <label className="font-semibold">Apellido:</label>
         <input
-          className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
           placeholder={submission.lastname}
           autocomplete="off"
           type="text"
@@ -122,12 +120,12 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
         />
       </div>
 
-      <div className="bg-gray-100 p-2">
+      <div className="bg-white-100 p-2">
         <label className="font-semibold">Contraseña:</label>
         <input
           name="password"
           disabled={active}
-          className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
           value={submission.password}
           type="password"
           placeholder="******"
@@ -139,12 +137,12 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
       </div>
 
 
-      <div className="bg-gray-100 p-2">
+      <div className="bg-white-100 p-2">
         <label className="font-semibold">Teléfono:</label>
         <div>
           <input
             disabled={active}
-            className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
+            className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
             type="tel"
             name="phone"
             autocomplete="off"
@@ -158,7 +156,7 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
       </div>
       {/* pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" */}
       <button
-        className="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+        className="focus:outline-none ml-3 bg-white-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
         onClick={(e) => handleSubmit(e)}
         type="submit"
       >

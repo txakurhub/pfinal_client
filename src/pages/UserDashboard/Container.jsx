@@ -8,6 +8,7 @@ import { useAuth } from "../../context/authContext";
 import { useDispatch } from "react-redux/es/exports";
 import { useSelector } from "react-redux/es/exports";
 import { useParams } from "react-router-dom";
+import userimg from '../../assets/user.png'
 const Container =  ({ active }) => {
     
     const { id } = useParams();
@@ -20,7 +21,7 @@ const Container =  ({ active }) => {
     console.log(currentUser);
 
     if (active === "compras") return <Shopping />;
-    if (active === "edit") return <EditUser user={currentUser}/>;
+    if (active === "edit") return <EditUser id={id} user={currentUser}/>;
     if (active === "favoritos") return <Wishlist />;
     if (active === "carrito") {
         return (
@@ -29,8 +30,10 @@ const Container =  ({ active }) => {
     } else {
         return (
 
-        <div>
-            <h1>hola</h1>
+        <div className="flex flex-col justify-center w-100">
+            <img src={currentUser.image?currentUser.image:currentUser.photoURL?currentUser.photoURL:userimg}   className='self-center object-cover h-50 w-50 rounded-full ' />
+            <h1 className="text-4xl">hola {currentUser.firstname!==''?currentUser.firstname+' '+currentUser.lastname:currentUser.displayName!==''?currentUser.displayName:"usuario"}</h1>
+            
         </div>
         )
     }
