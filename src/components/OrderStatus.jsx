@@ -91,11 +91,11 @@ function OrderStatus() {
         showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: "Realizada",
-        denyButtonText: `Cancelada`
+        denyButtonText: "Pendiente"
       }).then((result) => {
         if (result.isConfirmed) {
           //si apreta que si
-          dispatch(updateStateOfOrder({ order: "pendiente", id: id })).then(
+          dispatch(updateStateOfOrder({ order: "", id: id })).then(
             (res) => {
               setTimeout(() => {
                 Swal.fire(
