@@ -5,7 +5,7 @@ import swal from 'sweetalert'
 import CategoryAdd from '../../components/CategoryAdd'
 import CategoryEdit from '../../components/CategoryEdit'
 import Modal from '../../components/Modal'
-import { getAllCategoryAdmin } from '../../redux/actions'
+import { adminDeleteCategories, getAllCategoryAdmin } from '../../redux/actions'
 
 
 function Categories() {
@@ -45,7 +45,7 @@ function Categories() {
         swal(`¡El producto ${name}, ha sido eliminado correctamente!`, {
           icon: "success",
         });
-        //await dispatch(adminDeleteCategories(id));
+        dispatch(adminDeleteCategories(id));
        setTimeout(() => {
         window.location.reload()
        }, 2000);
