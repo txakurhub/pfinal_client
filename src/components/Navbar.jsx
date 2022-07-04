@@ -94,7 +94,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   <h4 className="dark:text-white">Cargando...</h4> :
                   user ?
                     <>
-                      <button onClick={() => To(`/user/${user.uid}/profile`)}>
+                      <button onClick={() => To(`/user/profile/${user.uid}`)}>
                         <h4 className="dark:text-white">Welcome {user.email}</h4>
                       </button>
                       
@@ -169,7 +169,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                        <button onClick={() => To(`/user/${user.uid}/profile`)}>
+                        <button onClick={() => To(`/user/profile/${user.uid}`)}>
                         <h4 className="dark:text-white">Welcome {user.email}</h4>
                       </button>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>
@@ -302,7 +302,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                       <h4 className="dark:text-white">Cargando...</h4> :
                       user ?
                         <>
-                        <button onClick={() => To(`/user/${user.uid}/profile`)}>
+                        <button onClick={() => To(`/user/profile/${user.uid}`)}>
                         <h4 className="dark:text-white">Welcome {user.email}</h4>
                       </button>
                           <button className="dark:text-white" onClick={handleLogout}>Logout</button>

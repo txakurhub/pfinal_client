@@ -32,6 +32,11 @@ export const FILTER_ORDER = "FILTER_ORDER"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const EDIT_CATEGORY = "EDIT_CATEGORY"
 export const SEARCH_USER = "SEARCH_USER"
+export const DELETE_CATEGORY = "DELETE_CATEGORY"
+export const DELETE_ORDER = "DELETE_ORDER"
+export const UPDATE_ORDER = "UPDATE_ORDER"
+export const RELOAD_USER = "RELOAD_USER"
+
 
 export function getProducts() {
   return function (dispatch) {
@@ -332,10 +337,34 @@ export const editCategory = ({ id, name }) => {
   }
 }
 
+export const adminDeleteCategories = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${local_url}/categories/${id}`)
+        .then(res => dispatch({type: DELETE_CATEGORY,payload:id}))
+    } catch (error) {
+      swal("Oops...", `ERROR: ${error}`, "error");
+    }
+  }
+}
+
 export const deleteOrder = ({ id }) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       await axios.delete(`${local_url}/order/${id}`);
+      return dispatch({type:DELETE_ORDER,payload:id})
+    } catch (error) {
+      swal(`ERROR: ${error}`);
+    }
+  };
+}
+export const updateStateOfOrder = (payload) => {
+  return async (dispatch) => {
+    try {
+      const {id} = payload
+      console.log(id,payload.order)
+      await axios.put(`${local_url}/order/${id}`,payload)
+      return dispatch({type:UPDATE_ORDER})
     } catch (error) {
       swal(`ERROR: ${error}`);
     }
@@ -345,6 +374,11 @@ export const deleteOrder = ({ id }) => {
 export const searchUser = (customer) => {
   return (dispatch) => {
     dispatch({ type: SEARCH_USER, payload: customer })
+  }
+}
+export const reloadUser = () => {
+  return (dispatch) => {
+    dispatch({ type: RELOAD_USER })
   }
 }
 
