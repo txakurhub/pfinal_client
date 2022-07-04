@@ -32,6 +32,7 @@ export const FILTER_ORDER = "FILTER_ORDER"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const EDIT_CATEGORY = "EDIT_CATEGORY"
 export const SEARCH_USER = "SEARCH_USER"
+export const DELETE_CATEGORY = "DELETE_CATEGORY"
 
 export function getProducts() {
   return function (dispatch) {
@@ -328,6 +329,17 @@ export const editCategory = ({ id, name }) => {
         .then(res => dispatch({ type: EDIT_CATEGORY, payload: res.data }))
     } catch (error) {
       console.log(error)
+    }
+  }
+}
+
+export const adminDeleteCategories = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`${local_url}/categories/${id}`)
+        .then(res => dispatch({type: DELETE_CATEGORY,payload:id}))
+    } catch (error) {
+      swal("Oops...", `ERROR: ${error}`, "error");
     }
   }
 }

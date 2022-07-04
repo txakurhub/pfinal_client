@@ -24,7 +24,8 @@ import {
   FILTER_ORDER,
   ADD_CATEGORY,
   EDIT_CATEGORY,
-  SEARCH_USER
+  SEARCH_USER,
+  DELETE_CATEGORY
 } from "./actions";
 import swal from "sweetalert";
 
@@ -283,6 +284,13 @@ function rootReducer(state = initialState, action) {
     case EDIT_CATEGORY: {
       return {
         ...state
+      }
+    }
+    case DELETE_CATEGORY:{
+      const result = state.allcategoriesAdmin.filter(e=> e.id !== action.payload)
+      return {
+        ...state,
+        allcategoriesAdmin:result
       }
     }
     case SEARCH_USER: {
