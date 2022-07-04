@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct, getCategories } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import swal from 'sweetalert';
 
 const validaciones = (input) => {
@@ -57,7 +57,7 @@ const validaciones = (input) => {
 };
 
 const CreationForm = () => {
-
+  const history = useHistory()
   const [input, setInput] = useState({
     title: '',
     brand: '',
@@ -99,6 +99,9 @@ const CreationForm = () => {
         image: '',
         category: ''
       });
+      setTimeout(() => {
+        history.push("/admin/7R07xtn17ZU09JHnm6Mi")
+      }, 2000);
     };
   };
 
@@ -108,7 +111,7 @@ const CreationForm = () => {
 
   return (
     <form id="login" onSubmit={handleSubmit}>
-      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/">
+      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/admin/7R07xtn17ZU09JHnm6Mi">
         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="black" fill="none" strokeLinecap="round" strokeLinejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <polyline points="15 6 9 12 15 18" />

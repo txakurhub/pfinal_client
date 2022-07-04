@@ -61,7 +61,6 @@ export const EditUser = ({ id }) => {
     r.preventDefault();
     console.log(submission);
     dispatch(updateUser({ id, submission }))
-    .then(window.location.reload(true))
   };
 
   return (
