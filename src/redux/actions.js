@@ -36,6 +36,7 @@ export const DELETE_CATEGORY = "DELETE_CATEGORY"
 export const DELETE_ORDER = "DELETE_ORDER"
 export const UPDATE_ORDER = "UPDATE_ORDER"
 export const RELOAD_USER = "RELOAD_USER"
+export const CLEAR_STATE = "CLEAR_STATE"
 
 
 export function getProducts() {
@@ -379,6 +380,12 @@ export const searchUser = (customer) => {
 export const reloadUser = () => {
   return (dispatch) => {
     dispatch({ type: RELOAD_USER })
+  }
+}
+
+export const clearStateDetail = () => {
+  return {
+    type: CLEAR_STATE
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
-import { getShoeDetail, getPictures } from "../redux/actions";
+import { getShoeDetail, getPictures, clearStateDetail } from "../redux/actions";
 import { create_new_wishlist } from "../redux/actions";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
@@ -11,19 +11,22 @@ const QuickView = ({ id, product }) => {
     const selected = useSelector((state) => state.product_detail);
     const pictures = useSelector((state) => state.pictures);
     const { addToCart } = useContext(CartContext);
-    
+
     const handleaddwishlist = (e) => {
         e.preventDefault();
-        dispatch(create_new_wishlist({user_id: 1, product_id: id}))
+        dispatch(create_new_wishlist({ user_id: 1, product_id: id }))
         setCount(1)
     };
 
     useEffect(() => {
         dispatch(getShoeDetail(id))
         dispatch(getPictures(id))
-    }, [dispatch, id ]);
+        return () => {
+            dispatch(clearStateDetail())
+        }
+    }, [dispatch, id]);
 
-    const result = product.wishlists.filter( d => d.userId === '1')
+    const result = product.wishlists.filter(d => d.userId === '1')
     const [count, setCount] = useState(result?.length || 0);
 
     return (
@@ -41,7 +44,7 @@ const QuickView = ({ id, product }) => {
                         <div className="slide-ana lg:relative">
                             <Slider>
                                 {
-                                    pictures.map((r, index) => 
+                                    pictures.map((r, index) =>
                                         <Slide>
                                             <img key={index++} src={r} alt="Not found" className="h-[150px] w-[350px] mt-[130px]" />
                                         </Slide>

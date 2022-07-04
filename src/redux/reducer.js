@@ -28,7 +28,8 @@ import {
   DELETE_CATEGORY,
   DELETE_ORDER,
   UPDATE_ORDER,
-  RELOAD_USER
+  RELOAD_USER,
+  CLEAR_STATE
 } from "./actions";
 import swal from "sweetalert";
 
@@ -319,6 +320,13 @@ function rootReducer(state = initialState, action) {
       return{
         ...state,
         users:state.usersCopy
+      }
+    }
+    case CLEAR_STATE: {
+      return {
+        ...state,
+        pictures: [],
+        product_detail: {},
       }
     }
     default:
