@@ -65,7 +65,7 @@ const PayPal = (props) => {
       }}
       onCancel={() => {
         //Desplegar algún modal, swal o redirección al usuario
-
+        
       }}
       onError={(err) => {
         setError(err);

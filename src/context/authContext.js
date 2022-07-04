@@ -47,8 +47,8 @@ export function AuthProvider({ children }) {
         banned,
       )
         .then((fireUser) => {
-          const docuRef = doc(firestore,`user/${fireUser.user.uid}`);
-          setDoc(docuRef,{
+          const docuRef = doc(firestore, `user/${fireUser.user.uid}`);
+          setDoc(docuRef, {
             email: email,
             password: password,
             firstname: firstname,
@@ -83,17 +83,23 @@ export function AuthProvider({ children }) {
     const firestore = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-    .then(cred=>{
-      const docuRef = doc(firestore,`user/${cred.user.uid}`);
-      console.log(firestore);
-      setDoc(docuRef,{
-        email: cred.user.email,
-        displayName: cred.user.displayName,
-        photoURL:cred.user.photoURL,
+      .then(cred => {
+        const docuRef = doc(firestore, `user/${cred.user.uid}`);
+        console.log(firestore);
+        setDoc(docuRef, {
+          email: cred.user.email,
+          displayName: cred.user.displayName,
+          photoURL: cred.user.photoURL,
+          admin: false,
+          banned: false,
+          firstname: "",
+          lastname: "",
+          phone: "",
+          image:""
+        })
       })
-    })
-    }
-  
+  }
+
 
   const loginWithFacebook = () => {
     const facebookProvider = new FacebookAuthProvider();
