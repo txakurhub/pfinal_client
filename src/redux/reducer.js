@@ -226,8 +226,11 @@ function rootReducer(state = initialState, action) {
     }
 
     case GET_ORDER: {
+      const order = Object.values(action.payload).filter((e)=> e.order_email === action.correo)
+ 
       return {
-        orderProduct: action.payload,
+       
+        orderProduct: order,
       };
     }
 

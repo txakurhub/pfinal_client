@@ -7,7 +7,8 @@ import Modal from "../components/Modal";
 import UpdateUser from "../components/UpdateUser";
 import { EditUser } from "../components/EditUser";
 import { useHistory } from "react-router-dom";
-// import img5 from "../assets/5.jpg";
+import { MyShopping } from "../components/MyShopping";
+
 import user from '../assets/user.png'
 import home from '../assets/home.png'
 import bag from '../assets/shopping-bag.png'
@@ -19,48 +20,62 @@ export default function UserProfile() {
     const history = useHistory()
     const params = useParams();
     const { user } = useAuth()
+    
     const [active, setActive] = useState(false);
     const toggle = () => setActive(!active);
+    
+    const [activeShopp, setActiveShopp] = useState(false);
+    const [activeEdit, setActiveEdit] = useState(true);
+    const toggleShopp = () => {setActiveShopp(true);setActiveEdit(false)};   
+
+    const toggleEdit = () => {setActiveEdit(true);setActiveShopp(false)};   
+
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.user);
     useEffect(() => {
         dispatch(getUser(user.uid))
-    }, [dispatch, user.id]);
+    }, [dispatch, user.uid]);
+    const currentUser = useSelector(state => state.user);
     return (
         <div >
-            <div className="flex bg-gray-100 shadow-sm p-6">
+            <div className="flex dark:bg-gray-900 shadow-sm p-6">
                 <div className="flex text-2xl font-semibold">
-                    <img className="ml-14 mr-14" src={user.photoURL ? user.photoURL : currentUser.image ? currentUser.image : imgDefault} width={50} height={35} />
-                    <div className='flex self-center'>
-                        <h1 className="mr-2">{currentUser.firstname}</h1>
-                        <h1 >{currentUser.lastname}</h1>
+                    <img className="ml-14 mr-14 rounded-full dark:text-white" src={user.photoURL ? user.photoURL : currentUser.image ? currentUser.image : imgDefault} width={50} height={35} />
                     </div>
-                </div>
-                {/* <h1 className="flex-0">Mi Perfil</h1> */}
-
-                {/* <h2>{currentUser.email}</h2>
-                <h1>{currentUser.phone}</h1> */}
-                {/* <h1>{user.uid ? user.uid : currentUser.id}</h1> */}
+                    {user.displayName?
+                    <div className="dark:text-white self-center">
+                    <h1>{user.displayName}</h1></div>
+                    :<h1 className="dark:text-white self-center">{user.email}</h1>}               
             </div>
-            <div className="flex h-screen">
-                <div className="p-6 border-r w-90 border-gray-200 ">
+            <div className="flex h-screen ">
+                <div className="p-10 border-r w-120 border-gray-200 ">
                     <ul>
                         <h6 className="font-bold mb-4">Acciones</h6>
-                        <li className='flex mb-8' onClick={() => { history.push('/') }}>
-                            <div className="bg-white shadow-sm mr-4"><img src={home} width={25} height={25} /></div><button className="self-center">inicio</button></li>
-                        <li className='flex mb-8'>
-                            <div className="bg-white shadow-sm mr-4"><img src={bag} width={25} height={25} /></div><button className="self-center">Mis compras</button></li>
+                        <div className="mr-10 border-l-2 border-gray-100 hover:border-blue-900 transition-all duration-200 delay-150">
+                        <li className='flex mb-8 ' onClick={() => { history.push('/') }}>
+                            <div className="bg-white shadow-sm  mr-4"><img src={home} width={25} height={25} /></div><button className="self-center ">inicio</button></li>
+                        </div>
+
+                        <div className="mr-10 border-l-2 border-gray-100 hover:border-blue-900 transition-all duration-200 delay-150">
+                        <li className='flex mb-8' onClick={toggleShopp}>
+                            <div className="bg-white shadow-sm mr-4"><img src={bag} width={25} height={25} /></div><button className="self-center">Compras</button></li>
+                        </div>
                     </ul>
+                    
                     <ul>
                         <h6 className="font-bold mb-4">Configuracion</h6>
-                        <li className='flex mb-8' onClick={() => { toggle() }}>
+                        <div className="mr-2 border-l-2 border-gray-100 hover:border-blue-900 transition-all duration-200 delay-150">
+                        <li className='flex mb-8' onClick= { toggleEdit }>
                             <div className="bg-white shadow-sm mr-4"><img src={edit} width={25} height={25} /></div><button className="self-center">Editar perfil</button></li>
+                        </div>
                     </ul>
+
                 </div>
                 <div className="p-6">
-                    <div className="gird grid-cols-">
-                        <div className="bg-gray-100 p-6">
-                            <EditUser id={user.uid} />
+                    
+                    <div className="flex flex-col items-center justify-center ">
+                        <div>{activeShopp?
+                    <MyShopping />:<EditUser id={user.uid} />    
+                    }
                         </div>
                     </div>
                 </div>
