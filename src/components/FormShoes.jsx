@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getShoeDetail, modifyProduct } from "../redux/actions";
 import { useHistory, useParams } from "react-router-dom";
 import swal from 'sweetalert';
-import style from './FormShoes.module.css'
 
 const FormShoes = ({ id }) => {
   const history = useHistory()

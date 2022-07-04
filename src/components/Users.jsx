@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/actions";
+import { getUsers, searchUser } from "../redux/actions";
 import Modal from "./Modal";
 import UpdateUser from "./UpdateUser";
 
@@ -17,13 +17,26 @@ const Users = () => {
     dispatch(getUsers());
   }, [dispatch]);
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    setBuscar(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(searchUser(buscar.toLowerCase()))
+    setBuscar('')
+  }
+
   return (
     <div className="w-full">
       <div className="py-3 col-12 mt-2 align-middle justify-evenly flex m-auto">
-        <button onClick={() => {}} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
+        <button onClick={() => { }} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
         <div>
-          <input onChange={(e) => setBuscar(e.target.value)} value={buscar} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar usuario..." id="search-filter"/> {/* falta terminar algo */}
-          <button onClick={() => {}} className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Buscar</button>
+          <form onSubmit={handleSubmit}>
+            <input onChange={handleChange} value={buscar} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar usuario..." id="search-filter" /> {/* falta terminar algo */}
+            <input type="submit" className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700" value='Buscar' />
+          </form>
         </div>
       </div>
       <div className="table w-[90%] m-auto">
@@ -55,8 +68,8 @@ const Users = () => {
                   <div className="flex items-center justify-center">
                     {
                       r.banned ?
-                      <p title="Bloqueado" className="h-4 w-4 rounded-full bg-red-500 mr-2" /> :
-                      <p title="Activo" className="h-4 w-4 rounded-full bg-[#5ad539] mr-2" />
+                        <p title="Bloqueado" className="h-4 w-4 rounded-full bg-red-500 mr-2" /> :
+                        <p title="Activo" className="h-4 w-4 rounded-full bg-[#5ad539] mr-2" />
                     }
                     <button title="Editar usuario" onClick={() => { toggle(); onClick(r.id); }} key={r.id}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

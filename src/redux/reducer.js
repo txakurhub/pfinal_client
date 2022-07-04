@@ -23,7 +23,8 @@ import {
   GET_ORDER,
   FILTER_ORDER,
   ADD_CATEGORY,
-  EDIT_CATEGORY
+  EDIT_CATEGORY,
+  SEARCH_USER
 } from "./actions";
 import swal from "sweetalert";
 
@@ -42,6 +43,7 @@ const initialState = {
   productosDestacados: [],
   orderProduct: [],
   users: [],
+  usersCopy: [],
   user: [],
   productosDestacados: [],
   pictures: [],
@@ -225,10 +227,10 @@ function rootReducer(state = initialState, action) {
     }
 
     case GET_ORDER: {
-      const order = Object.values(action.payload).filter((e)=> e.order_email === action.correo)
- 
+      const order = Object.values(action.payload).filter((e) => e.order_email === action.correo)
+
       return {
-       
+
         orderProduct: order,
       };
     }
@@ -237,6 +239,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload,
+        usersCopy: action.payload
       };
     }
 
@@ -280,6 +283,14 @@ function rootReducer(state = initialState, action) {
     case EDIT_CATEGORY: {
       return {
         ...state
+      }
+    }
+    case SEARCH_USER: {
+      let filtrado = state.usersCopy.filter(u => u.firstname && u.firstname.toLowerCase().includes(action.payload))
+      let resultado = filtrado.length ? filtrado : alert("Usuario inexistente")
+      return {
+        ...state,
+        users: resultado ? resultado : state.users
       }
     }
 
