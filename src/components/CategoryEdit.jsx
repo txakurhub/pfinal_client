@@ -16,6 +16,7 @@ export default function CategoryEdit() {
     e.preventDefault();
     dispatch(editCategory(info))
     setInfo({ id: "", name: "" })
+    window.location.reload()
   };
 
   const handleChange = (e) => {
