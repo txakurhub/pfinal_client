@@ -30,6 +30,7 @@ export const GET_ORDER = "GET_ORDER"
 export const FILTER_ORDER = "FILTER_ORDER"
 export const ADD_CATEGORY = "ADD_CATEGORY"
 export const EDIT_CATEGORY = "EDIT_CATEGORY"
+export const SEARCH_USER = "SEARCH_USER"
 
 export function getProducts() {
   return function (dispatch) {
@@ -332,11 +333,17 @@ export const editCategory = ({ id, name }) => {
 
 export const deleteOrder = ({ id }) => {
   return async () => {
-    try { 
+    try {
       await axios.delete(`${local_url}/order/${id}`);
     } catch (error) {
       swal(`ERROR: ${error}`);
     }
   };
+}
+
+export const searchUser = (customer) => {
+  return (dispatch) => {
+    dispatch({ type: SEARCH_USER, payload: customer })
+  }
 }
 
