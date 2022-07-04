@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, searchUser } from "../redux/actions";
+import { getUsers, reloadUser, searchUser } from "../redux/actions";
 import Modal from "./Modal";
 import UpdateUser from "./UpdateUser";
 
@@ -31,7 +31,7 @@ const Users = () => {
   return (
     <div className="w-full">
       <div className="py-3 col-12 mt-2 align-middle justify-evenly flex m-auto">
-        <button onClick={() => { }} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
+        <button onClick={() => { dispatch(reloadUser()) }} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
         <div>
           <form onSubmit={handleSubmit}>
             <input onChange={handleChange} value={buscar} type="text" className="col-8 border-2 p-2 m-1 rounded-lg " placeholder="Buscar usuario..." id="search-filter" /> {/* falta terminar algo */}
