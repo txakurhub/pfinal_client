@@ -20,7 +20,11 @@ function PageShopingCart() {
     0
   );
   
-  const product = cartItem.map((e) => {
+   const product = {
+    price: total,
+  }
+  
+  /*const product = cartItem.map((e) => {
     return {
       id: e.id,
       title: e.title,
@@ -35,7 +39,7 @@ function PageShopingCart() {
     e.preventDefault()
     history.push("/")
     window.location.reload()
-  }    
+  }    */
   
   const handleCheckout = async (e) => {
     e.preventDefault();
