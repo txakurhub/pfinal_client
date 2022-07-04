@@ -5,7 +5,7 @@ import swal from "sweetalert";
 import { adminDeleteShoes, getProducts } from "../../redux/actions";
 import FormShoes from "../../components/FormShoes";
 import Modal from "../../components/Modal";
-import { set } from "firebase/database";
+import CreationForm from "../../components/CreationForm";
 
 function Shoes() {
   const allProduts = useSelector((state) => state.allProductsCopy);
@@ -17,8 +17,10 @@ function Shoes() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [id, setId] = useState('');
-  const [active, setActive] = useState(false);
-  const toggle = () => setActive(!active);
+  const [activeEdit, setActiveEdit] = useState(false);
+  const toggleEdit = () => setActiveEdit(!activeEdit);
+  // const [activeCreate, setActiveCreate] = useState(false);  despues de la demo lo implemento
+  // const toggleCreate = () => setActiveCreate(!activeCreate);
   const onClick = (r) => setId(r);
   const marcas = allProduts.map((e)=> e.brand)
   const marcasSinRepetido = [...new Set(marcas)];
@@ -88,11 +90,11 @@ function Shoes() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const resultado = allProduts.filter((el) =>
-      el.id.toLowerCase().includes(buscar.toLowerCase())
+      el.title.toLowerCase().includes(buscar.toLowerCase())
     );
     if (!resultado.length) return swal("No hay resultados"); // cambiar alerta por swal
     setBuscar("");
-    setShoes(resultado);
+    setShoes(resultado.slice(0,201));
   };
 
   const allShoes = () => {
@@ -123,10 +125,6 @@ function Shoes() {
     });
   };
 
-  const editShoes = ({ id, name }) => {
-    // console.log(history)
-    history.push("/admin/edit/"+id);
-  };
 
   useEffect(() => {
     if (actualizar) {
@@ -165,7 +163,8 @@ function Shoes() {
         <button onClick={allShoes} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
         <button
        className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-600 rounded-lg focus:shadow-outline hover:bg-green-700"
-          onClick={() => {
+      //  onClick={()=>{toggleCreate();}}
+       onClick={() => {
             history.push("/form");
           }}
         >
@@ -248,7 +247,7 @@ function Shoes() {
                       <button
                         className="px-2 bg-lime-500 py-2 rounded-md text-white font-semibold hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:bg-lime-300 "
                         id={shoes.id}
-                        onClick={() => { toggle(); onClick(shoes.id); }}
+                        onClick={() => { toggleEdit(); onClick(shoes.id); }}
                       >
                         Editar
                       </button>
@@ -268,7 +267,8 @@ function Shoes() {
             })}
         </tbody>
       </table>
-      <Modal active={active} toggle={toggle} children={<FormShoes id={id} />} />
+      <Modal active={activeEdit} toggle={toggleEdit} children={<FormShoes id={id} />} />
+      {/* <Modal active={activeCreate} toggle={toggleCreate} children={<CreationForm />} /> */}
     </div>
   );
 }
