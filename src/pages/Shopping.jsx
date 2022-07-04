@@ -4,15 +4,15 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getOrderProducts } from "../redux/actions";
 
-const Shopping = () => {
+const Shopping = ({email}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(true);
   const ProductOrder = useSelector((state) => state.orderProduct);
 
 
-  const { user } = useAuth()
- const email = user?.reloadUserInfo.email
+  // const { user } = useAuth()
+//  const email = user?.reloadUserInfo.email
   const numberFormat = (value) =>
     new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -21,15 +21,15 @@ const Shopping = () => {
     }).format(value);
 
   useEffect(() => {
-    if (!ProductOrder.length) {
+    // if (!ProductOrder.length) {
       dispatch(getOrderProducts(email));
-    }
-  }, [dispatch, email]); 
+    // }
+  }, [dispatch]); 
 
   const handledetail = (e)=>{
    e.preventDefault();
     history.push(`/detail/${e.target.value}`)
-    window.location.reload();
+    // window.location.reload();
   }
   return (
     <div>

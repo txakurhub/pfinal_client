@@ -19,6 +19,7 @@ import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
 import Reviews from "./components/Reviews";
 import PayPal from "./components/PayPal";
+import UserDash from './pages/UserDashboard/UserDash'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 import UserProfile from "./pages/UserProfile";
@@ -42,7 +43,8 @@ function App() {
             <Route exact path="/admin/edit/:id" component={FormShoes} />
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
-            <PrivateRouteUser exact path="/user/:id/profile" component={UserProfile} />
+            {/* <Route exact path="/userDash" component={UserDash} /> */}
+            <PrivateRouteUser exact path="/user/profile/:id" component={UserDash} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>
