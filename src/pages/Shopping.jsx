@@ -29,7 +29,7 @@ const Shopping = ({email}) => {
   const handledetail = (e)=>{
    e.preventDefault();
     history.push(`/detail/${e.target.value}`)
-    // window.location.reload();
+    window.location.reload();
   }
   return (
     <div>
