@@ -25,7 +25,10 @@ import {
   ADD_CATEGORY,
   EDIT_CATEGORY,
   SEARCH_USER,
-  DELETE_CATEGORY
+  DELETE_CATEGORY,
+  DELETE_ORDER,
+  UPDATE_ORDER,
+  RELOAD_USER
 } from "./actions";
 import swal from "sweetalert";
 
@@ -301,7 +304,23 @@ function rootReducer(state = initialState, action) {
         users: resultado ? resultado : state.users
       }
     }
-
+    case DELETE_ORDER:{
+      const result = state.orderstatusCopy.filter(e=> e.id !== action.payload)
+      return{
+        ...state,
+        orderstatusCopy:result,
+        orderstatus:result
+      }
+    }
+    case UPDATE_ORDER:{
+      return state
+    }
+    case RELOAD_USER:{
+      return{
+        ...state,
+        users:state.usersCopy
+      }
+    }
     default:
       return { ...state };
   }
