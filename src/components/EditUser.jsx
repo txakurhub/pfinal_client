@@ -8,33 +8,35 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { set } from "firebase/database";
 import defaultImage from "../assets/user.png"
 
-export const EditUser = ({ id }) => {
-  const user = useSelector((state) => state.user);
+export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
+  
+  // const user = useSelector((state) => state.user);
+  console.log(id);
   const dispatch = useDispatch();
   const initialState = {
-    lastname: user.lastname,
-    firstname: user.firstname,
-    phone: user.phone,
-    password: user.password,
-    image: user.image
+    lastname: lastname,
+    firstname: firstname,
+    phone: phone,
+    password: password,
+    image: image
   };
   // const [imageUrl, setImageUrl] = useState(user.image ? user.image : "");
   const [submission, setSubmission] = useState({ ...initialState });
-
+  
   const [active, setActive] = useState();
-
+  
   const toggle = (e) => {
     setActive(!active);
   };
-
+  
   const handleSubmissionChange = (r) => {
     setSubmission({ ...submission, [r.target.name]: r.target.value });
   };
-
+  
   useEffect(() => {
     dispatch(getUser(id));
   }, [dispatch]);
-
+  
   const handleUpload = async (e) => {
     const archivo = e.target.files[0];
     if (!archivo) {
@@ -92,7 +94,7 @@ export const EditUser = ({ id }) => {
           className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
           type="text"
           name="firstname"
-          placeholder={user.firstname}
+          placeholder={submission.firstname}
           autocomplete="off"
           minLength={3}
           value={submission.firstname}
@@ -107,7 +109,7 @@ export const EditUser = ({ id }) => {
         <label className="font-semibold">Apellido:</label>
         <input
           className="border border-gray-400 block w-full rounded focus:outline-none focus:border-teal-300"
-          placeholder={user.lastname}
+          placeholder={submission.lastname}
           autocomplete="off"
           type="text"
           name="lastname"
@@ -146,7 +148,7 @@ export const EditUser = ({ id }) => {
             type="tel"
             name="phone"
             autocomplete="off"
-            placeholder={user.phone}
+            placeholder={submission.phone}
             onChange={(e) => {
               handleSubmissionChange(e);
             }}

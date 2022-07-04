@@ -1,15 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { authContext, useAuth } from "../context/authContext";
 import { getUser } from "../redux/actions";
 import React, { useEffect, useState } from "react";
 import Modal from "../components/Modal";
 import UpdateUser from "../components/UpdateUser";
 import { EditUser } from "../components/EditUser";
 import { useHistory } from "react-router-dom";
-import { MyShopping } from "../components/MyShopping";
+// import { MyShopping } from "../components/MyShopping";
 import Shopping from "./Shopping";
-
 import user from '../assets/user.png'
 import home from '../assets/home.png'
 import bag from '../assets/shopping-bag.png'
@@ -21,6 +20,7 @@ export default function UserProfile() {
     const history = useHistory()
     const params = useParams();
     const { user } = useAuth()
+    
     
     const [active, setActive] = useState(false);
     const toggle = () => setActive(!active);
@@ -34,13 +34,13 @@ export default function UserProfile() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUser(user.uid))
-    }, [dispatch, user.uid]);
+    }, [dispatch,user.uid]);
     const currentUser = useSelector(state => state.user);
     return (
         <div >
             <div className="flex dark:bg-gray-900 shadow-sm p-6">
                 <div className="flex text-2xl font-semibold">
-                    <img className="ml-14 mr-14 rounded-full dark:text-white" src={currentUser.image ? currentUser.image : user.photoURL ? user.photoURL : imgDefault} width={50} height={35} />
+                    <img className="ml-14 mr-14 rounded-full dark:text-white" src={currentUser.image ? currentUser.image : user.photoURL ? user.photoURL : imgDefault} width={50} height={50} />
                     </div>
                     {user.displayName?
                     <div className="dark:text-white self-center">
@@ -75,7 +75,8 @@ export default function UserProfile() {
                     
                     <div className="gird grid-cols ">
                         <div>{activeShopp?
-                    <Shopping />:<EditUser id={user.uid} />    
+                        <h1>hola</h1>:<h1>chau</h1>
+                    // <Shopping email={user.email}/>:<EditUser id={user.uid} />    
                     }
                         </div>
                     </div>
