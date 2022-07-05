@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-// import {
-//   getAllCategoryAdmin,
-//   getCategories,
-//   getProducts,
-//   getUsers,
-//   orderStatus
-// } from "../redux/actions";
+
 import Container from "./Container";
 import Nav from "./Nav";
 

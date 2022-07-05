@@ -14,6 +14,8 @@ import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
 import { async } from "@firebase/util";
+import { LocalStorage } from "./LocalStorage";
+
 export const authContext = createContext();
 
 export const useAuth = () => {
@@ -21,7 +23,7 @@ export const useAuth = () => {
   return context;
 };
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = LocalStorage("user",{})
   const [loading, setLoading] = useState(true);
 
   const signup = async ({
