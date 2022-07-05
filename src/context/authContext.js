@@ -23,9 +23,9 @@ export const useAuth = () => {
   return context;
 };
 export function AuthProvider({ children }) {
-  // const [user, setUser] = LocalStorage("user",{}) componente de Tomás
   const [user, setUser] = useState(null);
   const [userInf, setUserInf] = useState(false);
+  const [userStorage, setUserStorage] = LocalStorage("user",{})
   const [loading, setLoading] = useState(true);
   const db = getFirestore();
 
@@ -126,6 +126,7 @@ export function AuthProvider({ children }) {
       if (currentUser) {
         userInfo(currentUser)
         setUser(currentUser);
+        setUserStorage(currentUser);
         console.log(userInf)
       } else {
         setUserInf(null)
@@ -155,9 +156,11 @@ export function AuthProvider({ children }) {
         loginWithFacebook,
         resetPassword,
         userData,
+        userStorage
       }}
     >
       {children}
     </authContext.Provider>
   );
 }
+

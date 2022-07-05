@@ -36,6 +36,7 @@ export default function UserProfile() {
         dispatch(getUser(user.uid))
     }, [dispatch,user.uid]);
     const currentUser = useSelector(state => state.user);
+    console.log(currentUser);
     return (
         <div >
             <div className="flex dark:bg-gray-900 shadow-sm p-6">
