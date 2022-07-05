@@ -23,6 +23,7 @@ import UserDash from './pages/UserDashboard/UserDash'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 import UserProfile from "./pages/UserProfile";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             <Route exact path="/detail/:id" component={Detail}></Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/admin/:id" component={Dashboard}></Route>
+            <PrivateRouteAdmin exact path="/admin/:id" component={Dashboard} />
             <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
             <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
             <Route exact path="/cart" component={PageShopingCart}></Route>
