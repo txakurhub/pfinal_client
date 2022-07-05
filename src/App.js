@@ -43,7 +43,6 @@ function App() {
             <Route exact path="/admin/edit/:id" component={FormShoes} />
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
-            {/* <Route exact path="/userDash" component={UserDash} /> */}
             <PrivateRouteUser exact path="/user/profile/:id" component={UserDash} />
           </CartProvider>
         </PayPalScriptProvider>
