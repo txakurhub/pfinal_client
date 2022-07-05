@@ -7,10 +7,7 @@ const Reviews = ({ id, user }) => {
   const users = useSelector(state => state.users);
   
   const username =(id)=>{
-    console.log(id)
-
     const dato =  Object.values(users).filter(e=> e.id === id)
-    console.log(dato)
     const date = dato.map( e => e.firstname?e.firstname: "Sin Nombre")
     return date.length > 0 ? date : "Sin Nombre"
 
