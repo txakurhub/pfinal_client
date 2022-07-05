@@ -2,7 +2,15 @@ import React, { useState } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import { Chart as CharJS } from "chart.js/auto"; //importar para que muestre los graficos
 import img from "../../assets/user.png";
-const PanelAdmin = ({ productData, userData, categoryData, id }) => {
+const PanelAdmin = ({ productData, userData, categoryData, admin }) => {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false
+      }
+    }
+  };
   const userList = [
     userData.length,
     userData.filter((e) => e.banned).length,
@@ -75,35 +83,46 @@ const PanelAdmin = ({ productData, userData, categoryData, id }) => {
       }
     ]
   });
-  const [admin, setAdmin] = useState(
-    userData.find((e) => e.id === "7R07xtn17ZU09JHnm6Mi")
-  ); //harcodeado porque falta hacer ruta protegida
+
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row">
-        {admin && (
-          <div>
-            <h1>{`${admin.firstname} ${admin.lastname}`}</h1>
-            <img src={img} alt="user" width={100} height={100} />
-            {admin.admin && <h3>Admin </h3>}
-            {admin.superAdmin && <h3>Super Admin </h3>}
+    <div className="flex flex-row p-4 mx-5">
+      <div className="flex flex-col w-1/2">
+        <div className="mt-5 max-w-sm mx-2 bg-slate-50 shadow-md shadow-gray-500/50 rounded-lg overflow-hidden max-h-32">
+          <div className="sm:flex sm:items-center px-6 py-4">
+            <img
+              className="block mx-auto sm:mx-0 sm:flex-shrink-0 h-16 sm:h-24 rounded-full"
+              src={img}
+            />
+            <div className="mt-4 sm:mt-0 sm:ml-4 text-center sm:text-left">
+              <p className="text-sm leading-tight text-gray-600">
+                #{admin.uid}
+              </p>
+              <p className="text-xl leading-tight">{`${admin.firstname} ${admin.lastname}`}</p>
+              <p className="text-sm leading-tight text-gray-600">{admin.email}</p>
+              <div className="mt-2">
+                <button className="text-white-500 text-white bg-green-500 text-xs font-semibold rounded-full px-4 py-1 leading-normal">
+                  {admin.admin && "Admin"}
+                  {admin.superAdmin && "Super Admin"}
+                </button>
+              </div>
+            </div>
           </div>
-        )}
-        <div className="w-64">
-          {/* esto es user */}
-          <h3>Usuarios total</h3>
+        </div>
+        <div className="mt-7 max-w-sm mx-2 bg-slate-50 shadow-md shadow-gray-500/50 rounded-lg overflow-hidden py-6  px-9">
+          <h3 className="text-xl leading-tight pb-2">Usuarios total</h3>
           <Pie data={dataUser} />
         </div>
       </div>
-      <div className="flex flex-row">
-        <div className="w-1/2">
-          <h3>Categorias total</h3>
-          <Bar data={dataCategory} />
+      <div className="flex flex-col w-1/2">
+      <div className="mt-5 w-auto bg-slate-50 shadow-md shadow-gray-500/50 rounded-lg overflow-hidden py-4 px-5">
+          <h3 className="text-xl leading-tight pb-2">
+            Productos mas vendidos
+          </h3>
+          <Bar data={dataProduct} options={options} />
         </div>
-
-        <div className="w-1/2">
-          <h3>TOP 10 Productos mas vendidos</h3>
-          <Bar data={dataProduct} />
+        <div className="mt-5 w-auto bg-slate-50 shadow-md shadow-gray-500/50 rounded-lg overflow-hidden py-2 px-5">
+          <h3 className="text-xl leading-tight pb-2">Categorias total</h3>
+          <Bar data={dataCategory} options={options} />
         </div>
       </div>
     </div>
