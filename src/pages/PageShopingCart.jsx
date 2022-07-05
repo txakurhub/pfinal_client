@@ -19,28 +19,29 @@ function PageShopingCart() {
     (previous, current) => previous + current.amount * current.price,
     0
   );
-  const product = {
+  
+   const product = {
     price: total,
-    
   }
   
-  // const product = cartItem.map((e) => {
-  //   return {
-  //     id: e.id,
-  //     title: e.title,
-  //     description: `${e.title}, ${e.brand}, ${e.model}`,
-  //     picture_url: e.image,
-  //     category_id: e.category,
-  //     quantity: e.amount,
-  //     unit_price: e.price,
-  //   };
-  // });
+  /*const product = cartItem.map((e) => {
+    return {
+      id: e.id,
+      title: e.title,
+      description: `${e.title}, ${e.brand}, ${e.model}`,
+      picture_url: e.image,
+      category_id: e.category,
+      quantity: e.amount,
+      unit_price: e.price,
+    };
+  });
+   */
   const handleBack = (e) => {
     e.preventDefault()
     history.push("/")
     window.location.reload()
-  }  
-
+  }   
+  
   const handleCheckout = async (e) => {
     e.preventDefault();
     const linkMP = await sendMP()

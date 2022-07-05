@@ -45,7 +45,7 @@ const Shopping = ({email}) => {
           return (
             <div key={e.id}>
               <div>{horaFinal}</div>
-              <h1 className="text-2xl">Estado de la orden: {e.order_status}</h1>
+                <h1 className="text-2xl">Estado de la orden: {e.order_status}</h1>
               <div>{e.Products? e.Products.length: 0} Compras</div>
               
               {e.Products &&
