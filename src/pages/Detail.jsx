@@ -274,7 +274,7 @@ const Detail = () => {
       </div>
     </section>
     <Reviews user={user} id={selected.id}/>
-    <SlideDetail />
+    {/* <SlideDetail /> */}
   </div>
   );
 };

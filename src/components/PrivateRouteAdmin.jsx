@@ -1,21 +1,19 @@
-// import { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
-// import { Redirect, Route } from 'react-router-dom'
-// import { getUser } from '../redux/actions';
+import { Redirect, Route } from 'react-router-dom'
+import { useAuth } from '../context/authContext';
 
-// const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
+const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
 
-//     const dispatch = useDispatch()
-//     const users = useSelector(state => state.user)
+    const { userInf } = useAuth();
 
-//     useEffect(() => {
-//         dispatch(getUser(id))
-//     }, [dispatch])
+    if (userInf === false) {
+        return <p>Loading ...</p>
+    }
 
-//     return (
-//         <Route {...rest}>{users.admin ? <Component /> : <Redirect to="/" />}</Route>
-//     )
+    return (
+        // cambiar la varia de false a true
+        <Route {...rest}>{userInf && userInf.admin === "true" || userInf && userInf.admin === true ? <Component /> : <Redirect to="/" />}</Route>
+    )
 
-// }
+}
 
-// export default PrivateRouteAdmin
+export default PrivateRouteAdmin
