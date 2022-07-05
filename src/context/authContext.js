@@ -8,11 +8,13 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   FacebookAuthProvider,
-
 } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc, collection, getDoc } from "firebase/firestore";
+import { local_url } from "../redux/actions";
+import { async } from "@firebase/util";
+import { LocalStorage } from "./LocalStorage";
 
 export const authContext = createContext();
 
@@ -25,7 +27,6 @@ export function AuthProvider({ children }) {
   const [userInf, setUserInf] = useState(false);
   const [loading, setLoading] = useState(true);
   const db = getFirestore();
-
   const signup = async ({
     email,
     password,
