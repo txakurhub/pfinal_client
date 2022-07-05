@@ -20,7 +20,7 @@ const Container =  ({ active }) => {
     const currentUser = useSelector(state => state.user);
     console.log(currentUser);
 
-    if (active === "compras") return <Shopping />;
+    if (active === "compras") return <Shopping email={user.email} />;
     if (active === "edit") return <EditUser id={id} user={currentUser}/>;
     if (active === "favoritos") return <Wishlist />;
     if (active === "carrito") {

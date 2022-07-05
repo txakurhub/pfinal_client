@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { getUser } from "../../redux/actions";
+import { getFirestore, doc, setDoc,collection, getDoc } from "firebase/firestore";
 
-const Nav = ({ setView }) => {
+const Nav = ({ setView, id }) => {
+  const db = getFirestore();
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const handleClick = (value) => setView(value);
   const history = useHistory()
+  const [info, setInfo] = useState(null)
+  console.log(id);
+
+  const userInfo = async (currentUser)=>{
+    const users = doc(db, 'user', currentUser);
+    console.log(users);
+      const docSnap = await getDoc(users);
+      setInfo(docSnap.data())
+  }
+
+  const { user } =  useAuth()
+const dispatch = useDispatch()
+  useEffect(() => {
+    
+      dispatch(getUser(id))
+      userInfo(user)
+  }, [dispatch]);
+  const currentUser = useSelector(state => state.user);
+console.log(info);
+
 
   return (
     <div className="dark:bg-gray-900 relative w-full bg-gray-100 shadow-sm p-6">
@@ -17,6 +42,11 @@ const Nav = ({ setView }) => {
             inicio
             </a>
           </li>
+          {id === "Equi8zPWkJUnZcrD1jo3eJ2fPbP2" && 
+          <li>
+             <a href={`/admin/${id}`} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"/>
+          </li>
+          }
           <li>
             <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mis Compras
@@ -42,7 +72,7 @@ const Nav = ({ setView }) => {
       </div>
       {/* For large screens */}
       <div className="dark:bg-gray-900 bg-gray-100 container mx-auto flex items-center justify-between">
-        <h1 className="md:w-2/12 cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
+        <h1 onClick={e=>history.push("/")} className="md:w-2/12 cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
           <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
         </h1>
         <div className="justify-end flex items-center space-x-4 xl:space-x-8">
@@ -52,6 +82,13 @@ const Nav = ({ setView }) => {
                 inicio
               </a>
             </li>
+
+            {id === "Equi8zPWkJUnZcrD1jo3eJ2fPbP2" && 
+          <li>
+             <a href={`/admin/${id}`} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"/>
+          </li>
+          }
+
             <li>
               <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 Mis compras
@@ -108,6 +145,13 @@ const Nav = ({ setView }) => {
                 inicio
               </a>
             </li>
+
+            {id === "Equi8zPWkJUnZcrD1jo3eJ2fPbP2" && 
+          <li>
+             <a href={`/admin/${id}`} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"/>
+          </li>
+          }
+
             <li>
               <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 mis compras

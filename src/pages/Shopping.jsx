@@ -29,7 +29,7 @@ const Shopping = ({email}) => {
   const handledetail = (e)=>{
    e.preventDefault();
     history.push(`/detail/${e.target.value}`)
-    // window.location.reload();
+    window.location.reload();
   }
   return (
     <div>
@@ -39,12 +39,15 @@ const Shopping = ({email}) => {
       {ProductOrder?.length > 0 ? (
         ProductOrder.map((e) => {
           const hora = e.order_date.split("-").join("/").slice(0, 10);
+          
           const horaFinal = hora 
 
           return (
             <div key={e.id}>
               <div>{horaFinal}</div>
+              <h1 className="text-2xl">Estado de la orden: {e.order_status}</h1>
               <div>{e.Products? e.Products.length: 0} Compras</div>
+              
               {e.Products &&
                 e.Products.map((product) => (
                   <div key={product.id}>
