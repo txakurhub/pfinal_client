@@ -94,11 +94,11 @@ const PanelAdmin = ({ productData, userData, categoryData, admin }) => {
               src={img}
             />
             <div className="mt-4 sm:mt-0 sm:ml-4 text-center sm:text-left">
-              <p className="text-sm leading-tight text-gray-600">
+            <p className="text-xs leading-tight text-gray-400">
                 #{admin.uid}
               </p>
               <p className="text-xl leading-tight">{`${admin.firstname} ${admin.lastname}`}</p>
-              <p className="text-sm leading-tight text-gray-600">{admin.email}</p>
+              <p className="text-xs leading-tight text-gray-600">{admin.email}</p>
               <div className="mt-2">
                 <button className="text-white-500 text-white bg-green-500 text-xs font-semibold rounded-full px-4 py-1 leading-normal">
                   {admin.admin && "Admin"}
