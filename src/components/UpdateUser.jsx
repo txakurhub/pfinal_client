@@ -9,10 +9,20 @@ const UpdateUser = ({ id }) => {
   const dispatch = useDispatch();
   // const history = useHistory()
   const {resetPassword} = useAuth()
-  const initialState = { lastname: '', firstname: '', image: '', phone: '', email: '', admin: null, banned: null };
+  const initialState = { lastname: '', firstname: '', image: '', phone: '', email: '', admin: false, banned: false };
   const [submission, setSubmission] = useState({ ...initialState });
   const user = useSelector(state => state.user);
 
+  const toBoolean = (string)=>{ // funcion para pasar de string a booleano
+    if(typeof string === "string"){
+       if(string.trim().includes("true")){
+      return true
+    }
+    if(string.trim().includes("false")){
+      return false
+    }
+    }else return string
+  }
 
   const handleSubmissionChange = (r) => {
     setSubmission({ ...submission, [r.target.name]: r.target.value });
@@ -20,9 +30,8 @@ const UpdateUser = ({ id }) => {
 
   const handleSubmit = (r) => {
     r.preventDefault();
-    const admin = submission.admin
-    const banned = submission.banned
-    dispatch(updateUserAdmin({ id, admin: admin, banned:banned }));
+    const {admin,banned}= submission
+    dispatch(updateUserAdmin({ id, admin: toBoolean(admin), banned:toBoolean(banned) }));
     setSubmission({ ...initialState });
     window.location.reload()
   };
@@ -30,7 +39,7 @@ const UpdateUser = ({ id }) => {
   useEffect(() => {
     dispatch(getUser(id));
   }, [dispatch]);
-
+console.log(submission)
   return (
     <form onSubmit={handleSubmit} className="h-full w-full">
       <div className="flex flex-row w-full justify-evenly">
@@ -70,12 +79,16 @@ const UpdateUser = ({ id }) => {
       <div className="flex flex-row w-full justify-evenly">
         <div className="flex flex-col w-[48%]">
           <label className="text-start">banned</label>
-          <input type="text" value={submission.banned} onChange={handleSubmissionChange} name="banned" placeholder={user.banned?.toString()} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+          <select name="banned" onChange={handleSubmissionChange} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400">
+            <option hidden>estado</option>
+            <option value={false}>false</option>
+            <option value={true}>true</option>
+          </select>
         </div>
         <div className="flex flex-col w-[48%]">
           <label className="text-start">Resetear contraseña</label>
           {/* eso pa que le envien un correo para restablecer la contra*/}
-          <button onClick={()=>{resetPassword(submission.email); swal("Se envio un correo para restablecer la contraseña")}}>Resetear</button>
+          <span onClick={()=>{resetPassword(submission.email); swal("Se envio un correo para restablecer la contraseña")}}>Resetear</span>
           {/* <input type="text" value={submission.password} onChange={handleSubmissionChange} name="password" placeholder={user.password} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" /> */}
         </div>
       </div>
