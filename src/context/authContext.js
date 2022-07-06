@@ -95,8 +95,8 @@ export function AuthProvider({ children }) {
           photoURL: cred.user.photoURL,
           admin: false,
           banned: false,
-          firstname: "",
-          lastname: "",
+          firstname: cred.user.displayName.split(" ")[0],
+          lastname: cred.user.displayName.split(" ")[1],
           phone: "",
           image: ""
         })
