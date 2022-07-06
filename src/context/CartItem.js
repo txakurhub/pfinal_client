@@ -30,7 +30,7 @@ export const CartProvider = ({ children }) => {
     if (inCart) {
       setCartItem(
         cartItem.map((productInCart) => {
-          if (productInCart.id === product.id && inCart.amount < product.stock) {
+          if (productInCart.id === product.id && inCart.amount < product.stock && product.stock !== 0) {
             return { ...inCart, amount: inCart.amount + 1 };
           } else return productInCart;
         })
