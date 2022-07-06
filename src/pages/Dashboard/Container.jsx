@@ -2,11 +2,14 @@ import React from "react";
 import { useSelector } from "react-redux";
 import OrderStatus from "../../components/OrderStatus";
 import Users from "../../components/Users";
+import { useAuth } from "../../context/authContext";
 import Categories from "./Categories";
 import PanelAdmin from "./PanelAdmin";
 import Shoes from "./Shoes";
 
+
 const Container = ({ active }) => {
+  const { userInf } = useAuth();
   const { allProducts, users, orderstatus, allcategoriesAdmin } = useSelector(
     (state) => state
   );
@@ -16,13 +19,13 @@ const Container = ({ active }) => {
   if (active === "categories") return <Categories />;
   if (active === "order") return <OrderStatus />;
   if (active === "dashboard") {
-    if (allProducts.length && users.length && orderstatus && allcategoriesAdmin.length)
+    if (allProducts.length && userInf && users.length &&orderstatus && allcategoriesAdmin.length)
       return (
         <PanelAdmin
           productData={allProducts}
           userData={users}
           categoryData={allcategoriesAdmin}
-          
+          data={userInf}
         />
       );
     else return <div class="text-center m-36">

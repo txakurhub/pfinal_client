@@ -6,6 +6,7 @@ import {
   filter_get_wishlist_product,
   getPictures, 
   getShoeDetail,
+  getUsers,
   // getStock,
   remove_wishlist_product,
 } from "../redux/actions";
@@ -27,14 +28,15 @@ const Detail = () => {
   const counter = useSelector((state)=> state.counterwishlist);
   const [order, setOrder] = useState('')
   let stock = useSelector((state)=> state.stockShoes)
+  
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
-
+ 
   useEffect(() => {
     if(user){
       dispatch(filter_get_wishlist_product({ id: user.uid, product: params.id }));
     }
-    
+   
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
     dispatch(getPictures(params.id))
     // dispatch(getStock(params.id))
@@ -44,7 +46,7 @@ const Detail = () => {
   
   }, [dispatch, counter, params.id ]);
   
-
+ 
 
   const handleaddwishlist = (e)=>{
     e.preventDefault();
