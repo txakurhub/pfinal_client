@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct, getCategories } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const validaciones = (input) => {
   const errores = {}
@@ -57,7 +58,7 @@ const validaciones = (input) => {
 };
 
 const CreationForm = () => {
-
+  const history = useHistory()
   const [input, setInput] = useState({
     title: '',
     brand: '',
@@ -69,6 +70,30 @@ const CreationForm = () => {
   const [errores, setErrores] = useState([]);
   const categories = useSelector(state => state.categories);
   const dispatch = useDispatch();
+
+  const handleUpload = async (e) => {
+    const archivo = e.target.files[0];
+    if (!archivo) {
+      console.log("no hay archivos");
+    } else {
+      const storage = getStorage();
+      const storageRef = ref(storage, archivo.name);
+      uploadBytes(storageRef, archivo)
+        .then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+        })
+        .then((x) => {
+          getDownloadURL(ref(storage, archivo.name)).then((url) => {
+            console.log(url);
+            setInput({ ...input, image: url });
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -99,6 +124,9 @@ const CreationForm = () => {
         image: '',
         category: ''
       });
+      setTimeout(() => {
+        history.push("/admin/7R07xtn17ZU09JHnm6Mi")
+      }, 2000);
     };
   };
 
@@ -108,7 +136,7 @@ const CreationForm = () => {
 
   return (
     <form id="login" onSubmit={handleSubmit}>
-      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/">
+      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/admin/7R07xtn17ZU09JHnm6Mi">
         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="black" fill="none" strokeLinecap="round" strokeLinejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <polyline points="15 6 9 12 15 18" />
@@ -232,7 +260,7 @@ const CreationForm = () => {
                     </svg>
                   </div>
                 </div>
-                <input type="file" name="image" value={input.image} accept="image/*" onChange={handleChange} required id="image" className="cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
+                <input type="file" name="image"  accept="image/*" onChange={handleUpload} required id="image" className="cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
                 <div className={`flex justify-between items-center pt-1 ${errores.image ? 'text-red-400' : 'text-green-400'}`}>
                   <p className="text-xs">{errores.price ? errores.image : input.image === '' ? '' : 'Image submission succes!'}</p>
                   {
@@ -257,7 +285,7 @@ const CreationForm = () => {
                     <option hidden>Select category</option>
                     {
                       categories && categories.map(c => (
-                        <option value={c.name}>{c.name}</option>
+                        <option key={categories.indexOf(c)} value={c.name}>{c.name}</option>
                       ))
                     }
                   </select>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
-import { getShoeDetail, getPictures } from "../redux/actions";
+import { getShoeDetail, getPictures, clearStateDetail } from "../redux/actions";
 import { create_new_wishlist } from "../redux/actions";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
@@ -21,6 +21,9 @@ const QuickView = ({ id, product }) => {
     useEffect(() => {
         dispatch(getShoeDetail(id))
         dispatch(getPictures(id))
+        return () => {
+            dispatch(clearStateDetail())
+        }
     }, [dispatch, id ]);
 
     const result = product.wishlists.filter( d => d.userId === '1')

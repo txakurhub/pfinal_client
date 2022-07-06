@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { getOrderProducts } from "../redux/actions";
+// import { useDispatch, useSelector } from "react-redux";
+// import { Link, useHistory } from "react-router-dom";
+// import { getOrderProducts } from "../../redux/actions";
 
-export const MyShopping =()=>{
+ const MyShopping =()=>{
     return(
         <div >
         <section className="container mx-auto p-10 md:p-20 transform duration-500 mb-0">
@@ -27,3 +27,5 @@ export const MyShopping =()=>{
       </div>
     )
 }
+
+export default MyShopping

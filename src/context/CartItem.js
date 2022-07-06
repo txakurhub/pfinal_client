@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import swal from 'sweetalert';
 import { local_url } from '../redux/actions'
+import qrcode from "qrcode"
 
 export const CartContext = createContext();
 
@@ -191,6 +192,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  const generateQr = async (url)=>{
+    const QR = await qrcode.toDataURL(url)
+    return QR
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -200,7 +206,8 @@ export const CartProvider = ({ children }) => {
         deleteItemCantidad,
         sendMP,
         deleteTotal,
-        addToCart2
+        addToCart2,
+        generateQr
       }}
     >
       {children}

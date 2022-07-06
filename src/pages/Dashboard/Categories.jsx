@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert'
-import { getAllCategoryAdmin } from '../../redux/actions'
+import CategoryAdd from '../../components/CategoryAdd'
+import CategoryEdit from '../../components/CategoryEdit'
+import Modal from '../../components/Modal'
+import { adminDeleteCategories, getAllCategoryAdmin } from '../../redux/actions'
 
 
 function Categories() {
@@ -10,14 +13,20 @@ function Categories() {
   const [categories,setCategories] = useState(allcategories)
   const [buscar,setBuscar] = useState("")
   const [actualizar,setActualizar]=useState(true)
-  const history = useHistory()
   const dispatch = useDispatch()
+  const [id, setId] = useState('');
+  const [activeCreate, setActiveCreate] = useState(false);
+  const [activeEdit, setActiveEdit] = useState(false);
+    const toggleEdit = () => setActiveEdit(!activeEdit);
+    const toggleCreate = () => setActiveCreate(!activeCreate);
+    const onClick = (r) => setId(r);
+
   const handleChange = (e)=>{
     setBuscar(e.target.value)
   }
   const handleSubmit = (e)=>{
     e.preventDefault()
-    const resultado = allcategories.filter(el=> el.id.toLowerCase().includes(buscar.toLowerCase()))
+    const resultado = allcategories.filter(el=> el.name.toLowerCase().includes(buscar.toLowerCase()))
     if(!resultado.length) return alert("No hay resultados") // cambiar alerta por swal
     setBuscar("")
     setCategories(resultado)
@@ -36,7 +45,7 @@ function Categories() {
         swal(`¡El producto ${name}, ha sido eliminado correctamente!`, {
           icon: "success",
         });
-        //await dispatch(adminDeleteCategories(id));
+        dispatch(adminDeleteCategories(id));
        setTimeout(() => {
         window.location.reload()
        }, 2000);
@@ -44,13 +53,9 @@ function Categories() {
         swal("¡La acción ha sido cancelada con éxito!");
       }
     })
-    alert(`ELIMINAR => ID: ${id} NAME: ${name}`)
     // esta funcion va a despachar una accion que elimina el producto
   }
-  const editCategories = ({id,name})=>{
-    history.push("/edit/category/"+id)
-    // esta funcion va a despachar una accion que edita el producto
-  }
+  
 
   const allCategories = ()=>{
     setCategories(allcategories)
@@ -75,9 +80,7 @@ function Categories() {
         <button onClick={allCategories} className="h-10 px-5 m-2 ml-10 text-gray-100 transition-colors duration-150 bg-gray-600 rounded-lg focus:shadow-outline hover:bg-gray-700">Recargar</button>
         <button
        className="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-600 rounded-lg focus:shadow-outline hover:bg-green-700"
-          onClick={() => {
-            history.push("/form");
-          }}
+       onClick={()=>{toggleCreate();}}
         >
           Crear categoria
         </button>
@@ -110,7 +113,7 @@ function Categories() {
                   <div>
                     <button
                         className="px-2 bg-lime-500 py-2 rounded-md text-white font-semibold hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:bg-lime-300 "
-                     id={category.id} onClick={()=>editCategories({id:category.id,name:category.name})}>Editar</button>
+                     id={category.id} onClick={()=>{toggleEdit(); onClick(category.id)}}>Editar</button>
                     <button
                         className="px-2 bg-red-500 py-2 rounded-md text-white font-semibold hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:bg-red-300 "
 
@@ -122,6 +125,8 @@ function Categories() {
           })}
         </tbody>
       </table>
+      <Modal active={activeEdit} toggle={toggleEdit} children={<CategoryEdit id={id} />} />
+      <Modal active={activeCreate} toggle={toggleCreate} children={<CategoryAdd />} />
     </div>
   )
 }

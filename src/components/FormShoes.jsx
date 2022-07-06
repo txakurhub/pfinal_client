@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getShoeDetail, modifyProduct } from "../redux/actions";
 import { useHistory, useParams } from "react-router-dom";
 import swal from 'sweetalert';
-import style from './FormShoes.module.css'
 
 const FormShoes = ({ id }) => {
   const history = useHistory()
@@ -56,7 +55,7 @@ const FormShoes = ({ id }) => {
       stock: '',
       image: ''
     });
-    history.goBack()
+    history.push("/admin/7R07xtn17ZU09JHnm6Mi") // el id full hardcodeado => despues de la demo lo arreglo
   };
 
   return (

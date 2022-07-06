@@ -19,10 +19,11 @@ import UpdateUser from "./components/UpdateUser";
 import Users from "./components/Users";
 import Reviews from "./components/Reviews";
 import PayPal from "./components/PayPal";
+import UserDash from './pages/UserDashboard/UserDash'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 
 import UserProfile from "./pages/UserProfile";
-import CategoryEdit from "./components/CategoryEdit";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             <Route exact path="/detail/:id" component={Detail}></Route>
             <Route exact path="/login" component={Login}></Route>
             <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/admin/:id" component={Dashboard}></Route>
+            <PrivateRouteAdmin exact path="/admin/:id" component={Dashboard} />
             <Route exact path="/user/:id/cart" component={ShoppingCart}></Route>
             <PrivateRouteUser exact path="/user/:id/wishlist" component={Wishlist} />
             <Route exact path="/cart" component={PageShopingCart}></Route>
@@ -43,8 +44,7 @@ function App() {
             <Route exact path="/admin/edit/:id" component={FormShoes} />
             <Route exact path="/users" component={Users} />
             <Route exact path='/shopping/' component={Shopping} />
-            <Route exact path='/profile/' component={UserProfile} />
-            <Route exact path='/edit/category/:id' component={CategoryEdit} />
+            <PrivateRouteUser exact path="/user/profile/:id" component={UserDash} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>

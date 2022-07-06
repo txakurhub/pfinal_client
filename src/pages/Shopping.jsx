@@ -4,15 +4,15 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getOrderProducts } from "../redux/actions";
 
-const Shopping = () => {
+const Shopping = ({email}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(true);
   const ProductOrder = useSelector((state) => state.orderProduct);
 
 
-  const { user } = useAuth()
- const email = user?.reloadUserInfo.email
+  // const { user } = useAuth()
+//  const email = user?.reloadUserInfo.email
   const numberFormat = (value) =>
     new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -21,10 +21,10 @@ const Shopping = () => {
     }).format(value);
 
   useEffect(() => {
-    if (!ProductOrder.length) {
+    // if (!ProductOrder.length) {
       dispatch(getOrderProducts(email));
-    }
-  }, [dispatch, email]); 
+    // }
+  }, [dispatch]); 
 
   const handledetail = (e)=>{
    e.preventDefault();
@@ -44,6 +44,7 @@ const Shopping = () => {
           return (
             <div key={e.id}>
               <div>{horaFinal}</div>
+                <h1 className="text-2xl">Estado de la orden: {e.order_status}</h1>
               <div>{e.Products? e.Products.length: 0} Compras</div>
               {e.Products &&
                 e.Products.map((product) => (

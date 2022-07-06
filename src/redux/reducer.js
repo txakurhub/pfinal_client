@@ -23,7 +23,13 @@ import {
   GET_ORDER,
   FILTER_ORDER,
   ADD_CATEGORY,
-  EDIT_CATEGORY
+  EDIT_CATEGORY,
+  SEARCH_USER,
+  DELETE_CATEGORY,
+  DELETE_ORDER,
+  UPDATE_ORDER,
+  RELOAD_USER,
+  CLEAR_STATE
 } from "./actions";
 import swal from "sweetalert";
 
@@ -42,8 +48,8 @@ const initialState = {
   productosDestacados: [],
   orderProduct: [],
   users: [],
+  usersCopy: [],
   user: [],
-  productosDestacados: [],
   pictures: [],
   orderstatus: [],
   orderstatusCopy: [],
@@ -51,6 +57,14 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case CLEAR_STATE: {
+      return {
+        ...state,
+        pictures: [],
+        product_detail: {},
+      }
+    }
 
     case GET_PRODUCTS:
       const result = action.payload.map((e) => ({
@@ -225,10 +239,10 @@ function rootReducer(state = initialState, action) {
     }
 
     case GET_ORDER: {
-      const order = Object.values(action.payload).filter((e)=> e.order_email === action.correo)
- 
+      const order = Object.values(action.payload).filter((e) => e.order_email === action.correo)
+
       return {
-       
+
         orderProduct: order,
       };
     }
@@ -237,6 +251,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload,
+        usersCopy: action.payload
       };
     }
 
@@ -282,7 +297,38 @@ function rootReducer(state = initialState, action) {
         ...state
       }
     }
-
+    case DELETE_CATEGORY:{
+      const result = state.allcategoriesAdmin.filter(e=> e.id !== action.payload)
+      return {
+        ...state,
+        allcategoriesAdmin:result
+      }
+    }
+    case SEARCH_USER: {
+      let filtrado = state.usersCopy.filter(u => u.firstname && u.firstname.toLowerCase().includes(action.payload))
+      let resultado = filtrado.length ? filtrado : alert("Usuario inexistente")
+      return {
+        ...state,
+        users: resultado ? resultado : state.users
+      }
+    }
+    case DELETE_ORDER:{
+      const result = state.orderstatusCopy.filter(e=> e.id !== action.payload)
+      return{
+        ...state,
+        orderstatusCopy:result,
+        orderstatus:result
+      }
+    }
+    case UPDATE_ORDER:{
+      return state
+    }
+    case RELOAD_USER:{
+      return{
+        ...state,
+        users:state.usersCopy
+      }
+    }
     default:
       return { ...state };
   }
