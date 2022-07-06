@@ -118,7 +118,7 @@ export function AuthProvider({ children }) {
   const userInfo = async (currentUser) => {
     const users = doc(db, 'user', currentUser.uid);
     const docSnap = await getDoc(users);
-    setUserInf(docSnap.data())
+    setUserInf({...docSnap.data(),uid:currentUser.uid})
   }
 
   useEffect(() => {
