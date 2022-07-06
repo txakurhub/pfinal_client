@@ -38,6 +38,7 @@ export default function Home() {
   const productPage = 20;
   const indexOfLastProduct = currentPage * productPage;
   const indexOfFirstProduct = indexOfLastProduct - productPage;
+  const sinStock = 'SIN STOCK';
   const currentProduct = products.slice(
     indexOfFirstProduct,
     indexOfLastProduct
@@ -81,7 +82,7 @@ export default function Home() {
         handleLogin={handleLogin}
         handleLogout={handleLogout}
       />
-      <Carrousel />
+      {/* <Carrousel /> */}
       {currentProduct ? (
         <PageHeading
           products={products}
@@ -94,7 +95,23 @@ export default function Home() {
         <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3  gap-x-8 gap-y-8 items-center px-[10px]">
           {currentProduct.map(
             (r) =>
-              r.stock !== 0 && (
+              r.stock === 0 ?(  <Card
+                setProduct={setProduct}
+                toggle={toggle}
+                onClick={onClick}
+                id={r.id}
+                key={r.id}
+                title={r.title}
+                image={r.image}
+                brand={r.brand}
+                model={r.model}
+                price={r.price}
+                product={r}
+                stock={r.stock}
+                sold={r.sold}
+                wishlist={r.wishlist}
+                sinStock={sinStock}
+              />):(
                 <Card
                   setProduct={setProduct}
                   toggle={toggle}

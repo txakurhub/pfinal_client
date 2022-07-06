@@ -170,10 +170,11 @@ const Detail = () => {
         </div>
        
         <button
-          onClick={() => addToCart(selected)}
+          onClick={() => addToCart(selected) }
+          disabled={selected.stock === 0}
           className="mt-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-gray-800 w-full py-4 hover:bg-gray-700"
         >
-          <svg
+          {selected.stock ?  <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"
@@ -186,8 +187,9 @@ const Detail = () => {
               strokeLinejoin="round"
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
-          </svg>
-          Añadir al carrito de compras
+          </svg> : null}
+         
+           { selected.stock ? (<p>Añadir al Carrito</p>):( <p>Sin Stock</p>)}
         </button>
         <p className="text-base leading-4 mt-7 text-gray-600">
           Modelo del producto: {selected.model}
