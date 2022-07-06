@@ -82,7 +82,7 @@ export default function Home() {
         handleLogin={handleLogin}
         handleLogout={handleLogout}
       />
-      {/* <Carrousel /> */}
+      <Carrousel />
       {currentProduct ? (
         <PageHeading
           products={products}
