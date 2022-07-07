@@ -32,6 +32,12 @@ const Detail = () => {
   
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
+  const numberFormat = (value) =>
+  new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    currencyDisplay: "symbol",
+  }).format(value);
  
   useEffect(() => {
     if(user){
