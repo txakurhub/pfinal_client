@@ -136,7 +136,7 @@ export default function Home() {
       {currentProduct ? <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} /> : null}
       <h2 className="mt-10 ml-5 text-2xl font-semibold leading-normal text-gray-800 flex justify-start">Productos Destacados</h2>
       
-      <ProductosDestacados/>
+      <ProductosDestacados setProduct={setProduct} toggle={toggle} onClick={onClick}/>
       <Modal active={active} toggle={toggle} children={<QuickView id={id} product={product} />} />
     </>
   );
