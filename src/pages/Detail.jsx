@@ -15,6 +15,7 @@ import Reviews from "../components/Reviews";
 import { CartContext } from "../context/CartItem";
 import { SlideDetail } from "../components/SlideDetail";
 import { useAuth } from "../context/authContext";
+import Loading from "../components/Loading";
 
 const Detail = () => {
   const { user } = useAuth()
@@ -67,7 +68,7 @@ const Detail = () => {
 
   }
   if (loader === true) {
-    return <div>Acá va un loader...</div>;
+    return <Loading/>
   }
 
   return (
