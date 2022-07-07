@@ -33,7 +33,8 @@ export const EditUser = ({
   };
 
   const toggle = (e) => {
-    setActive(!active);
+    console.log(e.target.disabled);
+    setActive({[e.target.disabled]:!e.target.disabled.value});
   };
 
   const handleSubmissionChange = (r) => {
