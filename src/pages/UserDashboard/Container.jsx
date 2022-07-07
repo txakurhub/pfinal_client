@@ -23,17 +23,20 @@ const Container =  ({ active }) => {
     if (active === "compras") return <Shopping email={user.email} />;
     if (active === "edit") return <EditUser id={id} user={currentUser}/>;
     if (active === "favoritos") return <Wishlist />;
-    if (active === "carrito") {
-        return (
-            <PageShopingCart />
-        );
-    } else {
+    if (active === "carrito") { return (<PageShopingCart />);
+    } 
+    if (active === "perfil"){return (
+        <div className="flex flex-col justify-center w-100">
+        <img src={currentUser.image?currentUser.image:currentUser.photoURL?currentUser.photoURL:userimg}   className='self-center object-cover h-50 w-50 rounded-full ' />
+        <h1 className="text-4xl">hola {currentUser.firstname!==''?currentUser.firstname+' '+currentUser.lastname:currentUser.displayName!==''?currentUser.displayName:"usuario"}</h1>
+    </div>
+    )}
+    else {
         return (
 
         <div className="flex flex-col justify-center w-100">
             <img src={currentUser.image?currentUser.image:currentUser.photoURL?currentUser.photoURL:userimg}   className='self-center object-cover h-50 w-50 rounded-full ' />
             <h1 className="text-4xl">hola {currentUser.firstname!==''?currentUser.firstname+' '+currentUser.lastname:currentUser.displayName!==''?currentUser.displayName:"usuario"}</h1>
-            
         </div>
         )
     }
