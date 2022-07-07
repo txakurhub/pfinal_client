@@ -8,8 +8,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { set } from "firebase/database";
 import defaultImage from "../assets/user.png"
 
-export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
-  
+export const EditUser = ({ id, lastname, firstname, phone, password, image }) => {
+
   // const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const initialState = {
@@ -19,22 +19,20 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
     password: password,
     image: image
   };
-  
+
   const [submission, setSubmission] = useState({ ...initialState });
   const [active, setActive] = useState();
-  
+
   const toggle = (e) => {
-    setActive(!active);
+    console.log(e.target.disabled);
+    setActive({[e.target.disabled]:!e.target.disabled.value});
   };
-  
+
   const handleSubmissionChange = (r) => {
     setSubmission({ ...submission, [r.target.name]: r.target.value });
   };
-  
-  useEffect(() => {
-    dispatch(getUser(id));
-  }, [dispatch]);
-  
+
+
   const handleUpload = async (e) => {
     const archivo = e.target.files[0];
     if (!archivo) {
@@ -64,81 +62,115 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
   };
 
   return (
-    <form
-      className="flex flex-col items-center"
-      onSubmit={handleSubmit}
-    >
+    <div className="flex flex-col items-center">
+
       <div className="text-gray-600">
-        <button onClick={toggle}>
-          <img src={edit} alt="" width={25} height={25} />
-        </button>
         <p>Los cambios que hagas seran visibles para otros usuarios</p>
       </div>
 
-      <div className="bg-white-100 p-2">
-        <label className="font-semibold">Foto de perfil:</label>
-        <input
-          type="file"
-          name="image"
-          id="my_file"
-          onChange={handleUpload}
-          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
-        />
-      </div>
+      <form
+        className="flex flex-col items-center"
+        onSubmit={handleSubmit}
+      >
+        <div className="bg-white-100 p-2">
+          <label className="font-semibold">Foto de perfil:</label>
+          <button onClick={(e)=>{toggle(e)}}>
+            <img src={edit} alt="" width={25} height={25} />
+          </button>
+          <input
+            disabled={active}
+            type="file"
+            name="image"
+            id="my_file"
+            onChange={(e) => { handleUpload(e) }}
+            className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
+          />
+        </div>
+      </form>
 
-      <div className="bg-white-100 p-2">
-        <label className="font-semibold">Nombre:</label>
-        <input
-          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
-          type="text"
-          name="firstname"
-          placeholder={submission.firstname}
-          autocomplete="off"
-          minLength={3}
-          value={submission.firstname}
-          onChange={(e) => {
-            handleSubmissionChange(e);
-          }}
-          disabled={active}
-        ></input>
-      </div>
+      <form
+        className="flex flex-col items-center"
+        onSubmit={handleSubmit}
+      >
+        <div className="bg-white-100 p-2">
+          <label className="font-semibold">Nombre:</label>
+          <button onClick={e=>{toggle(e)}}>
+            <img src={edit} alt="" width={25} height={25} />
+          </button>
+          <input
+            className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
+            type="text"
+            name="firstname"
+            // placeholder={submission.firstname}
+            autocomplete="off"
+            minLength={3}
+            value={ submission.firstname}
+            onChange={(e) => {
+              handleSubmissionChange(e);
+            }}
+            disabled={active}
+          ></input>
+        </div>
+      </form>
 
-      <div className="bg-white-100 p-2">
-        <label className="font-semibold">Apellido:</label>
-        <input
-          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
-          placeholder={submission.lastname}
-          autocomplete="off"
-          type="text"
-          name="lastname"
-          value={submission.lastname}
-          onChange={(e) => {
-            handleSubmissionChange(e);
-          }}
-          minLength={3}
-          disabled={active}
-        />
-      </div>
+      <form
+        className="flex flex-col items-center"
+        onSubmit={handleSubmit}
+      >
+        <div className="bg-white-100 p-2">
+          <label className="font-semibold">Apellido:</label>
+          <button onClick={e=>{toggle(e)}}>
+            <img src={edit} alt="" width={25} height={25} />
+          </button>
+          <input
+            className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
+            placeholder={submission.lastname}
+            autocomplete="off"
+            type="text"
+            name="lastname"
+            value={submission.lastname}
+            onChange={(e) => {
+              handleSubmissionChange(e);
+            }}
+            minLength={3}
+            disabled={active}
+          />
+        </div>
+      </form>
 
-      <div className="bg-white-100 p-2">
-        <label className="font-semibold">Contraseña:</label>
-        <input
-          name="password"
-          disabled={active}
-          className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
-          value={submission.password}
-          type="password"
-          placeholder="******"
-          minLength={6}
-          onChange={(e) => {
-            handleSubmissionChange(e);
-          }}
-        />
-      </div>
+      <form
+        className="flex flex-col items-center"
+        onSubmit={handleSubmit}
+      >
+        <div className="bg-white-100 p-2">
+          <label className="font-semibold">Contraseña:</label>
+          <button onClick={e=>{toggle(e)}}>
+            <img src={edit} alt="" width={25} height={25} />
+          </button>
+          <input
+            name="password"
+            disabled={active}
+            className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
+            value={submission.password}
+            type="password"
+            placeholder="******"
+            minLength={6}
+            onChange={(e) => {
+              handleSubmissionChange(e);
+            }}
+          />
+        </div>
+      </form>
 
-
+      <form 
+    className="flex flex-col items-center"
+    onSubmit={handleSubmit}
+    >
       <div className="bg-white-100 p-2">
         <label className="font-semibold">Teléfono:</label>
+        <button onClick={e=>{toggle(e)}}>
+            <img src={edit} alt="" width={25} height={25} />
+          </button>
         <div>
           <input
             disabled={active}
@@ -154,7 +186,8 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
           />
         </div>
       </div>
-      {/* pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" */}
+      </form>
+      
       <button
         className="focus:outline-none ml-3 bg-white-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
         onClick={(e) => handleSubmit(e)}
@@ -162,6 +195,7 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
       >
         Aceptar
       </button>
-    </form>
+
+    </div>
   );
 };
