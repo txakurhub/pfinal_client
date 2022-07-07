@@ -1,12 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { getUser } from "../../redux/actions";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-const Nav = ({ setView }) => {
+
+
+const Nav = ({ setView, id }) => {
+  const db = getFirestore();
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const handleClick = (value) => setView(value);
   const history = useHistory()
+  const [info, setInfo] = useState(null)
+  console.log(id);
+
+  const userInfo = async (currentUser)=>{
+    const users = doc(db, 'user', currentUser);
+    console.log(users);
+      const docSnap = await getDoc(users);
+      setInfo(docSnap.data())
+  }
+
+  const { user } =  useAuth()
+const dispatch = useDispatch()
+  useEffect(() => {
+    
+      dispatch(getUser(id))
+      userInfo(user)
+  }, [dispatch]);
+  const currentUser = useSelector(state => state.user);
+console.log(info);
+
 
   return (
     <div className="dark:bg-gray-900 relative w-full bg-gray-100 shadow-sm p-6">
@@ -18,6 +44,7 @@ const Nav = ({ setView }) => {
             inicio
             </a>
           </li>
+          
           <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
@@ -58,6 +85,7 @@ const Nav = ({ setView }) => {
                 inicio
               </a>
             </li>
+
             <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
@@ -119,6 +147,7 @@ const Nav = ({ setView }) => {
                 inicio
               </a>
             </li>
+
             <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
