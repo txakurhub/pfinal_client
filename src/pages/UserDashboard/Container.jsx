@@ -18,10 +18,15 @@ const Container =  ({ active }) => {
         dispatch(getUser(id))
     }, [dispatch]);
     const currentUser = useSelector(state => state.user);
-    console.log(currentUser);
-
+console.log(currentUser);
     if (active === "compras") return <Shopping email={user.email} />;
-    if (active === "edit") return <EditUser id={id} user={currentUser}/>;
+    if (active === "edit") return <EditUser id={id} 
+    lastname={currentUser.lastname}
+    firstname={currentUser.firstname}
+    phone={currentUser.phone}
+    password={currentUser.password}
+    image={currentUser.image}
+    />;
     if (active === "favoritos") return <Wishlist />;
     if (active === "carrito") { return (<PageShopingCart />);
     } 
