@@ -155,6 +155,7 @@ const Detail = () => {
           <p className="text-base leading-4 text-gray-800">Tamaño</p>
           <p>Stock: {selected.stock}</p>
           <p>Vendidas: {selected.sold}</p>
+          <p>Precio: {numberFormat(selected.price)}</p>
           <div className="flex items-center justify-center">
             <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
             <svg
