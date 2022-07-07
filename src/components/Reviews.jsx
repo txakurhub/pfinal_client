@@ -5,8 +5,7 @@ import swal from 'sweetalert';
 
 const Reviews = ({ id, user }) => {
   const users = useSelector(state => state.users);
-  console.log("id user:", id)
-  console.log("user de params:", user)
+
   const username = (id) => {
     const dato = Object.values(users).filter(e => e.id === id)
     const date = dato.map(e => e.firstname ? e.firstname : "Sin nombre")
@@ -14,7 +13,7 @@ const Reviews = ({ id, user }) => {
   }
 
   const reviews = useSelector((state) => state.reviews);
-  console.log("reviews:", reviews)
+
   const dispatch = useDispatch();
 
   const [input, setInput] = useState({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id });
