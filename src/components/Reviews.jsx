@@ -5,8 +5,7 @@ import swal from 'sweetalert';
 
 const Reviews = ({ id, user }) => {
   const users = useSelector(state => state.users);
-  console.log("id user:", id)
-  console.log("user de params:", user)
+
   const username = (id) => {
     const dato = Object.values(users).filter(e => e.id === id)
     const date = dato.map(e => e.firstname ? e.firstname : "Sin nombre")
@@ -14,7 +13,7 @@ const Reviews = ({ id, user }) => {
   }
 
   const reviews = useSelector((state) => state.reviews);
-  console.log("reviews:", reviews)
+
   const dispatch = useDispatch();
 
   const [input, setInput] = useState({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id });
@@ -90,7 +89,7 @@ const Reviews = ({ id, user }) => {
               <input onChange={(e) => handlechange(e)} name="calification" type="radio" value={4} className="ml-2 h-6 w-6 opacity-0 cursor-pointer" />
               <input onChange={(e) => handlechange(e)} name="calification" type="radio" value={5} className="ml-2 h-6 w-6 opacity-0 cursor-pointer" />
             </div>
-            <textarea value={input.comment} className="bg-gray-100 rounded border border-transparent focus:border-gray-400 leading-normal resize w-full h-20 py-2 pr-[40px] px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" type="text" placeholder="Agregar un comentario" name="comment" id="comentario" onChange={(e) => handlechange(e)} />
+            <textarea value={input.comment} className="bg-gray-100 rounded border border-transparent focus:border-gray-400 leading-normal resize w-full h-20 py-2 pr-[40px] px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" type="text" placeholder="Deja un comentario" name="comment" id="comentario" onChange={(e) => handlechange(e)} />
           </form>
         ) : (<div>Debes estar registrado para poder dejar un comentario.</div>)}
          <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Comentarios:</p>

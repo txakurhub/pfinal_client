@@ -15,7 +15,7 @@ import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc, collection, getDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
 import { async } from "@firebase/util";
-// import { LocalStorage } from "./LocalStorage";
+import { LocalStorage } from "./LocalStorage";
 export const authContext = createContext();
 
 export const useAuth = () => {
@@ -23,7 +23,7 @@ export const useAuth = () => {
   return context;
 };
 export function AuthProvider({ children }) {
-  // const [user, setUser] = LocalStorage("user",{}) componente de Tomás
+  const [userStorage, setUserStorage] = LocalStorage("user",{}) 
   const [user, setUser] = useState(null);
   const [userInf, setUserInf] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -119,6 +119,7 @@ export function AuthProvider({ children }) {
     const users = doc(db, 'user', currentUser.uid);
     const docSnap = await getDoc(users);
     setUserInf({...docSnap.data(),uid:currentUser.uid})
+    setUserStorage({...docSnap.data(),uid:currentUser.uid});
   }
 
   useEffect(() => {
@@ -151,6 +152,7 @@ export function AuthProvider({ children }) {
         userInf,
         logout,
         loading,
+        userStorage,
         loginWithGoogle,
         loginWithFacebook,
         resetPassword,
