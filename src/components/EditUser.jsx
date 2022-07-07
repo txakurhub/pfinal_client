@@ -92,7 +92,7 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
           className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
           type="text"
           name="firstname"
-          placeholder={submission.firstname}
+          placeholder={firstname}
           autocomplete="off"
           minLength={3}
           value={submission.firstname}
@@ -107,7 +107,7 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
         <label className="font-semibold">Apellido:</label>
         <input
           className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
-          placeholder={submission.lastname}
+          placeholder={lastname}
           autocomplete="off"
           type="text"
           name="lastname"
@@ -142,11 +142,11 @@ export const EditUser = ({ id , lastname,firstname ,phone,password,image}) => {
         <div>
           <input
             disabled={active}
-            className="border border-gray-400 block  rounded focus:outline-none focus:border-teal-300"
+            className="border border-gray-400 block rounded focus:outline-none focus:border-teal-300"
             type="tel"
             name="phone"
             autocomplete="off"
-            placeholder={submission.phone}
+            placeholder={phone}
             onChange={(e) => {
               handleSubmissionChange(e);
             }}
