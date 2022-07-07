@@ -6,7 +6,7 @@ import Container from "./Container";
 import Nav from "./Nav";
 
 const Dashboard = () => {
-  const [view, setView] = useState("dashboard");
+  const [view, setView] = useState("perfil");
   const dispatch = useDispatch();
   const { id } = useParams();
  
