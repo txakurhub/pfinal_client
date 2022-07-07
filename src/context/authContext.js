@@ -8,14 +8,14 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   FacebookAuthProvider,
+
 } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, collection, getDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
 import { async } from "@firebase/util";
-import { LocalStorage } from "./LocalStorage";
-
+// import { LocalStorage } from "./LocalStorage";
 export const authContext = createContext();
 
 export const useAuth = () => {
@@ -23,8 +23,11 @@ export const useAuth = () => {
   return context;
 };
 export function AuthProvider({ children }) {
-  const [user, setUser] = LocalStorage("user",{})
+  // const [user, setUser] = LocalStorage("user",{}) componente de Tomás
+  const [user, setUser] = useState(null);
+  const [userInf, setUserInf] = useState(false);
   const [loading, setLoading] = useState(true);
+  const db = getFirestore();
 
   const signup = async ({
     email,
@@ -86,17 +89,16 @@ export function AuthProvider({ children }) {
     signInWithPopup(auth, googleProvider)
       .then(cred => {
         const docuRef = doc(firestore, `user/${cred.user.uid}`);
-        console.log(firestore);
         setDoc(docuRef, {
           email: cred.user.email,
           displayName: cred.user.displayName,
           photoURL: cred.user.photoURL,
           admin: false,
           banned: false,
-          firstname: "",
-          lastname: "",
+          firstname: cred.user.displayName.split(" ")[0],
+          lastname: cred.user.displayName.split(" ")[1],
           phone: "",
-          image:""
+          image: ""
         })
       })
   }
@@ -113,9 +115,21 @@ export function AuthProvider({ children }) {
     sendPasswordResetEmail(auth, email);
   };
 
+  const userInfo = async (currentUser) => {
+    const users = doc(db, 'user', currentUser.uid);
+    const docSnap = await getDoc(users);
+    setUserInf({...docSnap.data(),uid:currentUser.uid})
+  }
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        userInfo(currentUser)
+        setUser(currentUser);
+        console.log(userInf)
+      } else {
+        setUserInf(null)
+      }
       setLoading(false);
     });
     return () => unSubscribe;
@@ -131,8 +145,10 @@ export function AuthProvider({ children }) {
     <authContext.Provider
       value={{
         signup,
+        userInfo,
         login,
         user,
+        userInf,
         logout,
         loading,
         loginWithGoogle,
