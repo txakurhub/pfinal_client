@@ -44,11 +44,7 @@ console.log(info);
             inicio
             </a>
           </li>
-          {id === "Equi8zPWkJUnZcrD1jo3eJ2fPbP2" && 
-          <li>
-             <a href={`/admin/${id}`} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"/>
-          </li>
-          }
+          
           <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
@@ -89,12 +85,6 @@ console.log(info);
                 inicio
               </a>
             </li>
-
-            {id === "Equi8zPWkJUnZcrD1jo3eJ2fPbP2" && 
-          <li>
-             <a href={`/admin/${id}`} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"/>
-          </li>
-          }
 
             <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
@@ -157,12 +147,6 @@ console.log(info);
                 inicio
               </a>
             </li>
-
-            {id === "Equi8zPWkJUnZcrD1jo3eJ2fPbP2" && 
-          <li>
-             <a href={`/admin/${id}`} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"/>
-          </li>
-          }
 
             <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
