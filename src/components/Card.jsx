@@ -1,35 +1,35 @@
 import React, { useContext, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
 // import { create_new_wishlist, remove_wishlist_product } from "../redux/actions";
-import { create_new_wishlist } from "../redux/actions";
-import QuickView from "./QuickView";
+// import { create_new_wishlist } from "../redux/actions";
+// import QuickView from "./QuickView";
 //lo comente porque tira warning que no se usa
 
-import { useAuth } from "../context/authContext";
-const Card = ({ title, image, price, id, product, toggle, onClick, setProduct ,sinStock}) => {
+// import { useAuth } from "../context/authContext";
+// const Card = ({ title, image, price, id, product, toggle, onClick, setProduct ,sinStock}) => {
 
-  const { addToCart } = useContext(CartContext)
+//   const { addToCart } = useContext(CartContext)
   
   //Lo comente porque tiraba warning que no se usaba
   //const [resultado, setResultado] = useState(result)
-  return (
-    <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-[5rem] py-36 px-10 flex justify-center items-center">
-      <img src={image} alt="" className="object-contain w-[350px] h-[200px]" />
-      <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
-        <div>
-          <p className="group-hover:opacity-60 transition duration-500 text-xl leading-5 text-gray-600">{title}</p>
-        </div>
-      </div>
-        <div>
-          <p className="group-hover:opacity-60 transition duration-500 text-xl font-semibold leading-5 text-gray-800 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">${price}</p>
-        </div>
+  // return (
+  //   <div className="group group-hover:bg-opacity-60 transition duration-500 relative bg-gray-50 sm:p-[5rem] py-36 px-10 flex justify-center items-center">
+  //     <img src={image} alt="" className="object-contain w-[350px] h-[200px]" />
+  //     <div className="absolute sm:top-8 top-4 left-4 sm:left-8 flex justify-start items-start flex-col space-y-2">
+  //       <div>
+  //         <p className="group-hover:opacity-60 transition duration-500 text-xl leading-5 text-gray-600">{title}</p>
+  //       </div>
+  //     </div>
+  //       <div>
+  //         <p className="group-hover:opacity-60 transition duration-500 text-xl font-semibold leading-5 text-gray-800 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">${price}</p>
+  //       </div>
       {/* <div className="group-hover:opacity-60 transition duration-500 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />
       </div> */}
-      <div className="flex flex-col bottom-8 left-8 space-y-4 absolute opacity-100 group-hover:opacity-100 transition duration-500">
+      {/* <div className="flex flex-col bottom-8 left-8 space-y-4 absolute opacity-100 group-hover:opacity-100 transition duration-500">
         {
           sinStock ? <p  class=" decoration-sky-400 bg-red-600 p-1.5 text-white rounded-full font-semibold" >SIN STOCK</p> : (  <button onClick={() => addToCart(product)}>
           <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,5 +47,45 @@ const Card = ({ title, image, price, id, product, toggle, onClick, setProduct ,s
     </div>
   );
 }
+
+export default Card; */}
+
+const Card = ({ title, image, price, id, product, toggle, onClick, setProduct, sinStock}) => {
+  const { addToCart } = useContext(CartContext);
+
+  return (
+    <div key={id} className="group w-[280px] h-[250px]">
+      <a title="Ir al detalle del producto" href={`/detail/${id}`} className="w-full h-[140px] aspect-w-1 aspect-h-1 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8 flex items-center justify-center">
+        <img
+          src={image}
+          alt="Not found"
+          className="h-full object-center object-cover group-hover:opacity-75"
+        />
+      </a>
+      <h3 title={title} className="mt-4 text-sm text-start text-gray-700 w-full h-[20px] truncate">{title}</h3>
+      <div className="flex justify-between items-center">
+        <p title={'$' + price} className="mt-1 text-lg text-start font-medium text-gray-900">${price}</p>
+        {
+          sinStock ? 
+          <p title="Producto sin disponibilidad en stock" className="flex items-center text-sm text-gray-700 opacity-0 group-hover:opacity-100 transition duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="red">
+              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+            No disponible
+          </p> : 
+          <p title="Producto disponible en stock" className="flex items-center text-sm text-gray-700 opacity-0 group-hover:opacity-100 transition duration-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="green">
+              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            </svg>
+            Disponible
+          </p>
+        }
+      </div>
+      <button title={sinStock ? 'deshabilitado' : 'Agregar al carrito'} disabled={sinStock ? true : false} onClick={() => addToCart(product)} className="w-full h-[30px] m-auto rounded bg-[#f3f4f6] text-[#404850] font-semibold mt-2 opacity-0 group-hover:opacity-100 transition duration-500">
+        Agregar al carrito
+      </button>
+    </div>
+  );
+};
 
 export default Card;

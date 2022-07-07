@@ -107,27 +107,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
           {/* For large screens */}
           <div className="dark:bg-gray-900 bg-gray-50 px-6 py-9">
             <div className="container mx-auto flex items-center justify-between">
-              <h1 className="md:w-2/12 cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
+              <h1 className="md:w-auto cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
               </h1>
-              <ul className={`hidden w-8/12 md:flex items-center justify-center space-x-8 ${searchInput ? "" : "translate-x-[-100px] ease-in-out transition duration-50"}`}>
-                <li className="hidden">
-                  <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    Furniture
-                  </a>
-                </li>
-                <li className="hidden">
-                  <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    Lookbook
-                  </a>
-                </li>
-                <li className="hidden">
-                  <a href="/" className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    Support
-                  </a>
-                </li>
-              </ul>
-              <div className="md:w-2/12 justify-end flex items-center space-x-4 xl:space-x-8">
+              <div className="md:w-auto justify-end flex items-center space-x-4 xl:space-x-8">
                 <form onSubmit={handleSubmit} className="hidden lg:flex items-center relative">
                   <button onClick={() => setSearchInput(!searchInput)} aria-label="search items" className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
                     <svg className="fill-stroke" width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,15 +149,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   <ShoppingCart />
                   {
                     loading ?
-                      <h4 className="dark:text-white">Cargando...</h4> :
-                      user ?
-                        <>
-                        <button onClick={() => To(`/user/profile/${user.uid}`)}>
-                        <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      </button>
-                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                        </> :
-                        <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
+                    <h4 className="dark:text-white">Cargando...</h4> :
+                    user ?
+                    <>
+                      <button title="Ir al perfil" onClick={() => To(`/user/profile/${user.uid}`)}>Hola, {user.displayName}!</button>
+                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                    </> :
+                    <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
