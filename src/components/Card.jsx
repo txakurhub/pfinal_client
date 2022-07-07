@@ -11,6 +11,12 @@ import { useAuth } from "../context/authContext";
 const Card = ({ title, image, price, id, product, toggle, onClick, setProduct ,sinStock}) => {
 
   const { addToCart } = useContext(CartContext)
+  const numberFormat = (value) =>
+  new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    currencyDisplay: "symbol",
+  }).format(value);
   
   //Lo comente porque tiraba warning que no se usaba
   //const [resultado, setResultado] = useState(result)
@@ -23,7 +29,7 @@ const Card = ({ title, image, price, id, product, toggle, onClick, setProduct ,s
         </div>
       </div>
         <div>
-          <p className="group-hover:opacity-60 transition duration-500 text-xl font-semibold leading-5 text-gray-800 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">${price}</p>
+          <p className="group-hover:opacity-60 transition duration-500 text-xl font-semibold leading-5 text-gray-800 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">{numberFormat(price)}</p>
         </div>
       {/* <div className="group-hover:opacity-60 transition duration-500 absolute bottom-8 right-8 flex justify-start items-start flex-row space-x-2">
         <button className="bg-white border rounded-full focus:bg-gray-800 border-gray-600 p-1.5" />

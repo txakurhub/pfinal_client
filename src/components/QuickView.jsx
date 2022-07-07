@@ -11,7 +11,12 @@ const QuickView = ({ id, product }) => {
     const selected = useSelector((state) => state.product_detail);
     const pictures = useSelector((state) => state.pictures);
     const { addToCart } = useContext(CartContext);
-    
+    const numberFormat = (value) =>
+    new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "ARS",
+      currencyDisplay: "symbol",
+    }).format(value);
     const handleaddwishlist = (e) => {
         e.preventDefault();
         dispatch(create_new_wishlist({user_id: 1, product_id: id}))
@@ -63,7 +68,7 @@ const QuickView = ({ id, product }) => {
                 </CarouselProvider>
                 <div className="h-full lg:w-1/2 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
                     <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">{selected.title}</h1>
-                    <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">${selected.price}</p>
+                    <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">{numberFormat(selected.price)}</p>
                     <div className="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8 mt-8 md:mt-16">
                     { product.stock ?
                         <button onClick={() => addToCart(product)} disabled={product.stock === 0} className="w-full md:w-3/5 border border-gray-800 text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800 text-white">

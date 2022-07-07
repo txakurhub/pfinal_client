@@ -15,6 +15,7 @@ import Reviews from "../components/Reviews";
 import { CartContext } from "../context/CartItem";
 import { SlideDetail } from "../components/SlideDetail";
 import { useAuth } from "../context/authContext";
+import Loading from "../components/Loading";
 
 const Detail = () => {
   const { user } = useAuth()
@@ -31,6 +32,12 @@ const Detail = () => {
   
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
+  const numberFormat = (value) =>
+  new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    currencyDisplay: "symbol",
+  }).format(value);
  
   useEffect(() => {
     if(user){
@@ -67,7 +74,7 @@ const Detail = () => {
 
   }
   if (loader === true) {
-    return <div>Acá va un loader...</div>;
+    return <Loading/>
   }
 
   return (
@@ -148,6 +155,7 @@ const Detail = () => {
           <p className="text-base leading-4 text-gray-800">Tamaño</p>
           <p>Stock: {selected.stock}</p>
           <p>Vendidas: {selected.sold}</p>
+          <p>Precio: {numberFormat(selected.price)}</p>
           <div className="flex items-center justify-center">
             <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
             <svg

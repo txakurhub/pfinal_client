@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Nav = ({ setView }) => {
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
@@ -13,18 +14,23 @@ const Nav = ({ setView }) => {
       <div id="md-searchbar" className={`${mdOptionsToggle ? "hidden" : "flex"} bg-gray-100 dark:bg-gray-900 lg:hidden pb-5 pt-0 items-center justify-center`}>
         <ul className={`hidden md:flex items-center justify-center space-x-8 bg-white w-full py-2 rounded-xl`}>
           <li>
-            <a href="/" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+            <a  onClick={() =>history.push('/') } className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
             inicio
             </a>
           </li>
           <li>
-            <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-             Mis Compras
+            <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mi perfil
             </a>
           </li>
           <li>
             <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
               Editar mi perfil
+            </a>
+          </li>
+          <li>
+            <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mis Compras
             </a>
           </li>
           <li>
@@ -48,18 +54,23 @@ const Nav = ({ setView }) => {
         <div className="justify-end flex items-center space-x-4 xl:space-x-8">
           <ul className={`hidden lg:flex items-center justify-center space-x-8`}>
             <li>
-              <a href="/" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+              <a  onClick={() =>history.push('/') } className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 inicio
+              </a>
+            </li>
+            <li>
+            <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mi perfil
+            </a>
+          </li>
+            <li>
+              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                editar
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 Mis compras
-              </a>
-            </li>
-            <li>
-              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                editar
               </a>
             </li>
             <li>
@@ -104,18 +115,23 @@ const Nav = ({ setView }) => {
         <div className="mt-6 p-4 h-full">
           <ul className={`h-full flex flex-col items-center justify-evenly bg-white w-full py-2 rounded-xl md:hidden lg:hidden xl:hidden 2xl:hidden`}>
             <li>
-              <a href="/" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+              <a  onClick={() =>history.push('/') } className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 inicio
+              </a>
+            </li>
+            <li>
+            <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mi perfil
+            </a>
+          </li>
+            <li>
+              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                editar
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 mis compras
-              </a>
-            </li>
-            <li>
-              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                editar
               </a>
             </li>
             <li>
