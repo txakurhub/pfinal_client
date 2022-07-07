@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full">
-      <Nav setView={setView} /> {/* va ir arriba */}
+      <Nav setView={setView} id={id} /> {/* va ir arriba */}
       <Container active={view} id={id} />     {/* {ocupa el resto de la pantalla} */}
     </div>
   );

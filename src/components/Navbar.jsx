@@ -95,12 +95,12 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                   user ?
                     <>
                       <button onClick={() => To(`/user/profile/${user.uid}`)}>
-                        <h4 className="dark:text-white">Welcome {user.email}</h4>
+                        <h4 className="dark:text-white">Bienvenido {user.email}</h4>
                       </button>
                       
-                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                      <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button>
                     </> :
-                    <button className="dark:text-white" onClick={handleLogin}>Login</button>
+                    <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
               }
             </div>
           </div>
@@ -153,7 +153,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     user ?
                     <>
                       <button title="Ir al perfil" onClick={() => To(`/user/profile/${user.uid}`)}>Hola, {user.displayName}!</button>
-                      <button className="dark:text-white" onClick={handleLogout}>Logout</button>
+                      <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button>
                     </> :
                     <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
                   }
