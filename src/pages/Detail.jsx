@@ -40,20 +40,22 @@ const Detail = () => {
   }).format(value);
  
   useEffect(() => {
-    if(user){
-      dispatch(filter_get_wishlist_product({ id: user.uid, product: params.id }));
-    }
+
    
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
     dispatch(getPictures(params.id))
+    if(user){
+      dispatch(filter_get_wishlist_product({ id: user.uid, product: params.id }));
+    }
+
     // dispatch(getStock(params.id))
     return () => {
       dispatch(clearStateDetail())
   }
   
-  }, [dispatch, counter, params.id ]);
+  }, [dispatch, counter, user ]);
   
- 
+console.log(wishlist)
 
   const handleaddwishlist = (e)=>{
     e.preventDefault();
