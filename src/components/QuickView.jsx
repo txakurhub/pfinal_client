@@ -70,9 +70,15 @@ const QuickView = ({ id, product }) => {
                     <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">{selected.title}</h1>
                     <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">{numberFormat(selected.price)}</p>
                     <div className="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8 mt-8 md:mt-16">
+                    { product.stock ?
                         <button onClick={() => addToCart(product)} disabled={product.stock === 0} className="w-full md:w-3/5 border border-gray-800 text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800 text-white">
-                        { product.stock ? (<p>Añadir al Carrito</p>):( <p>Sin Stock</p>)}
+                        <p>Añadir al Carrito</p>
                         </button>
+                        :
+                        <button onClick={() => addToCart(product)} disabled={product.stock === 0} className="w-full md:w-3/5  text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-red-600 text-white hover:bg-red-800">
+                         <p class="text-white ">Sin Stock</p>
+                        </button>
+                        }
                         <Link to={`/detail/${id}`} className="w-full md:w-2/5">
                             <button className="w-full border border-gray-800 text-base font-medium leading-none text-gray-800 uppercase py-6 bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-800 hover:text-white">
                                 Ver detalles

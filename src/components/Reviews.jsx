@@ -50,7 +50,10 @@ const Reviews = ({ id, user }) => {
   useEffect(() => {
     dispatch(get_reviews(id));
     dispatch(getUsers())
-  }, [dispatch, id]);
+    if(user){
+      setInput({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id })
+    }
+  }, [dispatch, id, user]);
 
   console.log(reviews);
 
