@@ -53,7 +53,7 @@ const Detail = () => {
       dispatch(clearStateDetail())
   }
   
-  }, [dispatch, counter, user ]);
+  }, [dispatch, user ]);
  
 
   const handleaddwishlist = (e)=>{
@@ -249,7 +249,7 @@ const Detail = () => {
         </div>
       </div>
     </section>
-    <Reviews user={user} id={selected.id}/>
+    <Reviews user={user} product={selected}/>
     {/* <SlideDetail /> */}
   </div>
   );
