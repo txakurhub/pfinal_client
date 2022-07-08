@@ -55,6 +55,7 @@ const FormShoes = ({ id }) => {
       stock: '',
       image: ''
     });
+    // window.location.reload() // te dejo este comentado 
     history.push("/admin/7R07xtn17ZU09JHnm6Mi") // el id full hardcodeado => despues de la demo lo arreglo
   };
 
