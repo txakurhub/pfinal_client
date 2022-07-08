@@ -50,7 +50,10 @@ const Reviews = ({ id, user }) => {
   useEffect(() => {
     dispatch(get_reviews(id));
     dispatch(getUsers())
-  }, [dispatch, id]);
+    if(user){
+      setInput({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id })
+    }
+  }, [dispatch, id, user]);
 
   return (
     <div className="py-12 px-4 md:px-6 2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center">

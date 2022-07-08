@@ -54,8 +54,7 @@ const Detail = () => {
   }
   
   }, [dispatch, counter, user ]);
-  
-console.log(wishlist)
+ 
 
   const handleaddwishlist = (e)=>{
     e.preventDefault();
