@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 
 const Reviews = ({ id, user }) => {
   const users = useSelector(state => state.users);
-  console.log(user);
+
   const username = (id) => {
     const dato = Object.values(users).filter(e => e.id === id)
     const date = dato.map(e => e.firstname ? e.firstname : "Sin nombre")
