@@ -6,7 +6,7 @@ import Shopping from "../Shopping";
 import { Profile } from "./Profile";
 import { useAuth } from "../../context/authContext";
 import { useParams } from "react-router-dom";
-import userimg from '../../assets/user.png'
+
 
 const Container =  ({ active }) => { 
     const { id } = useParams();
