@@ -6,7 +6,7 @@ import swal from "sweetalert";
 
 const PayPal = (props) => {
   const history = useHistory();
-  const { user } = useAuth();
+  const { user,userStorage } = useAuth();
   const { product } = props;
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
@@ -38,7 +38,7 @@ const PayPal = (props) => {
   return (
     <PayPalButtons
       onClick={(data, actions) => {
-        if(user === null) {
+        if(userStorage === null) {
           setError("Tienes que estar registrado para poder comprar");
           history.push("/login");
           return actions.reject();
