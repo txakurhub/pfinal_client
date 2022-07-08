@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-
+import { LocalStorage } from "../../context/LocalStorage";
 import Container from "./Container";
 import Nav from "./Nav";
 
 const Dashboard = () => {
-  const [view, setView] = useState("perfil");
+  // const [userStorage, setUserStorage] = LocalStorage("user",{}) 
+  const [view, setView] = LocalStorage("view",{}) 
   const dispatch = useDispatch();
   const { id } = useParams();
  
