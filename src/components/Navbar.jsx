@@ -4,6 +4,7 @@ import { searchSneakes } from "../redux/actions";
 import ShoppingCart from "./ShoppingCart";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
+
 const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
   const wishlist = useSelector((state) => state.wishlist);
   const [searchInput, setSearchInput] = useState(true);
@@ -12,7 +13,8 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
   const dispatch = useDispatch();
   const history = useHistory();
   const [input, setInput] = useState('');
-
+  const { userStorage } =  useAuth();
+  console.log(userStorage);
 
   const To = (props) => history.push('/' + props ? props : null);
 
@@ -76,13 +78,13 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 )
               }
             </form>
-            <div className="space-x-6">
-              <button onClick={() => To()} aria-label="view favourites" className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
+            <div className="space-x-6 flex items-center">
+              <button onClick={() => To('user/1/wishlist')} aria-label="Ver favoritos" className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
                 <svg className="fill-stroke" width={16} height={16} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M13.8921 3.07357C13.5516 2.73291 13.1473 2.46267 12.7023 2.2783C12.2574 2.09392 11.7804 1.99902 11.2988 1.99902C10.8171 1.99902 10.3402 2.09392 9.89521 2.2783C9.45023 2.46267 9.04595 2.73291 8.70544 3.07357L7.99878 3.78024L7.29211 3.07357C6.60432 2.38578 5.67147 1.99938 4.69878 1.99938C3.72609 1.99938 2.79324 2.38578 2.10544 3.07357C1.41765 3.76137 1.03125 4.69422 1.03125 5.66691C1.03125 6.6396 1.41765 7.57245 2.10544 8.26024L2.81211 8.96691L7.99878 14.1536L13.1854 8.96691L13.8921 8.26024C14.2328 7.91974 14.503 7.51545 14.6874 7.07048C14.8718 6.6255 14.9667 6.14857 14.9667 5.66691C14.9667 5.18525 14.8718 4.70831 14.6874 4.26334C14.503 3.81836 14.2328 3.41408 13.8921 3.07357V3.07357Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-              <button onClick={() => To('cart')} aria-label="go to cart" className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
+              <button onClick={() => To('cart')} aria-label="Ir al carrito" className="text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
                 <svg className="fill-stroke" width={18} height={18} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M3.66667 1L1 4.2V15.4C1 15.8243 1.1873 16.2313 1.5207 16.5314C1.8541 16.8314 2.30628 17 2.77778 17H15.2222C15.6937 17 16.1459 16.8314 16.4793 16.5314C16.8127 16.2313 17 15.8243 17 15.4V4.2L14.3333 1H3.66667Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M1 4.2002H17" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
@@ -91,16 +93,10 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
               </button>
               {
                 loading ?
-                  <h4 className="dark:text-white">Cargando...</h4> :
-                  user ?
-                    <>
-                      <button onClick={() => To(`/user/profile/${user.uid}`)}>
-                        <h4 className="dark:text-white">Bienvenido {user.email}</h4>
-                      </button>
-                      
-                      <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button>
-                    </> :
-                    <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
+                <h4 className="dark:text-white">Cargando...</h4> :
+                user ?
+                <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button> :
+                <button className="dark:text-white" onClick={handleLogin}>Iniciar sesión</button>
               }
             </div>
           </div>
@@ -111,6 +107,22 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
               </h1>
               <div className="md:w-auto justify-end flex items-center space-x-4 xl:space-x-8">
+                {
+                  user ?
+                  <button title="Ir al perfil" onClick={() => To(`/user/profile/${user.uid}`)} className="ml-1.5 dark:text-white capitalize flex items-center">
+                    {
+                      userStorage.image ?
+                      <div className="h-7 w-7 rounded-full mr-1.5 overflow-hidden">
+                        <img src={userStorage.image} alt="Not found" className="h-full" />
+                      </div> :
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    }
+                    Hola, {user.displayName === null ? user.email.split('@', 1).toString() : user.displayName}
+                  </button> :
+                  null
+                }
                 <form onSubmit={handleSubmit} className="hidden lg:flex items-center relative">
                   <button onClick={() => setSearchInput(!searchInput)} aria-label="search items" className="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
                     <svg className="fill-stroke" width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -151,11 +163,8 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     loading ?
                     <h4 className="dark:text-white">Cargando...</h4> :
                     user ?
-                    <>
-                      <button title="Ir al perfil" onClick={() => To(`/user/profile/${user.uid}`)}>Hola, {user.displayName}!</button>
-                      <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button>
-                    </> :
-                    <button className="dark:text-white" onClick={handleLogin}>Acceso</button>
+                    <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button> :
+                    <button className="dark:text-white" onClick={handleLogin}>Iniciar sesión</button>
                   }
                 </div>
                 <div className="flex lg:hidden">
@@ -178,7 +187,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
             </div>
           </div>
           {/* For small screen */}
-          <div id="mobile-menu" className={`${showMenu ? "flex" : "hidden"} absolute dark:bg-gray-900 z-10 inset-0 md:hidden bg-white flex-col h-screen w-full`}>
+          <div id="mobile-menu" className={`${showMenu ? "flex" : "hidden"} fixed dark:bg-gray-900 z-10 inset-0 md:hidden bg-white flex-col h-screen w-full`}>
             <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-4 p-4 relative">
               <form className="flex items-center space-x-3 relative">
                 <div>
@@ -221,74 +230,43 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                     </div>
                   </a>
                 </li>
-                <li className="hidden">
-                  <a href="/" className="dark:text-white flex items-center justify-between hover:underline text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">
-                    Furniture
-                    <div>
-                      <svg className="fill-stroke text-black dark:text-white" width={12} height={12} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  </a>
-                </li>
-                <li className="hidden">
-                  <a href="/" className="dark:text-white flex items-center justify-between hover:underline text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">
-                    Lookbook
-                    <div>
-                      <svg className="fill-stroke text-black dark:text-white" width={12} height={12} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  </a>
-                </li>
-                <li className="hidden">
-                  <a href="/" className="dark:text-white flex items-center justify-between hover:underline text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">
-                    Support
-                    <div>
-                      <svg className="fill-stroke text-black dark:text-white" width={12} height={12} viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.5 3L7.5 6L4.5 9" stroke="currentColor" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                  </a>
-                </li>
               </ul>
             </div>
             <div className="h-full flex items-end">
               <ul className="flex flex-col space-y-8 bg-gray-50 w-full py-10 p-4 dark:bg-gray-800">
-                <li>
-                  <a href="/cart" className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                    <div>
-                      <svg className="fill-stroke" width={22} height={22} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.33333 1L1 5V19C1 19.5304 1.23413 20.0391 1.65087 20.4142C2.06762 20.7893 2.63285 21 3.22222 21H18.7778C19.3671 21 19.9324 20.7893 20.3491 20.4142C20.7659 20.0391 21 19.5304 21 19V5L17.6667 1H4.33333Z" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M1 5H21" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M15.4436 9C15.4436 10.0609 14.9753 11.0783 14.1418 11.8284C13.3083 12.5786 12.1779 13 10.9991 13C9.82039 13 8.68993 12.5786 7.85643 11.8284C7.02294 11.0783 6.55469 10.0609 6.55469 9" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <p className="text-base">Cart</p>
-                  </a>
+                <li className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                  <ShoppingCart />
+                  <p className="text-base ml-1.5 cursor-pointer">Favoritos</p>
                 </li>
                 <li>
-                  <a href="/" className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                  <a href="/user/1/wishlist" className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                     <div>
-                      <svg className="fill-stroke" width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="fill-stroke" width={25} height={25} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.3651 3.84172C16.9395 3.41589 16.4342 3.0781 15.8779 2.84763C15.3217 2.61716 14.7255 2.49854 14.1235 2.49854C13.5214 2.49854 12.9252 2.61716 12.369 2.84763C11.8128 3.0781 11.3074 3.41589 10.8818 3.84172L9.99847 4.72506L9.11514 3.84172C8.25539 2.98198 7.08933 2.49898 5.87347 2.49898C4.65761 2.49898 3.49155 2.98198 2.6318 3.84172C1.77206 4.70147 1.28906 5.86753 1.28906 7.08339C1.28906 8.29925 1.77206 9.46531 2.6318 10.3251L3.51514 11.2084L9.99847 17.6917L16.4818 11.2084L17.3651 10.3251C17.791 9.89943 18.1288 9.39407 18.3592 8.83785C18.5897 8.28164 18.7083 7.68546 18.7083 7.08339C18.7083 6.48132 18.5897 5.88514 18.3592 5.32893C18.1288 4.77271 17.791 4.26735 17.3651 3.84172V3.84172Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                    <p className="text-base">Wishlist</p>
+                    <p className="text-base">Favoritos</p>
                   </a>
                 </li>
+                {
+                  user ?
+                  <li>
+                    <a to={`/user/profile/${user.uid}`} className="dark:text-white text-gray-800 flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <p className="text-base cursor-pointer">Perfil</p>
+                    </a>
+                  </li> :
+                  null
+                }
                 <li>
                   {
                     loading ?
-                      <h4 className="dark:text-white">Cargando...</h4> :
-                      user ?
-                        <>
-                        <button onClick={() => To(`/user/profile/${user.uid}`)}>
-                        <h4 className="dark:text-white">Welcome {user.email}</h4>
-                      </button>
-                          <button className="dark:text-white" onClick={handleLogout}>Logout</button>
-                        </> :
-                        <button className="dark:text-white" onClick={handleLogin}>Login</button>
+                    <h4 className="dark:text-white">Cargando...</h4> :
+                    user ?
+                    <button className="dark:text-white" onClick={handleLogout}>Cerrar sesión</button>:
+                    <button className="dark:text-white" onClick={handleLogin}>Iniciar sesión</button>
                   }
                 </li>
               </ul>
