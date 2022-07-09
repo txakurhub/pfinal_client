@@ -5,7 +5,7 @@ export const Profile = ({ user }) => {
   return (
     <div className="flex flex-col justify-center w-100">
       <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
-        <img alt=""src={user.image !== ""? user.image : user.photoURL ? user.photoURL : userimg}
+        <img alt="" src={user.image !== ""? user.image : user.photoURL ? user.photoURL : userimg}
           className="h-full" />
       </div>
       <h1 className="text-4xl">
