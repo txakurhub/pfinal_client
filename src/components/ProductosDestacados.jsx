@@ -22,7 +22,7 @@ export const ProductosDestacados = ({setProduct,toggle,onClick}) => {
     slideRef.current.addEventListener("animationend", removeAnimation);
     //   startSlider();
   }, []);
-  const imagesArr = productDestacados?.map((s) => s.image).slice(0,50);
+  const imagesArr = productDestacados?.map((s) => s.image).slice(0,20);
 
   const handleNext = () => {
     if (final >= imagesArr.length - 1) {
