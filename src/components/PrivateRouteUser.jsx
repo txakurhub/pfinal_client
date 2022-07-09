@@ -7,7 +7,7 @@ const PrivateRouteUser = ({ component: Component, ...rest }) => {
     const { userInf } = useAuth();
 
     if (userInf === false) {
-        return <p><Loading/></p>
+        return <span><Loading/></span>
     }
 
     return (

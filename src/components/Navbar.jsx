@@ -5,7 +5,7 @@ import ShoppingCart from "./ShoppingCart";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 
-const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout }) => {
+const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, handleLogout, admin }) => {
   const wishlist = useSelector((state) => state.wishlist);
   const [searchInput, setSearchInput] = useState(true);
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
@@ -14,7 +14,6 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
   const history = useHistory();
   const [input, setInput] = useState('');
   const { userStorage } =  useAuth();
-  console.log(userStorage);
 
   const To = (props) => history.push('/' + props ? props : null);
 
@@ -107,6 +106,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
               </h1>
               <div className="md:w-auto justify-end flex items-center space-x-4 xl:space-x-8">
+                {admin && <a href="/admin">Admin</a>}
                 {
                   user ?
                   <button title="Ir al perfil" onClick={() => To(`/user/profile/${user.uid}`)} className="ml-1.5 dark:text-white capitalize flex items-center">
