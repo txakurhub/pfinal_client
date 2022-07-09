@@ -115,7 +115,7 @@ const CreationForm = () => {
       swal("Revisar bien los campos completados.");
     } else {
       dispatch(createProduct(input));
-      swal("Zapatilla creada!");
+      swal("Producto creado");
       setInput({
         title: '',
         brand: '',
@@ -125,7 +125,7 @@ const CreationForm = () => {
         category: ''
       });
       setTimeout(() => {
-        history.push("/admin/7R07xtn17ZU09JHnm6Mi")
+        history.push("/admin")
       }, 2000);
     };
   };

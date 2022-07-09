@@ -42,7 +42,7 @@ const Users = () => {
       <div className="table w-[90%] m-auto">
         <div className="flex flex-row justify-between items-center h-[40px]">
           {/* <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">{" "}</th> */}
-          <p className="text-sm font-semibold tracking-wide text-center">NOMBRE/Rol</p>
+          <p className="text-sm font-semibold tracking-wide text-center">NOMBRE/ROL</p>
           <p className="text-sm font-semibold tracking-wide text-center">EMAIL</p>
           <p className="text-sm font-semibold tracking-wide text-center">ID</p>
           <p className="text-sm font-semibold tracking-wide text-center">ESTADO | ACTION</p>
