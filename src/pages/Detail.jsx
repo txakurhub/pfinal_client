@@ -156,7 +156,7 @@ const Detail = () => {
             <p>Vendidas: {selected.sold}</p>
             <p>Precio: {numberFormat(selected.price)}</p>
             <div className="flex items-center justify-center">
-              <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
+              <p className="text-sm leading-none text-gray-600 mr-3">Talle: 38.2</p>
               <svg
                 className="cursor-pointer"
                 width="6"
