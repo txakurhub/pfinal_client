@@ -90,7 +90,7 @@ const Shopping = ({email}) => {
           );
         })
       ) : (
-        <div> No Existe Registro De Compras</div>
+        <div> No existen registros de compras</div>
       )}
     </div>
   );
