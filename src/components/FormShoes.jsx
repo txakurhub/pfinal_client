@@ -46,7 +46,7 @@ const FormShoes = ({ id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(modifyProduct({ id: id, input }));
-    await swal("Zapatilla modificada");
+    await swal("Producto modificado");
     setInput({
       title: '',
       brand: '',
@@ -55,8 +55,8 @@ const FormShoes = ({ id }) => {
       stock: '',
       image: ''
     });
-    // window.location.reload() // te dejo este comentado 
-    // history.push("/admin/7R07xtn17ZU09JHnm6Mi") // el id full hardcodeado => despues de la demo lo arreglo
+    window.location.reload()
+    // history.push("/admin) // el id full hardcodeado => despues de la demo lo arreglo
   };
 
   return (
