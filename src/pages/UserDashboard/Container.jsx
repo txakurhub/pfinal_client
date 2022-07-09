@@ -6,7 +6,7 @@ import Shopping from "../Shopping";
 import { Profile } from "./Profile";
 import { useAuth } from "../../context/authContext";
 import { useParams } from "react-router-dom";
-
+import userimg from "../../assets/user.png";
 
 const Container =  ({ active }) => { 
 
@@ -29,27 +29,27 @@ const Container =  ({ active }) => {
         return (<section className="h-screen bg-gray-100"><Profile user={userStorage}/></section>
         )
     }
-  //if(active === "perfil") {
-  //  return (
-  //  <div className="flex flex-col justify-center w-100">
- //     <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
- //       <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
- //     </div>        
- //     <h1 className="text-4xl">
- //       Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
- //     </h1>
- //   </div>
- //   );
+//   if(active === "perfil") {
+//    return (
+//    <div className="flex flex-col justify-center w-100">
+//      <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
+//        <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
+//      </div>        
+//      <h1 className="text-4xl">
+//        Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
+//      </h1>
+//    </div>
+//    );
 //  } else {
-  //  return (
-    //  <div className="flex flex-col justify-center w-100">
-    //    <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
-    //      <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
-    //    </div>        
-    //    <h1 className="text-4xl">
-    //      Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
-   //     </h1>
-   //   </div>
+//    return (
+//      <div className="flex flex-col justify-center w-100">
+//        <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
+//          <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
+//        </div>        
+//        <h1 className="text-4xl">
+//          Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
+//        </h1>
+//      </div>
 //    );
 //  };
 
