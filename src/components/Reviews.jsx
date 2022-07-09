@@ -42,6 +42,7 @@ const Reviews = ({ id, user }) => {
         swal("Sólo puedes dejar una reseña por producto")
       } else {
         dispatch(create_new_review(input));
+        swal("Tu comentario ha sido creado, ¡muchas gracias!")
         setInput({
           comment: "",
           calification: 0,
