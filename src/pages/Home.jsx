@@ -6,6 +6,7 @@ import {
   getCategories,
   getProductosDestacados,
   getProducts,
+  getUser,
   getUsers,
   orderStatus
 } from "../redux/actions";
@@ -32,6 +33,7 @@ export default function Home() {
   const toggle = () => setActive(!active);
   const onClick = (r) => setId(r);
   const { user, logout, loading } = useAuth();
+  const currentUser = useSelector(state => state.user)
   const nombreProductos = useSelector((state) => state.allProductsName);
   const products = useSelector((state) => state.allProducts);
   const productDestacados = useSelector((state) => state.productosDestacados);
@@ -70,11 +72,16 @@ export default function Home() {
     if (!productDestacados.length) {
       dispatch(getProductosDestacados());
     }
-  }, [dispatch, productDestacados]);
+    if(user) {
+      dispatch(getUser(user.uid))
+    }
+  }, [dispatch, productDestacados, user]);
 
+console.log(currentUser);
   return (
     <>
       <NavBar
+        admin={currentUser ? currentUser.admin : false}
         nombreProductos={nombreProductos}
         setCurrentPage={setCurrentPage}
         loading={loading}
