@@ -14,7 +14,6 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
   const history = useHistory();
   const [input, setInput] = useState('');
   const { userStorage } =  useAuth();
-  console.log(userStorage);
 
   const To = (props) => history.push('/' + props ? props : null);
 
