@@ -77,7 +77,6 @@ export default function Home() {
     }
   }, [dispatch, productDestacados, user]);
 
-console.log(currentUser);
   return (
     <>
       <NavBar
