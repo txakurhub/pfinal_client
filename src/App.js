@@ -22,8 +22,6 @@ import PayPal from "./components/PayPal";
 import UserDash from './pages/UserDashboard/UserDash'
 import { PayPalScriptProvider } from "@paypal/react-paypal-js"
 import NavPrueba from "./components/NavTest/NavPrueba";
-
-import UserProfile from "./pages/UserProfile";
 import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
 
 function App() {
