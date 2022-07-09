@@ -4,13 +4,12 @@ import { create_new_review, getUsers, get_reviews } from "../redux/actions";
 import swal from 'sweetalert';
 import Loading from "./Loading";
 
-const Reviews = ({ id, user }) => {
+const Reviews = ({ product, user }) => {
   const users = useSelector(state => state.users);
-  console.log(id)
-  // console.log(user?.reloadUserInfo.email)
-  // console.log(Object.values(product)[10])
-  // const prueba = Object.values(product)[10].filter(e => e.order_email === user.reloadUserInfo.email )
-  // console.log(prueba)
+  console.log(product)
+ 
+  const prueba = product.Orders.filter(e => e.order_email === user?.reloadUserInfo.email )
+  console.log(prueba.length)
   const username = (id) => {
     const dato = Object.values(users).filter(e => e.id === id)
     const date = dato.map(e => e.firstname ? e.firstname : "Sin nombre")
@@ -21,7 +20,7 @@ const Reviews = ({ id, user }) => {
 
   const dispatch = useDispatch();
 
-  const [input, setInput] = useState({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id });
+  const [input, setInput] = useState({ comment: "", calification: 0, userid: user ? user.uid : null, productid: product.id });
 
   const handlechange = (e) => {
     e.preventDefault();
@@ -46,19 +45,19 @@ const Reviews = ({ id, user }) => {
           comment: "",
           calification: 0,
           userid: user.uid,
-          productid: id
+          productid: product.id
         });
       }
     }
   };
 
   useEffect(() => {
-    dispatch(get_reviews(id));
+    dispatch(get_reviews(product.id));
     dispatch(getUsers())
     if(user){
-      setInput({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id })
+      setInput({ comment: "", calification: 0, userid: user ? user.uid : null, productid: product.id })
     }
-  }, [dispatch, id, user]);
+  }, [dispatch, product.id, user]);
 if(user === false){
   return <Loading />
 }
