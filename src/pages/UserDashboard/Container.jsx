@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { EditUser } from './EditUser'
 import PageShopingCart from '../PageShopingCart'
 import Wishlist from '../Wishlist'
@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 
 
 const Container =  ({ active }) => { 
+
     const { id } = useParams();
     const { user,userStorage } =  useAuth()
     if (active === "compras") return (<section className="h-screen bg-gray-100"><Shopping email={user.email} /></section>)
@@ -28,6 +29,30 @@ const Container =  ({ active }) => {
         return (<section className="h-screen bg-gray-100"><Profile user={userStorage}/></section>
         )
     }
+  //if(active === "perfil") {
+  //  return (
+  //  <div className="flex flex-col justify-center w-100">
+ //     <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
+ //       <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
+ //     </div>        
+ //     <h1 className="text-4xl">
+ //       Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
+ //     </h1>
+ //   </div>
+ //   );
+//  } else {
+  //  return (
+    //  <div className="flex flex-col justify-center w-100">
+    //    <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
+    //      <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
+    //    </div>        
+    //    <h1 className="text-4xl">
+    //      Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
+   //     </h1>
+   //   </div>
+//    );
+//  };
+
 };
 
 export default Container;
