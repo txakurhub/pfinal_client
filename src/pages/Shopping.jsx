@@ -10,10 +10,7 @@ const Shopping = ({email}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(true);
-  const ProductOrder = useSelector((state) => state.orderProduct);
-  console.log(userStorage);
- 
-  
+  const ProductOrder = useSelector((state) => state.orderProduct);  
 
   const numberFormat = (value) =>
     new Intl.NumberFormat("es-AR", {
@@ -76,7 +73,7 @@ const Shopping = ({email}) => {
         </article>
         <div>
 
-           <Reviews className="w-screen bg-gray-100 " user={userStorage} id={product.id} />
+          {e.order_status === 'realizada' && <Reviews className="w-screen bg-gray-100 " user={userStorage} id={product.id} />}
         </div>
         
     </section>
