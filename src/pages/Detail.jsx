@@ -53,7 +53,7 @@ const Detail = () => {
       dispatch(clearStateDetail())
   }
   
-  }, [dispatch, user ]);
+  }, [dispatch, user]);
  
 
   const handleaddwishlist = (e)=>{
@@ -106,7 +106,9 @@ const Detail = () => {
       </Link>
       <div className="xl:w-2/6 lg:w-2/5 w-80 md:block hidden relative">
           {
+            
             counter > 0 ?
+
             <button title="Add to Wishlist" className="absolute top-[10px] left-[10px]" value={wishlist.id} name="id" onClick={(e) => handledeltewishlist(e)}>
               <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 21C11.8684 21.0008 11.7379 20.9755 11.6161 20.9258C11.4943 20.876 11.3834 20.8027 11.29 20.71L3.51999 12.93C2.54536 11.9452 1.99866 10.6156 1.99866 9.23C1.99866 7.84443 2.54536 6.51482 3.51999 5.53C4.50226 4.55051 5.83283 4.00047 7.21999 4.00047C8.60716 4.00047 9.93773 4.55051 10.92 5.53L12 6.61L13.08 5.53C14.0623 4.55051 15.3928 4.00047 16.78 4.00047C18.1672 4.00047 19.4977 4.55051 20.48 5.53C21.4546 6.51482 22.0013 7.84443 22.0013 9.23C22.0013 10.6156 21.4546 11.9452 20.48 12.93L12.71 20.71C12.6166 20.8027 12.5057 20.876 12.3839 20.9258C12.2621 20.9755 12.1316 21.0008 12 21Z" fill="#ff0000" />
@@ -177,13 +179,13 @@ const Detail = () => {
             </svg>
           </div>
         </div>
-       
+        {selected.stock ? 
         <button
           onClick={() => addToCart(selected) }
           disabled={selected.stock === 0}
           className="mt-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-gray-800 w-full py-4 hover:bg-gray-700"
         >
-          {selected.stock ?  <svg
+           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"
@@ -196,10 +198,19 @@ const Detail = () => {
               strokeLinejoin="round"
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
-          </svg> : null}
+          </svg> 
          
-           { selected.stock ? (<p>Añadir al Carrito</p>):( <p>Sin Stock</p>)}
-        </button>
+            <p>Añadir al Carrito</p>
+        </button>  :(
+          <button
+          onClick={() => addToCart(selected) }
+          disabled={selected.stock === 0}
+          className="mt-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-red-600 w-full py-4 hover:bg-red-800"
+          >
+
+            <p className="text-white">Sin Stock</p>
+          </button>
+          )}
         <p className="text-base leading-4 mt-7 text-gray-600">
           Modelo del producto: {selected.model}
         </p>
@@ -249,7 +260,7 @@ const Detail = () => {
         </div>
       </div>
     </section>
-    <Reviews user={user} product={selected}/>
+    <Reviews user={user} id={selected.id}/>
     {/* <SlideDetail /> */}
   </div>
   );
