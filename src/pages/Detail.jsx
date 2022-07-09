@@ -11,7 +11,7 @@ import {
   remove_wishlist_product,
 } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
-import Reviews from "../components/Reviews";
+import {ReviewsDetail} from "../components/ReviewsDetail";
 import { CartContext } from "../context/CartItem";
 import { SlideDetail } from "../components/SlideDetail";
 import { useAuth } from "../context/authContext";
@@ -30,6 +30,7 @@ const Detail = () => {
   const counter = useSelector((state) => state.counterwishlist);
   const [order, setOrder] = useState('')
   let stock = useSelector((state) => state.stockShoes)
+  console.log(selected);
 
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
@@ -256,7 +257,7 @@ const Detail = () => {
           </div>
         </div>
       </section>
-      <Reviews user={user} id={selected.id} />
+      <ReviewsDetail user={user} id={selected.id} />
       {/* <SlideDetail /> */}
     </div>
   );
