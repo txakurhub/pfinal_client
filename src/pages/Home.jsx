@@ -142,7 +142,7 @@ export default function Home() {
           {
             currentProduct ?
               <div className="bg-gray-200">
-                <div className="max-w-2xl mx-auto  px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
   
                   <div className={gridCols}>
                     {
@@ -162,10 +162,12 @@ export default function Home() {
       </section>
 
       {currentProduct ? <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} /> : null}
-      <h2 className="mt-10 ml-5 text-2xl font-semibold leading-normal text-gray-800 flex justify-start">Productos Destacados</h2>
-
+      <section className="bg-gray-100">
+      <h2 className="mt-4 mb-6 ml-5 text-2xl font-semibold leading-normal text-gray-800 flex justify-center">Productos Destacados</h2>
       <ProductosDestacados setProduct={setProduct} toggle={toggle} onClick={onClick} />
       <Modal active={active} toggle={toggle} children={<QuickView id={id} product={product} />} />
+
+      </section>
     </section>
   );
 }
