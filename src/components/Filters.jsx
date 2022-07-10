@@ -43,8 +43,8 @@ const Filters = ({ setOrder, setCurrentPage, order }) => {
   };
   
   return (
-    <div className="w-[90%] flex justify-center items-center mt-4 flex-col lg:flex-row">
-      <div className="flex gap-3 mb-2.5 lg:mb-0 w-full justify-around">
+    <div className="w-[90%] flex justify-center items-center mt-4 flex-col lg:flex-col gap-10">
+      {/* <div className="flex gap-3 mb-2.5 lg:mb-0 h-full justify-around"> */}
         <FilterPrice setCurrentPage={setCurrentPage} setOrder={setOrder} order={order} />
         <select name='brand' value={filter.brand} onChange={handleChange} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400">
           <option hidden>Marca</option>
@@ -67,14 +67,14 @@ const Filters = ({ setOrder, setCurrentPage, order }) => {
               value={t.id}>{t.name}</option>
           ))}
         </select>
+      {/* </div> */}
+      <div className="flex gap-3 lg:ml-3 justify-around">
+        <input type='number' value={priceMin} min={1} max={priceMax} placeholder="min" onChange={handlePriceMin} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400 w-20" />
+        <input type='number' value={priceMax} max={80000} min={priceMin} placeholder="max" onChange={handlePriceMax} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400 w-20"  />
       </div>
-      <div className="flex gap-3 lg:ml-3 w-full justify-around">
-        <input type='number' value={priceMin} min={1} max={priceMax} placeholder="Precio: más bajo" onChange={handlePriceMin} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
-        <input type='number' value={priceMax} max={80000} min={priceMin} placeholder="Precio: más alto" onChange={handlePriceMax} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
         <button onClick={e => handleSubmit(e)} className="hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800">
             Aplicar Filtros
         </button>
-      </div>
     </div>
   );
 };
