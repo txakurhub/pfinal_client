@@ -115,9 +115,6 @@ function PageShopingCart() {
                           <p className="w-96 text-xs leading-3 text-gray-600 opacity-0">Composition: 100% calf leather</p>
                           <div className="flex items-center justify-between pt-5 pr-6">
                             <button title="Agregar a favoritos">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 hover:fill-red-500" fill="none" viewBox="0 0 24 24" stroke="red" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                              </svg>
                             </button>
                             <div className="flex items-center">
                               <button title="Eliminar un elemento" onClick={() => deleteItemToCart(r)} className="pl-4">
@@ -149,7 +146,7 @@ function PageShopingCart() {
                       <p className="text-2xl leading-normal text-gray-800">Total</p>
                       <p className="text-2xl font-bold leading-normal text-right text-gray-800">${total}</p>
                     </div>
-                    <button onClick={(e) => handleCheckout(e)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                    <button onClick={(e) => handleCheckout(e)} disabled={!cartItem.length} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                       Comprar
                     </button>
                     <div className="w-full flex items-center justify-between py-5">

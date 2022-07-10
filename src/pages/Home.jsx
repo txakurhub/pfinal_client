@@ -6,6 +6,7 @@ import {
   getCategories,
   getProductosDestacados,
   getProducts,
+  getUser,
   getUsers,
   orderStatus
 } from "../redux/actions";
@@ -32,6 +33,7 @@ export default function Home() {
   const toggle = () => setActive(!active);
   const onClick = (r) => setId(r);
   const { user, logout, loading } = useAuth();
+  const currentUser = useSelector(state => state.user)
   const nombreProductos = useSelector((state) => state.allProductsName);
   const products = useSelector((state) => state.allProducts);
   const productDestacados = useSelector((state) => state.productosDestacados);
@@ -70,11 +72,15 @@ export default function Home() {
     if (!productDestacados.length) {
       dispatch(getProductosDestacados());
     }
-  }, [dispatch, productDestacados]);
+    if(user) {
+      dispatch(getUser(user.uid))
+    }
+  }, [dispatch, productDestacados, user]);
 
   return (
     <>
       <NavBar
+        admin={currentUser ? currentUser.admin : false}
         nombreProductos={nombreProductos}
         setCurrentPage={setCurrentPage}
         loading={loading}
@@ -94,7 +100,7 @@ export default function Home() {
       {
         currentProduct ?
         // <div className="mt-10 grid md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3  gap-x-8 gap-y-8 items-center px-[10px]">
-        <div className="bg-white">
+        <div className="bg-gray-200">
           <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
             <h2 className="sr-only">Productos</h2>
             <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
@@ -113,7 +119,7 @@ export default function Home() {
       {currentProduct ? <Paginado productPorPage={productPage} product={products.length} paginado={paginate} pagina={currentPage} setPagina={setCurrentPage} /> : null}
       <h2 className="mt-10 ml-5 text-2xl font-semibold leading-normal text-gray-800 flex justify-start">Productos Destacados</h2>
       
-      <ProductosDestacados/>
+      <ProductosDestacados setProduct={setProduct} toggle={toggle} onClick={onClick}/>
       <Modal active={active} toggle={toggle} children={<QuickView id={id} product={product} />} />
     </>
   );

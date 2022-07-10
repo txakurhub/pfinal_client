@@ -12,7 +12,7 @@ const Card = ({ title, image, price, id, product, toggle, onClick, setProduct, s
   }).format(value);
 
   return (
-    <div key={id} className="group w-[280px] h-[250px]">
+    <div key={id} className="group w-[280px] h-[250px] bg-white rounded-lg">
       <a title="Ir al detalle del producto" href={`/detail/${id}`} className="w-full h-[140px] aspect-w-1 aspect-h-1 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8 flex items-center justify-center">
         <img
           src={image}

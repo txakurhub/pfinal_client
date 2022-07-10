@@ -154,7 +154,6 @@ export function AuthProvider({ children }) {
       if (currentUser) {
         userInfo(currentUser)
         setUser(currentUser);
-        console.log(userInf)
       } else {
         setUserInf(null)
       }

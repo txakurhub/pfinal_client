@@ -37,6 +37,7 @@ const Reviews = ({ id, user }) => {
         swal("Sólo puedes dejar una reseña por producto")
       } else {
         dispatch(create_new_review(input));
+        swal("Tu comentario ha sido creado, ¡muchas gracias!")
         setInput({
           comment: "",
           calification: 0,
@@ -50,15 +51,20 @@ const Reviews = ({ id, user }) => {
   useEffect(() => {
     dispatch(get_reviews(id));
     dispatch(getUsers())
-  }, [dispatch, id]);
+    if(user){
+      setInput({ comment: "", calification: 0, userid: user ? user.uid : null, productid: id })
+    }
+  }, [dispatch, id, user]);
 
+  console.log(reviews);
   return (
-    <div className="py-12 px-4 md:px-6 2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center">
+    <div className=" md:px-6 2xl:px-0 2xl:container 2xl:mx-auto flex justify-center items-center">
       <div className="flex flex-col justify-start items-start w-full space-y-8">
         <div className="flex justify-start items-start">
           <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Opinión</p>
         </div>
-        {user ? (
+        {
+          user ? 
           <form className="relative w-full" onSubmit={handlesubmit}>
             <div className="flex flex-row absolute bottom-3 right-7">
               <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${input.calification >= 1 ? 'fill-[#fbff00]' : ''}`} fill="#1f2937" viewBox="0 0 24 24" stroke="none" strokeWidth={2}>
@@ -90,22 +96,9 @@ const Reviews = ({ id, user }) => {
               <input onChange={(e) => handlechange(e)} name="calification" type="radio" value={5} className="ml-2 h-6 w-6 opacity-0 cursor-pointer" />
             </div>
             <textarea value={input.comment} className="bg-gray-100 rounded border border-transparent focus:border-gray-400 leading-normal resize w-full h-20 py-2 pr-[40px] px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" type="text" placeholder="Deja un comentario" name="comment" id="comentario" onChange={(e) => handlechange(e)} />
-          </form>
-        ) : (<div>Debes estar registrado para poder dejar un comentario.</div>)}
-         <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Comentarios:</p>
-        {
-          reviews.length ? reviews.map((r) => (
-            <div className="w-full flex justify-start items-start flex-col bg-gray-50 p-8">
-              <div className="w-full flex justify-end">
-                {r.calification}
-              </div>
-              <div className="md:block">
-                <p className="mt-3 text-base leading-normal text-gray-600 w-full md:w-9/12 xl:w-5/6">{r.comment}</p>
-                <p className="mt-3 text-base leading-normal text-gray-600 w-full md:w-9/12 xl:w-5/6">{username(r.userId)} dice:</p>
-              </div>
-            </div>
-          )) : (<p>Sin comentarios</p>)
-        }
+          </form> : 
+          <div>Debes estar registrado para poder dejar un comentario.</div>
+         }
       </div>
     </div>
   );

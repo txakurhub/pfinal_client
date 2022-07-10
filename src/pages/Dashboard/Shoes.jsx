@@ -140,7 +140,7 @@ function Shoes() {
         <div className="bg-grey col-12 mt-2 align-middle justify-end flex " >
         <div className="relative inline-block w-40 p-2 text-gray-700">
           <select id="filtro" value={filtro} onChange={handleChange} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-md appearance-none focus:shadow-outline" placeholder="Regular input">
-            <option hidden >filtrar - ordenar</option>
+            <option hidden >Ordenar</option>
             <option value="sinstock">Sin Stock</option>
             <option value="mas">+ Ventas</option>
             <option value="menos">- Ventas</option>
@@ -243,7 +243,7 @@ function Shoes() {
                     ${shoes.price}
                   </td>
                   <td className="border border-gray-200 p-3 text-sm text-gray-700">
-                    <div className="flex space-x-4">
+                    <div >
                       <button
                         className="px-2 bg-lime-500 py-2 rounded-md text-white font-semibold hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:bg-lime-300 "
                         id={shoes.id}
@@ -252,7 +252,7 @@ function Shoes() {
                         Editar
                       </button>
                       <button
-                        className="px-2 bg-red-500 py-2 rounded-md text-white font-semibold hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:bg-red-300 "
+                         className="px-2 bg-red-500 py-2 rounded-md text-white font-semibold hover:bg-red-600 active:bg-red-700 focus:outline-none focus:ring focus:bg-red-300 "
                         id={shoes.id}
                         onClick={() =>
                           deleteShoes({ id: shoes.id, name: shoes.title })

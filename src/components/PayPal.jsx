@@ -6,14 +6,14 @@ import swal from "sweetalert";
 
 const PayPal = (props) => {
   const history = useHistory();
-  const { user,userStorage } = useAuth();
+  const { user, userStorage } = useAuth();
   const { product } = props;
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
 
   const handleAprrove = (orderID) => {
     //Llamada de una función del backend para completar la órden de compra
-    
+
     //Si la respuesta es exitosa
     setPaidFor(true);
     //Refresar el carrito
@@ -23,22 +23,23 @@ const PayPal = (props) => {
     //setError("El pago fue exitoso pero no pudimos pero lastimosamente no está disponible porcesar sus requerimientos, algo así")
   };
 
-  if(paidFor) {
+  if (paidFor) {
     //Desplegar algún modal, swal o redirección al usuario
     swal('Compra exitosa')
     history.push('/')
     // alert("Gracias por la compra, por el momento es alert esta vaina")
   };
 
-  if(error) {
+  if (error) {
     //Desplegar algún modal, swal o redirección al usuario
-    alert(error)
+    swal("Cierre emergente detectado")
   };
 
   return (
     <PayPalButtons
+      disabled={product.price === 0}
       onClick={(data, actions) => {
-        if(userStorage === null) {
+        if (userStorage === null) {
           setError("Tienes que estar registrado para poder comprar");
           history.push("/login");
           return actions.reject();
@@ -58,14 +59,14 @@ const PayPal = (props) => {
           ]
         })
       }}
-      onAprove={async(data, actions) => {
+      onAprove={async (data, actions) => {
         const order = await actions.order.capture();
         console.log("order", order);
         handleAprrove(data.orderID)
       }}
       onCancel={() => {
         //Desplegar algún modal, swal o redirección al usuario
-        
+        swal("Su orden ha sido cancelada")
       }}
       onError={(err) => {
         setError(err);
