@@ -11,7 +11,7 @@ import {
   remove_wishlist_product,
 } from "../redux/actions";
 import { Link, useParams } from "react-router-dom";
-import Reviews from "../components/Reviews";
+import {ReviewsDetail} from "../components/ReviewsDetail";
 import { CartContext } from "../context/CartItem";
 import { SlideDetail } from "../components/SlideDetail";
 import { useAuth } from "../context/authContext";
@@ -30,6 +30,7 @@ const Detail = () => {
   const counter = useSelector((state) => state.counterwishlist);
   const [order, setOrder] = useState('')
   let stock = useSelector((state) => state.stockShoes)
+  console.log(selected);
 
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
@@ -156,7 +157,7 @@ const Detail = () => {
             <p>Vendidas: {selected.sold}</p>
             <p>Precio: {numberFormat(selected.price)}</p>
             <div className="flex items-center justify-center">
-              <p className="text-sm leading-none text-gray-600 mr-3">38.2</p>
+              <p className="text-sm leading-none text-gray-600 mr-3">Talle: 38.2</p>
               <svg
                 className="cursor-pointer"
                 width="6"
@@ -256,7 +257,7 @@ const Detail = () => {
           </div>
         </div>
       </section>
-      <Reviews user={user} id={selected.id} />
+      <ReviewsDetail user={user} id={selected.id} />
       {/* <SlideDetail /> */}
     </div>
   );
