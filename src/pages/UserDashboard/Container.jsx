@@ -24,7 +24,7 @@ const Container =  ({ active }) => {
     if (active === "favoritos") return ( <section className="h-screen bg-gray-100">
     <Wishlist /></section>)
     if (active === "carrito") { return (<PageShopingCart />)} 
-    if (active === "perfil"){return (<section className="h-screen bg-gray-100"><Profile user={userStorage}/></section>)}
+    if (active === "perfil"){return (<section className="h-full bg-gray-100"><Profile user={userStorage}/></section>)}
     else {
         return (<section className="h-screen bg-gray-100"><Profile user={userStorage}/></section>
         )
