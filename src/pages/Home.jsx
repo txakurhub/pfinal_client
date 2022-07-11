@@ -75,7 +75,7 @@ export default function Home() {
     if(user) {
       dispatch(getUser(user.uid))
     }
-  }, [dispatch, productDestacados, user]);
+  }, [dispatch]);
 
   return (
     <>
