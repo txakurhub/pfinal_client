@@ -6,10 +6,6 @@ const PrivateRouteUser = ({ component: Component, ...rest }) => {
 
     const { userInf } = useAuth();
 
-    if (!userInf) {
-        return <Loading/>
-    }
-
     return (
         <Route {...rest}>{userInf ? <Component /> : <Redirect to="/login" />}</Route>
     )
