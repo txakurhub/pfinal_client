@@ -100,7 +100,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
             </div>
           </div>
           {/* For large screens */}
-          <div className="dark:bg-gray-900 bg-gray-50 px-6 py-9">
+          <div className="dark:bg-gray-900 relative w-full bg-gray-100 shadow-sm p-6">
             <div className="container mx-auto flex items-center justify-between">
               <h1 className="md:w-auto cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
