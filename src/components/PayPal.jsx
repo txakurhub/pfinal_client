@@ -17,8 +17,7 @@ const PayPal = (props) => {
     //Si la respuesta es exitosa
     setPaidFor(true);
     //Refresar el carrito
-    localStorage.clear()
-    window.location.reload()
+    
     //Si la respuesta es error
     //setError("El pago fue exitoso pero no pudimos pero lastimosamente no está disponible porcesar sus requerimientos, algo así")
   };
@@ -26,6 +25,8 @@ const PayPal = (props) => {
   if (paidFor) {
     //Desplegar algún modal, swal o redirección al usuario
     swal('Compra exitosa')
+    localStorage.clear()
+    window.location.reload()
     history.push('/')
     // alert("Gracias por la compra, por el momento es alert esta vaina")
   };
