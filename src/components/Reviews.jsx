@@ -32,7 +32,7 @@ const Reviews = ({ id, user }) => {
     if (!input.comment || !input.calification) {
       swal("Datos no completados");
     } else if (reviews) {
-      const search = reviews.find(e => e.userId === idUser)
+      const search = reviews.find(e => e.ProductId === id)
       if (search) {
         swal("Sólo puedes dejar una reseña por producto")
       } else {

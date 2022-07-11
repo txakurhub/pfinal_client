@@ -14,7 +14,7 @@ const PanelAdmin = ({ productData, userData, categoryData, admin }) => {
   const userList = [
     userData.length,
     userData.filter((e) => e.banned).length,
-    userData.filter((e) => e.banned).length
+    userData.filter((e) => e.admin).length
   ];
   //grafica usuarios
   const [dataUser, setDataUser] = useState({
