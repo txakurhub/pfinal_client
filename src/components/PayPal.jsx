@@ -31,10 +31,11 @@ const PayPal = (props) => {
     // alert("Gracias por la compra, por el momento es alert esta vaina")
   };
 
-  if (error) {
-    //Desplegar algún modal, swal o redirección al usuario
-    swal("Cierre emergente detectado")
-  };
+  // if (error) {
+  //   //Cuando cerras rápido una órden de PayPal se buguea el swal a la hora que querer seguir agregando 
+  //   //cosas, dejar esto comentado
+  //   swal("Cierre emergente detectado")
+  // };
 
   return (
     <PayPalButtons

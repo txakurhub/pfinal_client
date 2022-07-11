@@ -7,7 +7,7 @@ const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
 
   const { userInf } = useAuth();
 
-  if (userInf === false) {
+  if (!userInf) {
     return <Loading />
   }
 
