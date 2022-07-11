@@ -1,6 +1,6 @@
 import axios from "axios";
 import swal from "sweetalert";
-export const local_url = "https://zapatillas-proyecto.herokuapp.com" 
+export const local_url = "https://zapatillas-proyecto.herokuapp.com"
 // export const local_url = "http://localhost:3001";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
