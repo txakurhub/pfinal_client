@@ -106,7 +106,7 @@ const NavBar = ({ nombreProductos, setCurrentPage, loading, user, handleLogin, h
                 <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
               </h1>
               <div className="md:w-auto justify-end flex items-center space-x-4 xl:space-x-8">
-                {admin && <a href="/admin">Admin</a>}
+              {admin && <a href="/admin" className={`text-gray-50 font-medium h-[25px] hover:text-orange-700 h-[25px] truncate cursor-pointer`}>Admin</a>}
                 {
                   user ?
                   <button title="Ir al perfil" onClick={() => To(`/user/profile/${user.uid}`)} className="ml-1.5 dark:text-white capitalize flex items-center">

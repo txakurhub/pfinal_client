@@ -46,7 +46,7 @@ const FormShoes = ({ id }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(modifyProduct({ id: id, input }));
-    await swal("Producto modificado");
+    swal("Buen trabajo!", "Producto modificado correctamente", "success")
     setInput({
       title: '',
       brand: '',
@@ -55,8 +55,7 @@ const FormShoes = ({ id }) => {
       stock: '',
       image: ''
     });
-    window.location.reload()
-    // history.push("/admin) // el id full hardcodeado => despues de la demo lo arreglo
+    history.push("/admin")
   };
 
   return (
