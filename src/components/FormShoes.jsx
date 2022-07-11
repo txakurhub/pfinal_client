@@ -55,7 +55,7 @@ const FormShoes = ({ id }) => {
       stock: '',
       image: ''
     });
-    history.push("/admin")
+    window.location.reload()
   };
 
   return (
