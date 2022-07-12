@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getOrderProducts } from "../redux/actions";
-// import Reviews from '../components/Reviews'
+import Reviews from '../components/Reviews'
 import userimg from "../assets/user.png"
 
 const Shopping = ({ email }) => {
@@ -48,6 +48,7 @@ const Shopping = ({ email }) => {
                 </span>
                 {
                   r.Products.map(p => (
+                    <div>
                     <a title="Ver detalles" href={`/detail/${p.id}`}>
                       <div className="mt-4 md:mt-6 flex hover:bg-gray-100 flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                         <div className="pb-4 md:pb-8 w-full md:w-auto">
@@ -79,6 +80,10 @@ const Shopping = ({ email }) => {
                         </div>
                       </div>
                     </a>
+                    <div>
+                    {r.order_status === 'realizada' && <Reviews className="w-screen bg-gray-100 " user={userStorage} id={p.id} />}
+                    </div>
+                    </div>
                   ))
                 }
               </div>
