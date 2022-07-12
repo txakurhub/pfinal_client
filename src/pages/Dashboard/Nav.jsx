@@ -32,7 +32,7 @@ const Nav = ({ setView }) => {
               onClick={(e) => handleClick("dashboard")}
               className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
             >
-              Dashboard
+              Panel
             </a>
           </li>
           <li>
@@ -40,7 +40,7 @@ const Nav = ({ setView }) => {
               onClick={(e) => handleClick("customers")}
               className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
             >
-              Customers
+              Usuarios
             </a>
           </li>
           <li>
@@ -48,7 +48,7 @@ const Nav = ({ setView }) => {
               onClick={(e) => handleClick("shoes")}
               className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
             >
-              Shoes
+              Productos
             </a>
           </li>
           <li>
@@ -56,7 +56,7 @@ const Nav = ({ setView }) => {
               onClick={(e) => handleClick("categories")}
               className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
             >
-              Categories
+              Categorías
             </a>
           </li>
           <li>
@@ -64,7 +64,7 @@ const Nav = ({ setView }) => {
               onClick={(e) => handleClick("order")}
               className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
             >
-              Order status
+              Órdenes
             </a>
           </li>
         </ul>
@@ -94,7 +94,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("dashboard")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Dashboard
+                Panel
               </a>
             </li>
             <li>
@@ -102,7 +102,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("customers")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Customers
+                Usuarios
               </a>
             </li>
             <li>
@@ -110,7 +110,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("shoes")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Shoes
+                Productos
               </a>
             </li>
             <li>
@@ -118,7 +118,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("categories")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Categories
+                Categorías
               </a>
             </li>
             <li>
@@ -126,7 +126,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("order")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Order status
+                Órdenes
               </a>
             </li>
           </ul>
@@ -257,7 +257,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("dashboard")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Dashboard
+                Panel
               </a>
             </li>
             <li>
@@ -265,7 +265,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("customers")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Customers
+                Usuarios
               </a>
             </li>
             <li>
@@ -273,7 +273,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("shoes")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Shoes
+                Productos
               </a>
             </li>
             <li>
@@ -281,7 +281,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("categories")}
                 className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Categories
+                Categorías
               </a>
             </li>
             <li>
@@ -289,7 +289,7 @@ const Nav = ({ setView }) => {
                 onClick={(e) => handleClick("order")}
                 className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline"
               >
-                Order status
+                Órdenes
               </a>
             </li>
           </ul>

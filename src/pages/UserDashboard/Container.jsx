@@ -1,42 +1,58 @@
-import React, { useEffect } from "react";
-import { EditUser } from '../../components/EditUser'
+import React from "react";
+import { EditUser } from './EditUser'
 import PageShopingCart from '../PageShopingCart'
 import Wishlist from '../Wishlist'
 import Shopping from "../Shopping";
-import { getUser } from "../../redux/actions";
+import { Profile } from "./Profile";
 import { useAuth } from "../../context/authContext";
-import { useDispatch } from "react-redux/es/exports";
-import { useSelector } from "react-redux/es/exports";
 import { useParams } from "react-router-dom";
-import userimg from '../../assets/user.png'
-const Container =  ({ active }) => {
-    
+import userimg from "../../assets/user.png";
+
+const Container =  ({ active }) => { 
+
     const { id } = useParams();
-    const { user } =  useAuth()
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getUser(id))
-    }, [dispatch]);
-    const currentUser = useSelector(state => state.user);
-    console.log(currentUser);
-
-    if (active === "compras") return <Shopping email={user.email} />;
-    if (active === "edit") return <EditUser id={id} user={currentUser}/>;
-    if (active === "favoritos") return <Wishlist />;
-    if (active === "carrito") {
-        return (
-            <PageShopingCart />
-        );
-    } else {
-        return (
-
-        <div className="flex flex-col justify-center w-100">
-            <img src={currentUser.image?currentUser.image:currentUser.photoURL?currentUser.photoURL:userimg}   className='self-center object-cover h-50 w-50 rounded-full ' />
-            <h1 className="text-4xl">hola {currentUser.firstname!==''?currentUser.firstname+' '+currentUser.lastname:currentUser.displayName!==''?currentUser.displayName:"usuario"}</h1>
-            
-        </div>
+    const { user,userStorage } =  useAuth()
+    if (active === "compras") return (<section className="h-screen bg-gray-100"><Shopping email={user.email} /></section>)
+    if (active === "edit") return <EditUser 
+    id={id} 
+    lastname={userStorage.lastname}
+    firstname={userStorage.firstname}
+    phone={userStorage.phone}
+    password={userStorage.password}
+    image={userStorage.image?userStorage.image:userStorage.photoURL}
+    />;
+    if (active === "favoritos") return ( <section className="h-screen bg-gray-100">
+    <Wishlist /></section>)
+    if (active === "carrito") { return (<PageShopingCart />)} 
+    if (active === "perfil"){return (<section className="h-full bg-gray-100"><Profile user={userStorage}/></section>)}
+    else {
+        return (<section className="h-screen bg-gray-100"><Profile user={userStorage}/></section>
         )
     }
+//   if(active === "perfil") {
+//    return (
+//    <div className="flex flex-col justify-center w-100">
+//      <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
+//        <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
+//      </div>        
+//      <h1 className="text-4xl">
+//        Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
+//      </h1>
+//    </div>
+//    );
+//  } else {
+//    return (
+//      <div className="flex flex-col justify-center w-100">
+//        <div className="rounded-full h-[450px] w-[450px] overflow-hidden m-auto my-2.5">
+//          <img src={userStorage.image !== '' ? userStorage.image : userStorage.photoURL ? userStorage.photoURL : userimg} className="h-full" />
+//        </div>        
+//        <h1 className="text-4xl">
+//          Hola {userStorage.firstname ? userStorage.firstname + ' ' + userStorage.lastname : userStorage.displayName !== '' ? userStorage.displayName : "Usuario"}
+//        </h1>
+//      </div>
+//    );
+//  };
+
 };
 
 export default Container;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
-import { getShoeDetail, getPictures, clearStateDetail } from "../redux/actions";
+import { getShoeDetail, getPictures, /*clearStateDetail*/ } from "../redux/actions";
 import { create_new_wishlist } from "../redux/actions";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
@@ -11,7 +11,12 @@ const QuickView = ({ id, product }) => {
     const selected = useSelector((state) => state.product_detail);
     const pictures = useSelector((state) => state.pictures);
     const { addToCart } = useContext(CartContext);
-    
+    const numberFormat = (value) =>
+    new Intl.NumberFormat("es-AR", {
+      style: "currency",
+      currency: "ARS",
+      currencyDisplay: "symbol",
+    }).format(value);
     const handleaddwishlist = (e) => {
         e.preventDefault();
         dispatch(create_new_wishlist({user_id: 1, product_id: id}))
@@ -21,9 +26,9 @@ const QuickView = ({ id, product }) => {
     useEffect(() => {
         dispatch(getShoeDetail(id))
         dispatch(getPictures(id))
-        return () => {
-            dispatch(clearStateDetail())
-        }
+        // return () => {
+        //     dispatch(clearStateDetail())
+        // }
     }, [dispatch, id ]);
 
     const result = product.wishlists.filter( d => d.userId === '1')
@@ -63,11 +68,17 @@ const QuickView = ({ id, product }) => {
                 </CarouselProvider>
                 <div className="h-full lg:w-1/2 flex flex-col justify-center mt-7 md:mt-8 lg:mt-0 pb-8 lg:pb-0">
                     <h1 className="text-3xl lg:text-4xl font-semibold text-gray-800">{selected.title}</h1>
-                    <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">${selected.price}</p>
+                    <p className="text-3xl font-medium text-gray-600 mt-8 md:mt-10">{numberFormat(selected.price)}</p>
                     <div className="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 lg:space-x-8 mt-8 md:mt-16">
+                    { product.stock ?
                         <button onClick={() => addToCart(product)} disabled={product.stock === 0} className="w-full md:w-3/5 border border-gray-800 text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-gray-800 text-white">
-                        { product.stock ? (<p>Añadir al Carrito</p>):( <p>Sin Stock</p>)}
+                        <p>Añadir al Carrito</p>
                         </button>
+                        :
+                        <button onClick={() => addToCart(product)} disabled={product.stock === 0} className="w-full md:w-3/5  text-base font-medium leading-none text-white uppercase py-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 bg-red-600 text-white hover:bg-red-800">
+                         <p class="text-white ">Sin Stock</p>
+                        </button>
+                        }
                         <Link to={`/detail/${id}`} className="w-full md:w-2/5">
                             <button className="w-full border border-gray-800 text-base font-medium leading-none text-gray-800 uppercase py-6 bg-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-800 hover:text-white">
                                 Ver detalles

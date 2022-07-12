@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getOrderProducts } from "../redux/actions";
+import Reviews from '../components/Reviews'
 
 const Shopping = ({email}) => {
+  const { userStorage } = useAuth()
   const dispatch = useDispatch();
   const history = useHistory();
   const [loader, setLoader] = useState(true);
-  const ProductOrder = useSelector((state) => state.orderProduct);
+  const ProductOrder = useSelector((state) => state.orderProduct);  
 
-
-  // const { user } = useAuth()
-//  const email = user?.reloadUserInfo.email
   const numberFormat = (value) =>
     new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -39,6 +38,7 @@ const Shopping = ({email}) => {
       {ProductOrder?.length > 0 ? (
         ProductOrder.map((e) => {
           const hora = e.order_date.split("-").join("/").slice(0, 10);
+          
           const horaFinal = hora 
 
           return (
@@ -46,11 +46,13 @@ const Shopping = ({email}) => {
               <div>{horaFinal}</div>
                 <h1 className="text-2xl">Estado de la orden: {e.order_status}</h1>
               <div>{e.Products? e.Products.length: 0} Compras</div>
+              
               {e.Products &&
                 e.Products.map((product) => (
+                  
                   <div key={product.id}>
 
-<section className="container mx-auto p-10 md:p-20 transform duration-500 mb-0">
+<section className="container  p-10 md:p-20 transform duration-500 mb-0">
         <article className="flex flex-wrap md:flex-nowrap shadow-lg mx-auto max-w-screen-lg  border border-gray-200 bg-white">
             <img className="w-full md:w-2/4 h-auto" draggable="false" src={product.image} alt="" />
             <div className="p-8 my-auto">
@@ -69,6 +71,11 @@ const Shopping = ({email}) => {
                 </p>
             </div>
         </article>
+        <div>
+
+          {e.order_status === 'realizada' && <Reviews className="w-screen bg-gray-100 " user={userStorage} id={product.id} />}
+        </div>
+        
     </section>
                     
                
@@ -80,7 +87,7 @@ const Shopping = ({email}) => {
           );
         })
       ) : (
-        <div> No Existe Registro De Compras</div>
+        <div> No existen registros de compras</div>
       )}
     </div>
   );

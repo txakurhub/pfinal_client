@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { getUser } from "../../redux/actions";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-const Nav = ({ setView }) => {
+
+
+const Nav = ({ setView, id }) => {
+  const db = getFirestore();
   const [mdOptionsToggle, setMdOptionsToggle] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const handleClick = (value) => setView(value);
   const history = useHistory()
+  const [info, setInfo] = useState(null)
+
+
+  const userInfo = async (currentUser)=>{
+    const users = doc(db, 'user', currentUser);
+      const docSnap = await getDoc(users);
+      setInfo(docSnap.data())
+  }
+
+  const { user } =  useAuth()
+const dispatch = useDispatch()
+  useEffect(() => {
+    
+      dispatch(getUser(id))
+      userInfo(user)
+  }, [dispatch]);
+  const currentUser = useSelector(state => state.user);
+
 
   return (
     <div className="dark:bg-gray-900 relative w-full bg-gray-100 shadow-sm p-6">
@@ -13,13 +38,14 @@ const Nav = ({ setView }) => {
       <div id="md-searchbar" className={`${mdOptionsToggle ? "hidden" : "flex"} bg-gray-100 dark:bg-gray-900 lg:hidden pb-5 pt-0 items-center justify-center`}>
         <ul className={`hidden md:flex items-center justify-center space-x-8 bg-white w-full py-2 rounded-xl`}>
           <li>
-            <a href="/" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-            inicio
+            <a  href={"/"} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+            Inicio
             </a>
           </li>
+          
           <li>
-            <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-             Mis Compras
+            <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mi perfil
             </a>
           </li>
           <li>
@@ -28,13 +54,18 @@ const Nav = ({ setView }) => {
             </a>
           </li>
           <li>
+            <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mis Compras
+            </a>
+          </li>
+          <li>
               <a onClick={(e) => handleClick("carrito")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                mi carrito
+                Mi carrito
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("favoritos")} className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-               mis favoritos
+               Mis favoritos
               </a>
             </li>
     
@@ -48,8 +79,19 @@ const Nav = ({ setView }) => {
         <div className="justify-end flex items-center space-x-4 xl:space-x-8">
           <ul className={`hidden lg:flex items-center justify-center space-x-8`}>
             <li>
-              <a href="/" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                inicio
+              <a  href={"/"} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                Inicio
+              </a>
+            </li>
+
+            <li>
+            <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mi perfil
+            </a>
+          </li>
+            <li>
+              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                Editar
               </a>
             </li>
             <li>
@@ -58,18 +100,13 @@ const Nav = ({ setView }) => {
               </a>
             </li>
             <li>
-              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                editar
-              </a>
-            </li>
-            <li>
               <a onClick={(e) => handleClick("carrito")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                mi carrito
+                Mi carrito
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("favoritos")} className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-               mis favoritos
+               Mis favoritos
               </a>
             </li>
           </ul>
@@ -104,28 +141,34 @@ const Nav = ({ setView }) => {
         <div className="mt-6 p-4 h-full">
           <ul className={`h-full flex flex-col items-center justify-evenly bg-white w-full py-2 rounded-xl md:hidden lg:hidden xl:hidden 2xl:hidden`}>
             <li>
-              <a href="/" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+              <a  href={"/"} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 inicio
+              </a>
+            </li>
+
+            <li>
+            <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+             Mi perfil
+            </a>
+          </li>
+            <li>
+              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
+                Editar
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("compras")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                mis compras
-              </a>
-            </li>
-            <li>
-              <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                editar
+                Mis compras
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("carrito")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-                mi carrito
+                Mi carrito
               </a>
             </li>
             <li>
               <a onClick={(e) => handleClick("favoritos")} className="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
-               mis favoritos
+               Mis favoritos
               </a>
             </li>
           </ul>

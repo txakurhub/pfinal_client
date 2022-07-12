@@ -10,15 +10,20 @@ const Users = () => {
   const [id, setId] = useState('');
   const [buscar, setBuscar] = useState("");
   const [active, setActive] = useState(false);
+  const [usuarios, setUsuarios] = useState(users)
   const toggle = () => setActive(!active);
   const onClick = (r) => setId(r);
+  const [filtro, setFiltro] = useState("");
+  console.log(users)
 
   useEffect(() => {
     dispatch(getUsers());
+    setUsuarios(users)
   }, [dispatch]);
 
   const handleChange = (e) => {
     e.preventDefault()
+  
     setBuscar(e.target.value)
   }
 
@@ -26,6 +31,27 @@ const Users = () => {
     e.preventDefault()
     dispatch(searchUser(buscar.toLowerCase()))
     setBuscar('')
+  }
+  const handleUser = (e) =>{
+    if(e.target.id === 'filtro'){
+      if(e.target.value === "admin"){
+        let filtrados = [...users]
+        filtrados = filtrados.filter(f => f.admin === true)
+        console.log(filtrados)
+        return setUsuarios(filtrados)
+      }
+      if(e.target.value === 'usuarios'){
+        let filtrados2 = [...users]
+        filtrados2 = filtrados2.filter(f => f.admin === false)
+        return setUsuarios(filtrados2)
+      }
+      if(e.target.value === 'todos'){
+        let todos = [...users]
+
+        return setUsuarios(todos)
+      }
+    }
+    
   }
 
   return (
@@ -38,18 +64,26 @@ const Users = () => {
             <input type="submit" className="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700" value='Buscar' />
           </form>
         </div>
+        <div className="relative inline-block w-40 p-2 text-gray-700">
+          <select id="filtro"  value={filtro} onChange={handleUser} className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-md appearance-none focus:shadow-outline" placeholder="Regular input">
+            <option hidden >Filtar</option>
+            <option value="todos">Todos</option>
+            <option value="admin">Admin</option>
+            <option value="usuarios">Usuario</option>
+          </select>
+        </div>
       </div>
       <div className="table w-[90%] m-auto">
         <div className="flex flex-row justify-between items-center h-[40px]">
           {/* <th className="border border-gray-300 p-4 text-sm font-semibold tracking-wide text-center">{" "}</th> */}
-          <p className="text-sm font-semibold tracking-wide text-center">NOMBRE/Rol</p>
+          <p className="text-sm font-semibold tracking-wide text-center">NOMBRE/ROL</p>
           <p className="text-sm font-semibold tracking-wide text-center">EMAIL</p>
           <p className="text-sm font-semibold tracking-wide text-center">ID</p>
           <p className="text-sm font-semibold tracking-wide text-center">ESTADO | ACTION</p>
         </div>
         <div>
           {
-            users.map((r) => {
+            usuarios.map((r) => {
               return (
                 <div key={r.id} className="hover:bg-gray-100 flex flex-row justify-between items-center mb-2 h-[40px] border-b border-gray-500">
                   {/* <th className="border border-gray-200 px-1 text-sm text-gray-700">

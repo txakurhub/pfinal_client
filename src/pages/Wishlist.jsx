@@ -5,6 +5,7 @@ import { get_wishlist_product, remove_wishlist_product } from "../redux/actions"
 import { useHistory, Link } from "react-router-dom";
 import { CartContext } from "../context/CartItem";
 import { useAuth } from "../context/authContext";
+import Loading from '../components/Loading'
 const Wishlist = () => {
   const { user } = useAuth() 
   const [id, setId] = useState('')
@@ -25,7 +26,7 @@ const Wishlist = () => {
     setOrder(dato);
   };
   if (loader === true) {
-    return <div>Acá va un loader...</div>;
+    return <Loading />;
   }
   return (
 

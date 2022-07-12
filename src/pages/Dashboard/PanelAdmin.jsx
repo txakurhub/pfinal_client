@@ -14,7 +14,7 @@ const PanelAdmin = ({ productData, userData, categoryData, admin }) => {
   const userList = [
     userData.length,
     userData.filter((e) => e.banned).length,
-    userData.filter((e) => e.banned).length
+    userData.filter((e) => e.admin).length
   ];
   //grafica usuarios
   const [dataUser, setDataUser] = useState({
@@ -88,18 +88,18 @@ const PanelAdmin = ({ productData, userData, categoryData, admin }) => {
     <div className="flex flex-row p-4 mx-5">
       <div className="flex flex-col w-1/2">
         <div className="mt-5 max-w-sm mx-2 bg-slate-50 shadow-md shadow-gray-500/50 rounded-lg overflow-hidden max-h-32">
-          <div className="sm:flex sm:items-center px-6 py-4">
+          <div className="sm:flex sm:items-center px-6 py-2">
             <img
               className="block mx-auto sm:mx-0 sm:flex-shrink-0 h-16 sm:h-24 rounded-full"
-              src={img}
+              src={admin.image?admin.image:img}
             />
             <div className="mt-4 sm:mt-0 sm:ml-4 text-center sm:text-left">
-              <p className="text-sm leading-tight text-gray-600">
+              {admin.firstname ? <p className="text-xl leading-tight font-semibold py-1">{` ${admin.firstname} ${admin.lastname?admin.lastname:null}`}</p>:<p className="text-xl leading-tight font-semibold py-1">{`Usuario`}</p>}
+            <p className="text-xs leading-tight text-gray-400 py-1">
                 #{admin.uid}
               </p>
-              <p className="text-xl leading-tight">{`${admin.firstname} ${admin.lastname}`}</p>
-              <p className="text-sm leading-tight text-gray-600">{admin.email}</p>
-              <div className="mt-2">
+              <p className="text-xs leading-tight text-gray-600 py-1"> {admin.email}</p>
+              <div className="mt-1">
                 <button className="text-white-500 text-white bg-green-500 text-xs font-semibold rounded-full px-4 py-1 leading-normal">
                   {admin.admin && "Admin"}
                   {admin.superAdmin && "Super Admin"}

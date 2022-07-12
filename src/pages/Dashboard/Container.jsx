@@ -25,7 +25,7 @@ const Container = ({ active }) => {
           productData={allProducts}
           userData={users}
           categoryData={allcategoriesAdmin}
-          data={userInf}
+          admin={userInf}
         />
       );
     else return <div class="text-center m-36">

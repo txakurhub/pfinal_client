@@ -15,7 +15,8 @@ import { auth, app } from "../firebase-config";
 import { getFirestore, doc, setDoc, collection, getDoc } from "firebase/firestore";
 import { local_url } from "../redux/actions";
 import { async } from "@firebase/util";
-// import { LocalStorage } from "./LocalStorage";
+import { LocalStorage } from "./LocalStorage";
+import swal from "sweetalert";
 export const authContext = createContext();
 
 export const useAuth = () => {
@@ -23,9 +24,9 @@ export const useAuth = () => {
   return context;
 };
 export function AuthProvider({ children }) {
-  // const [user, setUser] = LocalStorage("user",{}) componente de Tomás
+  const [userStorage, setUserStorage] = LocalStorage("user",{}) 
   const [user, setUser] = useState(null);
-  const [userInf, setUserInf] = useState(false);
+  const [userInf, setUserInf] = useState(null);
   const [loading, setLoading] = useState(true);
   const db = getFirestore();
 
@@ -35,8 +36,8 @@ export function AuthProvider({ children }) {
     firstname,
     lastname,
     phone,
-    admin,
-    banned,
+    admin=false,
+    banned=false,
   }) => {
     try {
       const firestore = getFirestore(app);
@@ -80,25 +81,51 @@ export function AuthProvider({ children }) {
     });
   };
 
-  const login = async (email, password) =>
-    await signInWithEmailAndPassword(auth, email, password);
+  const login = async (email, password) =>{
+     await signInWithEmailAndPassword(auth, email, password).then(async cred=>{
+      const docuRef = doc(db, `user/${cred.user.uid}`)
+      const findUser = await getDoc(docuRef);
+      isBannedUser(findUser.data())
+    });
+    
+  }
+
+  const isBannedUser =  (user)=> {
+    if(user.banned){
+       signOut(auth) // se supone que cierra sesion 
+      throw new Error("Lo siento por algún motivo te han suspendido de la página")
+    }
+    // sino tiene ban entra joya 
+  }
+  
 
   const loginWithGoogle = () => {
     const firestore = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-      .then(cred => {
+      .then(async cred => {
         const docuRef = doc(firestore, `user/${cred.user.uid}`);
-        setDoc(docuRef, {
-          email: cred.user.email,
-          displayName: cred.user.displayName,
-          photoURL: cred.user.photoURL,
-          admin: false,
-          banned: false,
-          firstname: "",
-          lastname: "",
-          phone: "",
-          image: ""
+        const findUser = await getDoc(docuRef);
+        const found = findUser.data()
+        if(found){
+          isBannedUser(found)
+        }else{
+          setDoc(docuRef, {
+            email: cred.user.email,
+            displayName: cred.user.displayName,
+            photoURL: cred.user.photoURL,
+            admin: false,
+            banned: false,
+            firstname: cred.user.displayName.split(" ")[0],
+            lastname: cred.user.displayName.split(" ")[1],
+            phone: "",
+            image: ""
+          })
+        }
+      }).catch(error=>{
+        signOut(auth)
+        swal("Error",error.message,"error").then(res=>{
+          window.location.reload()
         })
       })
   }
@@ -118,7 +145,8 @@ export function AuthProvider({ children }) {
   const userInfo = async (currentUser) => {
     const users = doc(db, 'user', currentUser.uid);
     const docSnap = await getDoc(users);
-    setUserInf(docSnap.data())
+    setUserInf({...docSnap.data(),uid:currentUser.uid})
+    setUserStorage({...docSnap.data(),uid:currentUser.uid});
   }
 
   useEffect(() => {
@@ -126,7 +154,6 @@ export function AuthProvider({ children }) {
       if (currentUser) {
         userInfo(currentUser)
         setUser(currentUser);
-        console.log(userInf)
       } else {
         setUserInf(null)
       }
@@ -151,6 +178,7 @@ export function AuthProvider({ children }) {
         userInf,
         logout,
         loading,
+        userStorage,
         loginWithGoogle,
         loginWithFacebook,
         resetPassword,

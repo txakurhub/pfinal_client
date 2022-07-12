@@ -29,7 +29,7 @@ import {
   DELETE_ORDER,
   UPDATE_ORDER,
   RELOAD_USER,
-  CLEAR_STATE
+  // CLEAR_STATE
 } from "./actions";
 import swal from "sweetalert";
 
@@ -57,15 +57,13 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-
-    case CLEAR_STATE: {
-      return {
-        ...state,
-        pictures: [],
-        product_detail: {},
-      }
-    }
-
+    // case CLEAR_STATE: {
+    //   return {
+    //     ...state,
+    //     pictures: [],
+    //     product_detail: {},
+    //   }
+    // }
     case GET_PRODUCTS:
       const result = action.payload.map((e) => ({
         title: e.title,
@@ -203,7 +201,7 @@ function rootReducer(state = initialState, action) {
       }
       let searchResults = container.length
         ? container
-        : swal("No search results found");
+        : swal("No se encontraron resultados");
       return {
         ...state,
         allProducts: searchResults.length ? searchResults : state.allProducts,
@@ -306,10 +304,10 @@ function rootReducer(state = initialState, action) {
     }
     case SEARCH_USER: {
       let filtrado = state.usersCopy.filter(u => u.firstname && u.firstname.toLowerCase().includes(action.payload))
-      let resultado = filtrado.length ? filtrado : alert("Usuario inexistente")
+      let resultado = filtrado.length ? filtrado : swal("Usuario inexistente")
       return {
         ...state,
-        users: resultado ? resultado : state.users
+        users: resultado.length ? resultado : state.users
       }
     }
     case DELETE_ORDER:{
