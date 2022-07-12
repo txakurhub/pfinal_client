@@ -92,7 +92,8 @@ export function AuthProvider({ children }) {
 
   const isBannedUser =  (user)=> {
     if(user.banned){
-       signOut(auth) // se supone que cierra sesion 
+      localStorage.clear();
+       signOut(auth) // se supone que cierra sesion
       throw new Error("Lo siento por algún motivo te han suspendido de la página")
     }
     // sino tiene ban entra joya 
