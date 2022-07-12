@@ -12,12 +12,13 @@ const Card = ({ title, image, price, id, product, toggle, onClick, setProduct, s
   }).format(value);
 
   return (
-    <div key={id} className="group w-[280px] h-[250px] bg-white rounded-lg">
+    <div key={id} className="group w-[290px] h-[320px] bg-white rounded-lg p-4 hover:shadow-2xl transition delay-200 duration-300  ">
       <a title="Ir al detalle del producto" href={`/detail/${id}`} className="w-full h-[140px] aspect-w-1 aspect-h-1 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8 flex items-center justify-center">
         <img
           src={image}
           alt="Not found"
-          className="h-full object-center object-cover group-hover:opacity-75"
+        
+          className="h-full object-center object-cover  "
         />
       </a>
       <h3 title={title} className="mt-4 text-sm text-start text-gray-700 w-full h-[20px] truncate">{title}</h3>
@@ -39,7 +40,7 @@ const Card = ({ title, image, price, id, product, toggle, onClick, setProduct, s
           </p>
         }
       </div>
-      <button title={sinStock ? 'deshabilitado' : 'Agregar al carrito'} disabled={sinStock ? true : false} onClick={() => addToCart(product)} className="w-full h-[30px] m-auto rounded bg-[#f3f4f6] text-[#404850] font-semibold mt-2 opacity-0 group-hover:opacity-100 transition duration-500">
+      <button title={sinStock ? 'deshabilitado' : 'Agregar al carrito'} disabled={sinStock ? true : false} onClick={() => addToCart(product)} className="w-full h-[50px] m-auto rounded bg-gray-900 text-white font-semibold mt-10 opacity-0 group-hover:opacity-100 transition duration-500">
         Agregar al carrito
       </button>
     </div>

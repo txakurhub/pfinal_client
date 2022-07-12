@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { getProductosDestacados } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
-import Card from "../components/Card";
+import FeaturedCards from "./FeaturedCards";
 
 export const ProductosDestacados = ({setProduct,toggle,onClick}) => {
   const slideRef = useRef();
@@ -61,7 +61,7 @@ export const ProductosDestacados = ({setProduct,toggle,onClick}) => {
           {
         productDestacados?.map((r)=>(
 
-          r.stock !== 0 && <Card  setProduct={setProduct} toggle={toggle} onClick={onClick} id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} wishlist={r.wishlist} />
+          r.stock !== 0 && <FeaturedCards  setProduct={setProduct} toggle={toggle} onClick={onClick} id={r.id} key={r.id} title={r.title} image={r.image} brand={r.brand} model={r.model} price={r.price} product={r} stock={r.stock} sold={r.sold} wishlist={r.wishlist} />
           )).slice(inicio,final)
         }
        
