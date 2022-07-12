@@ -26,7 +26,6 @@ function PageShopingCart() {
     price: total,
   }
   
-  
   /*const product = cartItem.map((e) => {
     return {
       id: e.id,

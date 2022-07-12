@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   FacebookAuthProvider,
+
 } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import { auth, app } from "../firebase-config";

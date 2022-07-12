@@ -6,6 +6,7 @@ import {
   filter_get_wishlist_product,
   getPictures, 
   getShoeDetail,
+  getUsers,
   // getStock,
   remove_wishlist_product,
 } from "../redux/actions";
@@ -27,14 +28,15 @@ const Detail = () => {
   const counter = useSelector((state)=> state.counterwishlist);
   const [order, setOrder] = useState('')
   let stock = useSelector((state)=> state.stockShoes)
+  
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
-
+ 
   useEffect(() => {
     if(user){
       dispatch(filter_get_wishlist_product({ id: user.uid, product: params.id }));
     }
-    
+   
     dispatch(getShoeDetail(params.id)).then(() => setLoader(false));
     dispatch(getPictures(params.id))
     // dispatch(getStock(params.id))
@@ -44,7 +46,7 @@ const Detail = () => {
   
   }, [dispatch, counter, params.id ]);
   
-
+ 
 
   const handleaddwishlist = (e)=>{
     e.preventDefault();
@@ -168,10 +170,11 @@ const Detail = () => {
         </div>
        
         <button
-          onClick={() => addToCart(selected)}
+          onClick={() => addToCart(selected) }
+          disabled={selected.stock === 0}
           className="mt-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-base flex items-center justify-center leading-none text-white bg-gray-800 w-full py-4 hover:bg-gray-700"
         >
-          <svg
+          {selected.stock ?  <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"
@@ -184,8 +187,9 @@ const Detail = () => {
               strokeLinejoin="round"
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
-          </svg>
-          Añadir al carrito de compras
+          </svg> : null}
+         
+           { selected.stock ? (<p>Añadir al Carrito</p>):( <p>Sin Stock</p>)}
         </button>
         <p className="text-base leading-4 mt-7 text-gray-600">
           Modelo del producto: {selected.model}

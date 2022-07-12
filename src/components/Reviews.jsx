@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { create_new_review, get_reviews } from "../redux/actions";
+import { create_new_review, getUsers, get_reviews } from "../redux/actions";
 import swal from 'sweetalert';
 
 const Reviews = ({ id, user }) => {
+  const users = useSelector(state => state.users);
+  
+  const username =(id)=>{
+    const dato =  Object.values(users).filter(e=> e.id === id)
+    const date = dato.map( e => e.firstname?e.firstname: "Sin Nombre")
+    return date.length > 0 ? date : "Sin Nombre"
 
+  }
   const reviews = useSelector((state) => state.reviews);
   const dispatch = useDispatch();
  
@@ -35,6 +42,7 @@ const Reviews = ({ id, user }) => {
   
   useEffect(() => {
     dispatch(get_reviews(id));
+    dispatch(getUsers())
   }, [dispatch, id]);
 
   return (
@@ -86,6 +94,7 @@ const Reviews = ({ id, user }) => {
               </div>
               <div className="md:block">
                 <p className="mt-3 text-base leading-normal text-gray-600 w-full md:w-9/12 xl:w-5/6">{r.comment}</p>
+                <p className="mt-3 text-base leading-normal text-gray-600 w-full md:w-9/12 xl:w-5/6">Usuario: {username(r.userId)}</p>
               </div>
             </div>
           ))
