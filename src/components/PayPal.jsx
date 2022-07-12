@@ -44,12 +44,13 @@ const PayPal = (props) => {
     setPaidFor(true);
     doThePay();
   };
-
+  
   if (paidFor) {
-    alert("Gracias por la compra, serás redirigido a la pagina principal");
+    
     localStorage.clear();
-    window.location.reload();
     history.push('/');
+    window.location.reload();
+
   }
 
   if (error) {
@@ -65,7 +66,7 @@ const PayPal = (props) => {
       }}
       onClick={(data, actions) => {
         if(!userStorage) {
-          setError("Necesitas estar logueado capo");
+          setError("Necesitas estar registrado");
           history.push("/login");
           return actions.reject();
         } else {
@@ -87,13 +88,14 @@ const PayPal = (props) => {
       onApprove={async (data, actions) => {
         const order = await actions.order.capture(); 
         handleApprove(data.orderID);
+        // swal("Gracias por la compra, serás redirigido a la pagina principal");
       }}
       onError={(err) => {
         setError(err);
         console.error("PayPal Checkout onError", err);
       }}
       onCancel={() => {
-        alert('No caceles, porfa. I need the money')
+        swal('Compra cancelada')
       }}
     />
 	);

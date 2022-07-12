@@ -49,7 +49,7 @@ function PageShopingCart() {
     const linkMP = await sendMP()
     console.log(linkMP)
     const QR = await generateQr(linkMP)
-    console.log(linkMP)
+  
     if (user) {
       if(user.emailVerified){
         swal2.fire({
@@ -60,21 +60,25 @@ function PageShopingCart() {
           imageWidth: 200,
           imageHeight: 200,
           imageAlt: 'Custom image',
-          buttons: true,
-          dangerMode: true,
+          showConfirmButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Ir al link',
+          cancelButtonText: 'Cancelar',
+          // dangerMode: true,
         })
-          .then((willDelete) => {
-            if (willDelete) {
-              window.open(linkMP, '_blank');
-              history.push('/')
-              localStorage.clear()
-              window.location.reload()
-            } else {
+        .then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            window.open(linkMP, '_blank');
+                history.push('/')
+                localStorage.clear()
+                window.location.reload()
+            swal2.fire('Saved!', '', 'success')
+          } else if (result.isDenied) {
               swal("Su pago no fue completado");
-            }
-          });
-      }else{
-        swal({
+          }
+        })}else{
+        swal2({
           text: "Lo siento! Necesitas verificar tu email para continuar.",
           icon: "warning",
           dangerMode: true,
