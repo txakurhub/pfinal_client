@@ -41,6 +41,7 @@ export const EditUser = ({
   };
 
   useEffect(() => {
+    console.log("otra vez");
     dispatch(getUser(id));
   }, [dispatch]);
 
@@ -65,10 +66,10 @@ export const EditUser = ({
         });
     }
   };
-  const handleSubmit = (r) => {
-    r.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(updateUser({ id, submission }));
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (
