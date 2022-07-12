@@ -5,15 +5,17 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { useHistory } from 'react-router-dom'
 import swal from 'sweetalert';
+import swal2 from 'sweetalert2'
 import PayPal from "../components/PayPal";
 import mercadopago from "../assets/mercadopago.png"
+
 
 function PageShopingCart() {
   const { user } = useAuth();
   const history = useHistory()
   // const [show, setShow] = useState(false);
   const { cartItem } = useContext(CartContext);
-  const { deleteItemToCart, deleteItemCantidad, sendMP, deleteTotal, addToCart2 } =
+  const { deleteItemToCart, deleteItemCantidad, sendMP, deleteTotal, addToCart2, generateQr } =
     useContext(CartContext);
   const total = cartItem.reduce(
     (previous, current) => previous + current.amount * current.price,
@@ -45,11 +47,19 @@ function PageShopingCart() {
   const handleCheckout = async (e) => {
     e.preventDefault();
     const linkMP = await sendMP()
+    console.log(linkMP)
+    const QR = await generateQr(linkMP)
+    console.log(linkMP)
     if (user) {
       if(user.emailVerified){
-        swal({
+        swal2.fire({
           text: "Serás redirigido/a al método de pago, ¡gracias por la compra!",
           icon: "success",
+          text2: "Pagar con QR",
+          imageUrl: `${QR}`,
+          imageWidth: 200,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
           buttons: true,
           dangerMode: true,
         })

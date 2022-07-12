@@ -14,7 +14,6 @@ const PayPal = (props) => {
   const { cartItem } = useContext(CartContext);
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
-  console.log(userStorage);
 
   async function doThePay() {
     const items = cartItem.map(r => {
@@ -42,19 +41,11 @@ const PayPal = (props) => {
   };
 
   const handleApprove = (orderId) => {
-    // Call backend function to fulfill order
-
-    // if response is success
     setPaidFor(true);
     doThePay();
-    // Refresh user's account or subscription status
-
-    // if response is error
-    // alert("Your payment was processed successfully. However, we are unable to fulfill your purchase. Please contact us at support@designcode.io for assistance.");
   };
 
   if (paidFor) {
-    // Display success message, modal or redirect user to success page
     alert("Gracias por la compra, serás redirigido a la pagina principal");
     localStorage.clear();
     window.location.reload();
@@ -62,7 +53,6 @@ const PayPal = (props) => {
   }
 
   if (error) {
-    // Display error message, modal or redirect user to error page
     alert(error);
   }
 
@@ -74,7 +64,6 @@ const PayPal = (props) => {
         label: "buynow"
       }}
       onClick={(data, actions) => {
-        // Validate on button click, client or server side
         if(!userStorage) {
           setError("Necesitas estar logueado capo");
           history.push("/login");
@@ -97,8 +86,6 @@ const PayPal = (props) => {
       }}
       onApprove={async (data, actions) => {
         const order = await actions.order.capture(); 
-        console.log("order", order);
-
         handleApprove(data.orderID);
       }}
       onError={(err) => {
@@ -106,7 +93,6 @@ const PayPal = (props) => {
         console.error("PayPal Checkout onError", err);
       }}
       onCancel={() => {
-        // Display cancel message, modal or redirect user to cancel page or back to cart
         alert('No caceles, porfa. I need the money')
       }}
     />
