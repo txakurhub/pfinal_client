@@ -21,7 +21,7 @@ function PageShopingCart() {
   );
   
    const product = {
-    price: total,
+    price: Math.round((total * 0.0079)),
   }
   
   /*const product = cartItem.map((e) => {
