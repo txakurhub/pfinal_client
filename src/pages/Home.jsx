@@ -33,7 +33,7 @@ export default function Home() {
   const [product, setProduct] = useState();
   const toggle = () => setActive(!active);
   const onClick = (r) => setId(r);
-  const { user, logout, loading } = useAuth();
+  const { user, logout, loading , userStorage } = useAuth();
   const currentUser = useSelector(state => state.user)
   const nombreProductos = useSelector((state) => state.allProductsName);
   const products = useSelector((state) => state.allProducts);
@@ -76,7 +76,7 @@ export default function Home() {
     if (!productDestacados.length) {
       dispatch(getProductosDestacados());
     }
-    if (user) {
+    if (!currentUser) {
       dispatch(getUser(user.uid))
     }
   }, [dispatch]);
@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <section className="bg-gray-200">
       <NavBar
-        admin={currentUser ? currentUser.admin : false}
+        admin={userStorage &&userStorage.admin} // use el localstorage porque sino renderiza el "Admin" 
         nombreProductos={nombreProductos}
         setCurrentPage={setCurrentPage}
         loading={loading}
