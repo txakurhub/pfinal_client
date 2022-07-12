@@ -42,7 +42,7 @@ const Shopping = ({ email }) => {
                     {r.order_date.split("-").join("/").slice(0, 10)} - {r.Products.length > 2 ? r.Products.length + ' productos' : r.Products.length + ' producto'} | {r.order_status}
                   </p>
                   {
-                    r.order_status !== 'Completada' &&
+                    (r.order_status !== 'Completada' && r.order_status !== "realizada") &&
                     <a href="/cart" title="Ir al carrito" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">: Pagar ahora</a>
                   }
                 </span>
