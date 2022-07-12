@@ -9,6 +9,7 @@ export const local_url = process.env.REACT_APP_URL_LOCAL || "https://zapatillas-
 
 >>>>>>> 55abfd45cce76a4f8b7319df476ddf51f71950ea
 
+
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_SHOE_DETAIL = "GET_SHOE_DETAIL";
 export const SEARCH_SNEAKES = "SEARCH_SNEAKES";
