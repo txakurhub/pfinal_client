@@ -45,6 +45,7 @@ function App() {
             <Route exact path='/shopping/' component={Shopping} />
             <PrivateRouteUser exact path="/user/profile/:id" component={UserDash} />
             <Route exact path="/navprueba" component={NavPrueba}></Route>
+            <Route exact path="/pay" component={Shopping} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>
