@@ -77,7 +77,9 @@ export default function Home() {
       dispatch(getProductosDestacados());
     }
     if (!currentUser) {
-      dispatch(getUser(user.uid))
+      if(user){
+        dispatch(getUser(user.uid))
+      }
     }
   }, [dispatch]);
 
