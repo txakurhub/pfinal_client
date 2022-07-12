@@ -83,16 +83,19 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) =>{
      await signInWithEmailAndPassword(auth, email, password).then(async cred=>{
-      const docuRef = doc(db, `user/${cred.user.uid}`)
+      const docuRef = await doc(db, `user/${cred.user.uid}`)
       const findUser = await getDoc(docuRef);
-      isBannedUser(findUser.data())
+      await isBannedUser(findUser.data())
     });
     
   }
 
-  const isBannedUser =  (user)=> {
+  const isBannedUser =  async (user)=> {
     if(user.banned){
-       signOut(auth) // se supone que cierra sesion 
+      localStorage.clear();
+      setUser(null)
+      setUserStorage({})
+       await signOut(auth) // se supone que cierra sesion
       throw new Error("Lo siento por algún motivo te han suspendido de la página")
     }
     // sino tiene ban entra joya 
@@ -104,11 +107,11 @@ export function AuthProvider({ children }) {
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
       .then(async cred => {
-        const docuRef = doc(firestore, `user/${cred.user.uid}`);
+        const docuRef = await doc(firestore, `user/${cred.user.uid}`);
         const findUser = await getDoc(docuRef);
         const found = findUser.data()
         if(found){
-          isBannedUser(found)
+          await isBannedUser(found)
         }else{
           setDoc(docuRef, {
             email: cred.user.email,
@@ -124,9 +127,7 @@ export function AuthProvider({ children }) {
         }
       }).catch(error=>{
         signOut(auth)
-        swal("Error",error.message,"error").then(res=>{
-          window.location.reload()
-        })
+        swal("Error",error.message,"error")
       })
   }
 
