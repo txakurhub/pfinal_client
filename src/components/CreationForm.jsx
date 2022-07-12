@@ -183,7 +183,20 @@ const CreationForm = () => {
                 <label htmlFor="brand" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                   Brand
                 </label>
-                <input type="text" value={input.brand} maxlength={12} onChange={handleChange} id="brand" name="brand" required className={`border ${errores.brand ? 'border-red-400' : input.brand === '' ? 'border-gray-300' : 'border-green-400'} focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400`} placeholder="Brand..." />
+                <select name='brand' value={input.brand} onChange={handleChange} id="brand" required className={`border ${errores.brand ? 'border-red-400' : input.brand === '' ? 'border-gray-300' : 'border-green-400'} focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400`}>
+          <option hidden>Marca</option>
+          <option value='Nike'>Nike</option>
+          <option value='adidas'>Adidas</option>
+          <option value='Vans'>Vans</option>
+          <option value='Converse'>Converse</option>
+          <option value='Caterpillar'>Caterpillar</option>
+          <option value='Vizzano'>Vizzano</option>
+          <option value='Briganti'>Briganti</option>
+          <option value='Faraon'>Faraon</option>
+          <option value='Sport'>Sport</option>
+          <option value='Moleca'>Moleca</option>
+        </select>
+                {/* <input type="text" value={input.brand} maxlength={12} onChange={handleChange} id="brand" name="brand" required className={`border ${errores.brand ? 'border-red-400' : input.brand === '' ? 'border-gray-300' : 'border-green-400'} focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400`} placeholder="Brand..." /> */}
                 <div className={`flex justify-between items-center pt-1 ${errores.brand ? 'text-red-400' : input.brand === '' ? '' : 'text-green-400'}`}>
                   <p className="text-xs">{errores.brand ? errores.brand : input.brand === '' ? '' : 'Brand submission succes!'}</p>
                   {
