@@ -10,6 +10,7 @@ export const Carrousel = () => {
   const imagesArr = [img1, img2, img3, img4, img5];
   const [index, setIndex] = useState(0);
   const slideRef = useRef()
+  const [ inter, setInter ] = useState(null); 
 
   const removeAnimation = () => {
     slideRef.current.classList.remove('fade-anim')
@@ -17,14 +18,15 @@ export const Carrousel = () => {
 
   useEffect(() => {
     slideRef.current.addEventListener('animationend', removeAnimation)
-    startSlider();
-  }, []);
-
-  const startSlider = () => {
+    const startSlider = 
     setInterval(() => {
       handleNext();
     }, 3000);
-  };
+    return ()=>{
+      clearInterval(startSlider)
+    }
+  }, []);
+
   
   const handleNext = () => {
     count = (count + 1) % imagesArr.length
