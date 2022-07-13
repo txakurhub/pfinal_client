@@ -2,7 +2,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 export const local_url = process.env.REACT_APP_URL_LOCAL || "https://zapatillas-proyecto.herokuapp.com"
-
+// export const local_url = "http://localhost:3001"
 
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
@@ -63,7 +63,7 @@ export const searchSneakes = (shoe) => {
   return (dispatch) => {
     axios.get(`${local_url}/shoes?name=${shoe}`).then(
       (res) => dispatch({ type: SEARCH_SNEAKES, payload: res.data }),
-      (error) => swal("Zapatillas no encontradas")
+      (error) => swal("No hay resultados")
     );
   };
 };
