@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import { addCategory } from '../redux/actions';
 
 export default function CategoryAdd() {
+  const history = useHistory();
 
   const validation = (info) => {
     let errores = {}
@@ -21,7 +23,8 @@ export default function CategoryAdd() {
     e.preventDefault();
     dispatch(addCategory(info))
     setInfo('')
-    window.location.reload()
+    // window.location.reload()
+    history.push("/admin")
   };
 
   const handleChange = (e) => {

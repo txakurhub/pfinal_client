@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { editCategory } from '../redux/actions';
 
 export default function CategoryEdit() {
-
+  const history = useHistory();
   const dispatch = useDispatch()
   const [info, setInfo] = useState({
     id: "",
@@ -16,7 +16,8 @@ export default function CategoryEdit() {
     e.preventDefault();
     dispatch(editCategory(info))
     setInfo({ id: "", name: "" })
-    window.location.reload()
+    // window.location.reload()
+    history.push("/admin")
   };
 
   const handleChange = (e) => {

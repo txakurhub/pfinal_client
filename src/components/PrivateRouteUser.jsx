@@ -5,7 +5,7 @@ import Loading from './Loading';
 const PrivateRouteUser = ({ component: Component, ...rest }) => {
 
     const { userStorage } = useAuth();
-    console.log(userStorage)
+
     return (
         <Route {...rest}>{Object.keys(userStorage).length ? <Component /> : <Redirect to="/login" />}</Route>
     )

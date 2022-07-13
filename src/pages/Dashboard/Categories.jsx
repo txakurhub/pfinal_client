@@ -9,6 +9,7 @@ import { adminDeleteCategories, getAllCategoryAdmin } from '../../redux/actions'
 
 
 function Categories() {
+  const history = useHistory();
   const allcategories = useSelector(state=>state.allcategoriesAdmin)
   const [categories,setCategories] = useState(allcategories)
   const [buscar,setBuscar] = useState("")
@@ -47,7 +48,8 @@ function Categories() {
         });
         dispatch(adminDeleteCategories(id));
        setTimeout(() => {
-        window.location.reload()
+        // window.location.reload()
+        history.push("/admin")
        }, 2000);
       } else {
         swal("¡La acción ha sido cancelada con éxito!");
