@@ -21,7 +21,7 @@ export default function CategoryAdd() {
     e.preventDefault();
     dispatch(addCategory(info))
     setInfo('')
-    window.location.reload()
+    history.push("/admin")
   };
 
   const handleChange = (e) => {

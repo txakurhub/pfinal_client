@@ -14,6 +14,7 @@ function Categories() {
   const [buscar,setBuscar] = useState("")
   const [actualizar,setActualizar]=useState(true)
   const dispatch = useDispatch()
+  const history = useHistory()
   const [id, setId] = useState('');
   const [activeCreate, setActiveCreate] = useState(false);
   const [activeEdit, setActiveEdit] = useState(false);
@@ -47,7 +48,7 @@ function Categories() {
         });
         dispatch(adminDeleteCategories(id));
        setTimeout(() => {
-        window.location.reload()
+        history.push("/admin")
        }, 2000);
       } else {
         swal("¡La acción ha sido cancelada con éxito!");
