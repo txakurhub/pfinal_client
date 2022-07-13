@@ -1,13 +1,8 @@
 import axios from "axios";
 import swal from "sweetalert";
-<<<<<<< HEAD
-// export const local_url = "https://zapatillas-proyecto.herokuapp.com"
-export const local_url = "http://localhost:3001";
-=======
 
 export const local_url = process.env.REACT_APP_URL_LOCAL || "https://zapatillas-proyecto.herokuapp.com"
 
->>>>>>> 55abfd45cce76a4f8b7319df476ddf51f71950ea
 
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
