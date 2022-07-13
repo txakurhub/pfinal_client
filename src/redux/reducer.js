@@ -276,7 +276,7 @@ function rootReducer(state = initialState, action) {
     }
 
     case FILTER_ORDER: {
-      let resultado = state.orderstatusCopy.filter(
+      let resultado = action.payload === "todas" ? state.orderstatusCopy : state.orderstatusCopy.filter(
         (e) => e.order_status === action.payload
       );
       return {
@@ -295,11 +295,11 @@ function rootReducer(state = initialState, action) {
         ...state
       }
     }
-    case DELETE_CATEGORY:{
-      const result = state.allcategoriesAdmin.filter(e=> e.id !== action.payload)
+    case DELETE_CATEGORY: {
+      const result = state.allcategoriesAdmin.filter(e => e.id !== action.payload)
       return {
         ...state,
-        allcategoriesAdmin:result
+        allcategoriesAdmin: result
       }
     }
     case SEARCH_USER: {
@@ -310,21 +310,21 @@ function rootReducer(state = initialState, action) {
         users: resultado.length ? resultado : state.users
       }
     }
-    case DELETE_ORDER:{
-      const result = state.orderstatusCopy.filter(e=> e.id !== action.payload)
-      return{
+    case DELETE_ORDER: {
+      const result = state.orderstatusCopy.filter(e => e.id !== action.payload)
+      return {
         ...state,
-        orderstatusCopy:result,
-        orderstatus:result
+        orderstatusCopy: result,
+        orderstatus: result
       }
     }
-    case UPDATE_ORDER:{
+    case UPDATE_ORDER: {
       return state
     }
-    case RELOAD_USER:{
-      return{
+    case RELOAD_USER: {
+      return {
         ...state,
-        users:state.usersCopy
+        users: state.usersCopy
       }
     }
     default:

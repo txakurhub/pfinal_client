@@ -148,6 +148,7 @@ function OrderStatus() {
               className="w-full h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-md appearance-none focus:shadow-outline"
             >
               <option hidden>Órdenes</option>
+              <option value="todas">Todas</option>
               <option value="realizada">Realizadas</option>
               <option value="pendiente">Pendientes</option>
               <option value="cancelada">Canceladas</option>

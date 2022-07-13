@@ -53,9 +53,9 @@ const PayPal = (props) => {
 
   }
 
-  if (error) {
-    alert(error);
-  }
+  // if (error) {
+  //   alert(error);
+  // } // esto tira error cuando cerras rápido la ventana de paypal, dejar comentado
 
 	return (
 		<PayPalButtons
