@@ -7,7 +7,7 @@ import { CartContext } from "../context/CartItem";
 import { useAuth } from "../context/authContext";
 import Loading from '../components/Loading'
 const Wishlist = () => {
-  const { user } = useAuth() 
+  const { userStorage } = useAuth() 
   const [id, setId] = useState('')
   const dispatch = useDispatch();
   const history = useHistory();
@@ -17,12 +17,12 @@ const Wishlist = () => {
   const To = (props) => history.push('/' + props ? props : null);
   const { addToCart } = useContext(CartContext);
   useEffect(() => {
-    dispatch(get_wishlist_product(user.uid)).then(() => setLoader(false));
+    dispatch(get_wishlist_product(userStorage.uid)).then(() => setLoader(false));
   }, [dispatch]);
 
   const handleButton = (id) => {
     const dato = id;
-    dispatch(remove_wishlist_product(dato, user.uid));
+    dispatch(remove_wishlist_product(dato, userStorage.uid));
     setOrder(dato);
   };
   if (loader === true) {

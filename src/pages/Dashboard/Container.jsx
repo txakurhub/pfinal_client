@@ -9,7 +9,7 @@ import Shoes from "./Shoes";
 
 
 const Container = ({ active }) => {
-  const { userInf } = useAuth();
+  const { userStorage } = useAuth();
   const { allProducts, users, orderstatus, allcategoriesAdmin } = useSelector(
     (state) => state
   );
@@ -19,13 +19,13 @@ const Container = ({ active }) => {
   if (active === "categories") return <Categories />;
   if (active === "order") return <OrderStatus />;
   if (active === "dashboard") {
-    if (allProducts.length && userInf && users.length &&orderstatus && allcategoriesAdmin.length)
+    if (allProducts.length && userStorage && users.length &&orderstatus && allcategoriesAdmin.length)
       return (
         <PanelAdmin
           productData={allProducts}
           userData={users}
           categoryData={allcategoriesAdmin}
-          admin={userInf}
+          admin={userStorage}
         />
       );
     else return <div class="text-center m-36">
