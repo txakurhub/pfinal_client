@@ -10,7 +10,6 @@ export const Carrousel = () => {
   const imagesArr = [img1, img2, img3, img4, img5];
   const [index, setIndex] = useState(0);
   const slideRef = useRef()
-  const [ inter, setInter ] = useState(null); 
 
   const removeAnimation = () => {
     slideRef.current.classList.remove('fade-anim')
