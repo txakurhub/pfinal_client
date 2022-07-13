@@ -17,14 +17,15 @@ export const Carrousel = () => {
 
   useEffect(() => {
     slideRef.current.addEventListener('animationend', removeAnimation)
-    startSlider();
-  }, []);
-
-  const startSlider = () => {
+    const startSlider = 
     setInterval(() => {
       handleNext();
     }, 3000);
-  };
+    return ()=>{
+      clearInterval(startSlider)
+    }
+  }, []);
+
   
   const handleNext = () => {
     count = (count + 1) % imagesArr.length

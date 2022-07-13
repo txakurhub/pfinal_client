@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { getOrderProducts } from "../redux/actions";
-// import Reviews from '../components/Reviews'
+import Reviews from '../components/Reviews'
 import userimg from "../assets/user.png"
 
 const Shopping = ({ email }) => {
@@ -42,12 +42,13 @@ const Shopping = ({ email }) => {
                     {r.order_date.split("-").join("/").slice(0, 10)} - {r.Products.length > 2 ? r.Products.length + ' productos' : r.Products.length + ' producto'} | {r.order_status}
                   </p>
                   {
-                    r.order_status !== 'Completada' &&
+                    (r.order_status !== 'Completada' && r.order_status !== "realizada") &&
                     <a href="/cart" title="Ir al carrito" className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">: Pagar ahora</a>
                   }
                 </span>
                 {
                   r.Products.map(p => (
+                    <div>
                     <a title="Ver detalles" href={`/detail/${p.id}`}>
                       <div className="mt-4 md:mt-6 flex hover:bg-gray-100 flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                         <div className="pb-4 md:pb-8 w-full md:w-auto">
@@ -79,6 +80,10 @@ const Shopping = ({ email }) => {
                         </div>
                       </div>
                     </a>
+                    <div>
+                    {r.order_status === 'realizada' && <Reviews className="w-screen bg-gray-100 " user={userStorage} id={p.id} />}
+                    </div>
+                    </div>
                   ))
                 }
               </div>

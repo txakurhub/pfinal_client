@@ -73,9 +73,9 @@ const dispatch = useDispatch()
       </div>
       {/* For large screens */}
       <div className="dark:bg-gray-900 bg-gray-100 container mx-auto flex items-center justify-between">
-        <h1 onClick={e=>history.push("/")} className="md:w-2/12 cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
+        <a href="/" className="md:w-2/12 cursor-pointer text-gray-800 dark:text-white font-extrabold text-xl flex" aria-label="the Cribbb.">
           <p className="text-[#9CA3AF]">E</p>-<p>Commerce</p>
-        </h1>
+        </a>
         <div className="justify-end flex items-center space-x-4 xl:space-x-8">
           <ul className={`hidden lg:flex items-center justify-center space-x-8`}>
             <li>
