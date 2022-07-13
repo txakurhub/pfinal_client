@@ -10,8 +10,8 @@ import userimg from "../../assets/user.png";
 
 const Container = ({ active }) => { 
     const { id } = useParams();
-    const { user,userStorage } =  useAuth();
-    if(active === "compras") return <section className="h-full bg-gray-100 overflow-x-hidden"><Shopping email={user.email} /></section>
+    const { user,userStorage } =  useAuth(); // usando el user cuando recargas se rompe por eso use el useStorage
+    if(active === "compras") return <section className="h-full bg-gray-100 overflow-x-hidden"><Shopping email={userStorage.email} /></section> //tiraba error esta linea con el user.email
     if(active === "edit") return <EditUser 
         id={id} 
         lastname={userStorage.lastname}
