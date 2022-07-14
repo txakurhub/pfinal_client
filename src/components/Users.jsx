@@ -12,7 +12,7 @@ const Users = () => {
   const [active, setActive] = useState(false);
   const [usuarios, setUsuarios] = useState(users)
   const toggle = () => setActive(!active);
-  const onClick = (r) => setId(r);
+  const onClack = (r) => setId(r);
   const [filtro, setFiltro] = useState("");
 
   useEffect(() => {
@@ -32,6 +32,7 @@ const Users = () => {
     setBuscar('')
   }
   const handleUser = (e) =>{
+    console.log(id);
     if(e.target.id === 'filtro'){
       if(e.target.value === "admin"){
         let filtrados = [...users]
@@ -83,6 +84,7 @@ const Users = () => {
         <div>
           {
             usuarios.map((r) => {
+              console.log(r.id);
               return (
                 <div key={r.id} className="hover:bg-gray-100 flex flex-row justify-between items-center mb-2 h-[40px] border-b border-gray-500">
                   {/* <th className="border border-gray-200 px-1 text-sm text-gray-700">
@@ -104,7 +106,7 @@ const Users = () => {
                         <p title="Bloqueado" className="h-4 w-4 rounded-full bg-red-500 mr-2" /> :
                         <p title="Activo" className="h-4 w-4 rounded-full bg-[#5ad539] mr-2" />
                     }
-                    <button title="Editar usuario" onClick={() => { toggle(); onClick(r.id); }} key={r.id}>
+                    <button title="Editar usuario" onClick={() => { toggle(); onClack(r.id); }} key={r.id}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
                         <path fillRule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
