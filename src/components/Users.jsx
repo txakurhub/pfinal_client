@@ -15,10 +15,10 @@ const Users = () => {
   const onClick = (r) => setId(r);
   const [filtro, setFiltro] = useState("");
 
-  useEffect(() => {
-    // dispatch(getUsers());
+useEffect(() => {
+  
     setUsuarios(users)
-  }, [dispatch]);
+  }, [dispatch,users]);
 
   const handleChange = (e) => {
     e.preventDefault()
