@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import { useAuth } from "../context/authContext";
 import { getUser, updateUserAdmin } from "../redux/actions";
 
 const UpdateUser = ({ id }) => {
   const dispatch = useDispatch();
-  // const history = useHistory()
+  const history = useHistory()
   const {resetPassword} = useAuth()
   const initialState = { admin: false, banned: false };
   const [submission, setSubmission] = useState({ ...initialState });
@@ -32,7 +33,9 @@ const UpdateUser = ({ id }) => {
     const {admin,banned}= submission
     dispatch(updateUserAdmin({ id, admin: toBoolean(admin), banned:toBoolean(banned) }));
     setSubmission({ ...initialState });
-    window.location.reload()
+    swal("Buen trabajo!","Los cambios se han realizados correctamente","success").then(res=>{
+      window.location.reload()
+    })
   };
 
   useEffect(() => {
@@ -62,7 +65,7 @@ const UpdateUser = ({ id }) => {
         <div className="flex flex-col w-[48%]">
           <label className="text-start">Resetear contraseña</label>
           {/* eso pa que le envien un correo para restablecer la contra*/}
-          {user&& <span className="no-underline hover:underline cursor-pointer" onClick={()=>{resetPassword(user.email); swal("Se envio un correo para restablecer la contraseña")}}>Resetear</span>}
+          {user&& <span className="no-underline hover:underline cursor-pointer" onClick={()=>{resetPassword(user.email); swal("Atención","Se envio un correo al usuario para restablecer la contraseña","warning")}}>Resetear</span>}
           {/* <input type="text" value={submission.password} onChange={handleSubmissionChange} name="password" placeholder={user.password} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" /> */}
         </div>
       </div>
