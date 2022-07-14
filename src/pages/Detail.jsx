@@ -30,7 +30,7 @@ const Detail = () => {
   const counter = useSelector((state) => state.counterwishlist);
   const [order, setOrder] = useState('')
   let stock = useSelector((state) => state.stockShoes)
-  console.log(selected);
+
 
   const pictures = useSelector((state) => state.pictures);
   const { addToCart } = useContext(CartContext);
@@ -52,7 +52,7 @@ const Detail = () => {
     //     dispatch(clearStateDetail())
     // } // Esto hacía que a la hora de restaurar la página aparezca por unos milisegundos img not found,
     // por eso lo comenté
-  }, [dispatch, counter, user]);
+  }, [dispatch, counter]);
 
 
   const handleaddwishlist = (e) => {
@@ -76,6 +76,7 @@ const Detail = () => {
   if (loader === true) {
     return <Loading />
   }
+  
 
   return (
     <div >

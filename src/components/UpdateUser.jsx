@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import { useAuth } from "../context/authContext";
 import { getUser, updateUserAdmin } from "../redux/actions";
 
 const UpdateUser = ({ id }) => {
   const dispatch = useDispatch();
-  // const history = useHistory()
+  const history = useHistory()
   const {resetPassword} = useAuth()
   const initialState = { admin: false, banned: false };
   const [submission, setSubmission] = useState({ ...initialState });
@@ -32,7 +33,7 @@ const UpdateUser = ({ id }) => {
     const {admin,banned}= submission
     dispatch(updateUserAdmin({ id, admin: toBoolean(admin), banned:toBoolean(banned) }));
     setSubmission({ ...initialState });
-    window.location.reload()
+    history.push('/admin')
   };
 
   useEffect(() => {
