@@ -46,12 +46,10 @@ function PageShopingCart() {
   
   const handleCheckout = async (e) => {
     e.preventDefault();
-    
     if (user) {
       if(user.emailVerified){
-        const linkMP = await sendMP()
-        const QR = await generateQr(linkMP)
-        console.log(linkMP)
+         const linkMP = await sendMP()
+          const QR = await generateQr(linkMP)
         swal2.fire({
           text: "Serás redirigido/a al método de pago, ¡gracias por la compra!",
           icon: "success",
