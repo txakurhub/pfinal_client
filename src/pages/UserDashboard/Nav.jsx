@@ -43,11 +43,11 @@ const dispatch = useDispatch()
             </a>
           </li>
           
-          <li>
+          {/* <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
             </a>
-          </li>
+          </li> */}
           <li>
             <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
               Editar mi perfil
@@ -84,11 +84,11 @@ const dispatch = useDispatch()
               </a>
             </li>
 
-            <li>
+            {/* <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
             </a>
-          </li>
+          </li> */}
             <li>
               <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 Editar
@@ -146,11 +146,11 @@ const dispatch = useDispatch()
               </a>
             </li>
 
-            <li>
+            {/* <li>
             <a onClick={(e) => handleClick("perfil")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
              Mi perfil
             </a>
-          </li>
+          </li> */}
             <li>
               <a onClick={(e) => handleClick("edit")} className="cursor-pointer dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">
                 Editar

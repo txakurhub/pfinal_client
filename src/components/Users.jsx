@@ -14,10 +14,9 @@ const Users = () => {
   const toggle = () => setActive(!active);
   const onClick = (r) => setId(r);
   const [filtro, setFiltro] = useState("");
-  console.log(users)
 
   useEffect(() => {
-    dispatch(getUsers());
+    // dispatch(getUsers());
     setUsuarios(users)
   }, [dispatch]);
 
