@@ -17,7 +17,7 @@ export const ProductosDestacados = ({setProduct,toggle,onClick}) => {
     if (!productDestacados.length) {
       dispatch(getProductosDestacados());
     }
-  }, [dispatch, productDestacados]);
+  }, []);
   useEffect(() => {
     slideRef.current.addEventListener("animationend", removeAnimation);
     //   startSlider();

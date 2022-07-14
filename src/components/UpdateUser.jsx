@@ -6,6 +6,7 @@ import { getUser, updateUserAdmin } from "../redux/actions";
 
 const UpdateUser = ({ id }) => {
   const dispatch = useDispatch();
+
   const {resetPassword} = useAuth()
   const initialState = { admin: false, banned: false };
   const [submission, setSubmission] = useState({ ...initialState });
@@ -34,6 +35,7 @@ const UpdateUser = ({ id }) => {
     swal("Buen trabajo!","Los cambios se han realizados correctamente","success").then(res=>{
       window.location.reload()
     })
+
   };
 
   useEffect(() => {
