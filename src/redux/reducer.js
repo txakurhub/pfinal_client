@@ -305,6 +305,7 @@ function rootReducer(state = initialState, action) {
     case SEARCH_USER: {
       let filtrado = state.usersCopy.filter(u => u.firstname && u.firstname.toLowerCase().includes(action.payload))
       let resultado = filtrado.length ? filtrado : swal("Usuario inexistente")
+      console.log(filtrado);
       return {
         ...state,
         users: resultado.length ? resultado : state.users

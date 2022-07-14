@@ -5,6 +5,16 @@ import "firebase/compat/storage";
 import "firebase/compat/firestore";
 import { getDatabase } from "firebase/database";
 
+/////////////////urge
+const firebaseConfig = {
+  apiKey: "AIzaSyDe9zsMVze5abd3M0OMkMoJJKgjKyAb3Rw",
+  authDomain: "zapasemergencia.firebaseapp.com",
+  projectId: "zapasemergencia",
+  storageBucket: "zapasemergencia.appspot.com",
+  messagingSenderId: "165466714186",
+  appId: "1:165466714186:web:ee81ee3c15de9b628536b3",
+  measurementId: "G-T8TSSTT0FX",
+};
 // export const app = firebase.initializeApp({
 //   projectId: "zapas-56035",
 //   appId: "1:305266544328:web:a09d4d75e1bf19919c9ffd",
@@ -15,16 +25,16 @@ import { getDatabase } from "firebase/database";
 //   messagingSenderId: "305266544328",
 //   databaseURL: "https://DATABASE_NAME.firebaseio.com",
 // });
-//-------------zapas
-const firebaseConfig = {
-  apiKey: "AIzaSyBhNLEEhfneLhbVZojVZnPXdSwzBMS0CBc",
-  authDomain: "zapas-56035.firebaseapp.com",
-  projectId: "zapas-56035",
-  storageBucket: "zapas-56035.appspot.com",
-  messagingSenderId: "305266544328",
-  appId: "1:305266544328:web:a09d4d75e1bf19919c9ffd"
+///// -------------zapas ---------LA POSTA
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBhNLEEhfneLhbVZojVZnPXdSwzBMS0CBc",
+//   authDomain: "zapas-56035.firebaseapp.com",
+//   projectId: "zapas-56035",
+//   storageBucket: "zapas-56035.appspot.com",
+//   messagingSenderId: "305266544328",
+//   appId: "1:305266544328:web:a09d4d75e1bf19919c9ffd"
   // appId: "1:305266544328:web:76c9f917d9405b449c9ffd"
-};
+// };
 //---------------zapatillas-proyecto
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAauuDZYUBgVdRjJYAQeKo47RzgmMe38M0",
