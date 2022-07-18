@@ -42,8 +42,8 @@ const UpdateUser = ({ id }) => {
   return (
     <form onSubmit={handleSubmit} className="h-full w-full">
       {/* <div className="flex flex-row w-full justify-evenly"> */}
-        <div className="flex flex-col w-[48%]">
-          <label className="text-start">admin</label>
+      <div className="flex flex-col w-[48%] m-auto my-2">
+          <label className="text-start">Admin</label>
           <select name="admin" value={submission.admin} onChange={handleSubmissionChange} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400">
             <option hidden>estado</option>
             <option value={false}>false</option>
@@ -51,22 +51,22 @@ const UpdateUser = ({ id }) => {
           </select>
         {/* </div> */}
       </div>
-      <div className="flex flex-row w-full justify-evenly">
-        <div className="flex flex-col w-[48%]">
-          <label className="text-start">banned</label>
+      {/* <div className="flex flex-row w-full justify-evenly"> */}
+        <div className="flex flex-col w-[48%] m-auto my-2">
+          <label className="text-start">Banned</label>
           <select name="banned" value={submission.banned} onChange={handleSubmissionChange} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400">
             <option hidden>estado</option>
             <option value={false}>false</option>
             <option value={true}>true</option>
           </select>
         </div>
-        <div className="flex flex-col w-[48%]">
-          <label className="text-start">Resetear contraseña</label>
+        <div className="flex flex-row w-[48%] m-auto my-2">
+          <label className="text-start">Resetear contraseña:</label>
           {/* eso pa que le envien un correo para restablecer la contra*/}
-          {user&& <span className="no-underline hover:underline cursor-pointer" onClick={()=>{resetPassword(user.email); swal("Se envio un correo para restablecer la contraseña")}}>Resetear</span>}
+          {user&& <span className="no-underline hover:underline cursor-pointer ml-2" onClick={()=>{resetPassword(user.email); swal("Se envio un correo para restablecer la contraseña")}}>Resetear</span>}
           {/* <input type="text" value={submission.password} onChange={handleSubmissionChange} name="password" placeholder={user.password} className="border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" /> */}
         </div>
-      </div>
+      {/* </div> */}
       <input type="submit" value="Done" className="hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800" />
     </form>
   );
