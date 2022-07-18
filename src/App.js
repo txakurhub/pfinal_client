@@ -47,7 +47,7 @@ function App() {
             <PrivateRouteUser exact path="/user/profile/:id" component={UserDash} />
             <Route exact path="/navprueba" component={NavPrueba}></Route>
             <Route exact path="/pay" component={Shopping} />
-            <Route exat path="/form2" component={CategoryAdd} />
+            <Route exact path="/form2" component={CategoryAdd} />
           </CartProvider>
         </PayPalScriptProvider>
       </AuthProvider>
