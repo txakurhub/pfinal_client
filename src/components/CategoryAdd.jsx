@@ -36,12 +36,10 @@ export default function CategoryAdd() {
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" name='name' value={info} placeholder='Nombre' onChange={(e) => handleChange(e)} />
-        {errores.name ? <p>{errores.name}</p> : null}
-        <input type="submit" />
-      </form>
-    </div>
+    <form onSubmit={(e) => handleSubmit(e)} className="h-full w-full flex flex-col items-center justify-center gap-3">
+      <input type="text" name='name' value={info} placeholder='Nombre' onChange={(e) => handleChange(e)} className="w-[48%] border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+      {errores.name ? <p>{errores.name}</p> : null}
+      <input type="submit" className="cursor-pointer hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800" />
+    </form>
   )
 }

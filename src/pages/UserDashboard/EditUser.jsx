@@ -73,94 +73,29 @@ export const EditUser = ({
   };
 
   return (
-    <div className="h-screen bg-gray-100 w-full flex flex-col items-center justify-center">
-    <form
-      className="flex flex-col justify-center  bg-white shadow rounded  p-10"
-      onSubmit={handleSubmit}
-    >
-        <img
-            src={image? image: userimg}
-            alt="foto "
-            className='self-center rounded-full '
-            width={120} height={120}
-          />
-        <div className="mt-2 items-center">
-          <label 
-          className="text-sm font-medium leading-none text-gray-800 mt-4 flex"
-          >
-            Foto de perfil:
-          </label>
-          <input
-            onChange={(e) => {
-              handleUpload(e);
-            }}
-            id="image"
-            name="image"
-            aria-label="enter image"
-            type="file"
-            placeholder={image}
-            className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-1"
-          />
+      <form className="bg-white shadow rounded lg:w-1/3 md:w-1/2 w-full p-10 pb-5 m-auto mt-5 flex items-center justify-center flex-col" onSubmit={handleSubmit}>
+        <div className="h-[100px] w-[100px] rounded-full mr-1.5 overflow-hidden">
+          <img src={image ? image : userimg} alt="foto" className="h-full" width={120} height={120} />
         </div>
-
-        <div className=" mt-2 items-center">
-        <label className="text-sm font-medium leading-none text-gray-800 mt-4 flex">
-          Nombre
-        </label>
-        <input
-          onChange={handleSubmissionChange}
-          id="firstname"
-          name="firstname"
-          value={submission.firstname}
-          placeholder={firstname}
-          aria-label="enter firstname"
-          type="text"
-          className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-1"
-        />
+        <div className="mt-2 items-center w-full">
+          <label className="text-sm font-medium leading-none text-gray-800 mt-4 flex">Foto de perfil:</label>
+          <input onChange={(e) => handleUpload(e)} id="image" name="image" aria-label="enter image" type="file" placeholder={image} className="w-full cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
         </div>
-      <div
-       className=" mt-2 items-center"
-      >
-        <label className="text-sm font-medium leading-none text-gray-800 flex">
-          Apellido
-        </label>
-        <input
-          onChange={handleSubmissionChange}
-          id="lastname"
-          name="lastname"
-          value={submission.lastname}
-          placeholder={lastname}
-          aria-label="enter lastname"
-          type="text"
-          className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-1"
-        />
-      </div>
-
-      <div  className=" mt-2 items-center">
-        <label className="text-sm font-medium leading-none text-gray-800 flex mr-10">
-          Número de celular
-        </label>
-        <input
-          onChange={handleSubmissionChange}
-          id="phone"
-          value={submission.phone}
-          placeholder={phone}
-          name="phone"
-          aria-label="enter phone"
-          type="text"
-          className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-1"
-        />
-      </div>
-
-      {/* pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" */}
-      <button
-        className="focus:outline-none ml-3 bg-white-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
-        onClick={(e) => handleSubmit(e)}
-        type="submit"
-      >
-        Aceptar
-      </button>
-    </form>
-    </div>
+        <div className="mt-2 items-center w-full">
+          <label className="text-sm font-medium leading-none text-gray-800 mt-4 flex">Nombre</label>
+          <input onChange={handleSubmissionChange} id="firstname" name="firstname" value={submission.firstname} placeholder={firstname} aria-label="enter firstname" type="text" className="w-full border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+        <div className="mt-2 items-center w-full">
+          <label className="text-sm font-medium leading-none text-gray-800 flex">Apellido</label>
+          <input onChange={handleSubmissionChange} id="lastname" name="lastname" value={submission.lastname} placeholder={lastname} aria-label="enter lastname" type="text" className="w-full border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+        <div className="mt-2 items-center w-full">
+          <label className="text-sm font-medium leading-none text-gray-800 flex mr-10">Número de celular</label>
+          <input onChange={handleSubmissionChange} id="phone" value={submission.phone} placeholder={phone} name="phone" aria-label="enter phone" type="text" className="w-full border focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400" />
+        </div>
+        <button className="mt-3 hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800" onClick={(e) => handleSubmit(e)} type="submit">
+          Aceptar
+        </button>
+      </form>
   );
 };
