@@ -10,7 +10,6 @@ export default function BrandFilter({ setCurrentPage }) {
   let brandsName = allProducts.map((t) => t.brand).sort();
 
   function handleFilterTemp(e) {
-    console.log(e.target.value);
     dispatch(filterByBrand(e.target.value));
     setCurrentPage(1);
   }

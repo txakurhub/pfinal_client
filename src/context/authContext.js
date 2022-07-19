@@ -8,81 +8,129 @@ import {
   signInWithPopup,
   sendPasswordResetEmail,
   FacebookAuthProvider,
-} from "firebase/auth";
-import { auth, app } from "../firebase-config";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import axios from "axios"
 
+} from "firebase/auth";
+import { sendEmailVerification } from "firebase/auth";
+import { auth, app } from "../firebase-config";
+import { getFirestore, doc, setDoc, collection, getDoc } from "firebase/firestore";
+import { local_url } from "../redux/actions";
+import { async } from "@firebase/util";
+import { LocalStorage } from "./LocalStorage";
+import swal from "sweetalert";
 export const authContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(authContext);
   return context;
 };
-
-const signUpDb = (user)=>{
-  axios.post("http://localhost:3001/customers",user)
-  .then(res=>console.log(res.data))
-  .catch(err=>console.log(err))
-}
-
 export function AuthProvider({ children }) {
+  const [userStorage, setUserStorage] = LocalStorage("user",{}) 
   const [user, setUser] = useState(null);
+  const [userInf, setUserInf] = useState(null);
   const [loading, setLoading] = useState(true);
+  const db = getFirestore();
 
-  const signup = async (email, password, role = "user") => {
+  const signup = async ({
+    email,
+    password,
+    firstname,
+    lastname,
+    phone,
+    admin=false,
+    banned=false,
+  }) => {
     try {
       const firestore = getFirestore(app);
       const infoUser = await createUserWithEmailAndPassword(
         auth,
         email,
         password,
-        role
-      ).then((fireUser) => {
-        return fireUser;
-      });
-      console.log(infoUser.user.uid);
-      console.log(infoUser, "Es infoUser")
-      const newUser = {
-        name: "Usuario",
-        image:"https://www.pngmart.com/files/21/Account-Avatar-Profile-PNG-Clipart.png",
-        user:infoUser.user.uid,
-        password:password,
-        admin: role === "admin" ? true: false ,
-        phone:" ",
-        email:email,
-        address:" "
-      }
-      signUpDb(newUser)
-      const docuRef = doc(firestore, `users/${infoUser.user.uid}`);
-      setDoc(docuRef, { email: email, role: role });
+        firstname,
+        lastname,
+        phone,
+        admin,
+        banned,
+      )
+        .then((fireUser) => {
+          const docuRef = doc(firestore, `user/${fireUser.user.uid}`);
+          setDoc(docuRef, {
+            email: email,
+            password: password,
+            firstname: firstname,
+            lastname: lastname,
+            phone: phone,
+            admin: admin,
+            banned: banned,
+          })
+        })
+        .then((res) => {
+          verify();
+        })
+
     } catch (err) {
       console.log(err + "  - - -  error en signup");
     }
   };
 
-  const login = async (email, password) =>
-    await signInWithEmailAndPassword(auth, email, password);
+
+
+  const verify = async () => {
+    sendEmailVerification(auth.currentUser).then(() => {
+      // Email verification sent!
+      // ...
+    });
+  };
+
+  const login = async (email, password) =>{
+     await signInWithEmailAndPassword(auth, email, password).then(async cred=>{
+      const docuRef = await doc(db, `user/${cred.user.uid}`)
+      const findUser = await getDoc(docuRef);
+      await isBannedUser(findUser.data())
+    });
+    
+  }
+
+  const isBannedUser =  async (user)=> {
+    if(user.banned){
+      localStorage.clear();
+      setUser(null)
+      setUserStorage({})
+       await signOut(auth) // se supone que cierra sesion
+      throw new Error("Lo siento por algún motivo te han suspendido de la página")
+    }
+    // sino tiene ban entra joya 
+  }
+  
 
   const loginWithGoogle = () => {
+    const firestore = getFirestore(app);
     const googleProvider = new GoogleAuthProvider();
     signInWithPopup(auth, googleProvider)
-      .then(({user:us}) =>{
-         console.log(us)
-         const newUser = {
-          id:us.uid,
-          name: us.displayName,
-          image:us.photoURL,
-          user:us.uid,
-          password:"password google",
-          phone:us.phoneNumber?us.phoneNumber: " ",
-          email:us.email,
-          address:" "
+      .then(async cred => {
+        const docuRef = await doc(firestore, `user/${cred.user.uid}`);
+        const findUser = await getDoc(docuRef);
+        const found = findUser.data()
+        if(found){
+          await isBannedUser(found)
+        }else{
+          setDoc(docuRef, {
+            email: cred.user.email,
+            displayName: cred.user.displayName,
+            photoURL: cred.user.photoURL,
+            admin: false,
+            banned: false,
+            firstname: cred.user.displayName.split(" ")[0],
+            lastname: cred.user.displayName.split(" ")[1],
+            phone: "",
+            image: ""
+          })
         }
-        signUpDb(newUser)
-        })
-      .catch((err) => console.log(err));
-  };
+      }).catch(error=>{
+        signOut(auth)
+        swal("Error",error.message,"error")
+      })
+  }
+
 
   const loginWithFacebook = () => {
     const facebookProvider = new FacebookAuthProvider();
@@ -95,17 +143,29 @@ export function AuthProvider({ children }) {
     sendPasswordResetEmail(auth, email);
   };
 
+  const userInfo = async (currentUser) => {
+    const users = doc(db, 'user', currentUser.uid);
+    const docSnap = await getDoc(users);
+    setUserInf({...docSnap.data(),uid:currentUser.uid})
+    setUserStorage({...docSnap.data(),uid:currentUser.uid});
+  }
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        userInfo(currentUser)
+        setUser(currentUser);
+      } else {
+        setUserInf(null)
+      }
       setLoading(false);
     });
     return () => unSubscribe;
   }, []);
 
   const userData = () => {
-    return user
-  }
+    return user;
+  };
 
   const logout = () => signOut(auth);
 
@@ -113,14 +173,17 @@ export function AuthProvider({ children }) {
     <authContext.Provider
       value={{
         signup,
+        userInfo,
         login,
         user,
+        userInf,
         logout,
         loading,
+        userStorage,
         loginWithGoogle,
         loginWithFacebook,
         resetPassword,
-        userData
+        userData,
       }}
     >
       {children}
