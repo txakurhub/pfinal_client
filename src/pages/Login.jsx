@@ -61,17 +61,17 @@ const Login = () => {
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <polyline points="15 6 9 12 15 18" />
         </svg>
-        <p className="text-sm pl-2 leading-none">Back</p>
+        <p className="text-sm pl-2 leading-none">Volver</p>
       </Link>
       <form className="bg-white shadow rounded lg:w-1/3 md:w-1/2 w-full p-10 pb-5">
         <p tabIndex={0} role="heading" aria-level="1" aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">
-          Login to your account
+          Ingresa a tu cuenta
         </p>
         <p className="text-sm mt-4 font-medium leading-none text-gray-500">
-          Dont have account?{" "}
+          ¿No tienes una cuenta?{" "}
           <span onClick={handleRegister} tabIndex={0} role="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
             {" "}
-            Sign up here
+            Regístrate aquí
           </span>
         </p>
         <button onClick={handleGoogleLogin} aria-label="Continue with google" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-7">
@@ -81,18 +81,18 @@ const Login = () => {
             <path d="M4.17667 11.9366C3.97215 11.3165 3.85378 10.6521 3.85378 9.96562C3.85378 9.27905 3.97215 8.6147 4.16591 7.99463L4.1605 7.86257L1.13246 5.44363L1.03339 5.49211C0.37677 6.84302 0 8.36005 0 9.96562C0 11.5712 0.37677 13.0881 1.03339 14.4391L4.17667 11.9366Z" fill="#FBBC05" />
             <path d="M9.68807 3.85336C11.5073 3.85336 12.7344 4.66168 13.4342 5.33718L16.1684 2.59107C14.4892 0.985496 12.3039 0 9.68807 0C5.89885 0 2.62637 2.23672 1.0332 5.49214L4.16573 7.99466C4.95162 5.59183 7.12608 3.85336 9.68807 3.85336Z" fill="#EB4335" />
           </svg>
-          <p className="text-base font-medium ml-4 text-gray-700">Continue with Google</p>
+          <p className="text-base font-medium ml-4 text-gray-700">Continuar con Google</p>
         </button>
-        <button onClick={handleFacebookLogin} aria-label="Continue with facebook" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-2">
+        {/* <button onClick={handleFacebookLogin} aria-label="Continue with facebook" className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-2">
           <svg width={22} height={23} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M48 24C48 10.7438 37.2562 0 24 0C10.7438 0 0 10.7438 0 24C0 35.9813 8.775 45.9094 20.25 47.7094V30.9375H14.1562V24H20.25V18.7125C20.25 12.6984 23.8313 9.375 29.3156 9.375C31.9406 9.375 34.6875 9.84375 34.6875 9.84375V15.75H31.6594C28.6781 15.75 27.75 17.6016 27.75 19.5V24H34.4062L33.3422 30.9375H27.75V47.7094C39.225 45.9094 48 35.9813 48 24Z" fill="#1877F2"/>
             <path d="M33.3422 30.9375L34.4062 24H27.75V19.5C27.75 17.6016 28.6781 15.75 31.6594 15.75H34.6875V9.84375C34.6875 9.84375 31.9406 9.375 29.3156 9.375C23.8313 9.375 20.25 12.6984 20.25 18.7125V24H14.1562V30.9375H20.25V47.7094C21.4734 47.9016 22.725 48 24 48C25.275 48 26.5266 47.9016 27.75 47.7094V30.9375H33.3422Z" fill="white"/>
           </svg>
-          <p className="text-base font-medium ml-4 text-gray-700">Continue with Facebook</p>
-        </button>
+          <p className="text-base font-medium ml-4 text-gray-700">Continuar con Facebook</p>
+        </button> */}
         <div className="w-full flex items-center justify-between py-5">
           <hr className="w-full bg-gray-400" />
-          <p className="text-base font-medium leading-4 px-2.5 text-gray-400">OR</p>
+          <p className="text-base font-medium leading-4 px-2.5 text-gray-400">Ó</p>
           <hr className="w-full bg-gray-400  " />
         </div>
         <div>
@@ -100,7 +100,7 @@ const Login = () => {
           <input onChange={(e) => setEmail(e.target.value)} id="email" aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
         </div>
         <div className="mt-6 w-full">
-          <label className="text-sm font-medium leading-none text-gray-800">Password</label>
+          <label className="text-sm font-medium leading-none text-gray-800">Contraseña</label>
           <div title="See password" className="relative flex items-center justify-center">
             <input onChange={(e) => setPassword(e.target.value)} id="password" min={6} aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" />
             <div onClick={viewPassword} className="absolute right-0 mt-2 mr-3 cursor-pointer">
@@ -112,14 +112,14 @@ const Login = () => {
         </div>
         <div className="mt-8">
           <button onClick={handleSubmit} aria-label="create my account" className="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">
-            Log In
+            Entrar
           </button>
         </div>
         <p className="text-sm mt-4 font-medium leading-none text-gray-500">
-          Did you forget your password?{" "}
+          ¿Olvidaste tu contraseña?{" "}
           <span onClick={handleResetPassword} tabIndex={0} role="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
             {" "}
-            Recover it here
+            Recupérala aquí
           </span>
         </p>
         {error && <p className="text-red-600 mt-3">{error}</p>}

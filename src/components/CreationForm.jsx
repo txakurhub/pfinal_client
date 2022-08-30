@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createProduct, getCategories } from "../redux/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import swal from 'sweetalert';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const validaciones = (input) => {
   const errores = {}
@@ -57,7 +58,7 @@ const validaciones = (input) => {
 };
 
 const CreationForm = () => {
-  
+  const history = useHistory()
   const [input, setInput] = useState({
     title: '',
     brand: '',
@@ -69,6 +70,30 @@ const CreationForm = () => {
   const [errores, setErrores] = useState([]);
   const categories = useSelector(state => state.categories);
   const dispatch = useDispatch();
+
+  const handleUpload = async (e) => {
+    const archivo = e.target.files[0];
+    if (!archivo) {
+      console.log("no hay archivos");
+    } else {
+      const storage = getStorage();
+      const storageRef = ref(storage, archivo.name);
+      uploadBytes(storageRef, archivo)
+        .then((snapshot) => {
+          console.log("Uploaded a blob or file!");
+        })
+        .then((x) => {
+          getDownloadURL(ref(storage, archivo.name)).then((url) => {
+            console.log(url);
+            setInput({ ...input, image: url });
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -90,7 +115,7 @@ const CreationForm = () => {
       swal("Revisar bien los campos completados.");
     } else {
       dispatch(createProduct(input));
-      swal("Zapatilla creada!");
+      swal("Producto creado");
       setInput({
         title: '',
         brand: '',
@@ -99,6 +124,9 @@ const CreationForm = () => {
         image: '',
         category: ''
       });
+      setTimeout(() => {
+        history.push("/admin")
+      }, 2000);
     };
   };
 
@@ -108,7 +136,7 @@ const CreationForm = () => {
 
   return (
     <form id="login" onSubmit={handleSubmit}>
-      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/">
+      <Link title="Home" className="flex items-center ease-in-out transition duration-500 text-black border-b border-transparent hover:border-black cursor-pointer absolute top-3 left-1" to="/admin/7R07xtn17ZU09JHnm6Mi">
         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={16} height={16} viewBox="0 0 24 24" strokeWidth="1.5" stroke="black" fill="none" strokeLinecap="round" strokeLinejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <polyline points="15 6 9 12 15 18" />
@@ -138,16 +166,16 @@ const CreationForm = () => {
                   <p className="text-xs">{errores.title ? errores.title : input.title === '' ? '' : 'Title submission succes!'}</p>
                   {
                     errores.title ?
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
-                      <circle cx={12} cy={12} r={10} />
-                      <line x1={15} y1={9} x2={9} y2={15} />
-                      <line x1={9} y1={9} x2={15} y2={15} />
-                    </svg> :
-                    input.title === '' ?
-                    null :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                      <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
+                        <circle cx={12} cy={12} r={10} />
+                        <line x1={15} y1={9} x2={9} y2={15} />
+                        <line x1={9} y1={9} x2={15} y2={15} />
+                      </svg> :
+                      input.title === '' ?
+                        null :
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
+                          <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
+                        </svg>
                   }
                 </div>
               </div>
@@ -155,21 +183,34 @@ const CreationForm = () => {
                 <label htmlFor="brand" className="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">
                   Brand
                 </label>
-                <input type="text" value={input.brand} maxlength={12} onChange={handleChange} id="brand" name="brand" required className={`border ${errores.brand ? 'border-red-400' : input.brand === '' ? 'border-gray-300' : 'border-green-400'} focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400`} placeholder="Brand..." />
+                <select name='brand' value={input.brand} onChange={handleChange} id="brand" required className={`border ${errores.brand ? 'border-red-400' : input.brand === '' ? 'border-gray-300' : 'border-green-400'} focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400`}>
+          <option hidden>Marca</option>
+          <option value='Nike'>Nike</option>
+          <option value='adidas'>Adidas</option>
+          <option value='Vans'>Vans</option>
+          <option value='Converse'>Converse</option>
+          <option value='Caterpillar'>Caterpillar</option>
+          <option value='Vizzano'>Vizzano</option>
+          <option value='Briganti'>Briganti</option>
+          <option value='Faraon'>Faraon</option>
+          <option value='Sport'>Sport</option>
+          <option value='Moleca'>Moleca</option>
+        </select>
+                {/* <input type="text" value={input.brand} maxlength={12} onChange={handleChange} id="brand" name="brand" required className={`border ${errores.brand ? 'border-red-400' : input.brand === '' ? 'border-gray-300' : 'border-green-400'} focus:outline-none focus:border-indigo-700 dark:border-gray-700 pl-3 py-3 shadow-sm bg-transparent rounded text-sm focus:outline-none focus:border-indigo-700 placeholder-gray-500 text-gray-500 dark:text-gray-400`} placeholder="Brand..." /> */}
                 <div className={`flex justify-between items-center pt-1 ${errores.brand ? 'text-red-400' : input.brand === '' ? '' : 'text-green-400'}`}>
                   <p className="text-xs">{errores.brand ? errores.brand : input.brand === '' ? '' : 'Brand submission succes!'}</p>
                   {
                     errores.brand ?
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
-                      <circle cx={12} cy={12} r={10} />
-                      <line x1={15} y1={9} x2={9} y2={15} />
-                      <line x1={9} y1={9} x2={15} y2={15} />
-                    </svg> :
-                    input.brand === '' ?
-                    null :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                      <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
+                        <circle cx={12} cy={12} r={10} />
+                        <line x1={15} y1={9} x2={9} y2={15} />
+                        <line x1={9} y1={9} x2={15} y2={15} />
+                      </svg> :
+                      input.brand === '' ?
+                        null :
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
+                          <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
+                        </svg>
                   }
                 </div>
               </div>
@@ -187,16 +228,16 @@ const CreationForm = () => {
                   <p className="text-xs">{errores.model ? errores.model : input.model === '' ? '' : 'Model submission succes!'}</p>
                   {
                     errores.model ?
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
-                      <circle cx={12} cy={12} r={10} />
-                      <line x1={15} y1={9} x2={9} y2={15} />
-                      <line x1={9} y1={9} x2={15} y2={15} />
-                    </svg> :
-                    input.model === '' ?
-                    null :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                      <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
+                        <circle cx={12} cy={12} r={10} />
+                        <line x1={15} y1={9} x2={9} y2={15} />
+                        <line x1={9} y1={9} x2={15} y2={15} />
+                      </svg> :
+                      input.model === '' ?
+                        null :
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
+                          <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
+                        </svg>
                   }
                 </div>
               </div>
@@ -210,16 +251,16 @@ const CreationForm = () => {
                   <p className="text-xs">{errores.price ? errores.price : input.price === '' ? '' : 'Price submission succes!'}</p>
                   {
                     errores.price ?
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
-                      <circle cx={12} cy={12} r={10} />
-                      <line x1={15} y1={9} x2={9} y2={15} />
-                      <line x1={9} y1={9} x2={15} y2={15} />
-                    </svg> :
-                    input.price === '' ?
-                    null :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                      <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
+                        <circle cx={12} cy={12} r={10} />
+                        <line x1={15} y1={9} x2={9} y2={15} />
+                        <line x1={9} y1={9} x2={15} y2={15} />
+                      </svg> :
+                      input.price === '' ?
+                        null :
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
+                          <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
+                        </svg>
                   }
                 </div>
               </div>
@@ -232,21 +273,21 @@ const CreationForm = () => {
                     </svg>
                   </div>
                 </div>
-                <input type="file" name="image" value={input.image} accept="image/*" onChange={handleChange} required id="image" className="cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
+                <input type="file" name="image"  accept="image/*" onChange={handleUpload} required id="image" className="cursor-pointer bg-transparent pl-3 py-3 shadow-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-black hover:file:bg-violet-100" />
                 <div className={`flex justify-between items-center pt-1 ${errores.image ? 'text-red-400' : 'text-green-400'}`}>
                   <p className="text-xs">{errores.price ? errores.image : input.image === '' ? '' : 'Image submission succes!'}</p>
                   {
                     errores.image ?
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
-                      <circle cx={12} cy={12} r={10} />
-                      <line x1={15} y1={9} x2={9} y2={15} />
-                      <line x1={9} y1={9} x2={15} y2={15} />
-                    </svg> :
-                    input.image === '' ?
-                    null :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                      <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
+                        <circle cx={12} cy={12} r={10} />
+                        <line x1={15} y1={9} x2={9} y2={15} />
+                        <line x1={9} y1={9} x2={15} y2={15} />
+                      </svg> :
+                      input.image === '' ?
+                        null :
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
+                          <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
+                        </svg>
                   }
                 </div>
               </div>
@@ -257,7 +298,7 @@ const CreationForm = () => {
                     <option hidden>Select category</option>
                     {
                       categories && categories.map(c => (
-                        <option value={c.name}>{c.name}</option>
+                        <option key={categories.indexOf(c)} value={c.id}>{c.name}</option>
                       ))
                     }
                   </select>
@@ -266,16 +307,16 @@ const CreationForm = () => {
                   <p className="text-xs">{errores.price ? errores.category : input.category === '' ? '' : 'Category submission succes!'}</p>
                   {
                     errores.category ?
-                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
-                      <circle cx={12} cy={12} r={10} />
-                      <line x1={15} y1={9} x2={9} y2={15} />
-                      <line x1={9} y1={9} x2={15} y2={15} />
-                    </svg> :
-                    input.image === '' ?
-                    null :
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
-                      <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="feather feather-x-circle">
+                        <circle cx={12} cy={12} r={10} />
+                        <line x1={15} y1={9} x2={9} y2={15} />
+                        <line x1={9} y1={9} x2={15} y2={15} />
+                      </svg> :
+                      input.image === '' ?
+                        null :
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={16} height={16}>
+                          <path className="heroicon-ui" d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-2.3-8.7l1.3 1.29 3.3-3.3a1 1 0 0 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-2-2a1 1 0 0 1 1.4-1.42z" stroke="currentColor" strokeWidth="0.25" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" />
+                        </svg>
                   }
                 </div>
               </div>

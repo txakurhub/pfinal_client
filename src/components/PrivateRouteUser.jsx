@@ -1,24 +1,14 @@
-// NO TOCAR ESTE COMPONENTE
-
-import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { useAuth } from "../context/authContext";
+import Loading from './Loading';
 
 const PrivateRouteUser = ({ component: Component, ...rest }) => {
-    // console.log({...rest})
 
-    const { user } = useAuth();
+    const { userStorage } = useAuth();
 
     return (
-        <Route {...rest}>{user ? <Component /> : <Redirect to="/login" />}</Route>
+        <Route {...rest}>{Object.keys(userStorage).length ? <Component /> : <Redirect to="/login" />}</Route>
     )
 }
 
 export default PrivateRouteUser
-
-
-
-
-
-// import { useAuth } from "../context/authContext";
-// const { user } = useAuth();
