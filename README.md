@@ -11,7 +11,7 @@ App for the purchase of sneakers. Supports payment with QR, MercadoPago and PayP
 - **React**
 - **Redux**
 
-## 💻 Installation
+## 💻 **Installation**
 
 ```
  git clone https://github.com/txakurhub/pfinal_client
@@ -19,14 +19,14 @@ App for the purchase of sneakers. Supports payment with QR, MercadoPago and PayP
  npm start 
 ```
 
-## 💻 Preview
+## 💻 **Preview**
 
 <p>
    <img src='https://res.cloudinary.com/ddkurzft6/image/upload/v1662052185/sneakers/homesneakersgithub_nsztst.jpg' alt='sneakers-home' />
    <img src='https://res.cloudinary.com/ddkurzft6/image/upload/v1662052188/sneakers/shoppingsneakersgithub_fqpela.jpg' alt='sneakers-shoppingcart' />
 </p>
 
-## 💻 Deploy
+## 💻 **Deploy**
 ```
 https://sneakers-xxre.vercel.app/
 ```
